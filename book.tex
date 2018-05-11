@@ -1,0 +1,54 @@
+
+
+%% Warn me about obsolete Latex stuff
+\RequirePackage[l2tabu, orthodox]{nag}
+
+%% Some credentials about the author
+\newcommand{\bookauthor}{Jesse op den Brouw}
+\newcommand{\booktitleI}{Elektrische}
+\newcommand{\booktitleII}{Netwerken}
+\newcommand{\booktitle}{\booktitleI{} \booktitleII}
+\newcommand{\booksubtitle}{Een inleiding}
+\newcommand{\bookinstitution}{De Haagse Hogeschool}
+\newcommand{\bookedition}{Eerste druk}
+\newcommand{\bookversion}{0.1}
+\newcommand{\bookkeywords}{elektriciteit elektrische netwerken}
+\newcommand{\email}{J.E.J.opdenBrouw@hhs.nl}
+%% Nice text on empty pages, or not...
+%\newcommand{\thispageintentionallyleftblank}{Deze pagina is opzettelijk leeg gelaten.}
+\newcommand{\thispageintentionallyleftblank}{}
+%% Include advanced sections
+\newcommand{\bookuseadvanded}{\useadvancedtrue}
+%%\newcommand{\bookuseadvanded}{\useadvancedfalse}
+%% Pick one or none, placed in outer upper corner
+\newcommand{\finalconceptdraft}{CONCEPT}
+%% Which part to include in the book
+\newcommand{\bookpartI}{\usebookpartIfalse}
+\newcommand{\bookpartII}{\usebookpartIIfalse}
+\newcommand{\bookpartIII}{\usebookpartIIItrue}
+\newcommand{\bookasbook}{\usebookasbookfalse}
+
+
+\input{book_preamble}
+\input{book_preamble_tikz}
+
+\begin{document}
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  THE FRONTMATTER - title page, preface and table of contents
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+%% Pull in the title page, preface and table of contents
+%%%\input{book_title.tex}
+%%%\input{book_chap00.tex}
+%%%\input{book_toc.tex}
+
+%%
+\mainmatter
+\input{book_chap02}
+
+\end{document}
