@@ -1,0 +1,36 @@
+% Author: Till Tantau
+% Source: The PGF/TikZ manual
+\documentclass[a4paper]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{datavisualization.formats.functions,backgrounds,calc}
+
+
+% GNUPLOT required
+\begin{document}
+\pagestyle{empty}
+
+
+%%%\begin{tikzpicture}[domain=0:1]
+%%%    \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+%%%    \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+%%%    \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+%%%    \draw[color=orange] plot[id=exp] function{0.01*exp(x)};
+%%%       % node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+%%%\end{tikzpicture}
+
+\begin{tikzpicture}
+\datavisualization [school book axes={unit=1},
+                    visualize as smooth line,
+                    clean ticks,
+                    x axis={label=$U_D$},
+                    y axis={label=$I_D$}]
+    data [format=function] {
+        var x : interval [0:0.7] samples 100;
+        %func y = \value x*\value x;
+        func y = 0.000000000001*exp(38.46*\value x);
+    };
+\end{tikzpicture}
+
+\end{document}

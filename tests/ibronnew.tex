@@ -1,0 +1,36 @@
+\documentclass[a4paper]{article}
+
+\usepackage{tikz}
+\usepackage[european]{circuitikz}
+
+\makeatletter
+\pgfcircdeclarebipole{}{\ctikzvalof{bipoles/isource/height}}{isource}{\ctikzvalof{bipoles/isource/height}}{\ctikzvalof{bipoles/isource/width}}{
+    \pgfpointorigin
+    \pgfsetlinewidth{\pgfkeysvalueof{/tikz/circuitikz/bipoles/thickness}\pgfstartlinewidth}
+    \pgfpathellipse{\pgfpointorigin}{\pgfpoint{0}{\pgf@circ@res@up}}{\pgfpoint{\pgf@circ@res@left}{0}}
+    \pgfpathmoveto{\pgfpoint{\pgf@circ@res@step}{\pgf@circ@res@up}}
+    \pgfpathlineto{\pgfpoint{\pgf@circ@res@step}{\pgf@circ@res@down}}
+  \pgfusepath{draw}
+  \pgfscope
+    \pgfsetarrowsend{latex'}
+    \pgfpathmoveto{\pgfpoint{0.8\pgf@circ@res@left}{1.3\pgf@circ@res@up}}
+    \pgfpathlineto{\pgfpoint{0.8\pgf@circ@res@right}{1.3\pgf@circ@res@up}}
+    \pgfusepath{draw}   %draw arrow
+  \endpgfscope
+}
+\makeatother
+
+\begin{document}
+
+\begin{figure}[!ht]
+\begin{circuitikz}
+%\tikzset{every node/.style={inner sep=1em}}
+\draw (0,0) to[I, l_={$I_B$,},name=A, mirror, inner sep=1ex] (0,2);
+\draw[red] (A.sw) rectangle (A.ne);
+\draw (0,2) to[I, l={$I_B$},name=B, inner sep=10em] (2,2);
+\draw[blue] (B.sw) rectangle (B.ne);
+\draw (B.sw) -- (B.ne);
+\end{circuitikz}
+\end{figure}
+
+\end{document}

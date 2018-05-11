@@ -1,0 +1,21 @@
+\documentclass{article}
+
+\usepackage{tikz}
+
+\usetikzlibrary{shapes.multipart}
+
+\tikzset{
+  custom dash/.style={dash pattern=on 2pt off 3pt on 4pt off 4pt},
+}
+
+\begin{document}
+
+\tikz\node[
+    draw,
+    rectangle split,
+    rectangle split parts=2,
+    custom dash,
+    ]
+    {This is on the top,\nodepart{two}and this is on the bottom};
+
+\end{document}

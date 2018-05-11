@@ -1,0 +1,63 @@
+\documentclass{article}
+
+
+\usepackage{pgfplots}
+
+
+%%%\pgfplotsset{xticklabel={$\mathsf{\pgfmathprintnumber{\tick}}$},
+%%%             yticklabel={$\mathsf{\pgfmathprintnumber{\tick}}$},
+%%%             every axis/.append style={font=\sffamily}
+%%%}
+
+\tikzstyle{loosely dashdotted} = [dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt]
+
+\tikzset{prefix=gnuplot/}
+
+
+\begin{document}
+
+\begin{figure}[!ht]
+\begin{tikzpicture}
+	\begin{axis}[width=10cm,height=7cm,
+		xlabel=$R_U/R_I$,
+		ylabel=$P_{norm}$,
+		legend entries={$\eta$,$P_{Ri}$,$P_{bron}$, $P_{Ru}$},
+		legend style={font=\small,at={(0.95,0.75)},anchor=north east},
+		xtick={0,1,...,10},
+		reverse legend,
+        y tick label style={
+        /pgf/number format/.cd,
+            fixed,
+            fixed zerofill,
+            precision=1,
+	        use comma,
+    	    1000 sep={},
+            /tikz/.cd
+        }
+		%legend pos=outer north east
+	]
+	% invoke external gnuplot as
+	% calculator:
+	%\addplot [domain=0:2*pi, mark=*, blue,samples=100] gnuplot[id=sin]{sin(x)};
+	\addplot [domain=0:10,samples=101,olive,loosely dashdotted,thick] gnuplot[id=eff] {x/(1+x)};
+	\addplot [domain=0:10,samples=101,red,dashed,thick] gnuplot[id=pri] {1/((1+x)^2)};
+	\addplot [domain=0:10,samples=101,black,dotted,thick] gnuplot[id=pb] {1/(1+x)};
+	\addplot [domain=0:10,samples=101,blue,thick] gnuplot[id=pru] {x/((1+x)^2)};
+	\end{axis}
+
+               	
+	\begin{axis}[width=10cm,height=7cm,
+         xmin=0, xmax=10,
+         %ymin=0, ymax=1,
+         hide x axis,
+         axis y line*=right,
+         ylabel={$\eta$},
+         ylabel near ticks,
+         ylabel style={rotate=-180}
+     ]
+   \end{axis}
+\end{tikzpicture}
+\caption{Genormaliseerde ontwikkelde vermogens in de inwendige en uitwendige weerstand en de bron. De effici\"entie.}
+\end{figure}
+
+\end{document}

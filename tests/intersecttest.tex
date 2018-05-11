@@ -1,0 +1,42 @@
+% used PGFPlots v1.16
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots}
+    \usetikzlibrary{intersections}
+    \pgfplotsset{
+        % use this `compat' level or higher, so TikZ coordinates don't have to
+        % be prefixed by `axis cs:'
+        compat=1.11,
+    }
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        yticklabel style={
+            /pgf/number format/fixed,
+        },
+    ]
+        \addplot [name path global=GaussCurve]
+            gnuplot [domain=48.00:56.00,samples=100]
+                {exp(-0.5*((x-52.64)/1.82)**2)/(sqrt(2*pi)*1.82)};
+        \path [name path global=HelperLine]
+            (48,0.13288) -- (56,0.13288)
+                coordinate [at start]   (start)
+        ;
+        \draw [dashed,name intersections={of=GaussCurve and HelperLine}]
+            (start) -- (intersection-2) -- (intersection-2 |- 0,0)
+                % -------------------------------------------------------------
+                % using `\pgfplotspointgetcoordinates' stores the (axis)
+                % coordinates of e.g. the coordinate (intersection-2) in
+                % `data point', which then can be called by `\pgfkeysvalueof'
+%                node [at start,below left] {
+%                    \pgfplotspointgetcoordinates{(intersection-2)}
+%                    $(
+%                        \pgfmathprintnumber[fixed]{\pgfkeysvalueof{/data point/x}},
+%                        \pgfmathprintnumber[fixed]{\pgfkeysvalueof{/data point/y}}
+%                    )$
+%                }
+                % -------------------------------------------------------------
+        ;
+        \fill [red] (intersection-2) circle (1mm);
+    \end{axis}
+\end{tikzpicture}
+\end{document}

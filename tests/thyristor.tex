@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{circuitikz}
+
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to [battery](0,4) 
+               [short] -- ++ (3,0)
+            to [C, l_=hey] (4,4)
+               [short] -- ++ (2,0)
+            to [L] (8,4)
+               [short] -- ++ (2,0)
+            to [R] (10,0)
+     (10,0) -- (0,0)
+      (2,4) to [C](2,0)
+      (5,0) to [Ty, n=thyris](5,4)
+    (3,2.7) to (thyris.gate) node[below] {G}    % wire to gate
+               (thyris.anode) node[right] {A}   % the anode
+               (thyris.cathode) node[right] {C} % the cathode
+    (3,2.7) to[battery] (3,0)
+                ;
+\end{circuitikz}
+
+\end{document}

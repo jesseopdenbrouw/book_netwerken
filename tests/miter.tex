@@ -1,0 +1,12 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[V=$U$] ++(0,2) to[R=$R_i$, -*] ++(2,0) to[short, i=$I$] ++(1,0) to[R=$R_u$] ++(0,-2) to[short, -*] ++(-1,0) to[short,-.] (0,0);
+\end{circuitikz}
+
+\end{document}

@@ -1,0 +1,182 @@
+\documentclass[a4paper]{article}
+
+\usepackage{tikz}
+\usepackage[european]{circuitikz}
+
+%%%    \ctikzset{bipoles/resistor/height=0.15}
+%%%    \ctikzset{bipoles/resistor/width=0.4}
+%%%    %\ctikzset{resistor = european}
+
+%% Make a real good voltage source
+\makeatletter
+%% Output routine for voltage sources
+\def\pgf@circ@drawvoltagegenerator{
+	\ifpgf@circuit@bipole@voltage@below
+		coordinate (pgfcirc@Vfrom) at ($(\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.-120)$)
+		coordinate (pgfcirc@Vto) at ($(\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.-60)$)
+	\else
+		coordinate (pgfcirc@Vfrom) at ($ (\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.120)$)
+		coordinate (pgfcirc@Vto) at ($ (\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.60)$)
+	\fi
+	\ifpgf@circuit@europeanvoltage
+		\ifpgf@circuit@bipole@voltage@backward
+				(pgfcirc@Vfrom)  node {$-$}  (pgfcirc@Vto) node {$+$}
+		\else
+				(pgfcirc@Vfrom)  node {$+$}  (pgfcirc@Vto) node {$-$}
+		\fi
+	\else% american voltage
+		\ifpgf@circuit@bipole@voltageoutsideofsymbol
+		% if it is a battery, must put + and -
+			\ifpgf@circuit@bipole@voltage@backward
+				(pgfcirc@Vfrom)  node {$-$}  (pgfcirc@Vto) node {$+$}
+			\else
+				(pgfcirc@Vfrom)  node {$+$}  (pgfcirc@Vto) node {$-$}
+			\fi
+		\fi
+	\fi
+}
+
+%% Output routine 
+\def\pgf@circ@drawcurrent{
+	\pgfextra{
+		\edef\pgf@circ@ffffff{\pgf@circ@direction}
+		\def\pgfcircmathresult{\expandafter\pgf@circ@stripdecimals\pgf@circ@ffffff\pgf@nil}
+
+		\ifnum\pgfcircmathresult >4 \ifnum\pgfcircmathresult <86
+			\ifpgf@circuit@bipole@current@below
+				\def\pgf@circ@dir{north west} \else \def\pgf@circ@dir{south east}
+			\fi
+		\fi\fi
+		\ifnum\pgfcircmathresult >85 \ifnum\pgfcircmathresult <95
+			\ifpgf@circuit@bipole@current@below
+				\def\pgf@circ@dir{west} \else \def\pgf@circ@dir{east} 
+			\fi
+		\fi\fi
+		\ifnum\pgfcircmathresult >94 \ifnum\pgfcircmathresult <176
+			\ifpgf@circuit@bipole@current@below
+				 \def\pgf@circ@dir{south west}\else \def\pgf@circ@dir{north east}
+			\fi
+		\fi\fi
+		\ifnum\pgfcircmathresult >175 \ifnum\pgfcircmathresult <185
+			\ifpgf@circuit@bipole@current@below
+				  \def\pgf@circ@dir{south}\else\def\pgf@circ@dir{north}
+			\fi
+		\fi\fi
+		\ifnum\pgfcircmathresult >184 \ifnum\pgfcircmathresult <266
+			\ifpgf@circuit@bipole@current@below
+				 \def\pgf@circ@dir{south east}\else\def\pgf@circ@dir{north west}
+			\fi
+		\fi\fi
+		\ifnum\pgfcircmathresult >265 \ifnum\pgfcircmathresult <275
+			\ifpgf@circuit@bipole@current@below
+				 \def\pgf@circ@dir{east}\else \def\pgf@circ@dir{west}
+			\fi
+		\fi\fi
+		\ifnum\pgfcircmathresult >274 \ifnum\pgfcircmathresult <356
+			\ifpgf@circuit@bipole@current@below
+				  \def\pgf@circ@dir{north east}\else\def\pgf@circ@dir{south west}
+			\fi
+		\fi\fi
+		\ifnum\pgfcircmathresult <5
+			\ifpgf@circuit@bipole@current@below
+				 \def\pgf@circ@dir{north}\else\def\pgf@circ@dir{south} 
+			\fi
+		\fi
+		\ifnum\pgfcircmathresult >355
+			\ifpgf@circuit@bipole@current@below
+				 \def\pgf@circ@dir{north}\else\def\pgf@circ@dir{south} 
+			\fi
+		\fi
+		
+		\ifpgf@circuit@bipole@current@below
+			\def\pgf@circ@bipole@current@label@where{-90}
+		\else
+			\def\pgf@circ@bipole@current@label@where{+90}
+		\fi
+	}
+	
+	\pgfextra{\def\pgf@temp{short}\edef\pgf@circ@temp{\ctikzvalof{bipole/kind}}}
+		\ifx\pgf@circ@temp\pgf@temp%draw current at a short at middle of the line
+				(\tikztostart)--(\tikztotarget)
+		\else% normal bipole or source
+			\ifpgf@circuit@bipole@current@before
+				 (\tikztostart)--(anchorstartnode)
+			\else
+				(anchorendnode)--(\tikztotarget)
+			\fi
+		\fi
+		\ifpgf@circuit@bipole@current@backward
+			\pgfextra{
+				\pgfmathsubtract{\pgf@circ@ffffff}{180}
+				\edef\pgf@circ@ffffff{\expandafter\pgf@circ@stripdecimals\pgfmathresult\pgf@nil}
+				}
+		\fi
+	coordinate[currarrow,pos=\ctikzvalof{current/distance},rotate=\pgf@circ@ffffff](Iarrow)
+	(Iarrow.\pgf@circ@bipole@current@label@where) node[anchor=\pgf@circ@dir]{\pgf@circ@finallabels{current/label}}
+}
+
+%%%\makeatother
+
+\begin{document}
+
+%%%\begin{figure}[!ht]
+%%%\centering
+%%%\begin{circuitikz}
+%%%\draw (0,0) to[V_>=$U_B$] (0,-2);
+%%%\draw (0,0) to[/tikz/circuitikz/bipoles/length=30pt, R=$R_i$, -o] (2,0);
+%%%\draw (2,0) to[short, i=$I_B$] (3,0);
+%%%\draw (3,0) to[/tikz/circuitikz/bipoles/length=30pt, R=$R_u$] (3,-2);
+%%%\draw (3,-2) to[short, -o] (2,-2);
+%%%\draw (2,-2) to[short] (0,-2);
+%%%\end{circuitikz}
+%%%\caption{Testcircit}
+%%%\end{figure}
+%%%
+%%%\begin{figure}[!ht]
+%%%\centering
+%%%\begin{circuitikz}
+%%%\draw (0,0) to[V<=$U_B$] (0,2) to[/tikz/circuitikz/bipoles/length=25pt, R=$R_i$, -o] ++(2,0)
+%%%to[short, i=$I$] ++ (1,0) to[/tikz/circuitikz/bipoles/length=20pt, Do, l=$D$] ++(0,-2)
+%%%to[short, -o] ++ (-1,0) to[short] (0,0);
+%%%\draw [<->] (2,0.2) -- (2,1.8);
+%%%\node at (1.7,1) {$U_D$};
+%%%\end{circuitikz}
+%%%\caption{Testcircuit}
+%%%\end{figure}
+
+\begin{figure}[!ht]
+\begin{circuitikz}
+\draw (0,0) to[I, l=$I_B$] (0,2);
+\draw [->] (-0.5,0.65) -- (-0.5,1.35);
+\end{circuitikz}
+\end{figure}
+
+%%%\begin{circuitikz}
+%%%\draw (2,0) node[npn,nobase](npn){T1};
+%%%\draw (npn.E) node[below]{E};
+%%%\draw (npn.C) node[above]{C};
+%%%\draw (npn.B) node[circ]{} node[left]{B};
+%%%\draw[dashed,red,-latex] (1,0.5)--(npn.nobase);
+%%%\end{circuitikz}
+%%%
+%%%\bigskip
+%%%
+%%%\begin{circuitikz}
+%%%\draw (2,0) node[elmech](motor){};
+%%%\draw (motor.north) |-(0,2) to [R] ++(0,-2) to[dcvsource]++(0,-2) -| (motor.bottom);
+%%%\draw[thick,->>] (motor.center) -- ++(1.5,0) node[midway,above] {$\omega$};
+%%%\end{circuitikz}
+%%%
+%%%\bigskip
+%%%
+%%%\begin{circuitikz}
+%%%\draw (0,0) node[op amp, yscale=-1] (opamp) {}
+%%%(opamp.+) node[left] {$v_+$}
+%%%(opamp.-) node[left] {$v_-$}
+%%%(opamp.out) node[right] {$v_o$}
+%%%(opamp.up) --++(0,-2.5) node[vcc]{5\,\textnormal{V}}
+%%%%(opamp.down) --++(0,0.5) node[vee]{-5\,\textnormal{V}}
+%%%;
+%%%\end{circuitikz}
+
+\end{document}

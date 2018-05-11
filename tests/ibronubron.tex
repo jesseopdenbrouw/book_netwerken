@@ -1,0 +1,103 @@
+\documentclass[a4paper]{article}
+
+\usepackage{tikz}
+\usepackage[european]{circuitikz}
+
+%% Make a real good voltage source
+\makeatletter
+%% Output routine for voltage sources
+\def\pgf@circ@drawvoltagegenerator{
+	\ifpgf@circuit@bipole@voltage@below
+		coordinate (pgfcirc@Vfrom) at ($(\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.-120)$)
+		coordinate (pgfcirc@Vto) at ($(\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.-60)$)
+	\else
+		coordinate (pgfcirc@Vfrom) at ($ (\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.120)$)
+		coordinate (pgfcirc@Vto) at ($ (\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.60)$)
+	\fi
+	\ifpgf@circuit@europeanvoltage
+		\ifpgf@circuit@bipole@voltage@backward
+				(pgfcirc@Vfrom)  node {$-$}  (pgfcirc@Vto) node {$+$}
+		\else
+				(pgfcirc@Vfrom)  node {$+$}  (pgfcirc@Vto) node {$-$}
+		\fi
+	\else% american voltage
+		\ifpgf@circuit@bipole@voltageoutsideofsymbol
+		% if it is a battery, must put + and -
+			\ifpgf@circuit@bipole@voltage@backward
+				(pgfcirc@Vfrom)  node {$-$}  (pgfcirc@Vto) node {$+$}
+			\else
+				(pgfcirc@Vfrom)  node {$+$}  (pgfcirc@Vto) node {$-$}
+			\fi
+		\fi
+	\fi
+}
+
+%% Create a Dutch version of the current source
+\makeatletter
+\pgfcircdeclarebipole{}{\ctikzvalof{bipoles/isource/height}}{isource}{\ctikzvalof{bipoles/isource/height}}{\ctikzvalof{bipoles/isource/width}}{
+    \pgfpointorigin
+    \pgfsetlinewidth{\pgfkeysvalueof{/tikz/circuitikz/bipoles/thickness}\pgfstartlinewidth}
+    \pgfpathellipse{\pgfpointorigin}{\pgfpoint{0}{\pgf@circ@res@up}}{\pgfpoint{\pgf@circ@res@left}{0}}
+    \pgfpathmoveto{\pgfpoint{\pgf@circ@res@step}{\pgf@circ@res@up}}
+    \pgfpathlineto{\pgfpoint{\pgf@circ@res@step}{\pgf@circ@res@down}}
+  \pgfusepath{draw}
+  \pgfscope
+    \pgfsetarrowsend{latex'}
+    \pgfpathmoveto{\pgfpoint{0.8\pgf@circ@res@left}{1.3\pgf@circ@res@up}}
+    \pgfpathlineto{\pgfpoint{0.8\pgf@circ@res@right}{1.3\pgf@circ@res@up}}
+    \pgfusepath{draw}   %draw arrow
+  \endpgfscope
+}
+\makeatother
+
+\begin{document}
+
+\begin{figure}[!ht]
+\begin{circuitikz}
+%\tikzset{every node/.style={inner sep=1em}}
+\draw (0,0) to[I, l_={$I_B$,},name=A, mirror, inner sep=1ex] (0,2);
+\draw[red] (A.sw) rectangle (A.ne);
+\draw (0,2) to[I, l={$I_B$},name=B, inner sep=10em] (2,2);
+\draw[blue] (B.sw) rectangle (B.ne);
+\draw (B.sw) -- (B.ne);
+\end{circuitikz}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{circuitikz}
+\draw (0,0) to[V_>=$U_B$] (0,-2);
+\draw (0,0) to[/tikz/circuitikz/bipoles/length=30pt, R=$R_i$, -*] (2,0);
+\draw (2,0) to[short, i=$I_B$] (3,0);
+\draw (3,0) to[/tikz/circuitikz/bipoles/length=30pt, R=$R_u$] (3,-2);
+\draw (3,-2) to[/tikz/circuitikz/bipoles/length=30pt,short, -*] (2,-2);
+\draw (2,-2) to[short] (0,-2);
+\end{circuitikz}
+\caption{Testcircit}
+\end{figure}
+
+\begin{circuitikz}
+\draw (0,0) to[I, name=A] (0,2);
+\node[left=2pt] at (A.n) {$I_A$};
+
+\draw (0,0) to[I, name=B] (2,0);
+\node[above=5pt] at (B.n) {$I_B$};
+\end{circuitikz}
+
+\begin{figure}[!ht]
+\centering
+\begin{circuitikz}
+\draw (0,0) to[V_>=$1$V] (0,-2);
+\draw (0,0) to[/tikz/circuitikz/bipoles/length=30pt, R=$25\ \Omega$, -*] (2,0);
+\draw (2,0) to[short, i=$I_D$] (4,0);
+\draw (4,0) to[/tikz/circuitikz/bipoles/length=20pt, empty diode, l=$D$] (4,-2);
+\draw (4,-2) to[/tikz/circuitikz/bipoles/length=30pt,short, -*] (2,-2);
+\draw (2,-2) to[short] (0,-2);
+\draw[<->,shorten <=5pt,shorten >=5pt,thin] (2,0) -- (2,-1) node[anchor=east] {$U_D$} -- (2,-2);
+\end{circuitikz}
+\caption{Testcircuit}
+\end{figure}
+
+
+
+\end{document}

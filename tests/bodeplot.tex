@@ -1,0 +1,34 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[dutch]{babel}
+\usepackage{tikz}
+
+\usepackage{bodegraph}
+
+\tikzset{
+    gnuplot def/.style={samples=100,id=\arabic{idGnuplot},prefix=gnuplot/}
+}
+
+\begin{document}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[xscale=10/4]
+\begin{scope}[yscale=3/50]
+%\UnitedB
+\semilog{0}{4}{-50}{10}
+\BodeGraph[thick,samples=100]{0:4}
+{-\POAmp{1}{0.006}+
+\SOAmp{1}{0.3}{100}}
+\end{scope}
+\begin{scope}[yshift=-5cm,yscale=3/120]
+%\UniteDegre
+\OrdBode{30}
+\semilog{0}{4}{-120}{30}
+\BodeGraph[thick,samples=100]{0:4}
+{-\POArg{1}{0.006}+
+\SOArg{1}{0.3}{100}}
+\end{scope}
+\end{tikzpicture}
+\caption{Bodediagrammen voor amplitude en fase.}
+\end{figure}
+\end{document}
