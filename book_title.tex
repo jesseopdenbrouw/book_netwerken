@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%       TITLE PAGE
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%% Make title page
+%% Title page defined in preamble
+\maketitle
+
+\hspace*{0em}
+\vfill
+\textcopyright\the\year\ \ \bookauthor, Den Haag\\
+Versie: \bookversion\\
+Datum: \today
+
+\vspace*{.25cm}
+\ifusebookasbook\else
+\includegraphics[scale=0.5]{images/HHS_grijs_groen_fc}
+\fi
+
+\ifusebookasbook
+\vspace*{1cm}
+\begin{tabbing}
+\hspace{1.2cm}\=\kill
+ ISBN: \> 978-XX-XXX-XXXX \\ 
+ NUR:  \> 173/959
+\end{tabbing}
+\fi
+
+\vspace*{2cm}
+\includegraphics{images/by-nc-sa_eu.pdf}
+\par
+{\small%
+\booktitle{} van \bookauthor{} is in licentie gegeven volgens
+een \href{http://creativecommons.org/licenses/by-nc-sa/3.0/nl/}{Creative Commons
+Naamsvermelding-NietCommercieel-GelijkDelen 3.0 Nederland-licentie}.
+
+Suggesties en/of opmerkingen over dit boek kunnen worden gestuurd naar:\\
+\href{mailto:\email}{\email}.}
