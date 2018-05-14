@@ -12,7 +12,7 @@
 \usepgfplotslibrary{units}
 
 % New dashed-dotted style
-\tikzstyle{loosely dashdotted} = [dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt]
+%\tikzstyle{loosely dashdotted} = [dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt]
 % Directory prefix for Gnuplot plots
 \tikzset{prefix=gnuplot/}
 % Bipoles have the same line witdh as the wires
@@ -20,7 +20,7 @@
 % Reinitialize the generic box for European resistor
 %%%\ctikzset{bipoles/generic/height/.initial=.20}
 %%%\ctikzset{bipoles/generic/width/.initial=.60}
-
+\tikzset{bookcircuit/.style={line width=1pt,scale=1.25}}
 
 % Get the x and y coordinates of a point
 \makeatletter
