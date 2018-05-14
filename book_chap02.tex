@@ -95,7 +95,7 @@ uitgaande stroom. Zie figuur~\ref{fig:gelingaandeIisuitgaandeI}.
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[line width=1pt]
-\draw (0,0) to [short, i>=$I_1$, -*] ++(3,0) node[above,yshift=1cm] {$I_1=I_2$} to [short, i>=$I_2$] ++(3,0);
+\draw (0,0) to [short, i>=$I_1$, -*] ++(3,0) node[above,yshift=.6cm] {$I_1=I_2$} to [short, i>=$I_2$] ++(3,0);
 \end{tikzpicture}
 \caption{De ingaande stroom is even groot als de uitgaande stroom.}
 \label{fig:gelingaandeIisuitgaandeI}
@@ -162,7 +162,7 @@ is dan het potentiaal bij de `$-$'.
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R=$R$, v=$U_R$] ++(0,-2) to [short,-.] (0,0)
 ;
 %%%\draw (-2,0) to[short, i=$I$] (0,0);
@@ -179,7 +179,7 @@ $I$ waardoor de spanningsbron een bepaalde weerstand ondervindt. We noemen deze 
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=$U$] ++ (0,2) to [short, i=$I$] ++(2,0)
             to [R, l=$R_1$,v=$U_1$] ++(2,0) to [R, l=$R_2$, v=$U_2$] ++(2,0)
             coordinate (A);
@@ -232,7 +232,7 @@ de spanningsbron een bepaalde weerstand. Deze weerstand noemen we $R_p$.
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 %% Draw voltage source, wire with current I, resistor R1 and back to minus of voltage source
 \draw (0,0) to [V<=$U$] ++ (0,2) to [short] ++(0,0.25) to [short,i=$I$,-*] ++(3,0) coordinate (A) to [short] ++(0,-0.25) to[R=$R_1$,-*,i>^=\small $I_1$,v=\small $U_1$] ++(0,-2) to [short,-.] (0,0);
 %% Draw resistor R2 and wire to minus of resistor R1
@@ -297,7 +297,7 @@ verdelen over de twee weerstanden. Er is sprake van spanningsdeling.
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=$U$] ++ (0,2) to [short, i=$I$] ++(1.5,0)
             to [R, l=$R_1$,v=$U_1$] ++(2,0) to [R, l=$R_2$, v=$U_2$] ++(2,0)
             to [short] ++(0.5,0) to [short] ++(0,-2) to [short,-.] (0,0);
@@ -326,7 +326,7 @@ verdelen over de twee weerstanden. Er is sprake van stroomdeling.
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 %% Draw voltage source, wire with current I, resistor R1 and back to minus of voltage source
 \draw (0,0) to [V<=$U$] ++ (0,2) to [short] ++(0,0.25) to [short,i=$I$,-*] ++(3,0) coordinate (A) to [short] ++(0,-0.25) to[R=$R_1$,-*,i>^=\small $I_1$,v=\small $U_1$] ++(0,-2) to [short,-.] (0,0);
 %% Draw resistor R2 and wire to minus of resistor R1
@@ -371,7 +371,7 @@ figuur~\ref{fig:gelnisopenkort}.
 \begin{figure}[!ht]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=$U$] ++(0,2) to [R=$R_i$,-*] coordinate (A) ++(2.5,0) node[right] {$+$} to [open] ++(0,-2) coordinate (B) node[right] {$-$} to [short,*-.] (0,0);
 \draw ($(A)!0.5!(B)$) node[right] {$U_o$};
 \end{tikzpicture}
@@ -380,7 +380,7 @@ figuur~\ref{fig:gelnisopenkort}.
 \end{subfigure}%
 \begin{subfigure}{0.5\textwidth}
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=$U$] ++(0,2) to [R=$R_i$,-*] ++(2.5,0) to [short, i=$I_k$] ++(0,-2) to [short,*-.] (0,0);
 \end{tikzpicture}
 \caption{}
@@ -419,7 +419,7 @@ figuur~\ref{fig:gelnissopenkort}.
 \begin{figure}[!ht]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [I, l=$I$, inner sep=5pt] ++(0,2) to [short] ++(1,0) coordinate (A) to [R=$R_i$,*-*]  ++(0,-2) coordinate (B) to [short,-.] (0,0) (A) to [short, -*] ++(1,0) node[right] {$+$} (B) to [short, -*] ++(1,0) node[right] {$-$}; 
 \draw ($(A)!0.5!(B)$) node[right,xshift=1cm] {$U_o$};
 \end{tikzpicture}
@@ -428,7 +428,7 @@ figuur~\ref{fig:gelnissopenkort}.
 \end{subfigure}%
 \begin{subfigure}{0.5\textwidth}
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [I, l=$I$, inner sep=5pt] ++(0,2) to [short] ++(1,0) coordinate (A) to [R=$R_i$,*-*]  ++(0,-2) coordinate (B) to [short,-.] (0,0) (A) to [short, -*] ++(1,0) to [short, i=$I_k$, -*] ++(0,-2) to [short] (B) ; 
 \end{tikzpicture}
 \caption{}
@@ -465,7 +465,7 @@ P = U\cdot I
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R,l_=$R$,n=R] ++(0,-2) to [short,-.] (0,0);
 \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.2) -> ++(2,0.2);
  \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.0) -> ++(2,0.0) node[right] {W};
@@ -532,7 +532,7 @@ vanuit de bron in $R_u$.
 
 \begin{figure}[!ht]
 \centering
-\begin{circuitikz}[line width=1pt]
+\begin{circuitikz}[bookcircuit]
 \draw (0,0) to[V<=$U$] ++(0,2) to[R=$R_i$, -*] ++(2,0) to[short, i=$I$] ++(1,0) to[R=$R_u$] ++(0,-2) to[short, -*] ++(-1,0) to[short,-.] (0,0);
 \end{circuitikz}
 \captionsetup{width=.9\linewidth}
@@ -601,23 +601,10 @@ kortsluiting van de bron het beschikbare vermogen dat in de inwendige weerstand 
 gelijk wordt gesteld aan 1. De vermogens zijn uitgezet tegen de verhouding van de uitwendige weerstand
 en de inwendige weerstand. Een verhouding van $R_u/R_i=1$ betekent dat $R_u=R_i$.
 
-De ononderbroken kromme geeft de vermogensopname van de uitwendige weerstand weer. De gestreepte
-kromme geeft de vermogensopname van de inwendige weerstand weer. Het geleverde vermogen van de
-bron wordt door de gestippelde kromme weergegeven. Verder is te zien dat de gestippelde
-streepjes lijn de effici\"entie weergeeft.
-
-We bespreken een drietal markante punten.
-Bij kortsluiting van de bron ($R_u/R_i=0$) wordt het maximale vermogen van de bron in de inwendige
-weerstand gedissipeerd. Te zien is dat $P_{bron} = P_{Ri} = 1$ en $P_{Ru} = 0$. De effici\"entie is 0.
-Bij $R_u=R_i$ is het gedissipeerde vermogen in de inwendige en uitwendige weerstand $0,25$. Het geleverde
-bronvermogen is $0,5$ en de effici\"entie is $0,5$. Naar mate $R_u$ groter wordt, neemt het geleverde
-en opgenomen vermogen af. Bijna al het vermogen wordt in $R_u$ gedissipeerd. De effci\"entie neemt toe
-maar zal nooit 1 worden.
-
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
-	\sansmath
+	%\sansmath
 	\begin{axis}[width=10cm,height=7cm,
 		xlabel=$R_U/R_I$,
 		ylabel=$P_{norm}$,
@@ -670,11 +657,33 @@ maar zal nooit 1 worden.
 \label{fig:gelbeschikbarevermogenseneff}
 \end{figure}
 
+De ononderbroken kromme geeft de vermogensopname van de uitwendige weerstand weer. De gestreepte
+kromme geeft de vermogensopname van de inwendige weerstand weer. Het geleverde vermogen van de
+bron wordt door de gestippelde kromme weergegeven. Verder is te zien dat de gestippelde
+streepjes lijn de effici\"entie weergeeft.
+
+We bespreken een drietal markante punten.
+Bij kortsluiting van de bron ($R_u/R_i=0$) wordt het maximale vermogen van de bron in de inwendige
+weerstand gedissipeerd. Te zien is dat $P_{bron} = P_{Ri} = 1$ en $P_{Ru} = 0$. De effici\"entie is 0.
+Bij $R_u=R_i$ is het gedissipeerde vermogen in de inwendige en uitwendige weerstand $0,25$. Het geleverde
+bronvermogen is $0,5$ en de effici\"entie is $0,5$. Naar mate $R_u$ groter wordt, neemt het geleverde
+en opgenomen vermogen af. Bijna al het vermogen wordt in $R_u$ gedissipeerd. De effci\"entie neemt toe
+maar zal nooit 1 worden.
+
+
 \section{De belastingskarakteristiek}
+
+In deze paragraaf bespreken we het begrip \textsl{belastingskarakteristiek}. We kunnen hiermee de stromen
+en spanningen in een netwerk bepalen via een grafische weg. Dit is met name bij het gebruik van niet-lineaire
+netwerkelementen zoals de diode erg handig.
+
+In figuur~\ref{fig:gelschemavoorbelastingskarakteristiek} is een schakeling te zien met een spanningsbron
+$U$ en een inwendige weerstand $R_i$. De bron wordt belast door de belastingsweerstand $R_b$. Deze weerstand
+is variabel gemaakt en kan vari\"eren tussen $R_b = 0$ en $R_b \rightarrow \infty$.
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt,scale=1.25]
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V<=$U$] ++(0,2) to[R=$R_i$, -*] ++(2,0) coordinate (A) node[below] {$+$} to[short, i=$I$] ++(2,0) to[vR=$R_b$,invert,mirror] ++(0,-2) to[short, -*] ++(-2,0) coordinate (B) node[above] {$-$} to[short,-.] (0,0);
 \draw[draw=none] (A) -- (B) node[midway] {$U_{R_b}$};
 \end{tikzpicture}
@@ -717,7 +726,9 @@ De stroom $I$ komt overeen met de afhankelijke variabele $y$. De spanning $U_{R_
 onafhankelijke variabele $x$. De factor $-1/R_i$ komt overeen met de constante $a$ en wordt de
 richtingsco\"effici\"ent genoemd. De kortsluitstroom $I_k$ komt overeen met het startgetal $b$.
 
-We kunnen de lijn nu uitzetten in een grafiek. We onderscheiden twee markante punten van de lijn:
+We kunnen de lijn nu uitzetten in een grafiek, zie figuur~\ref{fig:gelbelastingskarakteristiek}.
+We onderscheiden twee markante punten op de lijn:
+
 \begin{itemize}
 \item Het kortsluitpunt. Dit doet zich voor als $R_b=0$, dus als de bron is kortgesloten. De bron
       levert dan een maximale stroom, de kortsluitstroom $I_k$ genoemd. De spanning over $R_b$ is
@@ -726,22 +737,229 @@ We kunnen de lijn nu uitzetten in een grafiek. We onderscheiden twee markante pu
       is verwijderd. Dan geldt dat $I=0$ A en $U_{R_b}=U$. Dit wordt de open klemspanning $U_o$ genoemd. 
 \end{itemize}
 
-
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[line width=1pt]
+\begin{tikzpicture}[line width=1pt,yscale=0.8]
 \draw[-latex] (0,0) node[left] {$0$} -- (0,6) node[above] {$I$};
 \draw[-latex] (0,0) node[below] {$0$} -- (6,0) node[right] {$U_{R_b}$};
 \draw (0,5) node[left] {$I_k$} -- (5,0) coordinate[pos=0.2] (rico) coordinate[midway] (rbisri) node[below] {$U_o$};
 \draw[<-] (0.2,5) -- ++(0.8,0.4) node[right] {$R_b=0$};
-\draw[<-] (5.05,0.2) -- ++(0.8,0.4) node[right] {$R_b=\infty$};
+\draw[<-] (5.05,0.2) -- ++(0.8,0.4) node[right] {$R_b\rightarrow\infty$};
 \draw[<-] (rico) ++(0.05,0.2) -- ++(0.8,0.4) node[right] {rico = $-\dfrac{1}{R_i}$};
-\draw[dashed] (rbisri) -- (rbisri -| {{0,0}}) node[left] {$\dfrac{I_k}{2}$};
-\draw[dashed] (rbisri) -- (rbisri |- {{0,0}}) node[below] {$\dfrac{U_o}{2}$};
+\draw[dashed] (rbisri) -- (rbisri -| {{0,0}}) node[left] {$\frac{1}{2}I_k$};    %{$\dfrac{I_k}{2}$};
+\draw[dashed] (rbisri) -- (rbisri |- {{0,0}}) node[below] {$\frac{1}{2}U_o$};   %{$\dfrac{U_o}{2}$};
 \draw[<-] (rbisri) ++(0.1,0.1) -- ++(0.8,0.4) node[right] {$R_b=R_i$};
 \end{tikzpicture}
 \caption{Belastingskarakteristiek.}
 \label{fig:gelbelastingskarakteristiek}
+\end{figure}
+
+De belastingslijn in de grafiek loopt van het punt (0,$I_k$) naar het punt ($U_o$, 0). Dit komt overeen
+met respectievelijk $R_b=0$ en $R_b\rightarrow\infty$.
+Naast de twee eerder genoemde punten is er nog een interessant punt op de lijn te vinden, namelijk
+waar $R_b=R_i$. Dit punt ligt op het midden van de belastingslijn. In dat punt geldt dat $I=\frac{1}{1}I_k$
+en $U_{R_b}=\frac{1}{2}U_o$.
+
+Nu is deze grafische methode niet erg interessant bij een netwerk met lineaire elementen, zoals weerstanden.
+We kunnen immers de stroom $I$ en de spanning $U_{R_b}$ ook analytisch oplossen:
+%
+\begin{equation}
+I = \dfrac{U}{R_i+R_b} \quad \text{en} \quad U_{R_b} = \dfrac{R_b}{R_i+R_b}\cdot U
+\end{equation}
+
+
+Maar bij het gebruik van niet-lineaire elementen zoals de diode komt de methode goed tot zijn recht.
+In figuur~\ref{fig:gelserieweerstandenled} is een netwerk getekend met een weerstand in serie met een
+led. De led gedraagt zich als een diode. De spanning-stroomcurve van een led is sterk niet-lineair en een
+analytische oplossing van de spanningen en stromen in het netwerk is niet realiseerbaar.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V_>={$3{,}3$ V}] (0,-2);
+\draw (0,0) to[R=$150\ \Omega$, -*] node[below] {$+$} (2,0);
+\draw (2,0) to[short, i=$I_D$] (4,0);
+\draw (4,0) to[empty led, l=$D$,inner sep=10pt] (4,-2);
+\draw (4,-2) to[short, -*] node[above] {$-$} (2,-2);
+\draw (2,-2) to[short] (0,-2);
+%\draw[<->,shorten <=5pt,shorten >=5pt,thin] (2,0) -- (2,-1) node[anchor=east] {$U_D$} -- (2,-2);
+\draw[draw=none] (2,0) -- (2,-2) node[midway] {$U_D$};
+\end{tikzpicture}
+\caption{Serieschakeling van een weerstand en een led.}
+\label{fig:gelserieweerstandenled}
+\end{figure}
+
+De open klemspanning bedraagt $3,3$ V. De kortsluitstroom is $3,3/270 = 12,2$ mA.
+We tekenen de belastingslijn in een grafiek, te zien in figuur~\ref{fig:gelbelastingweerstandenled}.
+De rechte lijn wordt getrokken tussen het kortsluitpunt en het nullastpunt. De belastingslijn van
+de led wordt eveneens in de grafiek getrokken. Te zien is dat de ledstroom tot 1,5 V nagenoeg 0 is.
+Daarna stijgt de stroom zeer snel. 
+ 
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+	%\sansmath
+	\begin{axis}[width=8cm,height=5cm,
+		xlabel=$U_D$,
+		x unit=V,
+		ylabel=$I_D$,
+		y unit=mA,
+%		xtick={0.1,0.2,...,1.05},
+		xtick={0.5,1.0,...,3.55},
+		axis x line*=bottom,
+		axis y line*=left,
+%%%        xmin=0, xmax=1.05,
+%%%        ymin=0, ymax=42,
+%%%        restrict y to domain=0:40,
+        xmin=0, xmax=4.05,
+        ymin=0, ymax=26,
+        restrict y to domain=0:26,
+        % enlargelimits={abs=10pt},
+        x tick label style={
+        /pgf/number format/.cd,
+            fixed,
+            fixed zerofill,
+            precision=1,
+	        use comma,
+    	    1000 sep={},
+            /tikz/.cd,
+        }
+	]
+	% Draw diode curve, diode current is in mA
+	\addplot [domain=0:1.9,samples=201,red,thick,name path=dline] gnuplot[id=diode]{1e-21*(exp(x/(1.4*0.02569257028945))-1)};
+	% Draw load line
+	\addplot [domain=0:3.5,samples=201,blue,thick,name path=rline] {(3.3-x)/0.150};
+%%%	\addplot [domain=0:1,samples=201,red,thick,name path=dline] gnuplot[id=diode]{0.0000000001*(exp(x/(1.0*0.02569257028945))-1)};
+%%%	\addplot [domain=0:1,samples=201,blue,thick,name path=rline] {(1.0-x)/0.025};
+	% Find the intersection of the diode curve and the load line
+	\path [name intersections={of=rline and dline , by=op}];
+	% Draw horizontal an vertical li lines
+	\draw [dashed] ({{0,0}} |- op) -- (op);
+	\draw [dashed] ({{0,0}} -| op) -- (op);
+	
+	% Calculate the intersection coordinates and print them
+	\path(op) node [above right,xshift=5pt] {\footnotesize werkpunt \pgfgetlastxy{\macrox}{\macroy}
+        \transformxdimension{\macrox}%
+        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\udiode{\dummy}%
+        %\pgfmathprintnumber[use comma]{\pgfmathresult},%
+        \transformydimension{\macroy}%
+        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\idiode{\dummy}%
+        %\pgfmathprintnumber[use comma]{\pgfmathresult}%
+        };
+
+	\end{axis}
+\end{tikzpicture}
+\captionsetup{width=.9\linewidth}
+\caption{Belastingskarakteristiek van een serieschakeling van een led en uitwendige weerstand en de bron.}
+\label{fig:gelbelastingweerstandenled}
+\end{figure}
+
+Het snijpunt van de twee lijnen is het punt waarop het netwerk zich zal instellen. Dit wordt het werkpunt,
+belastingspunt of instelpunt genoemd. We lezen nu uit de grafiek af dat de diodespanning $U_D$ zo'n 1,8 V
+bedraagt. De stroom bedraagt zo'n 10 mA.
+
+Nauwkeurige analyse van het instelpunt toont aan dat de spanning over de diode \udiode\ V is. De stroom door de
+diode (en dus ook de weerstand en de bron) is \idiode\ mA.
+
+\section{Het theorema van Th\'evenin}
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V<=$U$] ++ (0,2) to [short, i=$I$] ++(1.5,0)
+            to [R, l=$R_1$] ++(1.5,0) to [R, l=$R_2$] ++(2,0)
+            to [short,-*] ++(0.5,0)
+            to [R, l_=$R_3$,-*] ++(0,-2) to [open] ++(0,2)
+            to [short,-*] ++(1,0) to [R,l=$R_4$,-*] ++(0,-2) to [open] ++(0,2)
+            to [short,i=$I_u$] ++(2,0) to [R,l=$R_u$] ++(0,-2)
+            to [short,-.] (0,0)
+            ;
+\end{tikzpicture}
+\caption{Netwerk.}
+\label{fig:gelthevenin}
+\end{figure}
+
+We vereenvoudigen dit netwerk direct door de weerstanden $R_1$ en $R_2$ te vervangen door een
+serieweerstand $R_s$ en weerstanden $R_3$ en $R_4$ te vervangen door een parallelweerstand $R_p$.
+Dus geldt:
+%
+\begin{equation}
+R_s=R_1+R_2 \quad \text{en} \quad R_p = \dfrac{R_3\cdot R_4}{R_3+R_4}
+\end{equation}
+
+We berekenen nu eerst de stroom die de bron moet leveren. Daarvoor moeten we de weerstand bepalen
+die de bron ziet. De weerstand wordt gevormd door de parallelschakeling van $R_p$ met $R_u$, in serie
+met $R_s$. We kunnen dus voor $I$ schrijven dat:
+%
+\begin{equation}
+I = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}
+\end{equation}
+%
+Vervolgens berekenen we de stroom $I_u$ door gebruik te maken van stroomdeling:
+%
+\begin{equation}
+I_u = I\cdot\dfrac{R_p}{R_p+R_u}
+\end{equation}
+%
+Combineren we de twee vorige vergelijkingen dan vinden we:
+%
+\begin{equation}
+I_u = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}\cdot\dfrac{R_p}{R_p+R_u}
+\end{equation}
+%
+We mogen in bovenstaande vergelijking $R_s$ ook schrijven als:
+%
+\begin{equation}
+R_s = \dfrac{R_s\cdot(R_p+R_u) + R_p\cdot R_u}{R_p+R_u} = \dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}
+\end{equation}
+%
+
+%
+\begin{equation}
+I_u = \dfrac{U\cdot\dfrac{R_p}{R_p+R_u}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}}
+\end{equation}
+%
+Zowel in de teller als de noemer wordt gedeeld door $R_p+R_u$. We kunnen dit tegen elkaar wegstrepen:
+%
+\begin{equation}
+I_u = \dfrac{U\cdot R_p}{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}
+\end{equation}
+%
+De delen nu teller en noemer door $R_s+R_p$:
+%
+\begin{equation}
+I_u = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_s+R_p}}
+    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_u\cdot(R_s+R_p)}{R_s+R_p}}
+    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p}{R_s+R_p}+R_u} 
+\end{equation}
+%
+Over deze laatste vergelijking kunnen we twee opmerkingen maken. De teller vertegenwoordigt een spanning en
+wel de open klemspanning van de schakeling. We noemen deze spanning de th\'eveninspanning $U_T$.
+De noemer beschrijft een weerstandswaarde gevormd door de parallelschakeling van $R_s$ en $R_p$ in serie
+met $R_u$. De parallelschakeling van $R_s$ en $R_p$ wordt de th\'eveninweerstand  $R_T$ genoemd. We krijgen dus:
+%
+\begin{equation}
+U_T = U\cdot\dfrac{R_p}{R_s+R_p} \qquad\text{en}\qquad R_T = \dfrac{R_s\cdot R_p}{R_s+R_p}
+\end{equation}
+%
+De stroom $I_u$ wordt dus beschreven met de vergelijking:
+%
+\begin{equation}
+I_u = \dfrac{U_T}{R_T+R_u}
+\end{equation}
+%
+We kunnen nu een netwerk opstellen dat bestaat uit de spanningsbron en weerstanden. Dit is te zien in
+figuur~\ref{fig:geltheveninvervangingsschema}.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V<=$U_T$] ++(0,2) to[R=$R_T$, -*] ++(2,0) to[short, i=$I_u$] ++(1.5,0) to[R=$R_u$] ++(0,-2) 
+            to[short, -*] ++(-1.5,0) to[short,-.] (0,0);
+\end{tikzpicture}
+\captionsetup{width=.9\linewidth}
+\caption{Th\'eveninvervangingsschema.}
+\label{fig:geltheveninvervangingsschema}
 \end{figure}
 
 
