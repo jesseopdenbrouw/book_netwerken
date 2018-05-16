@@ -154,7 +154,7 @@ Gegeven een bepaalde spanning en stroom, dan kan de weerstandswaarde berekend wo
 R = \dfrac{U}{I}
 \end{equation}
 %
-In figuur~\ref{fig:geldewetvanohm} is de wet van Ohm uitgebeeld. Aan de spanningbron $U$ wordt
+In figuur~\ref{fig:geldewetvanohm} is de wet van Ohm uitgebeeld. Aan de spanningsbron $U$ wordt
 een weerstand $R$ geplaatst. We spreken dan dat de spanningsbron wordt belast. Ook hier geldt de
 spanningswet van Kirchhoff: de spanning $U$ van de bron is gelijk aan de spanning $U_R$ over de
 weerstand. Bij de gegeven richting van de stroom $I$ geldt dat het potentiaal bij de `$+$' groter
@@ -362,6 +362,7 @@ I_2 = \dfrac{U}{R_2} = \dfrac{R_1\cdot R_2}{R_1+R_2}\cdot \dfrac{1}{R_2}\cdot I 
 
 
 \section{De niet-ideale spanningsbron}
+\label{sec:gelnietidealespanningsbron}
 In de praktijk hebben we te maken met niet-ideale spanningsbronnen. We kunnen zo'n bron
 weergeven met een ideale spanningsbron in serie met een ideale weerstand. De ideale
 weerstand wordt de \textsl{inwendige weerstand} genoemd. Dit is te zien in
@@ -411,6 +412,7 @@ kortsluitstroom begrensd.
 
 
 \section{De niet-ideale stroombron}
+\label{sec:gelnietidealestroombron}
 In de praktijk hebben we ook te maken met niet-ideale stroombronnen. De niet-ideale
 stroombron is te modelleren als een ideale stroombron parallel geschakeld aan een ideale
 weerstand. Ook deze weerstand wordt de inwendige weerstand genoemd. Dit is te zien in
@@ -698,7 +700,7 @@ Voor de spanningen in het schema kunnen we opstellen dat:
 U = U_{R_i} + U_{R_b}
 \end{equation}
 %
-Deze functie kunnen we ook schrijven als:
+Deze vergelijking kunnen we ook schrijven als:
 \begin{equation}
 U_{R_i} = - U_{R_b} + U
 \end{equation}
@@ -711,7 +713,7 @@ Vervolgens delen we alle spanningen door $R_i$:
 %
 Nu is de term $U_{R_i}/R_i$ gelijk aan de bronstroom $I$. De term $U/R_i$ is de stroom die de bron levert
 als de bron kortgesloten wordt, d.w.z.\@ $R_b=0$. Dit wordt de kortsluitstroom $I_k$ genoemd. We kunnen de
-functie dus schrijven als:
+vergelijking dus schrijven als:
 %
 \begin{equation}
 I = -\dfrac{1}{R_i}\cdot U_{R_b} + I_k
@@ -948,7 +950,7 @@ De stroom $I_u$ wordt dus beschreven met de vergelijking:
 I_u = \dfrac{U_T}{R_T+R_u}
 \end{equation}
 %
-We kunnen nu een netwerk opstellen dat bestaat uit de spanningsbron en weerstanden. Dit is te zien in
+We kunnen nu een netwerk opstellen dat bestaat uit een spanningsbron en weerstanden. Dit is te zien in
 figuur~\ref{fig:geltheveninvervangingsschema}.
 
 \begin{figure}[!ht]
@@ -962,4 +964,5 @@ figuur~\ref{fig:geltheveninvervangingsschema}.
 \label{fig:geltheveninvervangingsschema}
 \end{figure}
 
+We hebben hier te maken met een niet-ideale spanningsbron uit paragraaf~\ref{sec:gelnietidealespanningsbron}.
 
