@@ -566,7 +566,7 @@ wordt overgedragen in de uitwendige weerstand. Hiertoe differenti\"eren we de ve
 \setlength{\jot}{10pt}
 \begin{split}
 \dfrac{\text{d}P_{Ru}}{\text{d}R_u} &= U^2\dfrac{(R_i+R_u)^2-R_u\cdot2(R_i+R_u)}{(R_i+R_u)^4} \\
-      &= U^2 \dfrac{(R_i+R_u)-2R_u}{(R_i+R_u)^3•} \\
+      &= U^2 \dfrac{(R_i+R_u)-2R_u}{(R_i+R_u)^3} \\
       &= U^2 \dfrac{R_i-R_u}{(R_i+R_u)^3}
 \end{split}
 \end{equation}
@@ -686,7 +686,7 @@ is variabel gemaakt en kan vari\"eren tussen $R_b = 0$ en $R_b \rightarrow \inft
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V<=$U$] ++(0,2) to[R=$R_i$, -*] ++(2,0) coordinate (A) node[below] {$+$} to[short, i=$I$] ++(2,0) to[vR=$R_b$,invert,mirror] ++(0,-2) to[short, -*] ++(-2,0) coordinate (B) node[above] {$-$} to[short,-.] (0,0);
+\draw (0,0) to[V<=$U$] ++(0,2) to[R=$R_i$, v=$U_{R_i}$, -*] ++(2,0) to [short] ++(1,0) coordinate (A) node[below] {$+$} to[short, i=$I_b$] ++(1,0) to[vR=$R_b$,invert,mirror] ++(0,-2) to[short, -*] ++(-1,0) coordinate (B) node[above] {$-$} to[short,-.] (0,0);
 \draw[draw=none] (A) -- (B) node[midway] {$U_{R_b}$};
 \end{tikzpicture}
 \captionsetup{width=.9\linewidth}
@@ -711,12 +711,13 @@ Vervolgens delen we alle spanningen door $R_i$:
 \dfrac{U_{R_i}}{R_i} = - \dfrac{U_{R_b}}{R_i} + \dfrac{U}{R_i}
 \end{equation}
 %
-Nu is de term $U_{R_i}/R_i$ gelijk aan de bronstroom $I$. De term $U/R_i$ is de stroom die de bron levert
+Nu is de term $U_{R_i}/R_i$ gelijk aan de (bron-)stroom $I_b$. De term $U/R_i$ is de stroom die de bron levert
 als de bron kortgesloten wordt, d.w.z.\@ $R_b=0$. Dit wordt de kortsluitstroom $I_k$ genoemd. We kunnen de
 vergelijking dus schrijven als:
 %
 \begin{equation}
-I = -\dfrac{1}{R_i}\cdot U_{R_b} + I_k
+\label{equ:gelbelastingsfunctie}
+I_b = -\dfrac{1}{R_i}\cdot U_{R_b} + I_k
 \end{equation}
 %
 We hebben nu een rechte lijn gekregen met de algemene gedaante:
@@ -724,7 +725,8 @@ We hebben nu een rechte lijn gekregen met de algemene gedaante:
 \begin{equation}
 y=ax+b
 \end{equation}
-De stroom $I$ komt overeen met de afhankelijke variabele $y$. De spanning $U_{R_b}$ komt overeen met de
+%
+De stroom $I_b$ komt overeen met de afhankelijke variabele $y$. De spanning $U_{R_b}$ komt overeen met de
 onafhankelijke variabele $x$. De factor $-1/R_i$ komt overeen met de constante $a$ en wordt de
 richtingsco\"effici\"ent genoemd. De kortsluitstroom $I_k$ komt overeen met het startgetal $b$.
 
@@ -736,13 +738,13 @@ We onderscheiden twee markante punten op de lijn:
       levert dan een maximale stroom, de kortsluitstroom $I_k$ genoemd. De spanning over $R_b$ is
       dan 0 V.
 \item Het nullastpunt. Dit doet zich voor als $R_b \rightarrow \infty$, dus als $R_b$ uit de schakeling
-      is verwijderd. Dan geldt dat $I=0$ A en $U_{R_b}=U$. Dit wordt de open klemspanning $U_o$ genoemd. 
+      is verwijderd. Dan geldt dat $I_b=0$ en $U_{R_b}=U$. Dit wordt de open klemspanning $U_o$ genoemd. 
 \end{itemize}
 
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[line width=1pt,yscale=0.8]
-\draw[-latex] (0,0) node[left] {$0$} -- (0,6) node[above] {$I$};
+\draw[-latex] (0,0) node[left] {$0$} -- (0,6) node[above] {$I_b$};
 \draw[-latex] (0,0) node[below] {$0$} -- (6,0) node[right] {$U_{R_b}$};
 \draw (0,5) node[left] {$I_k$} -- (5,0) coordinate[pos=0.2] (rico) coordinate[midway] (rbisri) node[below] {$U_o$};
 \draw[<-] (0.2,5) -- ++(0.8,0.4) node[right] {$R_b=0$};
@@ -759,7 +761,7 @@ We onderscheiden twee markante punten op de lijn:
 De belastingslijn in de grafiek loopt van het punt (0,$I_k$) naar het punt ($U_o$, 0). Dit komt overeen
 met respectievelijk $R_b=0$ en $R_b\rightarrow\infty$.
 Naast de twee eerder genoemde punten is er nog een interessant punt op de lijn te vinden, namelijk
-waar $R_b=R_i$. Dit punt ligt op het midden van de belastingslijn. In dat punt geldt dat $I=\frac{1}{1}I_k$
+waar $R_b=R_i$. Dit punt ligt op het midden van de belastingslijn. In dat punt geldt dat $I=\frac{1}{2}I_k$
 en $U_{R_b}=\frac{1}{2}U_o$.
 
 Nu is deze grafische methode niet erg interessant bij een netwerk met lineaire elementen, zoals weerstanden.
@@ -791,7 +793,7 @@ analytische oplossing van de spanningen en stromen in het netwerk is niet realis
 \label{fig:gelserieweerstandenled}
 \end{figure}
 
-De open klemspanning bedraagt $3,3$ V. De kortsluitstroom is $3,3/270 = 12,2$ mA.
+De open klemspanning bedraagt $3,3$ V. De kortsluitstroom is $3,3/150 = 22$ mA.
 We tekenen de belastingslijn in een grafiek, te zien in figuur~\ref{fig:gelbelastingweerstandenled}.
 De rechte lijn wordt getrokken tussen het kortsluitpunt en het nullastpunt. De belastingslijn van
 de led wordt eveneens in de grafiek getrokken. Te zien is dat de ledstroom tot 1,5 V nagenoeg 0 is.
@@ -853,7 +855,7 @@ Daarna stijgt de stroom zeer snel.
 	\end{axis}
 \end{tikzpicture}
 \captionsetup{width=.9\linewidth}
-\caption{Belastingskarakteristiek van een serieschakeling van een led en uitwendige weerstand en de bron.}
+\caption{Belastingskarakteristiek van een serieschakeling van een weerstand en een led.}
 \label{fig:gelbelastingweerstandenled}
 \end{figure}
 
@@ -864,94 +866,182 @@ bedraagt. De stroom bedraagt zo'n 10 mA.
 Nauwkeurige analyse van het instelpunt toont aan dat de spanning over de diode \udiode\ V is. De stroom door de
 diode (en dus ook de weerstand en de bron) is \idiode\ mA.
 
-\section{Het theorema van Th\'evenin}
+Het is ook mogelijk om een belastingsweerstand aan te sturen met een stroombron met een inwendige weerstand.
+Dit is te zien in figuur~\ref{fig:gelschemavoorbelastingskarakteristiekstroombron}.
+
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to [V<=$U$] ++ (0,2) to [short, i=$I$] ++(1.5,0)
-            to [R, l=$R_1$] ++(1.5,0) to [R, l=$R_2$] ++(2,0)
-            to [short,-*] ++(0.5,0)
-            to [R, l_=$R_3$,-*] ++(0,-2) to [open] ++(0,2)
-            to [short,-*] ++(1,0) to [R,l=$R_4$,-*] ++(0,-2) to [open] ++(0,2)
-            to [short,i=$I_u$] ++(2,0) to [R,l=$R_u$] ++(0,-2)
-            to [short,-.] (0,0)
-            ;
+\draw (0,0) to [I, l=$I$] ++(0,2) to [short, i=$I$] ++(2,0)
+            to [R=$R_i$, i>^=$I_i$, *-*] ++(0,-2) to [open] ++(0,2)
+            to [short, -*] ++(1,0) node[below] {$+$} coordinate (A) to [short] ++(1,0) 
+            to [R=$R_b$, i>^=$I_b$] ++(0,-2) to [short, -*] ++(-1,0) node[above] {$-$} coordinate (B)
+            to [short,-.] (0,0);
+\draw[draw=none] (A) -- (B) node[midway] {$U_{R_b}$};
 \end{tikzpicture}
-\caption{Netwerk.}
-\label{fig:gelthevenin}
+\caption{Schema voor de belastingskarakteristiek.}
+\label{fig:gelschemavoorbelastingskarakteristiekstroombron}
 \end{figure}
 
-We vereenvoudigen dit netwerk direct door de weerstanden $R_1$ en $R_2$ te vervangen door een
-serieweerstand $R_s$ en weerstanden $R_3$ en $R_4$ te vervangen door een parallelweerstand $R_p$.
+We kunnen voor dit netwerk de stroomvergelijking opstellen:
+%
+\begin{equation}
+I = I_i + I_b
+\end{equation}
+%
+We brengen $I_b$ links van het isgelijkteken:
+\begin{equation}
+I_b = -I_i + I
+\end{equation}
+%
+We kunnen $I_i$ vervangen zodat volgt dat:
+%
+\begin{equation}
+I_b = -\dfrac{1}{R_i}\cdot U_{R_b} + I
+\end{equation}
+%
+Verder volgt dat als $R_b$ kortgesloten is, de spanning over de weerstanden 0 V is en dat de
+volledige bronstroom door de kortsluiting loopt. Dus geldt $I=I_k$. We kunnen de vergelijking
+dus ook schrijven als:
+%
+\begin{equation}
+I_b = -\dfrac{1}{R_i}\cdot U_{R_b} + I_k
+\end{equation}
+%
+Dit is exact dezelfde vergelijking als~\eqref{equ:gelbelastingsfunctie}. Het maakt voor de belastingsweerstand
+dus kennelijk niet uit of deze gestuurd wordt door een spanningsbron met serieweerstand $R_i$ of door een
+stroombron met parallelweerstand $R_i$.
+
+
+\section{Het theorema van Th\'evenin}
+Aansluitend op de belastingskarakteristiek bespreken we nu het theorema van Th\'evenin.
+Dit theorema is bijzonder handig bij het vereenvoudigen van netwerken. Het bespaart veel
+rekenwerk door van een netwerk het th\'eveningvervangingsschema op te stellen.
+
+In figuur~\ref{fig:geltheveninbeginschema} is een netwerk getekend met een spanningsbron $U$,
+serieweerstand $R_s$ en parallelweerstand weerstand $R_p$. Het netwerk wordt belast met uitwendige $R_u$.
+%
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V<=$U$] ++ (0,2) to [short, i=$I$] ++(1,0)
+            %to [R, l=$R_1$] ++(1.5,0) to [R, l=$R_2$] ++(2,0)
+            to [R=$R_s$, v=$U_s$] ++(1.5,0)
+            to [short,-*] ++(0.5,0)
+            %to [R, l_=$R_3$,-*] ++(0,-2) to [open] ++(0,2)
+            %to [short,-*] ++(1,0) to [R,l=$R_4$,-*] ++(0,-2) to [open] ++(0,2)
+            to [R, l_=$R_p$,-*] ++(0,-2) to [open] ++(0,2)
+            to [short,-*] ++(1,0) node[below] {$+$} coordinate (A)
+            to [short,i=$I_u$] ++(1,0) to [R=$R_u$, i>^=$I_u$] ++(0,-2)
+            to [short,-*] ++(-1,0) node[above] {$-$} coordinate (B)
+%            to [open] ++(0,2)
+%            to [open] ++(0,-2) node[pos=0.5] {$U_u$}
+            to [short,-.] (0,0);
+\draw[draw=none] (A) -- (B) node[midway] {$U_u$};
+\end{tikzpicture}
+\caption{Netwerk.}
+\label{fig:geltheveninbeginschema}
+\end{figure}
+%
+We willen voor de weerstand $R_u$ de belastingskarakteristiek opstellen. Hiervoor onderzoeken we de
+spanning-stroomrelatie van $U_u$ en $I_u$.
+
+Voor de spanningen in het netwerk kunnen we opstellen dat:
+%
+\begin{equation}
+U = U_s + U_u
+\end{equation}
+%
+We delen alle spanningen door $R_s$:
+%
+\begin{equation}
+\label{equ:gelalleudelendoorrs}
+\dfrac{U}{R_s} = \dfrac{U_s}{R_s} + \dfrac{U_u}{R_s}
+\end{equation}
+%
+Als we $R_u$ vervangen door een kortsluiting, dan staat de spanning $U$ volledig over $R_s$. De stroom $I$ 
+vloeit alleen door $R_s$ want $R_p$ is immers kortgesloten. De bron levert nu een kortsluitstroom $I_k$.
 Dus geldt:
 %
 \begin{equation}
-R_s=R_1+R_2 \quad \text{en} \quad R_p = \dfrac{R_3\cdot R_4}{R_3+R_4}
+\label{equ:theveninkortsluitstroom}
+I_k = \dfrac{U}{R_s}
 \end{equation}
-
-We berekenen nu eerst de stroom die de bron moet leveren. Daarvoor moeten we de weerstand bepalen
-die de bron ziet. De weerstand wordt gevormd door de parallelschakeling van $R_p$ met $R_u$, in serie
-met $R_s$. We kunnen dus voor $I$ schrijven dat:
+%
+Verder geldt voor elke waarde van $R_u$ dat:
+\begin{equation}
+I = \dfrac{U_s}{R_s}
+\end{equation}
+%
+We vullen dit in de vergelijking~\eqref{equ:gelalleudelendoorrs} in zodat we krijgen:
+% 
+\begin{equation}
+I_k = I + \dfrac{U_u}{R_s}
+\end{equation}
+%
+We vervangen de stroom $I$ door de takstromen $I_p$ en $I_u$:
 %
 \begin{equation}
-I = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}
+I_k = I_p + I_u + \dfrac{U_u}{R_s}
 \end{equation}
 %
-Vervolgens berekenen we de stroom $I_u$ door gebruik te maken van stroomdeling:
+We brengen $I_u$ voor het isgelijkteken:
 %
 \begin{equation}
-I_u = I\cdot\dfrac{R_p}{R_p+R_u}
+I_u = -I_p - \dfrac{U_u}{R_s} + I_k
 \end{equation}
 %
-Combineren we de twee vorige vergelijkingen dan vinden we:
+De stroom $I_p$ vervangen we door $\dfrac{U_u}{R_p}$:
 %
 \begin{equation}
-I_u = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}\cdot\dfrac{R_p}{R_p+R_u}
+I_u = -\dfrac{U_u}{R_p} - \dfrac{U_u}{R_s} + I_k
 \end{equation}
 %
-We mogen in bovenstaande vergelijking $R_s$ ook schrijven als:
+We halen $U_u$ buiten de haakjes:
 %
 \begin{equation}
-R_s = \dfrac{R_s\cdot(R_p+R_u) + R_p\cdot R_u}{R_p+R_u} = \dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}
+I_u = - \left(\dfrac{1}{R_p}+\dfrac{1}{R_s}\right)\cdot U_u + I_k
 \end{equation}
 %
-
+De vergelijking heeft dezelfde vorm als vergelijking~\eqref{equ:gelbelastingsfunctie} van de belastingskarakteristiek.
+De vergelijking beschrijft weer een rechte lijn. De richtingsco\"effici\"ent van de lijn is:
 %
 \begin{equation}
-I_u = \dfrac{U\cdot\dfrac{R_p}{R_p+R_u}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}}
+\text{rico} = - \left(\dfrac{1}{R_p}+\dfrac{1}{R_s}\right)
 \end{equation}
 %
-Zowel in de teller als de noemer wordt gedeeld door $R_p+R_u$. We kunnen dit tegen elkaar wegstrepen:
+We werken deze uitdrukking om:
 %
 \begin{equation}
-I_u = \dfrac{U\cdot R_p}{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}
+- \left(\dfrac{1}{R_p}+\dfrac{1}{R_s}\right) = - \left(\dfrac{R_s}{R_p\cdot R_s}+\dfrac{R_p}{R_p\cdot R_s}\right) =
+-\dfrac{R_p+R_s}{R_p\cdot R_s} = - \dfrac{1}{\ \dfrac{R_p\cdot R_s}{R_p+R_s}\ } = -\dfrac{1}{R_p // R_s}
 \end{equation}
 %
-De delen nu teller en noemer door $R_s+R_p$:
+In de uitdrukking staat $R_p // R_s$ voor de parallelvervangingsweerstand van $R_p$ en $R_s$. We kunnen de
+belastingkarakteristiek dus schrijven als:
 %
 \begin{equation}
-I_u = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_s+R_p}}
-    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_u\cdot(R_s+R_p)}{R_s+R_p}}
-    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p}{R_s+R_p}+R_u} 
+I_u = -\dfrac{1}{R_p//R_s}\cdot U_u + I_k
 \end{equation}
 %
-Over deze laatste vergelijking kunnen we twee opmerkingen maken. De teller vertegenwoordigt een spanning en
-wel de open klemspanning van de schakeling. We noemen deze spanning de th\'eveninspanning $U_T$.
-De noemer beschrijft een weerstandswaarde gevormd door de parallelschakeling van $R_s$ en $R_p$ in serie
-met $R_u$. De parallelschakeling van $R_s$ en $R_p$ wordt de th\'eveninweerstand  $R_T$ genoemd. We krijgen dus:
+Vergelijken we dit met vergelijking~\eqref{equ:gelbelastingsfunctie} dan zien we dat $R_i$ overeenkomt
+met de parallelschakeling van $R_p$ en $R_s$. De parallelschakeling en $R_i$ vervullen dezelfde functie.
+We onderzoeken twee markante punten van de belastingskarakteristiek: het kortsluitpunt en het nullastpunt.
+Het kortsluitpunt, waar de bron de kortsluitstroom $I_k$ levert is al bekend, zie
+vergelijking~\eqref{equ:theveninkortsluitstroom}. Voor het nullastpunt geldt dat $I_u = 0$, dus als $R_u$
+is verwijderd. De spanning $U_u$ is nu gelijk aan de open klemspanning $U_o$:
 %
 \begin{equation}
-U_T = U\cdot\dfrac{R_p}{R_s+R_p} \qquad\text{en}\qquad R_T = \dfrac{R_s\cdot R_p}{R_s+R_p}
+U_o = \dfrac{R_p}{R_p+R_s}\cdot U
 \end{equation}
 %
-De stroom $I_u$ wordt dus beschreven met de vergelijking:
-%
-\begin{equation}
-I_u = \dfrac{U_T}{R_T+R_u}
-\end{equation}
-%
-We kunnen nu een netwerk opstellen dat bestaat uit een spanningsbron en weerstanden. Dit is te zien in
-figuur~\ref{fig:geltheveninvervangingsschema}.
+We zijn nu zover gekomen dat we een theoretisch model kunnen opstellen voor het netwerk in
+figuur~\ref{fig:geltheveninbeginschema}. Dit wordt het \textsl{th\'eveninvervangingsschema} genoemd. Het
+vervangingsschema is
+te zien in figuur~\ref{fig:geltheveninvervangingsschema}. We vervangen bron $U$ door een bron met de open
+klemspanning. Deze spanning wordt de th\'eveninspanning $U_T$ genoemd. De weerstanden $R_s$ en $R_p$ worden
+vervangen door de parallelweerstandswaarde van $R_s$ en $R_p$. Dit wordt de th\'eveninweerstand $R_T$
+genoemd.
 
 \begin{figure}[!ht]
 \centering
@@ -960,9 +1050,84 @@ figuur~\ref{fig:geltheveninvervangingsschema}.
             to[short, -*] ++(-1.5,0) to[short,-.] (0,0);
 \end{tikzpicture}
 \captionsetup{width=.9\linewidth}
-\caption{Th\'eveninvervangingsschema.}
+\caption{Th\'eveninvervangingsnetwerk.}
 \label{fig:geltheveninvervangingsschema}
 \end{figure}
 
-We hebben hier te maken met een niet-ideale spanningsbron uit paragraaf~\ref{sec:gelnietidealespanningsbron}.
+Th\'evenin heeft aangetoond dat een netwerk gevormd door een willekeurig aantal spanningsbronnen en
+weerstanden kan worden vervangen door een netwerk met spanningsbron $U_T$ en serieweerstand $R_T$.
+
+
+%%%We vereenvoudigen dit netwerk direct door de weerstanden $R_1$ en $R_2$ te vervangen door een
+%%%serieweerstand $R_s$ en weerstanden $R_3$ en $R_4$ te vervangen door een parallelweerstand $R_p$.
+%%%Dus geldt:
+%%%%
+%%%\begin{equation}
+%%%R_s=R_1+R_2 \quad \text{en} \quad R_p = \dfrac{R_3\cdot R_4}{R_3+R_4}
+%%%\end{equation}
+
+%%%We berekenen nu eerst de stroom die de bron moet leveren. Daarvoor moeten we de weerstand bepalen
+%%%die de bron ziet. De weerstand wordt gevormd door de parallelschakeling van $R_p$ met $R_u$, in serie
+%%%met $R_s$. We kunnen dus voor $I$ schrijven dat:
+%%%%
+%%%\begin{equation}
+%%%I = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}
+%%%\end{equation}
+%%%%
+%%%Vervolgens berekenen we de stroom $I_u$ door gebruik te maken van stroomdeling:
+%%%%
+%%%\begin{equation}
+%%%I_u = I\cdot\dfrac{R_p}{R_p+R_u}
+%%%\end{equation}
+%%%%
+%%%Combineren we de twee vorige vergelijkingen dan vinden we:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}\cdot\dfrac{R_p}{R_p+R_u}
+%%%\end{equation}
+%%%%
+%%%We mogen in bovenstaande vergelijking $R_s$ ook schrijven als:
+%%%%
+%%%\begin{equation}
+%%%R_s = \dfrac{R_s\cdot(R_p+R_u) + R_p\cdot R_u}{R_p+R_u} = \dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}
+%%%\end{equation}
+%%%%
+%%%
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U\cdot\dfrac{R_p}{R_p+R_u}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}}
+%%%\end{equation}
+%%%%
+%%%Zowel in de teller als de noemer wordt gedeeld door $R_p+R_u$. We kunnen dit tegen elkaar wegstrepen:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U\cdot R_p}{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}
+%%%\end{equation}
+%%%%
+%%%De delen nu teller en noemer door $R_s+R_p$:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_s+R_p}}
+%%%    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_u\cdot(R_s+R_p)}{R_s+R_p}}
+%%%    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p}{R_s+R_p}+R_u} 
+%%%\end{equation}
+%%%%
+%%%Over deze laatste vergelijking kunnen we twee opmerkingen maken. De teller vertegenwoordigt een spanning en
+%%%wel de open klemspanning van de schakeling. We noemen deze spanning de th\'eveninspanning $U_T$.
+%%%De noemer beschrijft een weerstandswaarde gevormd door de parallelschakeling van $R_s$ en $R_p$ in serie
+%%%met $R_u$. De parallelschakeling van $R_s$ en $R_p$ wordt de th\'eveninweerstand  $R_T$ genoemd. We krijgen dus:
+%%%%
+%%%\begin{equation}
+%%%U_T = U\cdot\dfrac{R_p}{R_s+R_p} \qquad\text{en}\qquad R_T = \dfrac{R_s\cdot R_p}{R_s+R_p}
+%%%\end{equation}
+%%%%
+%%%De stroom $I_u$ wordt dus beschreven met de vergelijking:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U_T}{R_T+R_u}
+%%%\end{equation}
+%%%%
+
+
+%%%We hebben hier te maken met een niet-ideale spanningsbron uit paragraaf~\ref{sec:gelnietidealespanningsbron}.
 
