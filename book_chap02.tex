@@ -875,7 +875,7 @@ Dit is te zien in figuur~\ref{fig:gelschemavoorbelastingskarakteristiekstroombro
 \draw (0,0) to [I, l=$I$] ++(0,2) to [short, i=$I$] ++(2,0)
             to [R=$R_i$, i>^=$I_i$, *-*] ++(0,-2) to [open] ++(0,2)
             to [short, -*] ++(1,0) node[below] {$+$} coordinate (A) to [short] ++(1,0) 
-            to [R=$R_b$, i>^=$I_b$] ++(0,-2) to [short, -*] ++(-1,0) node[above] {$-$} coordinate (B)
+            to [vR=$R_b$,invert,mirror, i>^=$I_b$] ++(0,-2) to [short, -*] ++(-1,0) node[above] {$-$} coordinate (B)
             to [short,-.] (0,0);
 \draw[draw=none] (A) -- (B) node[midway] {$U_{R_b}$};
 \end{tikzpicture}
