@@ -470,9 +470,9 @@ P = U\cdot I
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R,l_=$R$,n=R] ++(0,-2) to [short,-.] (0,0);
 \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.2) -> ++(2,0.2);
- \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.0) -> ++(2,0.0) node[right] {W};
+ \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.0) -> ++(2,0.0) node[right] {warmte};
 \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,-0.2) -> ++(2,-0.2); \end{tikzpicture}
-\caption{De weerstand dissipeert warmte.}
+\caption{De weerstand levert energie en wordt warm.}
 \label{fig:gelvermogensdissipatie}
 \end{figure}
 
@@ -908,9 +908,9 @@ dus ook schrijven als:
 I_b = -\dfrac{1}{R_i}\cdot U_{R_b} + I_k
 \end{equation}
 %
-Dit is exact dezelfde vergelijking als~\eqref{equ:gelbelastingsfunctie}. Het maakt voor de belastingsweerstand
-dus kennelijk niet uit of deze gestuurd wordt door een spanningsbron met serieweerstand $R_i$ of door een
-stroombron met parallelweerstand $R_i$.
+Dit is exact dezelfde vergelijking als~\eqref{equ:gelbelastingsfunctie}. Het maakt voor de
+belastingsweerstand dus kennelijk niet uit of deze wordt gestuurd door een spanningsbron of door een
+stroombron waarvoor geldt dat beide dezelfde open klemspanning en kortsluitstroom hebben.
 
 
 \section{Het theorema van Th\'evenin}
@@ -920,7 +920,7 @@ rekenwerk door van een netwerk het th\'eveningvervangingsschema op te stellen.
 
 In figuur~\ref{fig:geltheveninbeginschema} is een netwerk getekend met een spanningsbron $U$,
 serieweerstand $R_s$ en parallelweerstand weerstand $R_p$. Het netwerk wordt belast met uitwendige $R_u$.
-%
+
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
@@ -930,9 +930,9 @@ serieweerstand $R_s$ en parallelweerstand weerstand $R_p$. Het netwerk wordt bel
             to [short,-*] ++(0.5,0)
             %to [R, l_=$R_3$,-*] ++(0,-2) to [open] ++(0,2)
             %to [short,-*] ++(1,0) to [R,l=$R_4$,-*] ++(0,-2) to [open] ++(0,2)
-            to [R, l_=$R_p$,-*] ++(0,-2) to [open] ++(0,2)
+            to [R, l_=$R_p$,i>^=$I_p$,-*] ++(0,-2) to [open] ++(0,2)
             to [short,-*] ++(1,0) node[below] {$+$} coordinate (A)
-            to [short,i=$I_u$] ++(1,0) to [R=$R_u$, i>^=$I_u$] ++(0,-2)
+            to [short] ++(1,0) to [R=$R_u$, i>^=$I_u$] ++(0,-2)
             to [short,-*] ++(-1,0) node[above] {$-$} coordinate (B)
 %            to [open] ++(0,2)
 %            to [open] ++(0,-2) node[pos=0.5] {$U_u$}
@@ -942,10 +942,10 @@ serieweerstand $R_s$ en parallelweerstand weerstand $R_p$. Het netwerk wordt bel
 \caption{Netwerk.}
 \label{fig:geltheveninbeginschema}
 \end{figure}
-%
+
 We willen voor de weerstand $R_u$ de belastingskarakteristiek opstellen. Hiervoor onderzoeken we de
 spanning-stroomrelatie van $U_u$ en $I_u$.
-
+%
 Voor de spanningen in het netwerk kunnen we opstellen dat:
 %
 \begin{equation}
@@ -1056,6 +1056,8 @@ genoemd.
 
 Th\'evenin heeft aangetoond dat een netwerk gevormd door een willekeurig aantal spanningsbronnen en
 weerstanden kan worden vervangen door een netwerk met spanningsbron $U_T$ en serieweerstand $R_T$.
+
+\section{Het theorema van Norton}
 
 
 %%%We vereenvoudigen dit netwerk direct door de weerstanden $R_1$ en $R_2$ te vervangen door een
