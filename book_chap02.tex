@@ -674,7 +674,7 @@ maar zal nooit 1 worden.
 
 
 \section{De belastingskarakteristiek}
-
+\label{sec:belastingskarakteristiek}
 In deze paragraaf bespreken we het begrip \textsl{belastingskarakteristiek}. We kunnen hiermee de stromen
 en spanningen in een netwerk bepalen via een grafische weg. Dit is met name bij het gebruik van niet-lineaire
 netwerkelementen zoals de diode erg handig.
@@ -910,8 +910,30 @@ I_b = -\dfrac{1}{R_i}\cdot U_{R_b} + I_k
 %
 Dit is exact dezelfde vergelijking als~\eqref{equ:gelbelastingsfunctie}. Het maakt voor de
 belastingsweerstand dus kennelijk niet uit of deze wordt gestuurd door een spanningsbron of door een
-stroombron waarvoor geldt dat beide dezelfde open klemspanning en kortsluitstroom hebben.
+stroombron waarvoor geldt dat beide dezelfde open klemspanning en kortsluitstroom hebben. De
+spanningsbron en stroombron zijn dus \textsl{uitwisselbaar}. Zie figuur~\ref{fig:gelbelspanningstroom}.
 
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V<=$U_o$] ++(0,2) to [R=$R_i$,-*] coordinate (A) ++(2.5,0) node[right] {$+$} to [open] ++(0,-2) coordinate (B) node[right] {$-$} to [short,*-.] (0,0);
+%\draw ($(A)!0.5!(B)$) node[right] {$U_o$};
+\draw (6,0) to [I, l=$I_k$, inner sep=5pt] ++(0,2) to [short] ++(1,0) coordinate (A) to [R=$R_i$,*-*]  ++(0,-2) coordinate (B) to [short,-.] (6,0) (A) to [short, -*] ++(1,0) node[right] {$+$} (B) to [short, -*] ++(1,0) node[right] {$-$}; 
+%\draw ($(A)!0.5!(B)$) node[right,xshift=1.2cm] {$U_o$};
+\node at (4,1) {$\longleftrightarrow$};
+\end{tikzpicture}
+\caption{De spanningsbron en stroombron zijn uitwisselbaar.}
+\label{fig:gelbelspanningstroom}
+\end{figure}
+
+Omdat de twee netwerken door de belasting als identiek worden gezien, moet gelden dat de open
+klemspanningen en kortsluitstromen gelijk zijn. Dus moet gelden dat:
+%
+\begin{equation}
+U_o = I_k\cdot R_i \qquad \text{en} \qquad I_k = \dfrac{U_o}{R_i}
+\end{equation}
+%
+Hier volgt uit dat de inwendige weerstanden gelijk zijn.
 
 \section{Het theorema van Th\'evenin}
 Aansluitend op de belastingskarakteristiek bespreken we nu het theorema van Th\'evenin.
@@ -1054,19 +1076,139 @@ genoemd.
 \label{fig:geltheveninvervangingsschema}
 \end{figure}
 
+We kunnen de th\'eveninweerstand $R_T$ ook vinden door de open klemspanning te delen door de kortsluitstroom.
+Dus geldt:
+%
+\begin{equation}
+R_T = \dfrac{U_o}{I_k}
+\end{equation}
+
 Th\'evenin heeft aangetoond dat een netwerk gevormd door een willekeurig aantal spanningsbronnen en
 weerstanden kan worden vervangen door een netwerk met spanningsbron $U_T$ en serieweerstand $R_T$.
 
+
 \section{Het theorema van Norton}
+%We hadden in paragraaf~\ref{sec:belastingskarakteristiek} als gezien dat spanningsbron
+
+In figuur~\ref{fig:gelnetwerkvoornorton} is een netwerk te zien met een stroombron $I$, een
+parallelweerstand $R_p$ en een serieweerstand $R_s$. Het netwerk wordt belast met een uitwendige
+weerstand $R_u$. We willen van dit netwerk de belastingskarakteristiek opstellen en onderzoeken
+hiervoor de spanning-stroomrelatie van $U_u$ en $I_u$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [I, l=$I$] ++(0,2) to [short] ++(1,0) to [R=$R_p$, *-*, i>^=$I_p$] ++(0,-2) to [open] ++(0,2)
+            to [short] ++(0.5,0) to [R=$R_s$,v=$U_s$] ++(2,0) to [short,-*] ++(0.5,0) coordinate (A) node[below] {$+$}
+            to [short] ++(1,0)
+            to [R=$R_u$, i>^=$I_u$] ++(0,-2) to [short,-*] ++(-1,0) coordinate (B) node[above] {$-$}
+            to [short] (0,0);
+\draw [draw=none] (A) -- (B) node[midway] {$U_u$};
+\end{tikzpicture}
+\caption{Netwerk.}
+\label{fig:gelnetwerkvoornorton}
+\end{figure}
+
+We gaan uit van de stroomvergelijking:
+%
+\begin{equation}
+I = I_p + I_u
+\end{equation}
+%
+We schrijven $I_u$ expliciet:
+%
+\begin{equation}
+I_u = -I_p + I
+\end{equation}
+%
+We kunnen dit schrijven als:
+%
+\begin{equation}
+I_u = \dfrac{-I_p\cdot(R_s+R_p)}{R_s+R_p} + \dfrac{I\cdot(R_s+R_p)}{R_s+R_p}
+\end{equation}
+%
+We vermenigvuldigen de rechterzijde uit:
+%
+\begin{equation}
+I_u = \dfrac{-I_p\cdot R_s -I_p\cdot R_p + I\cdot R_s + I\cdot R_p}{R_s+R_p}
+\end{equation}
+%
+We schrijven $I\cdot R_p$ los:
+%
+\begin{equation}
+I_u = \dfrac{-I_p\cdot R_s -I_p\cdot R_p + I\cdot R_s}{R_s+R_p} + \dfrac{I\cdot R_p}{R_s+R_p}
+\end{equation}
+%
+De term geheel rechts stelt de kortsluitstroom $I_k$ voor zodat we kunnen schrijven dat:
+%
+\begin{equation}
+I_u = \dfrac{-I_p\cdot R_s -I_p\cdot R_p + I\cdot R_s}{R_s+R_p} + I_k
+\end{equation}
+%
+Dit kunnen we omwerken tot:
+%
+\begin{equation}
+I_u = \dfrac{-I_p\cdot R_p}{R_s+R_p} + \dfrac{(I-I_p)\cdot R_s}{R_s+R_p} + I_k
+\end{equation}
+%
+Nu stelt $I-I_p$ de stroom $I_u$ voor zodat volgt dat:
+%
+\begin{equation}
+I_u = \dfrac{-I_p\cdot R_p}{R_s+R_p} + \dfrac{I_u\cdot R_s}{R_s+R_p} + I_k
+\end{equation}
+%
+In deze vergelijking stelt $I_p\cdot R_p$ de spanning $U_p$ over $R_p$ (en de stroombron) voor en
+stelt $I_u\cdot R_s$ de spanning over $R_s$ voor:
+%
+\begin{equation}
+I_u = \dfrac{-U_p}{R_s+R_p} + \dfrac{U_s}{R_s+R_p} + I_k
+\end{equation}
+%
+Dit kunnen we schrijven als:
+\begin{equation}
+I_u = \dfrac{-(U_p-U_s)}{R_s+R_p} + I_k
+\end{equation}
+%
+Nu stelt $U_p-U_s$ de spanning $U_u$ voor zodat volgt dat:
+%
+\begin{equation}
+I_u = -\dfrac{1}{R_s+R_p}\cdot U_u + I_k
+\end{equation}
+%
+De vergelijking heeft dezelfde vorm als vergelijking~\eqref{equ:gelbelastingsfunctie} van de belastingskarakteristiek.
+De vergelijking beschrijft weer een rechte lijn. De richtingsco\"effici\"ent van de lijn is:
+%
+\begin{equation}
+\text{rico} = -\dfrac{1}{R_s+R_p}
+\end{equation}
+%
+Verder geldt dat bij kortsluiting van $R_u$ (of anders: $R_u = 0\ \Omega$) de volledige bronstroom door
+de kortsluiting vloeit. We kunnen het netwerk in figuur~\ref{fig:gelnetwerkvoornorton} dus vervangen door
+een stroombron met stroom $I_k$ en een parallelweerstand van $R_s+R_p$, zie
+figuur~\ref{fig:gelnortonvervangingsschema}. Dit wordt het \textsl{nortonvervangingsschema} genoemd. De
+kortsluitstroom wordt de nortonstroom $I_N$ genoemd. De parallelweerstand wordt de nortonweerstand $R_N$
+genoemd. 
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [I, l=$I_N$] ++(0,2) to [short] ++(1,0) to [R=$R_N$, *-*] ++(0,-2)
+            to [open] ++(0,2) to [short, i=$I_u$] ++(2,0) to [R=$R_u$] ++(0,-2)
+            to [short,-*] ++(-2,0) to [short] (0,0);
+%\draw [draw=none] (A) -- (B) node[midway] {$U_u$};
+\end{tikzpicture}
+\caption{Nortonvervangingsschema.}
+\label{fig:gelnortonvervangingsschema}
+\end{figure}
+
+We kunnen de nortonweerstand ook vinden door de open klemspanning te delen door de kortsluitstroom:
+%
+\begin{equation}
+R_N = \dfrac{U_o}{I_k}
+\end{equation}
 
 
-%%%We vereenvoudigen dit netwerk direct door de weerstanden $R_1$ en $R_2$ te vervangen door een
-%%%serieweerstand $R_s$ en weerstanden $R_3$ en $R_4$ te vervangen door een parallelweerstand $R_p$.
-%%%Dus geldt:
-%%%%
-%%%\begin{equation}
-%%%R_s=R_1+R_2 \quad \text{en} \quad R_p = \dfrac{R_3\cdot R_4}{R_3+R_4}
-%%%\end{equation}
+
 
 %%%We berekenen nu eerst de stroom die de bron moet leveren. Daarvoor moeten we de weerstand bepalen
 %%%die de bron ziet. De weerstand wordt gevormd door de parallelschakeling van $R_p$ met $R_u$, in serie
@@ -1133,3 +1275,8 @@ weerstanden kan worden vervangen door een netwerk met spanningsbron $U_T$ en ser
 
 %%%We hebben hier te maken met een niet-ideale spanningsbron uit paragraaf~\ref{sec:gelnietidealespanningsbron}.
 
+
+
+%%%\begin{tikzpicture}[bookcircuit]
+%%%\draw (0,0) to [cV<=$2I_1$] +(0,2);
+%%%\end{tikzpicture}
