@@ -309,7 +309,7 @@ verdelen over de twee weerstanden. Er is sprake van spanningsdeling.
 De stroom $I$ kunnen we berekenen met:
 %
 \begin{equation}
-I = \dfrac{U}{R_!+R_2}
+I = \dfrac{U}{R_1+R_2}
 \end{equation} 
 %
 Voor de spanningen $U_1$ en $U_2$ kunnen we schrijven dat:
@@ -1083,8 +1083,9 @@ Dus geldt:
 R_T = \dfrac{U_o}{I_k}
 \end{equation}
 
-Th\'evenin heeft aangetoond dat een netwerk gevormd door een willekeurig aantal spanningsbronnen en
-weerstanden kan worden vervangen door een netwerk met spanningsbron $U_T$ en serieweerstand $R_T$.
+Th\'evenin heeft aangetoond dat een netwerk gevormd door een willekeurig aantal spanningsbronnen,
+stroombronnen en weerstanden kan worden vervangen door een netwerk met spanningsbron $U_T$ en
+serieweerstand $R_T$.
 
 
 \section{Het theorema van Norton}
@@ -1194,7 +1195,7 @@ genoemd.
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [I, l=$I_N$] ++(0,2) to [short] ++(1,0) to [R=$R_N$, *-*] ++(0,-2)
             to [open] ++(0,2) to [short, i=$I_u$] ++(2,0) to [R=$R_u$] ++(0,-2)
-            to [short,-*] ++(-2,0) to [short] (0,0);
+            to [short,-*] ++(-2,0) to [short,-.] (0,0);
 %\draw [draw=none] (A) -- (B) node[midway] {$U_u$};
 \end{tikzpicture}
 \caption{Nortonvervangingsschema.}
@@ -1205,6 +1206,86 @@ We kunnen de nortonweerstand ook vinden door de open klemspanning te delen door 
 %
 \begin{equation}
 R_N = \dfrac{U_o}{I_k}
+\end{equation}
+
+Norton heeft aangetoond dat een netwerk gevormd door een willekeurig aantal spanningsbronnen,
+stroombronnen en weerstanden kan worden vervangen door een netwerk met stroombron $I_N$ en
+parallelweerstand $R_N$.
+
+\section{Th\'evenen versus Norton}
+We hebben in paragraaf~\ref{sec:belastingskarakteristiek} dat een spanningsbron met serieweerstand
+en een stroombron met parallelweerstand uitwisselbaar zijn. Voor de belasting is er geen verschil.
+We kunnen nu de relatie tussen het th\'eveninvervangingsschema en nortonvervangingschema onderzoeken.
+
+In figuur~\ref{fig:gelopenklemspanningbijtheveninennorton} zijn de vervangingsschema's van Th\'evenin
+en Norton te zien met betrekking tot de open klemspanning.
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V<=$U_T$] ++(0,2) to[R=$R_T$, -*] coordinate (A) node[below] {$+$} ++(2,0)  
+            to[open, -*] ++(0,-2) coordinate (B) node[above] {$-$} to[short,-.] (0,0);
+\draw [draw=none] (A) -- (B) node[midway] {$U_o$};
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [I, l=$I_N$] ++(0,2) to [short] ++(1,0) to [R=$R_N$, *-*] ++(0,-2)
+            to [open] ++(0,2) to [short, -*] coordinate (A) node[below] {$+$} ++(1.5,0)
+            to [open,-*] ++(0,-2) coordinate (B) node[above] {$-$} to [short,-.] (0,0);
+\draw [draw=none] (A) -- (B) node[midway] {$U_o$};
+\end{tikzpicture}
+\end{subfigure}
+\caption{Open klemspanning bij Th\'evenin en Norton.}
+\label{fig:gelopenklemspanningbijtheveninennorton}
+\end{figure}
+
+ Als voor de belasting geldt dat er geen
+onderscheid kan worden gemaakt tussen de twee netwerken dan moet gelden dat de open klemspanningen
+gelijk zijn. Dus geldt:
+%
+\begin{equation}
+U_T = I_N\cdot R_N
+\end{equation}
+
+In figuur~\ref{fig:gelkortsluitstromenbijtheveninennorton} zijn beide netwerken in kortsluitsituatie
+getekend. Ook nu moet gelden dat beide kortsluitstromen gelijk zijn.
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V<=$U_T$] ++(0,2) to[R=$R_T$, -*] ++(2,0)  
+            to[short, ,i=$I_k$, -*] ++(0,-2) to[short,-.] (0,0);
+%\draw [draw=none] (A) -- (B) node[midway] {$U_o$};
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [I, l=$I_N$] ++(0,2) to [short] ++(1,0) to [R=$R_N$, *-*] ++(0,-2)
+            to [open] ++(0,2) to [short, -*] ++(1.5,0)
+            to [short,i=$I_k$,-*] ++(0,-2) to [short,-.] (0,0);
+%\draw [draw=none] (A) -- (B) node[midway] {$U_o$};
+\end{tikzpicture}
+\end{subfigure}
+\caption{Kortsluitstromen bij Th\'evenin en Norton.}
+\label{fig:gelkortsluitstromenbijtheveninennorton}
+\end{figure}
+
+Dus geldt:
+%
+\begin{equation}
+I_N = \dfrac{U_T}{R_T}
+\end{equation}
+
+Willen we aan de bovenstaande voorwaarden voldoen dan volgt automatisch dat:
+%
+\begin{equation}
+R_T = R_N
 \end{equation}
 
 
