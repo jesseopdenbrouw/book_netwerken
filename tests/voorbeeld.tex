@@ -1,0 +1,27 @@
+\documentclass[a4paper,12pt,dutch]{book}
+
+\usepackage{parskip}
+\usepackage{babel}
+
+% Hand made theorem
+\newcounter{example}[section]
+\renewcommand{\theexample}{\thechapter.\arabic{example}}
+\def\claim{\par\medskip\noindent\refstepcounter{example}\hbox{\bf Voorbeeld \arabic{chapter}.\arabic{example}}
+\par%
+}
+\def\endclaim{
+\par\medskip}
+\newenvironment{example}{\claim}{\endclaim}
+
+
+\begin{document}
+
+\chapter{Test}
+
+Tekst ervoor...
+\begin{example}
+test
+\end{example}
+Tekst erna...
+
+\end{document}
