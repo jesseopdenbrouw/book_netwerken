@@ -11,21 +11,17 @@ een constante waarden hebben over de tijd. De spanningen en stromen vari\"eren
 dus niet als functie van de tijd\footnote{Formeel gezien is een spanning of stroom
 die niet van polariteit veranderd ook een gelijkspanning of gelijkstroom. We
 veronderstellen hier echter dat de spanningen en stromen constant zijn.}.
- Ze kunnen zowel positief als negatief zijn,
-of nul.
+Ze kunnen zowel positief als negatief zijn, of nul.
 
-In de gelijkstroomtheorie hebben we drie componenten: de ideale
-spanningsbron, de ideale stroombron en de ideale weerstand. De
-symbolen die gebruikt worden in schakelschema's zijn te zien in
-figuur~\ref{fig:symbolenbronnenenweerstand}. Een
-ideale spanningsbron levert een constante spanning ongeacht de
-stroom die de bron levert. Een ideale stroombron levert een
-constante stroom ongeacht de spanning die over de bron staat.
-Een ideale weerstand heeft een constante waarde ongeacht de
-spanning over en de stroom door de weerstand. Verder merken
-we op dat de ideale spanningsbron een interne weerstand heeft
-van 0 Ohm. De interne weerstand van de ideale stroombron is
-oneindig.
+In de gelijkstroomtheorie hebben we drie componenten: de ideale spanningsbron,
+de ideale stroombron en de ideale weerstand. De symbolen die gebruikt worden in
+schakelschema's zijn te zien in figuur~\ref{fig:symbolenbronnenenweerstand}. Een
+ideale spanningsbron levert een constante spanning ongeacht de stroom die de bron
+levert. Een ideale stroombron levert een constante stroom ongeacht de spanning die
+over de bron staat. Een ideale weerstand heeft een constante waarde ongeacht de
+spanning over en de stroom door de weerstand. Verder merken we op dat de ideale
+spanningsbron een interne weerstand heeft van 0 Ohm. De interne weerstand van de
+ideale stroombron is oneindig.
 
 \begin{figure}[!ht]
 \centering
@@ -57,6 +53,11 @@ oneindig.
 \label{fig:symbolenbronnenenweerstand}
 \end{figure}
 
+In de boven gegeven beschrijvingen noemen we de ideale spanningsbron en ideale stroombron
+\textsl{onafhankelijke bronnen}. Dat wil zeggen dat de spanning of stroom die de bron
+levert niet afhankelijk is van een andere spanning of stroom in een netwerk. We zullen
+verderop kennis maken met afhankelijke bronnen.
+
 Voor het aangeven van spanningen gebruiken we de hoofdletter $U$. In Engelstalige boeken
 wordt de hoofdletter $V$ gebruikt. Spanning worden uitgedrukt in V (volt). Stromen worden
 aangegeven met een hoofdletter $I$ en worden uitgedrukt in A (amp\`ere). Weerstanden
@@ -67,7 +68,7 @@ We kunnen de waarden van spanningen, stromen en weerstanden ook uitdrukken door 
 letter voor te zetten, de zogenoemde SI-voorvoegsels: mV (millivolt), mA (milliamp\`ere),
 $\muup$A (microamp\`ere), k$\Omega$ (kilo-ohm), M$\Omega$ (megaohm).
 
-\section{Stroomwet van Kirchhof}
+\section{De stroomwet van Kirchhof}
 De stroomwet van Kirchhoff zegt dat alle stromen naar een knooppunt toe opgeteld 0 zijn.
 Er kan dus geen stroom bijkomen of verloren gaan. In formulevorm:
 \begin{equation}
@@ -586,18 +587,18 @@ gelijk te stellen aan de inwendige weerstand. Daaruit volgt dat:
 P_{Ru,max} = \dfrac{U^2}{4R_i}
 \end{equation}
 %
-Over de effici\"entie van de vermogensoverdracht kunnen we ook wat vertellen. De effi\"entie is
-het getransporteerde vermogen gedeeld door het opgewekte vermogen:
+Over het rendement van de vermogensoverdracht kunnen we ook wat vertellen. Het rendement is gedefinieerd
+als het getransporteerde vermogen gedeeld door het opgewekte vermogen:
 %
 \begin{equation}
 \eta = \dfrac{P_{Ru}}{P_{bron}} = \dfrac{I^2\cdot R_u}{I^2\cdot(R_i+R_u)} = \dfrac{R_u}{R_i+R_u}
 \end{equation}
 %
-Bij maximale vermogensoverdracht ($R_i=R_u$) is de effi\"entie dan 50\%. De helft van het beschikbare
+Bij maximale vermogensoverdracht ($R_i=R_u$) is het rendement dan 50\%. De helft van het beschikbare
 vermogen wordt in de uitwendige weerstand gedissipeerd. Dat betekent dat de bron zelf evenveel vermogen
 dissipeert.
 
-In figuur~\ref{fig:gelbeschikbarevermogenseneff} zijn de diverse vermogens en effici\"entie van de
+In figuur~\ref{fig:gelbeschikbarevermogenseneff} zijn de diverse vermogens en het rendement van de
 vermogensoverdracht uitgebeeld. De vermogens zijn genormaliseerd op 1. Dat houdt in dat bij
 kortsluiting van de bron het beschikbare vermogen dat in de inwendige weerstand wordt gedissipeerd
 gelijk wordt gesteld aan 1. De vermogens zijn uitgezet tegen de verhouding van de uitwendige weerstand
@@ -655,20 +656,20 @@ en de inwendige weerstand. Een verhouding van $R_u/R_i=1$ betekent dat $R_u=R_i$
     \end{axis}          	
 
 \end{tikzpicture}
-\caption{Genormaliseerde ontwikkelde vermogens in de inwendige en uitwendige weerstand en de bron. Links is de effici\"entie van de vermogensoverdracht weergegeven.}
+\caption{Genormaliseerde ontwikkelde vermogens in de inwendige en uitwendige weerstand en de bron. Links is het rendement van de vermogensoverdracht weergegeven.}
 \label{fig:gelbeschikbarevermogenseneff}
 \end{figure}
 
 De ononderbroken kromme geeft de vermogensopname van de uitwendige weerstand weer. De gestreepte
 kromme geeft de vermogensopname van de inwendige weerstand weer. Het geleverde vermogen van de
 bron wordt door de gestippelde kromme weergegeven. Verder is te zien dat de gestippelde
-streepjes lijn de effici\"entie weergeeft.
+streepjes lijn het rendement weergeeft.
 
 We bespreken een drietal markante punten.
 Bij kortsluiting van de bron ($R_u/R_i=0$) wordt het maximale vermogen van de bron in de inwendige
-weerstand gedissipeerd. Te zien is dat $P_{bron} = P_{Ri} = 1$ en $P_{Ru} = 0$. De effici\"entie is 0.
+weerstand gedissipeerd. Te zien is dat $P_{bron} = P_{Ri} = 1$ en $P_{Ru} = 0$. Het rendement is 0.
 Bij $R_u=R_i$ is het gedissipeerde vermogen in de inwendige en uitwendige weerstand $0,25$. Het geleverde
-bronvermogen is $0,5$ en de effici\"entie is $0,5$. Naar mate $R_u$ groter wordt, neemt het geleverde
+bronvermogen is $0,5$ en het rendement is $0,5$. Naar mate $R_u$ groter wordt, neemt het geleverde
 en opgenomen vermogen af. Bijna al het vermogen wordt in $R_u$ gedissipeerd. De effci\"entie neemt toe
 maar zal nooit 1 worden.
 
@@ -1287,6 +1288,78 @@ Willen we aan de bovenstaande voorwaarden voldoen dan volgt automatisch dat:
 \begin{equation}
 R_T = R_N
 \end{equation}
+
+
+\section{Het superpositiebeginsel}
+
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V<=10 V] ++(0,2) to [R=$6\ \Omega$, -*] ++(2,0) node[above] {$U_x$}
+            to [R=$3\ \Omega$, i>^=$I_x$,-*] ++(0,-2) to [open] ++(0,2) to [R=$8\ \Omega$] ++(2,0)
+            to [I_>=, l=$\frac{1}{2}$ A, invert] ++(0,-2) to [short, -.] (0,0);
+\end{tikzpicture}
+\caption{Netwerk voor berekening met superpositie.}
+\label{fig:gelnetwerkvoorsuperpositiebeginsel}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V<=10 V] ++(0,2) to [R=$6\ \Omega$, -*] ++(2,0) node[above] {$U_{xa}$}
+            to [R=$3\ \Omega$, i>^=$I_{xa}$,-*] ++(0,-2) to [open] ++(0,2) to [R=$8\ \Omega$] ++(2,0)
+            to [open] ++(0,-2) to [short, -.] (0,0);
+\end{tikzpicture}
+\caption{Berekening vanuit de spanningsbron.}
+\label{fig:gelnetwerkvoorsuperpositiebeginselsplita}
+\end{subfigure}\hfill%
+\begin{subfigure}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [short] ++(0,2) to [R=$6\ \Omega$, -*] ++(2,0) node[above] {$U_{xb}$}
+            to [R=$3\ \Omega$, i>^=$I_{xb}$,-*] ++(0,-2) to [open] ++(0,2) to [R=$8\ \Omega$] ++(2,0)
+            to [I_>=, l=$\frac{1}{2}$ A, invert] ++(0,-2) to [short, -.] (0,0);
+\end{tikzpicture}
+\caption{Berekening vanuit de stroombron.}
+\end{subfigure}
+\caption{Netwerk voor berekening met superpositie.}
+\label{fig:gelnetwerkvoorsuperpositiebeginselsplitb}
+\end{figure}
+
+Voor de $U_{xa}$ en $I_{xa}$ in netwerk~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplita} kunnen
+we opstellen:
+%
+\begin{equation}
+\begin{split}
+U_{xa} &= \dfrac{3}{3+6}\cdot 10 = 3\frac{1}{3}\text{ V} \\
+I_{xa} &= \dfrac{10}{3+6} = 1\frac{1}{9}\text{ A}
+\end{split}
+\end{equation}
+%
+Voor de $U_{xb}$ en $I_{xb}$ in netwerk~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplitb} kunnen
+we opstellen:
+%
+\begin{equation}
+\begin{split}
+U_{xb} &= (6//3)\cdot\dfrac{1}{2}  = 1\text{ V} \\
+I_{xb} &= \dfrac{6}{3+6}\cdot\dfrac{1}{2} = \frac{1}{3}\text{ A}
+\end{split}
+\end{equation}
+%
+Hieruit berekenen we de spanning $U_x$ en de stroom $I_x$:
+\begin{equation}
+\begin{split}
+U_{x} &= U_{ax} + U_{bx} = 3\frac{1}{3} + 1 = 4\frac{1}{3}\text{ V} \\
+I_{x} &= I_{ax} + I_{bx} = 1\frac{1}{9} + \frac{1}{3} = 1\frac{4}{9}\text{ A}
+\end{split}
+\end{equation}
+
+
+
 
 
 
