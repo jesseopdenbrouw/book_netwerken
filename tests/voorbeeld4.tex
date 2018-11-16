@@ -1,0 +1,67 @@
+\documentclass{article}
+%\usepackage{fontspec}
+\usepackage[most]{tcolorbox}
+\newcounter{example}[section]
+%\usepackage{xparse}
+\usepackage{lipsum}
+\usepackage{charter}
+\usepackage{caption}
+\usepackage{parskip}
+
+\renewcommand{\theexample}{\thesection .\arabic{example}}
+
+\colorlet{colorexample}{red!55!black} % Global example color
+
+\newtcolorbox[use counter=example]{example}[1][]{%
+    % Example Frame Start
+    empty,% Empty previously set parameters
+    title={Voorbeeld\ifx\hfuzz#1\hfuzz \else : #1\fi},% use \thetcbcounter to access the example counter text
+    % Attaching a box requires an overlay
+    attach boxed title to top left,
+       % Ensures proper line breaking in longer titles
+       minipage boxed title,
+    % (boxed title style requires an overlay)
+    boxed title style={empty,size=minimal,toprule=0pt,top=4pt,left=3mm,overlay={}},
+    coltitle=colorexample,fonttitle=\bfseries,
+    before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=3mm,right=0mm,top=5pt,breakable,pad at break=0mm,
+       before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+    % Handles box when it exists on one page only
+    overlay unbroken={\draw[colorexample,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: first page
+    overlay first={\draw[colorexample,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: middle page
+    overlay middle={\draw[colorexample,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: last page
+    overlay last={\draw[colorexample,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
+    }
+
+
+\begin{document}
+
+\section{Test}
+
+\lipsum[1]
+\begin{example}[Latin Text]
+\lipsum[2]
+\end{example}
+\lipsum[3]
+\begin{example}
+\lipsum[1-10]
+\end{example}
+
+\begin{example}[Hello]
+world!
+\end{example}
+
+
+\begin{example}
+\lipsum[1]
+{\centering
+\includegraphics[scale=1]{miter}
+\captionof{figure}{Een schakeling)}
+}
+\lipsum[2]
+\end{example}
+
+
+\end{document}
