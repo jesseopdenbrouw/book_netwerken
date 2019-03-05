@@ -7,6 +7,51 @@
 
 %%%%% Make title page
 %% Title page defined in preamble
+
+%% The title page
+\def\maketitle{%
+\pagecolor{Sienna2}%
+%\pagecolor{infoboxline}%
+\null%
+  \hbox{%
+  \hspace*{0.05\textwidth}%
+  \rule{3pt}{0.95\textheight}
+  \hspace*{0.10\textwidth}%
+\parbox[b]{0.85\textwidth}{%
+  \vbox{%
+%%%    \vspace{0.0\textheight}
+    {\noindent\fontsize{70pt}{80pt}\selectfont\bfseries \booktitleI \\[0.20\baselineskip] \booktitleII}\\[3\baselineskip]
+    {\fontsize{25pt}{35pt}\selectfont\itshape \booksubtitle}\\[4\baselineskip]
+    {\fontsize{30pt}{35pt}\selectfont \bookauthor}\\[\baselineskip]
+   \par%{\LARGE \bookinstitution}\par
+   \vspace{0.3\textheight}
+    {\noindent\Large \bookedition}\\[\baselineskip]
+    %\vspace{0.05\textheight}
+    }% end of vbox
+}% end of parbox
+  }% end of hbox
+\thispagestyle{empty}%
+\newpage
+\pagecolor{white}
+\ifusebookasbook
+\cleardoublepage
+{\centering
+\vfill\vspace*{5cm}
+{\fontsize{45pt}{55pt}\selectfont\bfseries\booktitle}\par
+{\fontsize{20pt}{25pt}\selectfont\itshape \booksubtitle}\par
+\vspace*{2cm}
+\Huge\bookauthor\par
+\Large\bookinstitution\par
+\vspace*{5cm}
+\Large\bookedition\par
+\vfill}
+\thispagestyle{empty}%
+\clearpage
+%%\pagestyle{empty}%
+\null%
+\fi
+}
+
 \maketitle
 
 \hspace*{0em}
@@ -17,7 +62,7 @@ Datum: \today
 
 \vspace*{.25cm}
 \ifusebookasbook\else
-\includegraphics[scale=0.5]{images/HHS_grijs_groen_fc}
+\includegraphics[scale=0.5]{images/HHS_NL_grijs_FC}
 \fi
 
 \ifusebookasbook
