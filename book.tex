@@ -1,3 +1,8 @@
+% !TeX root = book.tex
+% !TeX TS-program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = nl_NL
+
 
 
 %% Warn me about obsolete Latex stuff
@@ -8,7 +13,7 @@
 \newcommand{\booktitleI}{Elektrische}
 \newcommand{\booktitleII}{Netwerken}
 \newcommand{\booktitle}{\booktitleI{} \booktitleII}
-\newcommand{\booksubtitle}{Een inleiding}
+\newcommand{\booksubtitle}{Een inleiding in de elektrische netwerktheorie}
 \newcommand{\bookinstitution}{De Haagse Hogeschool}
 \newcommand{\bookedition}{Eerste druk}
 \newcommand{\bookversion}{0.1}
@@ -43,12 +48,18 @@
 \frontmatter
 
 %% Pull in the title page, preface and table of contents
-%%%\input{book_title.tex}
-%%%\input{book_chap00.tex}
-%%%\input{book_toc.tex}
+%%\input{book_title.tex}
+%%\input{book_chap00.tex}
+%%\input{book_toc.tex}
 
 %%
 \mainmatter
-\input{book_chap02}
+%\input{book_chap02}
+
+\appendix
+
+\input{book_chapA}
+%%\input{book_chapB}
+
 
 \end{document}
