@@ -1,0 +1,296 @@
+\documentclass[12pt,fleqn]{article}
+
+\usepackage[left=1in,right=1in,top=1in,bottom=1.5in]{geometry}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\setlength{\mathindent}{1em}
+\newcommand\strutrule{\rule{0mm}{1.9ex}}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+
+%% Uning tcolorbox for Infobox environment settings
+\usepackage{tcolorbox}
+\colorlet{infoboxline}{red!55!black} % Global example color
+\colorlet{infoboxbg}{brown!10}
+\colorlet{infoboxbgtitle}{brown!20}
+\newtcolorbox{infobox}[1]{title=#1,colback=infoboxbg,colframe=infoboxline,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt}
+
+%%
+%% https://tex.stackexchange.com/questions/476045/euler-and-minus-sign
+%%
+%% Imaginary unit, e, and Euler
+\newcommand\imaginaryunit{j}                  % the imaginary unit, i for mathematician and theoretical physicist, j for the rest of the world.
+\newcommand\imunit{\mathrm{\imaginaryunit}}   % ... in upright math
+\newcommand\ce{\mathrm{e}}                    % the constant e, upright of course
+\newcommand{\fiximunit}{\if\imaginaryunit j\,\fi}
+\makeatletter
+\newcommand{\epowim}[1]{\ce^{\epowim@#1}}
+\newcommand{\epowim@}{\@ifnextchar-{\epowim@@}{\epowim@@{\fiximunit}}}
+\newcommand{\epowim@@}[1]{#1\imunit}
+\makeatother
+%\def\Re{\mathrm{Re}}  % Redefine \Re
+%\def\Im{\mathrm{Im}}  % Redefine \Im
+
+
+
+
+\def\uangle{40}    % angle of unit vector between 30 and 55
+
+
+\begin{document}
+
+\begin{infobox}{De formule van Euler}
+De formule van Euler legt een relatie tussen de goniometrische functies en de complex exponentiële functie. Voor elk reëel getal $\alpha$ geldt:
+%
+\begin{equation}
+\epowim{\alpha} = \cos\alpha + \imunit\sin\alpha
+\end{equation}
+%
+Hierin is $\ce$ de grondtal van de natuurlijk logaritme, $\imunit$ de imaginaire eenheid en zijn $\cos$ en $\sin$ de functies cosinus en sinus met het argument in radialen.\newline
+
+De formule geldt ook voor complexe getallen:
+%
+\begin{equation}
+\ce^{\beta+\imunit\alpha} = \ce^{\beta} \cdot \epowim{\alpha} = \ce^{\beta}(\cos\alpha + \imunit\sin\alpha)
+\end{equation}
+\end{infobox}
+
+\begin{infobox}{Uitbeelding van de formule van Euler}
+\begin{center}
+\begin{tikzpicture}[scale=2.5,font=\footnotesize] % scale is radius in cm
+\draw[thick] (0,0) circle (1cm);
+\draw[-latex,thick] (0,-1.1) -- (0,1.1) node[above] {$\Im$};
+\draw[-latex,thick] (-1.1,0) -- (1.1,0) node[right] {$\Re$};
+\draw[-latex,thick] (0,0) --(\uangle:1) node[midway,above] {1};
+\draw[dashed] (\uangle:1) -| (0,0);
+\draw[dashed] (\uangle:1) |- (0,0);
+\draw[decorate,decoration={brace,amplitude=4pt,mirror,raise=2pt}] (0,0) -- node[below,yshift=-2mm]{$\cos\alpha$} ({cos(\uangle)},0);
+\draw[decorate,decoration={brace,amplitude=4pt,raise=2pt}] (0,0) -- node[left,xshift=-2mm]{$\sin\alpha$} (0,{sin(\uangle)});
+\draw[-latex] (0.3,0) arc (0:\uangle:0.3);
+\node at (\uangle/2:0.4) {$\alpha$};
+\node at (1,0) [xshift=50pt,right,font=\normalsize] {$\epowim{\alpha} = \cos\alpha + \imunit\sin\alpha$};
+\end{tikzpicture}
+\end{center}
+\end{infobox}
+
+\begin{infobox}{De identiteit van Euler}
+Als we bij de formule van Euler voor de hoek $\alpha$ het getal $\pi$ invullen, krijgen we een bijzondere vergelijking:
+%
+\begin{equation}
+\epowim{\pi} + 1 = 0
+\end{equation}
+%
+Deze vergelijking legt de relatie tussen de vijf constanten $\ce$, $\pi$, $0$, $1$ en $\imunit$ en de operaties optellen, vermenigvuldigen, machtsverheffen en gelijkstellen. Deze identiteit wordt ook wel ``de mooiste vergelijking van het universum'' genoemd.
+\end{infobox}
+
+%$ \epowim{(\omega t + \varphi)} =\cos (\omega t + \varphi) + \imunit\sin (\omega t + \varphi)  $
+
+\begin{infobox}{Bewijs van de formule van Euler}
+We kunnen de formule van Euler bewijzen door gebruik te maken van de reeksontwikkeling van $\ce^x$:
+%
+\begin{equation}
+\ce^x = \dfrac{x^0}{0!} + \dfrac{x^1}{1!} + \dfrac{x^2}{2!} + \dfrac{x^3}{3!} + \dfrac{x^4}{4!} + \dfrac{x^5}{5!} + \dfrac{x^6}{6!} + \dfrac{x^7}{7!} + \cdots
+\end{equation}
+%
+Vullen we voor $x = \imunit\alpha$ in, dan krijgen we:
+%
+\begin{equation}
+\jot=10pt
+\begin{split}
+\epowim{\alpha} &= \dfrac{(\imunit\alpha)^0}{0!} + \dfrac{(\imunit\alpha)^1}{1!} + \dfrac{(\imunit\alpha)^2}{2!} + \dfrac{(\imunit\alpha)^3}{3!} + \dfrac{(\imunit\alpha)^4}{4!} + \dfrac{(\imunit\alpha)^5}{5!} + \dfrac{(\imunit\alpha)^6}{6!} +\dfrac{(\imunit\alpha)^7}{7!} + \cdots \\
+ &= 1 + \imunit\alpha + \imunit^2 \dfrac{\alpha^2}{2!} + \imunit^3 \dfrac{\alpha^3}{3!} + \imunit^4 \dfrac{\alpha^4}{4!} + \imunit^5 \dfrac{\alpha^5}{5!} + \imunit^6 \dfrac{\alpha^6}{6!} + \imunit^7 \dfrac{\alpha^7}{7!} + \cdots \\
+ &= 1 + \imunit\alpha -\dfrac{\alpha^2}{2!} -\imunit \dfrac{\alpha^3}{3!} + \dfrac{\alpha^4}{4!} + \imunit \dfrac{\alpha^5}{5!}  -\dfrac{\alpha^6}{6!} - \imunit \dfrac{\alpha^7}{7!} \cdots \\
+ &= \underbrace{\left(1 - \dfrac{\alpha^2}{2!} + \dfrac{\alpha^4}{4!} -\dfrac{\alpha^6}{6!} + \cdots\right)}_{\cos\alpha}\, +\,\, \imunit\underbrace{\left( \alpha -\dfrac{\alpha^3}{3!} + \dfrac{\alpha^5}{5!} - \dfrac{\alpha^7}{7!} + \cdots \right)}_{\sin\alpha} \\
+ &= \cos\alpha + \imunit\sin\alpha
+\end{split}
+\end{equation}
+%
+We gaan stilzwijgend ervan uit dat alle rekenkundige operaties ook gelden voor complexe getallen. Euler heeft zijn stelling op deze manier aangetoond.
+\end{infobox}
+
+\begin{infobox}{{Wrong, so wrong \ldots}}
+In veel boeken wordt geschreven dat $\imunit$ gelijk is aan de wortel van $-1$:
+%
+\begin{equation}
+\imunit = \sqrt{-1}
+\end{equation}
+%
+Dit is absoluut fout. De wortel uit een getal $x$ is gedefinieerd als een niet-negatief getal $y$ waarvoor geldt dat het kwadraat van $y$ gelijk is aan $x$. 
+%In de veronderstelling dat $\imunit=\sqrt{-1}$ is, kunnen we nu aantonen dat $\imunit^2$ gelijk is aan $1$:
+%%
+%\begin{equation}
+%\imunit^2 = \sqrt{-1}\cdot\sqrt{-1} = \sqrt{-1\cdot-1} = \sqrt{1} = 1
+%\end{equation}
+%%
+%We gaan hier ten onrechte ervan uit dat geldt dat $\sqrt{a}\sqrt{b}=\sqrt{ab}$ ook geldt voor negatieve getallen.
+De enige juiste definitie is:
+%
+\begin{equation}
+\imunit^2 = -1
+\end{equation}
+
+\end{infobox}
+
+\begin{infobox}{De stellling van De Moivre}
+Voor elke geheel getal $n$ geldt:
+%
+\begin{equation}
+\left(\cos \alpha + \imunit\sin \alpha\right)^n = \cos n\alpha + \imunit\sin n\alpha
+\end{equation}
+%
+We kunnen dat eenvoudig aantonen:
+%
+\begin{equation}
+\left(\cos \alpha + \imunit\sin \alpha\right)^n = \epowim{n\alpha} = \cos n\alpha + \imunit\sin n\alpha
+\end{equation}
+
+Zoals gezegd geldt dit echter voor een geheel getal $n$.
+\end{infobox}
+
+\begin{infobox}{{Hoeken, hoeken en meer hoeken}}
+Volgens de stelling van De Moivre moet gelden dat:
+%
+\begin{equation}
+\cos 2\alpha + \imunit\sin 2\alpha = (\cos \alpha + \imunit\sin\alpha)^2
+\end{equation}
+%
+De gelijkheid is alleen waar als de reële en imaginaire delen links en rechts van het isgelijkteken aan elkaar gelijk zijn. We vermenigvuldigen het rechterlid uit:
+%
+\begin{equation}
+\begin{split}
+\cos 2\alpha + \imunit\sin 2\alpha &= (\cos \alpha + \imunit\sin\alpha)^2 \\
+ &= \cos^2 \alpha + 2\imunit\cos\alpha\sin\alpha + \imunit^2\sin^2\alpha \\
+ &= \cos^2 \alpha - \sin^2\alpha + 2\imunit\cos\alpha\sin\alpha \\
+ &= \cos^2 \alpha - (1-\cos^2 \alpha) + 2\imunit\cos\alpha\sin\alpha \\
+ &= 2\cos^2 \alpha - 1 + 2\imunit\cos\alpha\sin\alpha
+\end{split}
+\end{equation}
+%
+Nu splitsen we de reële en imaginaire delen:
+%
+\begin{equation}
+\cos 2\alpha = 2\cos^2 \alpha - 1 \qquad\text{en}\qquad \sin 2\alpha = 2\cos\alpha\sin\alpha
+\end{equation}
+
+Dit zijn de zogenoemde \textsl{dubbele hoekformules} van sinus en cosinus. We kunnen de
+machten uitbreiden en vinden dan:
+%
+\begin{equation}
+\begin{array}{lll}
+\cos 3\alpha = 3\cos^3\alpha - 3\cos\alpha &\text{en} &\sin 3\alpha = 3\sin\alpha - 4\sin^3 \alpha\\
+\cos 4\alpha = 8\cos^4 \alpha - 8\cos^2 \alpha + 1 &\text{en} &\sin 4\alpha = 4 \sin\alpha\cos\alpha - 8\sin^3\alpha\cos\alpha
+\end{array}
+\end{equation}
+%
+Voor de \textsl{cosinus} volgen de expansies de zogenoemde \textsl{Tsjebysjev-polynomen}\footnote{Ook wel geschreven als: Chebyshev, Chebyshov, Tschebyschow, Tchebichef of Tchebycheff}:
+%
+\begin{equation}
+\begin{split}
+T_0(x) &= 1 \\
+T_1(x) &= x \\
+T_2(x) &= 2x^2 - 1 \\
+T_3(x) &= 4x^3 - 3x \\
+T_4(x) &= 8x^4 - 8x^2 + 1 \\
+T_5(x) &= 16x^5 - 20x^3 + 5x \\
+T_6(x) &= 32x^6 - 48x^4 + 18x^2 - 1 \\
+%T_7(x) &= 64x^7 - 112x^5 + 56x^3 - 7x \\
+%T_8(x) &= 128x^8 - 256x^6 + 160x^4 - 32x^2 + 1 \\
+%T_9(x) &= 256x^9 - 576x^7 + 432x^5 - 120x^3 + 9x 
+\end{split}
+\end{equation}
+
+waarbij in het linkerlid $T_n(x)$ staat voor $\cos n\alpha$ en het rechterlid $x$ staat voor $\cos\alpha$. Tsjebysjev-polynomen spelen een belangrijke rol bij het ontwerpen van elektronische filters.
+\end{infobox}
+
+\begin{infobox}{Relatie met hyperbolische functies}
+De hyperbolische sinus- en cosinusfuncties zijn gedefinieerd als:
+%
+\begin{equation}
+\cosh x = \dfrac{\ce^x + \ce^{-x}}{2} \qquad\text{en}\qquad \sinh x = \dfrac{\ce^x - \ce^{-x}}{2}
+\end{equation}
+%
+Vervangen we $x$ door $\imunit\alpha$ dan volgt:
+%
+\begin{equation}
+\cosh \imunit\alpha = \dfrac{\epowim{\alpha} + \epowim{-\alpha}}{2} = \dfrac{\cos\alpha + \imunit\sin\alpha + \cos\alpha - \imunit\sin\alpha}{2} = \dfrac{2\cos\alpha}{2}= \cos\alpha
+\end{equation}
+%
+en
+%
+\begin{equation}
+\sinh \imunit\alpha = \dfrac{\epowim{\alpha} - \epowim{-\alpha}}{2} = \dfrac{\cos\alpha + \imunit\sin\alpha - (\cos\alpha - \imunit\sin\alpha)}{2} = \dfrac{2\imunit\sin\alpha}{2} = \imunit\sin\alpha
+\end{equation}
+%
+Verder geldt:
+%
+\begin{equation}
+\begin{split}
+\sinh\alpha &= -\imunit\sin(\imunit\alpha) \\
+\cosh\alpha &= \cos(\imunit\alpha)
+\end{split}
+\end{equation}
+%
+Het is dus mogelijk om de sinus en cosinus van een imaginair getal te berekenen.
+\end{infobox}
+
+\begin{infobox}{Complex toegevoegde getal}
+Als voor een complex getal $z$ geldt dat:
+%
+\begin{equation}
+z = a + \imunit b
+\end{equation}
+%
+dan is het \textsl{complex toegevoegde} of \textsl{complex geconjungeerde} getal $z^*$:
+%
+\begin{equation}
+z^* = a - \imunit b
+\end{equation}
+%
+Dan geldt vervolgens:
+%
+\begin{equation}
+\begin{split}
+z + z^* &= a + \imunit b + a -\imunit b = 2a \\
+z - z^* &= a + \imunit b - (a -\imunit b) = 2\imunit b \\
+z \cdot z^* &= (a + \imunit b)(a - \imunit b) = a^2 + b^2
+\end{split}
+\end{equation}
+\end{infobox}
+
+\begin{infobox}{Rekenen met complexe getallen}
+Optellen en aftrekken van complexe getallen gaat als volgt:
+%
+\begin{equation}
+\begin{split}
+(a + \imunit b) + (c + \imunit d) &= (a + c) + \imunit(b + d) \\
+(a + \imunit b) - (c + \imunit d) &= (a - c) + \imunit(b - d) \\
+\end{split}
+\end{equation}
+%
+Vermenigvuldigen van twee complexe getallen gaat als volgt:
+%
+\begin{equation}
+\begin{split}
+(a + \imunit b) \cdot (c + \imunit d) &= ac + \imunit ad + \imunit bc + \imunit^2 bd \\
+ &= (ac - bd) + \imunit(ad + bc) \\
+\end{split}
+\end{equation}
+
+%
+Delen van complexe getallen gaat als volgt:
+%
+\begin{equation}
+\begin{split}
+\dfrac{a+\imunit b}{c+\imunit d} = \dfrac{a+\imunit b}{c+\imunit d} \cdot \dfrac{c-\imunit d}{c-\imunit d} = 
+\dfrac{(ac + bd) + \imunit(bc-ad)}{c^2-d^2} \qquad (\text{met }c^2-d^2\neq 0)
+\end{split}
+\end{equation}
+\end{infobox}
+
+\end{document}
+

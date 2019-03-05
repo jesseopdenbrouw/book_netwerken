@@ -1,0 +1,12 @@
+\documentclass[a4paper,12pt,fleqn]{article}
+\def\imaginaryunit{j}                  % the imaginary unit, i for mathematician and theoretical physicist, j for the rest of the world.
+\def\imunit{\mathrm{\imaginaryunit}}   % ... in upright math
+\def\ce{\mathrm{e}}                    % the constant e, upright of course
+\newcommand\epowim[1]{\ce^{\epowimaux#1\endep}}
+\def\epowimaux#1#2\endep{\ifx-#1\relax-\imunit\else\if\imaginaryunit j\relax\,\fi\imunit#1\fi#2}
+
+\begin{document}
+\begin{equation}
+\epowim{\alpha}\qquad \epowim{-\alpha} \qquad \ce^{-\imunit\alpha}
+\end{equation}
+\end{document}
