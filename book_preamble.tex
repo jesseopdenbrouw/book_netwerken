@@ -9,15 +9,18 @@
 \documentclass[12pt,a4paper,final,twoside,fleqn]{book}
 
 %% Find out what engine we're running...
-\usepackage{iftex}
+\usepackage{ifluatex,ifxetex}
 
-\ifLuaTeX
+\ifluatex
+\else
+\ifxetex
 \else
 %% Suppress PTEX.FullBanner
-\pdfsuppressptexinfo=1
+%\pdfsuppressptexinfo=1
 %% PDF Version and compression...
 \pdfminorversion=5
 \pdfobjcompresslevel=1
+\fi
 \fi
 
 %% Set input encoding to UTF-8
@@ -131,6 +134,9 @@
 
 %% Use the AMS Mathematical characters, no other AMS packages required
 \usepackage{mathtools}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}}
+%\usepackage{amssymb}
 \setlength{\mathindent}{1em}
 \DeclareMathSymbol{,}{\mathord}{letters}{"3B}
 \abovedisplayskip=30pt
@@ -138,23 +144,31 @@
 \abovedisplayshortskip=30pt
 \belowdisplayskip=30pt
 
-\ifLuaTeX
-%\usepackage{nimbusmono}
-\usepackage[no-math]{fontspec}
-\usepackage{unicode-math}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0
+\usepackage[math-style=TeX]{unicode-math}
+%\usepackage{unicode-math}
+\usepackage{fontspec}
 \setmainfont[Ligatures=TeX]{Calibri}
-\setsansfont[Ligatures=TeX]{Arial}
-\usepackage[italic]{mathastext}
+\defaultfontfeatures{Scale=MatchUppercase}
+\setsansfont{Calibri}
+\setmonofont{Consolas}
+\setmathfont[slash-delimiter=frac]{Cambria Math}
+\setmathfont[range=up]{Calibri}
+\setmathfont[range=it]{Calibri Italic}
+\setmathfont[range=bfup]{Calibri Bold}
+\setmathfont[range=bfit]{Calibri Bold Italic}
+\setoperatorfont\normalfont % For log, sin, cos, etc.
 \def\checkmark{\textsl{v}}
 \def\muup{u}
 \else
 %% Use the Charter and Nimbus Mono fonts
 \usepackage{nimbusmono}
-\usepackage{charter}
+%\usepackage{charter}
 \usepackage[bitstream-charter]{mathdesign}
 %% Use microtype
 \usepackage[stretch=10]{microtype}
 \fi
+
 
 %% Nice calculations with lengths
 \usepackage{calc}
@@ -190,10 +204,10 @@
 {\bfseries}
 {\chapnumfont\textcolor{chapnumcol}{\thechapter}}
 {0ex}
-{\ifLuaTeX\else\fontfamily{phv}\fi\selectfont\Huge\bfseries}
+{\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\Huge\bfseries}
 [{\vspace*{1ex}\titlerule[0.8pt]}]
-\titleformat{\section}{\ifLuaTeX\else\fontfamily{phv}\fi\selectfont\large\bfseries}{\secmark\thesection}{1em}{}
-\titleformat{\subsection}{\ifLuaTeX\else\fontfamily{phv}\fi\selectfont\bfseries}{\secmark\thesubsection}{1em}{}
+\titleformat{\section}{\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\large\bfseries}{\secmark\thesection}{1em}{}
+\titleformat{\subsection}{\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\bfseries}{\secmark\thesubsection}{1em}{}
 \titlespacing*{\section}{0pt}{\baselineskip}{\aftersubsection}
 \titlespacing*{\paragraph}{0pt}{1.0ex plus 1ex minus .2ex}{1.5em}
 \newlength{\aftersubtitle}
@@ -504,142 +518,70 @@
 \newcommand{\iflabelexists}[3]{\@ifundefined{r@#1}{#3}{#2}}
 \makeatother
 
-%% Tikz to draw state diagrams
-%%%\usepackage{pgf}
-%%%\usepackage{tikz}
-%%%\usetikzlibrary{positioning,shapes,arrows,automata}
-%%%\tikzstyle{every picture}+=[font={\sffamily\small}]
-%%%\tikzstyle{every state}=[fill=none,draw=black,text=black,very thick,minimum size=1.2cm,initial distance=1cm]
-%%%% How to draw Moore states
-%%%\newif\ifmoorenodesepslash
-%%%\moorenodesepslashtrue
-%%%\ifmoorenodesepslash
-%%%\newcommand{\moorenode}[2]{$\mathsf{#1/#2}$}
-%%%\else
-%%%\newcommand{\moorenode}[2]{$\mathsf{\dfrac{#1}{#2}}$}
-%%%\fi
+%% Uning tcolorbox for Infobox environment settings
+\usepackage[most]{tcolorbox}
+\colorlet{infoboxline}{red!55!black} % Global example color
+\colorlet{infoboxbg}{brown!10}
+\colorlet{infoboxbgtitle}{brown!20}
+\newtcolorbox{infobox}[1]{title=#1,colback=infoboxbg,colframe=infoboxline,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt}
 
-%% Use Venn Diagrams
-%%%\usepackage{venndiagram}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Code voor Infobox
-\makeatletter
-\newsavebox{\@saveinfobox}
-\newlength{\@infoboxparskip}\setlength{\@infoboxparskip}{\smallskipamount}
-\ifusebookasbook
-\newcommand{\infoboxHTMLcolor}{F2F2F2}
-\else
-\newcommand{\infoboxHTMLcolor}{E7FEFF}
-\fi
-%% Floating minipages
-%%\newfloat{floatingminipage}{!htbp}{lfm}[section]
-%\restylefloat*{floatingminipage}
-\floatstyle{ruled}
-\newfloat{@rawinfobox}{!b}{loi}[section]
-%\newfloat{@rawinfoboxh}{!h}{loi}[section]
-\restylefloat*{@rawinfobox}
-%\restylefloat*{@rawinfoboxh}
-\floatname{@rawinfobox}{Infobox}
-%\floatname{@rawinfoboxh}{Infobox}
-
-% one length to rule them all
-\newlength\hrulethickness
-\setlength\hrulethickness{4\arrayrulewidth}
-%\newcommand{\hlinethick}{\Xhline{\hrulethickness}}
-
-% redefinition of the `ruled' floatstyle
-% (defined in the `float' package, used by the `algorithm' package)
-\renewcommand\fs@ruled{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
-  \def\@fs@pre{\hrule height \hrulethickness depth0pt }%\vskip1ex}%
-  \def\@fs@post{\hrule height \hrulethickness depth0pt \relax}%
-  \def\@fs@mid{\hrule height \hrulethickness depth0pt }%
-  \let\@fs@iftopcapt\iftrue}
-
-% make use of @... to set \parskip proper, affects all minipages!
-%\newcommand{\@minipagerestore}{\setlength{\parskip}{\smallskipamount}}
-
-% create a new environment
-% Argument #1 = box placement, one of '!hbtp' or 'H', default '!b'
-% Argument #2 = heading text, will be typeset in ...
-% See http://tex.stackexchange.com/questions/11349/how-do-you-define-your-environment-such-as-to-use-for-some-parameters
-\newenvironment{infobox}[2][!b]{%
-% Place float at ...
-\floatplacement{@rawinfobox}{#1}%
-\begin{@rawinfobox}%
-\begin{lrbox}{\@saveinfobox}%
-% Now a dirty hack: minipage within a minipage
-%\begin{minipage}[t]{\textwidth}%
-%\begin{minipage}[t]{0.985\textwidth}%
-\begin{minipage}[t]{\textwidth-\marginparsep-2\fboxrule-0.255pt}%
-\centering%
-\begin{minipage}[t]{0.95\textwidth}%
-\setlength{\parskip}{\@infoboxparskip}% restore the value
-\vspace*{1pt}\textsc{#2}\par
+\colorlet{colorexample}{red!55!black} % Global example color
+\newcounter{example}[chapter]
+\setcounter{example}{0}
+\newtcolorbox[use counter=example,number within=chapter,list inside=example]{example}[1][]{%
+    % Example Frame Start
+    empty,% Empty previously set parameters
+    title={Voorbeeld \theexample\ifx\hfuzz#1\hfuzz \else : #1\fi},% use \thetcbcounter to access the example counter text
+%	list entry=Voorbeeld~\theexample.\quad#1,
+    % Attaching a box requires an overlay
+    attach boxed title to top left,
+    % Ensures proper line breaking in longer titles
+    minipage boxed title,
+    % (boxed title style requires an overlay)
+    boxed title style={empty,size=minimal,toprule=0pt,top=4pt,bottom=2pt,left=3mm,overlay={}},
+    coltitle=colorexample,fonttitle=\bfseries,
+    before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=3mm,right=0mm,top=5pt,breakable,pad at break=0mm,
+       before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+    % Handles box when it exists on one page only
+    overlay unbroken={\draw[colorexample,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: first page
+    overlay first={\draw[colorexample,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: middle page
+    overlay middle={\draw[colorexample,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: last page
+    overlay last={\draw[colorexample,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
 }
-{%
-%\vspace*{1ex}
-\end{minipage}%
-\end{minipage}%
-\end{lrbox}%
-\colorbox[HTML]{\infoboxHTMLcolor}{\usebox{\@saveinfobox}}%
-\end{@rawinfobox}
-}%
+\makeatletter % no indent for entries
+\renewcommand{\l@tcolorbox}{\@dottedtocline{1}{0pt}{2.3em}}
 \makeatother
-% end code for Infobox
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\usepackage{showframe}
 
-%% Hypenation of some uncommon words in Dutch
-%\hyphenation{Kar-naugh-dia-gram Kar-naugh-dia-gram-men min-term min-ter-men flip-flop flip-flops im-pli-cant im-pli-can-ten twee-tal-len vier-tal-len acht-tal-len zes-tien-tallen timing-dia-gram-men timing-dia-gram}
 
-%% The title page
-\def\maketitle{%
-\pagecolor{Sienna2}%
-\null%
-  \hbox{%
-  \hspace*{0.05\textwidth}%
-  \rule{3pt}{0.95\textheight}
-  \hspace*{0.10\textwidth}%
-\parbox[b]{0.85\textwidth}{%
-  \vbox{%
-%%%    \vspace{0.0\textheight}
-    {\noindent\fontsize{70pt}{80pt}\selectfont\bfseries \booktitleI \\[0.20\baselineskip] \booktitleII}\\[3\baselineskip]
-    {\fontsize{25pt}{35pt}\selectfont\itshape \booksubtitle}\\[4\baselineskip]
-    {\fontsize{30pt}{35pt}\selectfont \bookauthor}\\[\baselineskip]
-   \par%{\LARGE \bookinstitution}\par
-   \vspace{0.3\textheight}
-    {\noindent\Large \bookedition}\\[\baselineskip]
-    %\vspace{0.05\textheight}
-    }% end of vbox
-}% end of parbox
-  }% end of hbox
-\thispagestyle{empty}%
-\newpage
-\pagecolor{white}
-\ifusebookasbook
-\cleardoublepage
-{\centering
-\vfill\vspace*{5cm}
-{\fontsize{45pt}{55pt}\selectfont\bfseries\booktitle}\par
-{\fontsize{20pt}{25pt}\selectfont\itshape \booksubtitle}\par
-\vspace*{2cm}
-\Huge\bookauthor\par
-\Large\bookinstitution\par
-\vspace*{5cm}
-\Large\bookedition\par
-\vfill}
-\thispagestyle{empty}%
-\clearpage
-%%\pagestyle{empty}%
-\null%
-\fi
-}
+%%
+%% based on https://tex.stackexchange.com/questions/476045/euler-and-minus-sign
+%%
+%% Imaginary unit, e, and Euler
+\newcommand\imaginaryunit{j}                   % the imaginary unit, i for mathematician and theoretical physicist,
+                                               % j for the rest of the world.
+\newcommand\imunit{\mathrm{\imaginaryunit}}    % ... in upright math
+\newcommand\ce{\mathrm{e}}                     % the constant e, upright of course
+
+\newcommand{\epowre}[1]{\ce^{#1}}              % e to the power of real
+\makeatletter
+\newcommand{\fiximunit@@}{\if\imaginaryunit j\,\fi}
+\newcommand{\epowim}[1]{\ce^{\epowim@#1}}      % e to the power of imaginary
+\newcommand{\epowim@}{\@ifnextchar-{\epowim@@}{\epowim@@{\fiximunit@@}}}
+\newcommand{\epowim@@}[1]{#1\imunit}
+\newcommand{\epowim@@@}{\@ifnextchar-{\epowim@@@@}{+\epowim@@@@{}}}
+\newcommand{\epowim@@@@}[1]{#1\imunit}
+\newcommand{\epowcom}[2]{\ce^{#1\epowim@@@#2}} % e to the power of complex
+\newcommand{\cis}[1]{\cis@#1}                  % cos + imaginary sin
+\newcommand{\cis@}{\@ifnextchar-{\cis@@@}{\cis@@}}
+\newcommand{\cis@@}[1]{\cos#1 + \imunit\sin#1}
+\newcommand{\cis@@@}[2]{\cos#2 - \imunit\sin#2}
+\makeatother
+%\renewcommand{\Re}{\mathrm{Re}}  % Redefine \Re
+%\renewcommand{\Im}{\mathrm{Im}}  % Redefine \Im
+
 
 %% The really backmatter
 \newcommand{\bookbackmatter}{%
@@ -648,7 +590,7 @@
 \hspace*{0pt}
 \thispagestyle{empty}
 \clearpage
-\pagecolor{SkyBlue2}
+\pagecolor{Sienna2}
 \hspace*{0pt}
 \vfill
 %\hfill\EANisbn[SC5b,ISBN=978-80-7340-097-2] 
