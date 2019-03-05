@@ -1,0 +1,604 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%       PREAMBLE
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Suppress PTEX.FullBanner
+\pdfsuppressptexinfo=1
+
+%% 12pt charachters, A4 paper size, twoside printing, equation left aligned
+%% equation indent at 1 em
+\documentclass[12pt,a4paper,final,twoside,fleqn]{book}
+
+%% Set input encoding to UTF-8
+\usepackage[utf8]{inputenc}
+%% Use T1 output font encoding
+\usepackage[T1]{fontenc}
+
+%%\subtitle{This is a sub title}
+%%\renewcommand{\rmdefault}{crm}
+\renewcommand{\author}{\bookauthor}
+\renewcommand{\title}{\booktitle}
+\renewcommand{\date}{\today}
+
+%% Some defines for scaling figs
+%% Scaled 1/1
+\def\figscale{0.6} % Really it should be 1-exp{-1} = 0.63212055882855767840447622983854
+\def\figscaleA{0.5}
+\def\figscaleAA{0.43}
+\def\figscaleB{0.3}
+\def\figscaleC{1.0}
+\def\figscaleE{0.7}
+\def\figscaleF{0.6}
+\def\figscaleG{0.8}
+
+%% Define which part of the book is included
+\newif\ifusebookpartI\bookpartI
+\newif\ifusebookpartII\bookpartII
+\newif\ifusebookpartIII\bookpartIII
+
+%% PDF Version and compression...
+\pdfminorversion=5
+\pdfobjcompresslevel=1
+
+%% Dutch spelling of chapter, section, etc.
+\usepackage[dutch]{babel}
+\usepackage[english=american]{csquotes}
+
+%% Set page layout
+\usepackage[a4paper,bindingoffset=0.2in,left=1.0in,right=1.0in,top=1.0in,bottom=1.4in,
+                                                               footskip=0.5in]{geometry}
+                                                               
+%% Use of dashed lines in tables
+\usepackage{tabu}
+%\usepackage{booktabs}
+\usepackage{multirow}
+
+%% Use array's
+\usepackage{array}
+
+%% Define and use colors
+\usepackage[x11names]{xcolor}
+
+%% Include rotating (includes graphicx) packages
+\usepackage{rotating}
+
+%% Enumerate items
+\usepackage[inline]{enumitem}
+%% Use an asterisk before item number, see
+%% http://tex.stackexchange.com/questions/61263/add-an-asterisk-left-of-an-enumerate
+\setlist[enumerate]{before=\setupmodenumerate}
+%
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}%
+  \def\makelabel##1{%
+%    \origmakelabel{\ifmoditem\llap{\mesymbol\enspace}\fi##1}%
+    \origmakelabel{\ifmoditem\llap{\mesymbol\ }\fi##1}%
+    \global\moditemfalse}%
+}
+\newcommand{\itemstar}{\moditem{\textbf{*}}}
+
+%% Use floats
+\usepackage{float}
+%% Separation between floats 12pt --> 24 pt
+\setlength{\floatsep}{24.0pt plus 2.0pt minus 2.0pt}
+
+%% Using footnotes in tables
+%%%\usepackage{tablefootnote}
+\usepackage{threeparttable}
+%\renewcommand{\TPTminimum}{1em}
+\renewcommand{\TPTnoteSettings}{\footnotesize}
+\makeatletter
+%\setlist[tablenotes]{label=\tnote{\alph*},ref=\alph*,itemsep=\z@,topsep=\z@skip,partopsep=\z@skip,parsep=\z@,itemindent=\z@,labelindent=\tabcolsep,labelsep=.2em,leftmargin=*,align=left,before={\footnotesize}}
+\makeatother
+
+% Use sansmath (load before DeclareMath below because Sansmath
+% redefines the comma as:
+% \DeclareMathSymbol{,}{\mathpunct}{operators}{`\,}
+\usepackage{sansmath}
+
+%% Use the AMS Mathematical characters, no other AMS packages required
+\usepackage{mathtools}
+\setlength{\mathindent}{1em}
+\DeclareMathSymbol{,}{\mathord}{letters}{"3B}
+
+% http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+\usepackage[
+    backend=biber,
+    backref=true,
+    backrefstyle=none,
+    sortcites=true,
+    sorting=none,
+    doi=false, % doi informatie wordt niet weergegeven
+    %uniquename=true,
+    %uniquelist=true,
+    maxcitenames=1,
+    %issn=false, werkt niet
+]{biblatex}
+\addbibresource{book_citations.bib}
+\DefineBibliographyStrings{dutch}{
+    backrefpage = {blz.},
+    backrefpages = {blz.},
+}
+%% Do not show ISSN numbers
+\AtEveryBibitem{\clearfield{issn}}
+\AtEveryCitekey{\clearfield{issn}}
+
+%% Use the Charter and Nimbus Mono fonts
+\usepackage{nimbusmono}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+%% Use microtype
+\usepackage[stretch=10]{microtype}
+
+%% Nice calculations with lengths
+\usepackage{calc}
+
+%%
+%% Do we include advanced sections?
+\newif\ifuseadvanced\bookuseadvanded
+%%
+%% Creating advanced sections with * prepended to sec number
+\newcommand*{\secmark}{}
+\newcommand*{\marktotoc}[1]{\renewcommand{\secmark}{#1}}
+\newcommand*{\advanced}{%
+  \renewcommand*{\secmark}{*}%
+  \addtocontents{toc}{\protect\marktotoc{*}}%
+}
+\newcommand*{\basic}{%
+  \renewcommand*{\secmark}{}%
+  \addtocontents{toc}{\protect\marktotoc{}}%
+}
+
+% http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/titlesec/titlesec.pdf
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage[titles]{tocloft}
+\newcommand{\chapnumfont}{%     % define font for chapter number
+  \usefont{T1}{pnc}{b}{n}%      % choose New Chancery, bold, normal shape
+  \fontsize{100}{100}%          % font size 100pt, baselineskip 100pt
+  \selectfont%                  % activate font
+  \vspace*{-0.5\baselineskip}	% half baseline skip up
+}
+\colorlet{chapnumcol}{gray!90}  % color for chapter number
+\titleformat{\chapter}[display]
+{\bfseries}
+{\chapnumfont\textcolor{chapnumcol}{\thechapter}}
+{0ex}
+{\fontfamily{phv}\selectfont\Huge\bfseries}
+[{\vspace*{1ex}\titlerule[0.8pt]}]
+\titleformat{\section}{\fontfamily{phv}\selectfont\large\bfseries}{\secmark\thesection}{1em}{}
+\titleformat{\subsection}{\fontfamily{phv}\selectfont\bfseries}{\secmark\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\aftersubsection}
+\titlespacing*{\paragraph}{0pt}{1.0ex plus 1ex minus .2ex}{1.5em}
+\newlength{\aftersubtitle}
+\setlength{\aftersubtitle}{1.2\baselineskip}
+\newlength{\aftersubsection}
+\setlength{\aftersubsection}{\aftersubtitle}
+\addtolength{\aftersubsection}{-\baselineskip}
+\titlespacing*{\subsection}{0pt}{.8\baselineskip}{\aftersubsection}
+\titlespacing*{\subsubsection}{0pt}{.6\baselineskip}{0pt}
+%\titlecontents{section}[1.5em]{}{\contentslabel[\secmark\thecontentslabel]{1.5em}}{}{\titlerule*{}\bfseries\contentspage}
+%\titleformat{\section}{\normalfont\Large\bfseries}{\makebox[1.5em][l]{\secmark\thesection}}{0.4em}{}
+%\titlecontents{section}[1.5em]{}{\bfseries\contentslabel[\secmark\thecontentslabel]{1.5em}}{\hspace*{-1.5em}}{\titlerule*{}\bfseries\contentspage}
+%\usepackage{tocloft,etoolbox}
+%\makeatletter
+%\patchcmd{\l@section}{#1}{\settowidth{\mylength}{\secmark}\hspace*{-\mylength}\secmark{#1}}{}{}
+%\renewcommand\cftchappresnum{\chaptername\newline}
+%\setlength{\cftchapnumwidth}{3.5cm}
+%\renewcommand{\cfttoctitlefont}{\fontfamily{phv}\selectfont\Huge\bfseries\scshape}
+%\renewcommand{\cftaftertoctitle}{}
+%\setlength{\cftbeforetoctitleskip}{\baselineskip}
+%\setlength{\cftaftertoctitleskip}{\aftersubsection}
+%% Remove page number on first page of ToC
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
+%% Make space for page number in TOC wider
+\makeatletter
+\renewcommand\@pnumwidth{1cm}
+\makeatother
+%% Wider chapnum and secnum
+%\renewcommand*\cftchapnumwidth{2em}
+\renewcommand*\cftsecnumwidth{3em}
+
+% http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/footmisc/footmisc.pdf
+% ruimte onder aan de pagina tussen tekst en voetnoot niet na voetnoot
+% package moet VOOR fancyhdr om warning te voorkomen
+\usepackage[
+    bottom,
+    hang,
+    multiple
+]{footmisc}
+% inspringen
+\setlength{\footnotemargin}{1em}
+% ruimte tussen footnotes:
+\setlength{\footnotesep}{.6\baselineskip}
+
+
+%% Using fancy headers and footers
+%% http://ftp.snt.utwente.nl/pub/software/tex/macros/latex/contrib/fancyhdr/fancyhdr.pdf
+\usepackage{fancyhdr}
+\newcommand{\bookfancy}{
+    \fancyhead{} % clear all header fields
+    \fancyhead[LE,RO]{\footnotesize\finalconceptdraft}
+    %\fancyhead[RO,LE]{\thepage} % Right Odd, Left Even
+    \fancyfoot{} % clear all footer fields
+    \fancyfoot[LE,RO]{\thepage}   % page number in "outer" position of footer line
+    \fancyfoot[RE,LO]{\booktitle} % other info in "inner" position of footer line
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+\pagestyle{fancy}
+\bookfancy
+\fancypagestyle{plain}{\bookfancy}
+%% Clear header and footer for blank pages, possibly print "This page ..."
+\makeatletter
+\renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}\vfill\begin{center}\thispageintentionallyleftblank\end{center}\vfill\vfill%
+\thispagestyle{empty}%
+\newpage%
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+%% Indexing words...
+\usepackage{imakeidx}
+%% The index page is typeset...
+\indexsetup{othercode=\footnotesize\thispagestyle{fancy}}
+\makeindex
+%\usepackage{showidx}
+
+%% Making captions nicer...
+\usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=sl,up]{caption}
+\DeclareCaptionLabelSeparator{emdash}{\ \ ---\ \ }
+\usepackage[labelformat=simple,font=footnotesize,format=plain,labelfont=bf,textfont=sl]{subcaption}
+\captionsetup[figure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[table]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[subfigure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[subtable]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+%% Put parens around the subfig name (a) (b) etc. Needs labelformat simple
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
+
+
+% Parskip et al.
+\usepackage{parskip}
+\makeatletter
+\setlength{\parfillskip}{00\p@ \@plus 1fil}
+\makeatother
+
+%% Nice strike out of text (more used in numbers)
+\usepackage{cancel}
+
+%% Some colors
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
+\definecolor{GKYgray}{rgb}{0.65,0.65,0.65}
+\definecolor{lightpink}{HTML}{F8E0E0}%{FBF3F3}%
+
+%% Use computer code listings
+\usepackage{listings}
+%% Use textcomp for upright quotes in listings
+\usepackage{textcomp}
+%%%\input{book_lstlisting_modelsim}
+%%%\input{book_lstlisting_asmlang}
+%%%\input{book_lstlisting_pseulang}
+
+%% Define listing style for VHDL
+\lstset{%
+  language=VHDL,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,                           
+  numbersep=8pt,
+  backgroundcolor=\color{lightpink},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  frame=lines,
+  rulecolor=\color{black},
+  tabsize=4,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false,
+  title=\lstname,
+  upquote=true,
+  aboveskip=\baselineskip
+}
+
+%% Using hyperrefs...
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	citecolor=purple,
+    pdftitle={\booktitleI{}\booktitleII},
+    pdfauthor={\bookauthor},
+    %pdfsubject={Beginselen van de digitale techniek},
+    pdfsubject={},
+    pdfkeywords={\bookkeywords},
+	pdfdisplaydoctitle=true,
+	pdfpagelayout=TwoPageRight
+}
+\urlstyle{sf}%
+
+%% Lay things over a picture
+%% http://mirrors.ctan.org/macros/latex/contrib/overpic/opic-abs.pdf
+\usepackage[abs]{overpic}
+
+%% Set \FloatBarrier to empty
+\def\FloatBarrier{}
+
+%%%
+%%% LaTeX installed packages loading done here
+%%%
+%%% From here on, only own-written packages and commands
+%%%
+
+%% Better overline command for use in logic functions
+\newcommand*{\oline}[1]{\overline{#1\mathstrut}}
+
+%% A nice circled x for use in prime implicant tables
+\newcommand{\cx}{\raisebox{-1.2pt}{\textcircled{\raisebox{1.2pt}{x}}}}
+
+%% Prints nice "solution" header (dutch: uitwerking)
+\newcommand{\uitw}[1]{\addvspace{1em}\textbf{Uitwerking opgave \ref{#1}.}\vspace*{0.2em}\newline}
+
+%% Circled numbers
+%\def\circled#1{{\ooalign{\hfil\lower.1ex\hbox{#1}\hfil\crcr\Orb}}}
+\def\circled#1{\textcircled{\raisebox{.95pt}{\scriptsize #1}}}
+
+%% Typeset propositions and postulates
+\newcommand{\propositie}[1]{\par\hspace*{1em}#1\par}
+
+%% Log notation with base
+\newcommand\logbase[1]{\mathop{{}^{#1}\mathrm{log}}}
+
+%% To input and print files.
+%% \booklising{lang}{caption}{filename}{ext}{floatplace}
+%%%\newcommand{\booklisting}[5]{%
+%%%\begin{figure}[#5]%
+%%%\lstinputlisting[language=#1,caption={#2.},label=cod:#3]{code/#3.#4}%
+%%%\vspace*{-\baselineskip}
+%%%\end{figure}%
+%%%}
+\newcommand{\booklisting}[6][]{%
+\begin{figure}[#6]%
+\lstinputlisting[language=#2,caption={#3.},label=cod:#4,#1]{code/#4.#5}%
+\vspace*{-\baselineskip}
+\end{figure}%
+}
+%\lstinputlisting[language=#1,caption={#2.},label=cod:#3,float]{code/#3.vhd}%
+%\lstinputlisting[language=#1,caption={#2.},label=cod:#3,float,floatplacement=h]{code/#3.vhd}%
+%\begin{minipage}{\textwidth}%
+%\lstinputlisting[language=#1,caption={#2.},label=cod:#3]{code/#3.vhd}%
+%\end{minipage}%
+%%% werkt niet
+%%%\captionsetup{belowskip=100pt}
+%%%\setlength{\abovecaptionskip}{-100pt plus 0pt minus 0pt}
+
+\newcommand{\lstmodelsim}[1]{\lstinline[language=modelsim]|#1|}   %[
+\newcommand{\lstvhdl}[1]{\lstinline[language=vhdl]|#1|}   %[
+\newcommand{\lstc}[1]{\lstinline[language=C]|#1|}   %[
+\newcommand{\lstpseu}[1]{\lstinline[language=HHSEprocPseudoLang]|#1|}   %[
+\newcommand{\lstasm}[1]{\lstinline[language=HHSEprocAssembler]|#1|}   %[
+
+%% To put single figures
+%% \bookfigure{floatplace}{scale}{imagename}{caption}{label}
+\newcommand{\bookfigure}[5]{%
+\begin{figure}[#1]%
+\centering%
+\includegraphics[scale=#2]{images/#3}%
+\caption{#4.}%
+\label{fig:#5}%
+\end{figure}%
+}
+
+%% Print hidden characters by using the white color, used for aligning numbers.
+%% Please note that the dash must cast to mathbin. See:
+%% http://tex.stackexchange.com/questions/21598/how-to-color-math-symbols
+\newcommand\ph[1]{\if-#1\mathbin{\textcolor{white}{-}}\else\textcolor{white}{#1}\fi}
+
+%% The askmaps package for displaying K-maps Amarican style
+\usepackage{askmaps}
+\askmapunitlength=0.88cm
+
+%% Import the binary number cirlces package
+%%%\usepackage[reddash]{binarynumbercircles}
+
+%% Lesser and more space around the binay dot and plus and xor
+\let\oldcdot\cdot
+\renewcommand{\cdot}{\kern-.10em\oldcdot\kern-.10em}
+\newcommand{\cdotw}{\kern.08em\oldcdot\kern.08em}
+\newcommand{\cdotww}{\kern.16em\oldcdot\kern.16em}
+\newcommand{\plusw}{\kern.08em+\kern.08em}
+\newcommand{\plusww}{\kern.16em+\kern.16em}
+\newcommand{\oplusw}{\kern.08em\oplus\kern.08em}
+\newcommand{\oplusww}{\kern.16em\oplus\kern.16em}
+
+%\usepackage{ifthen} already loaded
+%% Commands to print timing parameters. They are used in dutch books.
+%% Translation table:
+%%   tpmax     --> tpd (combinational)
+%%   tpmin     --> tpd,min (combinational)
+%%   tpmax(FF) --> tclk-to-output, tco
+%%   tpmin(FF) --> tclk-to-output,min, tco,min
+%%   tsu       --> tsu
+%%   thold     --> th (\th is already used)
+%%   T         --> T
+\newcommand\tpmax[1]{t_{P(max)}%
+\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
+\newcommand\tpmin[1]{t_{P(min)}%
+\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
+\newcommand\T[1]{T%
+\ifthenelse{\equal{#1}{}}{}{_{#1}}}
+\newcommand\tsu[1]{t_{su}%
+\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
+% Note: \th already exists
+\newcommand\thold[1]{t_{h}%
+\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
+% Use \textdash to create parts like: clk-to-D
+\newcommand{\textdash}{\text{-}}
+%\newcommand{\txx[2]}{t_{\mathrm{#1}}(\mathrm{#2})}
+%\newcommand{\txx[2]}{t_{#1}(#2)}%
+\newcommand\twhmin[1]{t_{wh(min)}%
+\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
+\newcommand\tptyp[1]{t_{P(typ)}%
+\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
+
+%% Vertically align cell contents
+\newcolumntype{M}[1]{>{\centering\arraybackslash$\vcenter\bgroup\hbox\bgroup}m{#1}<{\egroup\egroup$}}
+\newcolumntype{C}{>{\centering\arraybackslash$\vcenter\bgroup\hbox\bgroup}c<{\egroup\egroup$}}
+
+%% Make cells in tables vertically wider
+\newcommand\Tstrut{\rule{0pt}{2.0ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+
+%% Check if a label exists
+\makeatletter
+\newcommand{\iflabelexists}[3]{\@ifundefined{r@#1}{#3}{#2}}
+\makeatother
+
+%% Tikz to draw state diagrams
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,arrows,automata}
+\tikzstyle{every picture}+=[font={\sffamily\small}]
+\tikzstyle{every state}=[fill=none,draw=black,text=black,very thick,minimum size=1.2cm,initial distance=1cm]
+% How to draw Moore states
+\newif\ifmoorenodesepslash
+\moorenodesepslashtrue
+\ifmoorenodesepslash
+\newcommand{\moorenode}[2]{$\mathsf{#1/#2}$}
+\else
+\newcommand{\moorenode}[2]{$\mathsf{\dfrac{#1}{#2}}$}
+\fi
+%% Use Venn Diagrams
+\usepackage{venndiagram}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code voor Infobox
+\makeatletter
+\newsavebox{\@saveinfobox}
+\newlength{\@infoboxparskip}\setlength{\@infoboxparskip}{\smallskipamount}
+\newcommand{\infoboxHTMLcolor}{E7FEFF}
+%% Floating minipages
+%%\newfloat{floatingminipage}{!htbp}{lfm}[section]
+%\restylefloat*{floatingminipage}
+\floatstyle{ruled}
+\newfloat{@rawinfobox}{!b}{loi}[section]
+%\newfloat{@rawinfoboxh}{!h}{loi}[section]
+\restylefloat*{@rawinfobox}
+%\restylefloat*{@rawinfoboxh}
+\floatname{@rawinfobox}{Infobox}
+%\floatname{@rawinfoboxh}{Infobox}
+
+% one length to rule them all
+\newlength\hrulethickness
+\setlength\hrulethickness{4\arrayrulewidth}
+%\newcommand{\hlinethick}{\Xhline{\hrulethickness}}
+
+% redefinition of the `ruled' floatstyle
+% (defined in the `float' package, used by the `algorithm' package)
+\renewcommand\fs@ruled{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
+  \def\@fs@pre{\hrule height \hrulethickness depth0pt }%\vskip1ex}%
+  \def\@fs@post{\hrule height \hrulethickness depth0pt \relax}%
+  \def\@fs@mid{\hrule height \hrulethickness depth0pt }%
+  \let\@fs@iftopcapt\iftrue}
+
+% make use of @... to set \parskip proper, affects all minipages!
+%\newcommand{\@minipagerestore}{\setlength{\parskip}{\smallskipamount}}
+
+% create a new environment
+% Argument #1 = box placement, one of '!hbtp' or 'H', default '!b'
+% Argument #2 = heading text, will be typeset in ...
+% See http://tex.stackexchange.com/questions/11349/how-do-you-define-your-environment-such-as-to-use-for-some-parameters
+\newenvironment{infobox}[2][!b]{%
+% Place float at ...
+\floatplacement{@rawinfobox}{#1}%
+\begin{@rawinfobox}%
+\begin{lrbox}{\@saveinfobox}%
+% Now a dirty hack: minipage within a minipage
+%\begin{minipage}[t]{\textwidth}%
+%\begin{minipage}[t]{0.985\textwidth}%
+\begin{minipage}[t]{\textwidth-\marginparsep-2\fboxrule-0.255pt}%
+\centering%
+\begin{minipage}[t]{0.95\textwidth}%
+\setlength{\parskip}{\@infoboxparskip}% restore the value
+\vspace*{1pt}\textsc{#2}\par
+}
+{%
+%\vspace*{1ex}
+\end{minipage}%
+\end{minipage}%
+\end{lrbox}%
+\colorbox[HTML]{\infoboxHTMLcolor}{\usebox{\@saveinfobox}}%
+\end{@rawinfobox}
+}%
+\makeatother
+% end code for Infobox
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{showframe}
+
+%% Hypenation of some uncommon words in Dutch
+\hyphenation{Kar-naugh-dia-gram Kar-naugh-dia-gram-men min-term min-ter-men flip-flop flip-flops im-pli-cant im-pli-can-ten twee-tal-len vier-tal-len acht-tal-len zes-tien-tallen timing-dia-gram-men timing-dia-gram}
+
+%% The title page
+\def\maketitle{%
+\pagecolor{SkyBlue2}%
+\null%
+  \hbox{%
+  \hspace*{0.05\textwidth}%
+  \rule{3pt}{0.95\textheight}
+  \hspace*{0.10\textwidth}%
+\parbox[b]{0.70\textwidth}{%
+  \vbox{%
+%%%    \vspace{0.0\textheight}
+    {\noindent\fontsize{70pt}{80pt}\selectfont\bfseries \booktitleI \\[0.20\baselineskip] \booktitleII}\\[3\baselineskip]
+    {\fontsize{25pt}{35pt}\selectfont\itshape \booksubtitle}\\[4\baselineskip]
+    {\fontsize{30pt}{35pt}\selectfont \bookauthor}\\[\baselineskip]
+   \par%{\LARGE \bookinstitution}\par
+   \vspace{0.3\textheight}
+    {\noindent\Large \bookedition}\\[\baselineskip]
+    %\vspace{0.05\textheight}
+    }% end of vbox
+}% end of parbox
+  }% end of hbox
+\thispagestyle{empty}%
+\newpage
+\pagecolor{white}
+%%%\cleardoublepage
+%%%{\centering
+%%%\vfill\vspace*{5cm}
+%%%{\fontsize{45pt}{55pt}\selectfont\bfseries\booktitle}\par
+%%%{\fontsize{20pt}{25pt}\selectfont\itshape \booksubtitle}\par
+%%%\vspace*{2cm}
+%%%\Huge\bookauthor\par
+%%%\Large\bookinstitution\par
+%%%\vspace*{5cm}
+%%%\Large\bookedition\par
+%%%\vfill}
+%%%\thispagestyle{empty}%
+%%%\clearpage
+%%%%%\pagestyle{empty}%
+%%%\null%
+}
+
+%% The really backmatter
+\newcommand{\bookbackmatter}{%
+%%%\cleardoublepage%
+%%%\hspace*{0pt}
+%%%\thispagestyle{empty}
+%%%\cleardoublepage
+}
+
+%%% No package loading from here
