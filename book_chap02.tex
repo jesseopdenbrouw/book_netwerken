@@ -1,4 +1,5 @@
 \chapter{Gelijkstroomtheorie}
+\label{cha:gelijkstroomtheorie}
 In dit hoofdstuk behandelen we de gelijkstroomtheorie. Nu suggereert het woord
 gelijkstroomtheorie dat de theorie alleen de stromen betreft. Dat is echter niet
 het geval; het betreft ook de spanningen. We kunnen dus net zo goed spreken over
@@ -15,7 +16,7 @@ Ze kunnen zowel positief als negatief zijn, of nul.
 
 In de gelijkstroomtheorie hebben we drie componenten: de ideale spanningsbron,
 de ideale stroombron en de ideale weerstand. De symbolen die gebruikt worden in
-schakelschema's zijn te zien in figuur~\ref{fig:symbolenbronnenenweerstand}. Een
+schakelschema's zijn te zien in figuur~\ref{fig:gelsymbolenbronnenenweerstand}. Een
 ideale spanningsbron levert een constante spanning ongeacht de stroom die de bron
 levert. Een ideale stroombron levert een constante stroom ongeacht de spanning die
 over de bron staat. Een ideale weerstand heeft een constante waarde ongeacht de
@@ -31,7 +32,7 @@ ideale stroombron is oneindig.
 \draw (0,0) to [V<=$U$] (0,2);
 \end{tikzpicture}
 \caption{Symbool ideale spanningsbron.}
-\label{fig:gelidealespanningsbron}
+%\label{fig:gelidealespanningsbron}
 \end{subfigure}
 \begin{subfigure}{0.30\textwidth}
 \centering
@@ -50,25 +51,87 @@ ideale stroombron is oneindig.
 \end{subfigure}
 %\caption{blabla \protect\subref{fig:gelidealespanningsbron} blabla}
 \caption{Symbolen voor de ideale spanningsbron, de ideale stroombron en de ideale weerstand.}
-\label{fig:symbolenbronnenenweerstand}
+\label{fig:gelsymbolenbronnenenweerstand}
 \end{figure}
 
 In de boven gegeven beschrijvingen noemen we de ideale spanningsbron en ideale stroombron
 \textsl{onafhankelijke bronnen}. Dat wil zeggen dat de spanning of stroom die de bron
-levert niet afhankelijk is van een andere spanning of stroom in een netwerk. We zullen
-verderop kennis maken met afhankelijke bronnen.
+levert niet afhankelijk is van een andere spanning of stroom in een netwerk.
+%We zullen verderop kennis maken met afhankelijke bronnen.
+
+Naast de eerder genoemde componenten zijn er nog vier zogenoemde \textsl{gestuurde bronnen}.
+De symbolen van deze netwerkelementen zijn te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen}.
+De spanningsgestuurde spanningsbron levert een constante spanning die afhankelijk is van een
+andere spanning in het netwerk. De verhouding tussen de geleverde spanning en de andere spanning
+in het netwerk is constant. Hierdoor is de spanningsgestuurde spanningsbron een lineair netwerkelement.
+Een stroomgestuurde spanningsbron levert een constante spanning die afhankelijk is van een stroom in
+het netwerk. Ook deze verhouding is constant en is de stroomgestuurde spanningsbron een lineair
+netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroomgestuurde spanningsbron.
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (0,0) to[cV, v<=$aU$] ++(0,2);
+\end{tikzpicture}
+\caption{Symbool spanningsgestuurde spanningsbron.}
+%\label{fig:gelidealespanningsbron}
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (2,0) to[cV, v<=$aI$] ++(0,2);
+%\node[left=2pt] at (I.n) {$I$};
+\end{tikzpicture}
+\caption{Symbool stroomgestuurde spanningsbron.}
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (4,0) to[cI, i_>=,l=$aU\,$] ++(0,2);
+\end{tikzpicture}
+\caption{Symbool spanningsgestuurde stroombron.}
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (6,0) to[cI, l=$aI\ $] ++(0,2);
+\end{tikzpicture}
+\caption{Symbool stroomgestuurde stroombron.}
+\end{subfigure}
+%\caption{blabla \protect\subref{fig:gelidealespanningsbron} blabla}
+\caption{Symbolen voor gestuurde bronnen.}
+\label{fig:gelsymbolengestuuurdebronnenen}
+\end{figure}
 
 Voor het aangeven van spanningen gebruiken we de hoofdletter $U$. In Engelstalige boeken
-wordt de hoofdletter $V$ gebruikt. Spanning worden uitgedrukt in V (volt). Stromen worden
-aangegeven met een hoofdletter $I$ en worden uitgedrukt in A (amp\`ere). Weerstanden
-geven we aan met de hoofdletter $R$ (van het Engelse woord \textsl{resistor}) en worden
-uitgedrukt in $\Omega$ (ohm).
+wordt de hoofdletter $V$ gebruikt. Spanning worden uitgedrukt in \si{\volt} (volt). Stromen
+worden aangegeven met een hoofdletter $I$ en worden uitgedrukt in \si{\ampere} (amp\`ere).
+Weerstanden geven we aan met de hoofdletter $R$ (van het Engelse woord \textsl{resistor})
+en worden uitgedrukt in \si{\ohm} (ohm).
 
 We kunnen de waarden van spanningen, stromen en weerstanden ook uitdrukken door er een
-letter voor te zetten, de zogenoemde SI-voorvoegsels: mV (millivolt), mA (milliamp\`ere),
-$\muup$A (microamp\`ere), k$\Omega$ (kilo-ohm), M$\Omega$ (megaohm).
+letter voor te zetten, de zogenoemde SI-voorvoegsels: \si{\milli\volt} (millivolt),
+\si{\milli\ampere} (milliamp\`ere), \si{\micro\ampere} (microamp\`ere), \si{\kilo\ohm}
+(kilo-ohm), \si{\mega\ohm} (megaohm).
 
-\section{De stroomwet van Kirchhof}
+\subsubsection*{Nulstelling}
+Met nulstelling bedoelen we het op nul stellen van een bepaalde bron. Een spanningsbron
+van \SI{0}{\volt} mag vervangen worden door een kortsluiting. Een stroombron met de
+waarde~\SI{0}{\ampere} mag uit het netwerk verwijderd worden. De nulstelling van bronnen
+wordt gebruikt bij het superpositiebeginsel (zie paragraaf~\ref{sec:gelsuperpositie}).
+
+\subsubsection*{Fundamentele wetten}
+Alle berekeningen in een gelijkstroomnetwerk zijn terug te brengen tot drie wetten:
+\begin{itemize}
+\item De stroomwet van Kirchhoff;
+\item De spanningswet van Kirchhoff;
+\item De wet van Ohm.
+\end{itemize}
+We zullen deze wetten eerst bespreken voordat we andere wetten en berekeningsmethoden bespreken.
+
+\section{De stroomwet van Kirchhoff}
 De stroomwet van Kirchhoff zegt dat alle stromen naar een knooppunt toe opgeteld 0 zijn.
 Er kan dus geen stroom bijkomen of verloren gaan. In formulevorm:
 \begin{equation}
@@ -102,11 +165,34 @@ uitgaande stroom. Zie figuur~\ref{fig:gelingaandeIisuitgaandeI}.
 \label{fig:gelingaandeIisuitgaandeI}
 \end{figure}
 
+\begin{example}[De stroomwet van Kirchhoff]
+In figuur~\ref{fig:gelstroomwetKirchhoff2} is een netwerk getekend van vier stroomvoerende geleiders.
+Bepaal de stroom $I$.
+\begin{center}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (-2,1) to [short, i=\SI{5}{\ampere}, -*] (0,0);
+\draw (-1.5,-1.5) to [short, i<=\SI{2}{\ampere}, -*] (0,0);
+\draw (2,0.5) to [short, i=\SI{3}{\ampere}, -*] (0,0);
+\draw (1,-1.5) to [short, i=$I$, -*] (0,0);
+\end{tikzpicture}
+\captionof{figure}{De stroomwet van Kirchhoff.}
+\label{fig:gelstroomwetKirchhoff2}
+\end{center}
+Oplossing: Volgens de stroomwet van Kirchhoff moeten alle stromen opgeteld naar een knooppunt 0 zijn.
+Let hierbij op de referentierichtingen van de stromen. Zo is de referentierichting van de stroom van
+\SI{2}{\ampere} van het knooppunt af getekend. We kunnen dus stellen dat:
+\begin{equation}
+\SI{5}{\ampere} - \SI{2}{\ampere} + \SI{3}{\ampere} + I = 0
+\end{equation}
+De betekent dat $I = \SI{-6}{\ampere}$ is. Let hierbij op het minteken.
+\end{example}
 
 
-\section{De spanningswet van Kirchhof}
+\section{De spanningswet van Kirchhoff}
 De spanningswet van Kirchhoff zegt dat alle spanningen in een gesloten kring opgeteld~0
 zijn. Er kan dus geen spanning bijkomen of verloren gaan. In formulevorm:
+%
 \begin{equation}
 U_1 + U_2 + \cdots + U_n = 0
 \end{equation}
@@ -139,7 +225,29 @@ de netwerkelementen gelijk. Dit is te zien in figuur~\ref{fig:gelspanningengelij
 \label{fig:gelspanningengelijk}
 \end{figure}
 
-
+\begin{example}[De spanningswet van Kirchhoff]
+In figuur~\ref{fig:gelspanningswetKirchhoff2} is een netwerk getekend van vier spanningbronnen.
+Bepaal de spanning~$U$.
+\begin{center}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (0,0) to[V, v<=5<\volt>] (0,2)
+            to[V, v=-2<\volt>] (2,2)
+            to[V, v=$U$] (2,0)
+			to[V, v<=3<\volt>] (0,0);
+\end{tikzpicture}
+\captionof{figure}{De spanningswet van Kirchhoff.}
+\label{fig:gelspanningswetKirchhoff2}
+\end{center}
+Oplossing: Volgens de spanningswet van Kirchhoff moeten alle spanningen in kring opgeteld gelijk aan 0 zijn.
+Let hierbij op de referentierichtingen en de waarden van de spanningen. Zo is de referentierichting van
+de spanningsbron van \SI{-2}{\volt} tegengesteld aan de referentierichting van de spanningsbron van
+\SI{5}{\volt}. We kunnen dus stellen dat:
+\begin{equation}
+\SI{5}{\volt} - (\SI{-2}{\volt}) - U + \SI{3}{\volt} = 0
+\end{equation}
+De betekent dat $U = \SI{10}{\volt}$ is. Let hierbij op de richting van de spanning $U$.
+\end{example}
 
 
 \section{De wet van Ohm}
@@ -173,6 +281,30 @@ is dan het potentiaal bij de `$-$'.
 \label{fig:geldewetvanohm}
 \end{figure}
 
+\begin{example}[De wet van Ohm]
+In figuur~\ref{fig:geldewetvanohm} is de spanning $U=\SI{12}{\volt}$ en de stroom $I=\SI{2.15}{\milli\ampere}$.
+Bereken de waarde van $R$.
+
+Oplossing: We gebruiken de wet van Ohm voor het berekenen van de weerstandswaarde. Let erop dat de stroom in milliampère is gegeven:
+\begin{equation}
+R = \dfrac{12}{\num{2.15d-3}} = \SI{5581}{\ohm} 
+\end{equation}
+
+De waarde van weerstand $R$ is \SI{5581}{\ohm}. Voor praktische netwerken kunnen we de waarde afronden
+naar \SI{5.6}{\kilo\ohm} (kilo-ohm).
+\end{example}
+
+\subsection{Geleidbaarheid}
+In veel berekeningen wordt gerekend met de reciproke (of omgekeerde) waarde van weerstanden. Dit wordt
+de \textsl{geleidbaarheid} of \textsl{geleiding} genoemd. De eenheid van geleiding is siemens (\si{\siemens}).
+Meestal gebruiken we voor geleiding de letter $G$:
+\begin{equation}
+G = \dfrac{1}{R}
+\end{equation}
+In de literatuur wordt ook wel de naam mho (omgekeerde van ohm) gebruikt en als symbool wordt ook wel \si{\mho}
+of \si{\per\ohm} gebruikt.
+
+
 \section{Serieschakeling van weerstanden}
 In figuur~\ref{fig:gelserieschakelingweerstanden} is een schakeling te zien waarbij de weerstanden
 in serie geschakeld zijn en gevoed worden door een spanningsbron. De spanningsbron levert een stroom
@@ -197,7 +329,7 @@ Vanuit de spanningswet van Kirchhoff volgt dat:
 U=U_1+U_2+\cdots+U_n
 \end{equation}
 %
-Vanuit stroomwet van Kirchhoff volgt dat:
+Vanuit de stroomwet van Kirchhoff volgt dat:
 %
 \begin{equation}
 I = I_1 = I_2 = \cdots = I_n
@@ -224,6 +356,22 @@ R_s = R_1 + R_2 + \cdots R_n
 %
 Hierbij is $R_s$ de vervangingswaarde van de in serie geschakelde weerstanden.
 
+\begin{example}[Berekenen van de serieweerstand]
+Gegeven is een serieschakeling van vijf weerstanden met de waarden $R_1=\SI{2.2}{\kilo\ohm}$,
+$R_2=\SI{3.3}{\kilo\ohm}$, $R_3=\SI{1.5}{\kilo\ohm}$, $R_4=\SI{1.2}{\kilo\ohm}$ en
+$R_5=\SI{4.7}{\kilo\ohm}$. Bereken de vervangingswaarde van de serieweerstand $R_s$.
+
+Oplossing: De vervangingswaarde van de serieweerstand $R_s$ is de som van de waarden van $R_1$
+t/m $R_5$. Dus is:
+\begin{equation}
+\begin{split}
+R_s &= R_1 + R_2 + R_3 + R_4 + R_5\\
+    &= \SI{2.2}{\kilo\ohm} + \SI{3.3}{\kilo\ohm} +
+        \SI{1.5}{\kilo\ohm} + \SI{1.2}{\kilo\ohm} + \SI{4.7}{\kilo\ohm} \\
+    &= \SI{12.9}{\kilo\ohm} 
+\end{split}
+\end{equation}
+\end{example}
 
 \section{Parallelschakeling van weerstanden}
 In figuur~\ref{fig:gelparalledschakelingweerstanden} is een parallelschakeling van een
@@ -290,6 +438,25 @@ Dit kan worden omgewerkt tot:
 R_p = \dfrac{R_1\cdot R_2}{R_1+R_2}
 \end{equation}
 
+\begin{example}[Berekenen van de parallelweerstand]
+Gegeven is een parallelschakeling van drie weerstanden $R_1 = \SI{3.3}{\kilo\ohm}$,
+$R_1 = \SI{6.8}{\kilo\ohm}$ en $R_1 = \SI{8.2}{\kilo\ohm}$. Bereken de vervangingswaarde
+van de parallelweerstand $R_p$.
+
+Oplossing: Voor de parallelweerstand kunnen we schrijven:
+\begin{equation}
+\begin{split}
+\dfrac{1}{R_p} &= \dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_2} \\
+               &= \dfrac{1}{\SI{3.3d3}{\ohm}} + \dfrac{1}{\SI{6.8d3}{\ohm}} + \dfrac{1}{\SI{8.2d3}{\ohm}} \\[1ex]
+               &= \SI{0,572e-3}{\siemens}
+\end{split}
+\end{equation}
+%
+Dus geldt voor $R_p$:
+\begin{equation}
+R_p = \dfrac{1}{\SI{0,572e-3}{\siemens}} = \SI{1,748}{\kilo\ohm}
+\end{equation}
+\end{example}
 
 \section{Spanningsdeling}
 In figuur~\ref{fig:gelspanningsdeling} is een schema te zien van een bron met twee in
@@ -319,6 +486,16 @@ Voor de spanningen $U_1$ en $U_2$ kunnen we schrijven dat:
 U_1 = I\cdot R_1 = \dfrac{R_1}{R_1+R_2}\cdot U \qquad\text{en}\qquad U_2 = I\cdot R_2 = \dfrac{R_2}{R_1+R_2}\cdot U
 \end{equation}
 
+\begin{example}[Spanningsdeling]
+Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling}. Hierin zijn $U=\SI{12}{\volt}$, $R_1=\SI{2.2}{\kilo\ohm}$
+en $R_2=\SI{3.9}{\kilo\ohm}$. Bereken de spanning $U_2$.
+
+Oplossing: We vullen de gegevens in de formule in:
+\begin{equation}
+U_2 = I\cdot R_2 = \dfrac{R_2}{R_1+R_2}\cdot U = \dfrac{\SI{3.9}{\kilo\ohm}}{\SI{2.2}{\kilo\ohm}+\SI{3.9}{\kilo\ohm}}\cdot\SI{12}{\volt} = \SI{7.67}{\volt}
+\end{equation}
+\end{example}
+
 
 \section{Stroomdeling}
 In figuur~\ref{fig:gelstroomdeling} is een schema te zien van een bron met twee parallel
@@ -329,15 +506,15 @@ verdelen over de twee weerstanden. Er is sprake van stroomdeling.
 \centering
 \begin{tikzpicture}[bookcircuit]
 %% Draw voltage source, wire with current I, resistor R1 and back to minus of voltage source
-\draw (0,0) to [V<=$U$] ++ (0,2) to [short] ++(0,0.25) to [short,i=$I$,-*] ++(3,0) coordinate (A) to [short] ++(0,-0.25) to[R=$R_1$,-*,i>^=\small $I_1$,v=\small $U_1$] ++(0,-2) to [short,-.] (0,0);
+\draw (0,0) to [I,l=$I$] ++ (0,2) to [short] ++(0,0.25) to [short,i=$I$,-*] ++(3,0) coordinate (A) to [short] ++(0,-0.25) to[R=$R_1$,-*,i>^=\small $I_1$,v=\small $U$] ++(0,-2) to [short,-.] (0,0);
 %% Draw resistor R2 and wire to minus of resistor R1
-\draw (A) to[short] ++(2,0) coordinate (B) to [short] ++(0,-0.25) to [R=$R_2$,i>^=\small $I_2$, v=\small $U_2$] ++(0,-2) to [short] ++(-2,0);
+\draw (A) to[short] ++(2,0) coordinate (B) to [short] ++(0,-0.25) to [R=$R_2$,i>^=\small $I_2$, v=\small $U$] ++(0,-2) to [short] ++(-2,0);
 \end{tikzpicture}
 \caption{Schema voor stroomdeling.}
 \label{fig:gelstroomdeling}
 \end{figure}
 
-De spanning $U$ kunnen kunnen we berekenen met:
+De spanning $U$ kunnen we berekenen met:
 %
 \begin{equation}
 U = I\cdot\dfrac{R_1\cdot R_2}{R_1+R_2}
@@ -352,14 +529,41 @@ I = I_1 + I_2 = \dfrac{U}{R_1} + \dfrac{U}{R_2}
 Voor $I_1$ geldt dan:
 %
 \begin{equation}
-I_1 = \dfrac{U}{R_1} = \dfrac{R_1\cdot R_2}{R_1+R_2}\cdot \dfrac{1}{R_1}\cdot I = \dfrac{R_2}{R_!+R_2}\cdot I
+I_1 = \dfrac{U}{R_1} = \dfrac{1}{R_1}\cdot\dfrac{R_1\cdot R_2}{R_1+R_2}\cdot I = \dfrac{R_2}{R_!+R_2}\cdot I
 \end{equation}
 %
 Op vergelijkbare wijze vinden we voor $I_2$:
 %
 \begin{equation}
-I_2 = \dfrac{U}{R_2} = \dfrac{R_1\cdot R_2}{R_1+R_2}\cdot \dfrac{1}{R_2}\cdot I = \dfrac{R_1}{R_!+R_2}\cdot I
+I_2 = \dfrac{U}{R_2} = \dfrac{1}{R_2}\cdot\dfrac{R_1\cdot R_2}{R_1+R_2}\cdot I = \dfrac{R_1}{R_!+R_2}\cdot I
 \end{equation}
+
+\begin{example}[Stroomdeling]
+Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling2}. Hierin zijn $I=\SI{2}{\ampere}$, $R_1=\SI{6}{\ohm}$,
+$R_2=\SI{9}{\ohm}$ en $R_3=\SI{12}{\ohm}$. Bereken de stroom $I_3$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[bookcircuit]
+%% Draw voltage source, wire with current I, resistor R1 and back to minus of voltage source
+\draw (0,0) to [I,l=$I$] ++ (0,2) to [short,i=$I$,-*] ++(3,0) coordinate (A) to[R=$R_1$,-*,i>^=\small $I_1$] ++(0,-2) to [short,-.] (0,0);
+%% Draw resistor R2 and wire to minus of resistor R1
+\draw (A) to[short] ++(2,0) coordinate (B) to [R=$R_2$,i>^=\small $I_2$,-*] ++(0,-2) to [short] ++(-2,0);
+\draw (B) to[short] ++(2,0) coordinate (C) to [R=$R_3$,i>^=\small $I_3$] ++(0,-2) to [short] ++(-2,0);
+\end{tikzpicture}
+\caption{Schema voor stroomdeling.}
+\label{fig:gelstroomdeling2}
+\end{figure}
+Oplossing: De totale stroom die de bron levert is $I=\SI{2}{\ampere}$. Om gebruik te maken van de formules
+voor stroomdeling moeten we het netwerk vereenvoudigen tot een stroombron met twee weerstanden. We vervangen
+de weerstanden $R_1$ en $R_2$ door een weerstand $R_p$. De vervangingswaarde is:
+\begin{equation}
+R_p = \dfrac{R_1R_2}{R_1+R_2} = \dfrac{6\cdot12}{6+12} = \SI{3.6}{\ohm}
+\end{equation}
+Nu kunnen we de stroom $I_3$ uitrekenen:
+\begin{equation}
+I_3 = \dfrac{R_p}{R_P+R_3}\cdot I = \dfrac{\num{3.6}}{\num{3.6}+\num{12}}\cdot \num{2} = \SI{0.46}{\ampere}
+\end{equation}
+\end{example}
 
 
 \section{De niet-ideale spanningsbron}
@@ -403,10 +607,11 @@ bronspanning. Er loopt dan een zekere \textsl{kortsluitstroom} $I_k$. We kunnen 
 weerstand berekenen door de uitgangsspanning $U_o$ te delen door de kortsluitstroom $I_k$.
 
 Voor een goede spanningsbron moet de inwendige weerstand klein zijn. Praktische waarden van
-de inwendige weerstanden liggen tussen de enkele tientallen m$\Omega$ tot enkele~$\Omega$.
-Zo kan een autoaccu met een spanning van 12 V stromen van meer dan 100 A leveren. Het is dan
+de inwendige weerstanden liggen tussen de enkele tientallen \si{\milli\ohm} tot enkele \si{\ohm}.
+Zo kan een autoaccu met een spanning van \SI{12}{\volt} stromen van meer dan \SI{100}{\ampere}
+leveren. Het is dan
 ook niet aan te bevelen om dergelijke kortsluitstromen te meten. De inwendige weerstand
-van eenvoudige batterijen ligt in de orde van enkele $\Omega$. Een laboratoriumvoeding moet
+van eenvoudige batterijen ligt in de orde van enkele \si{\ohm}. Een laboratoriumvoeding moet
 natuurlijk ook een lage inwendige weerstand hebben om de uitgangsspanning zo constant
 mogelijk te houden. Veelal is de voeding beschermd tegen kortsluiting en wordt de
 kortsluitstroom begrensd.
@@ -449,7 +654,7 @@ kortsluitstroom. We kunnen de inwendige
 weerstand berekenen door de uitgangsspanning $U_o$ te delen door de kortsluitstroom $I_k$.
 
 Voor een goede stroombron moet de inwendige weerstand zo groot mogelijk zijn. Praktische
-waarden voor $R_i$ liggen tussen enkele honderden k$\Omega$ tot vele M$\Omega$. Aan
+waarden voor $R_i$ liggen tussen enkele honderden \si{\kilo\ohm} tot vele \si{\mega\ohm}. Aan
 figuur~\ref{fig:gelnissopen} kunnen we nog iets ontdekken. De uitgangsspanning in onbelaste
 toestand zal zeer groot zijn. We kunnen nu inzien dat een stroombron dus nooit onbelast gelaten
 mag worden. Een laboratoriumvoeding zal de uitgangsspanning in onbelaste toestand begrenzen.
@@ -477,8 +682,7 @@ P = U\cdot I
 \label{fig:gelvermogensdissipatie}
 \end{figure}
 
-
-Vermogen wordt uitgedrukt in W (watt). Aangezien we voor $U$ ook kunnen schrijven $U=I\cdot R$
+Vermogen wordt uitgedrukt in \si{\watt} (watt). Aangezien we voor $U$ ook kunnen schrijven $U=I\cdot R$
 kunnen we ook stellen dat:
 \begin{equation}
 P = I^2\cdot R
@@ -488,43 +692,65 @@ Verder kunnen we voor $I$ schrijven dat $I=\dfrac{U}{R}$ zodat we kunnen stellen
 P = \dfrac{U^2}{R}
 \end{equation}
 %
-De eenheid W (watt) kan ook geschreven worden als J/s (joules per seconde) en dat geeft precies
-aan wat het vermogen inhoudt: energieafgifte per seconde. Willen we de totale energieafgifte
-over een bepaalde tijd $t$ berekenen dan moeten we het vermogen vermenigvuldigen met de tijd:
+De eenheid \si{\watt} kan ook geschreven worden als \si[per-mode=symbol]{\joule\per\second} (joules per
+seconde) en dat geeft precies aan wat het vermogen inhoudt: energieafgifte per seconde. Willen
+we de totale energieafgifte over een bepaalde tijd $t$ berekenen dan moeten we het vermogen
+vermenigvuldigen met de tijd waarover we meten:
 %
 \begin{equation}
 W = P\cdot t
 \end{equation}
 %
-De variabele $W$ staat voor het Engelse woord \textsl{Work}. Een veel gebruikte eenheid van energie
-is de kWh (kilowattuur). Dit komt overeen met de energie
-als een component een vermogen van 1000 W een uur lang dissipeert. De hoeveelheid energie is:
+De variabele $W$ staat voor het Engelse woord \textsl{work}. Een veel gebruikte eenheid van energie
+is de \si{\kWh} (kilowattuur). Dit komt overeen met de hoeveelheid energie als een component een vermogen van
+\SI{1000}{\watt} een uur lang dissipeert. De hoeveelheid energie is:
 %
 \begin{equation}
-1\ \mathrm{kWh} = 1000\ \mathrm{W} \times 1\ \mathrm{uur} = 1000\ \dfrac{\mathrm{J}}{\mathrm{s}} \times 3600\ \mathrm{s} = 3.600.000\ \mathrm{J} = 3,6\ \mathrm{MJ}
+\SI{1}{\kWh} = \SI{1000}{\watt}  \times 1\ \mathrm{uur} = \SI{1000}{\joule\per\second} \times \SI{3600}{\second} = \SI{3600000}{\joule} = \SI{3.6}{\mega\joule}
 \end{equation}
+%
+\begin{example}[Gedissipeerd vermogen]
+In figuur~\ref{fig:gelvermogensdissipatie} is de spanning $U=\SI{9}{\volt}$ en de weerstandswaarde is
+$R=\SI{6}{\ohm}$. Bereken het vermogen dat de weerstand dissipeert. Bereken de hoeveelheid energie die
+verbruikt wordt als de schakeling een uur lang aanstaat.
 
-%%%De spanning over een spoel kan berekend worden met:
-%%%\begin{equation}
-%%%U = L\dfrac{\text{d}i}{\text{d}t}
-%%%\end{equation}
-%%%Hierin is $L$ de zelfinductie van de spoel. Bij een sinusvormige spanning met hoekfrequentie
-%%%$\omega$ kunnen we dus schrijven:
-%%%\begin{equation}
-%%%U = L\dfrac{\text{d}\, i \sin \omega t}{\text{d}t} = \omega L i\cos \omega t
-%%%\end{equation}
-%%%De amplitude van de spanning is dus afhankelijk van de hoekfrequentie $\omega$.
-%%%
-%%%De spanning over een condensator kan berekend worden met:
-%%%\begin{equation}
-%%%U = \dfrac{1}{C}\int i\,\text{d}t 
-%%%\end{equation}
-%%%
-%%%Hierin is $C$ de capaciteit van de condensator. Bij een sinusvormige spanning met hoekfrequentie
-%%%$\omega$ kunnen we schrijven:
-%%%\begin{equation}
-%%%U = \dfrac{1}{C}\int i\sin \omega t\,\text{d}t = -\dfrac{i}{\omega C} \cos \omega t
-%%%\end{equation}
+Oplossing: Het vermogen kan berekenend worden met $P = \dfrac{U^2}{R} = \dfrac{81}{6} = \SI{13.5}{\watt}$.
+De\\[1ex] verbruikte hoeveelheid energie is $W=P\cdot t = \num{13.5}\cdot\num{3600} = \num{48600} = \SI{48.6}{\kilo\joule}$.
+
+Een computer verbruikt bij een spanning van $U=\SI{230}{\volt}$ een stroom van $I=\SI{0.26}{\ampere}$.
+Bereken de hoeveelheid verbruikte energie per jaar in \si{\kWh}.
+
+Oplossing: De verbruikte hoeveelheid energie per jaar is $W=U\cdot I\cdot t = \num{230}\cdot\num{0.26}\cdot\num{31536000}=\SI{1885852800}{\joule}$. Dat komt overeen met $\SI{524}{\kWh}$.
+\end{example}
+
+
+\section{Vermogen geleverd door een bron}
+De eerste wet van de thermodynamica stelt dat er energie niet verloren kan gaan of uit het niets kan ontstaan.
+Dat betekent dat in het netwerk in figuur~\ref{fig:gelvermogensdissipatie} het geleverde vermogen en het
+opgenomen vermogen in balans moeten zijn. Dus geldt:
+%
+\begin{equation}
+P_{geleverd} + P_{opgenomen} = 0
+\end{equation}
+%
+Dat betekent dat het geleverde vermogen voorzien is met een minteken. Dat een bron niet altijd vermogen
+levert maar ook kan opnemen is zien in het onderstaande voorbeeld.
+
+\begin{example}[Geleverd vermogen]
+In figuur~\ref{fig:gelgeleverdvermogen} is een netwerk te zien met twee spanningsbronnen en een weerstand.
+Voor de netwerkelementen geldt dat $U_1 = \SI{10}{\volt}$, $U_2 = \SI{6}{\volt}$ en $R=\SI{4}{\ohm}$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V<=$U_1$] ++(0,2) to [short] ++(0.5,0) to [R=$R$,i>^=$I$] ++(2,0) to [short] ++(0.5,0) to [V=$U_2$] ++(0,-2) to [short,-.] (0,0);
+\end{tikzpicture}
+\caption{Netwerk voor het berekenen van geleverde vermogens.}
+\label{fig:gelgeleverdvermogen}
+\end{figure}
+De stroom $I$ bedraagt \SI{4}{\ampere}. Merk op dat de stroom bron $U_2$ ingaat. Het vermogen geleverd
+door bron $U_1$ bedraagt \SI{10}{\watt}. Weerstand $R$ dissipeert \SI{4}{\watt}. Dat betekent dat bron
+$U_2$ een vermogen van \SI{6}{\watt} dissipeert.
+\end{example}
 
 
 \section{Maximale vermogensoverdracht}
@@ -673,6 +899,24 @@ bronvermogen is $0,5$ en het rendement is $0,5$. Naar mate $R_u$ groter wordt, n
 en opgenomen vermogen af. Bijna al het vermogen wordt in $R_u$ gedissipeerd. De effci\"entie neemt toe
 maar zal nooit 1 worden.
 
+\begin{example}[Maximaal geleverd vermogen]
+Gegeven is het onderstaande netwerk waarvoor geldt $U=\SI{9}{\volt}$ en $R_i = \SI{4.5}{\ohm}$. Bereken
+de waarde van $R_u$ voor maximale vermogensoverdracht en bereken het overgebrachte vermogen.
+\vspace*{-2ex}
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[bookcircuit]
+\draw (0,0) to[V<=$U$] ++(0,2) to[R=$R_i$, -*] ++(2,0) to[short, i=$I$] ++(1,0) to[R=$R_u$] ++(0,-2) to[short, -*] ++(-1,0) to[short,-.] (0,0);
+\end{circuitikz}
+\captionsetup{width=.9\linewidth}
+\caption{Netwerk voor het berekenen van de maximale vermogensoverdracht.}
+\label{fig:maximalevermogensoverdracht2}
+\end{figure}
+
+Oplossing: maximaal vermogensoverdracht bij $R_u=R_i=\SI{4.5}{\ohm}$. Het gedissipeerde vermogen
+in $R_u$ is: $P_{max} = \dfrac{U^2}{4R_i} = \dfrac{81}{\num{4}\cdot\num{4.5}} = \SI{18}{\watt}$
+\end{example}
+
 
 \section{De belastingskarakteristiek}
 \label{sec:belastingskarakteristiek}
@@ -680,9 +924,10 @@ In deze paragraaf bespreken we het begrip \textsl{belastingskarakteristiek}. We 
 en spanningen in een netwerk bepalen via een grafische weg. Dit is met name bij het gebruik van niet-lineaire
 netwerkelementen zoals de diode erg handig.
 
+\subsection{De belastingskarakteristiek met een spanningsbron}
 In figuur~\ref{fig:gelschemavoorbelastingskarakteristiek} is een schakeling te zien met een spanningsbron
 $U$ en een inwendige weerstand $R_i$. De bron wordt belast door de belastingsweerstand $R_b$. Deze weerstand
-is variabel gemaakt en kan vari\"eren tussen $R_b = 0$ en $R_b \rightarrow \infty$.
+is variabel gemaakt en kan vari\"eren tussen $R_b = \SI{0}{\ohm}$ en $R_b \rightarrow \infty$.
 
 \begin{figure}[!ht]
 \centering
@@ -713,7 +958,7 @@ Vervolgens delen we alle spanningen door $R_i$:
 \end{equation}
 %
 Nu is de term $U_{R_i}/R_i$ gelijk aan de (bron-)stroom $I_b$. De term $U/R_i$ is de stroom die de bron levert
-als de bron kortgesloten wordt, d.w.z.\@ $R_b=0$. Dit wordt de kortsluitstroom $I_k$ genoemd. We kunnen de
+als de bron kortgesloten wordt, d.w.z.\@ $R_b=\SI{0}{\ohm}$. Dit wordt de kortsluitstroom $I_k$ genoemd. We kunnen de
 vergelijking dus schrijven als:
 %
 \begin{equation}
@@ -735,11 +980,12 @@ We kunnen de lijn nu uitzetten in een grafiek, zie figuur~\ref{fig:gelbelastings
 We onderscheiden twee markante punten op de lijn:
 
 \begin{itemize}
-\item Het kortsluitpunt. Dit doet zich voor als $R_b=0$, dus als de bron is kortgesloten. De bron
+\item Het kortsluitpunt. Dit doet zich voor als $R_b=\SI{0}{\ohm}$, dus als de bron is kortgesloten. De bron
       levert dan een maximale stroom, de kortsluitstroom $I_k$ genoemd. De spanning over $R_b$ is
-      dan 0 V.
+      dan \SI{0}{\volt}.
 \item Het nullastpunt. Dit doet zich voor als $R_b \rightarrow \infty$, dus als $R_b$ uit de schakeling
-      is verwijderd. Dan geldt dat $I_b=0$ en $U_{R_b}=U$. Dit wordt de open klemspanning $U_o$ genoemd. 
+      is verwijderd. Dan geldt dat $I_b=\SI{0}{\ampere}$ en $U_{R_b}=U$. Dit wordt de open klemspanning
+      $U_o$ genoemd. 
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -760,7 +1006,7 @@ We onderscheiden twee markante punten op de lijn:
 \end{figure}
 
 De belastingslijn in de grafiek loopt van het punt (0,$I_k$) naar het punt ($U_o$, 0). Dit komt overeen
-met respectievelijk $R_b=0$ en $R_b\rightarrow\infty$.
+met respectievelijk $R_b=\SI{0}{\ohm}$ en $R_b\rightarrow\infty$.
 Naast de twee eerder genoemde punten is er nog een interessant punt op de lijn te vinden, namelijk
 waar $R_b=R_i$. Dit punt ligt op het midden van de belastingslijn. In dat punt geldt dat $I=\frac{1}{2}I_k$
 en $U_{R_b}=\frac{1}{2}U_o$.
@@ -772,13 +1018,12 @@ We kunnen immers de stroom $I$ en de spanning $U_{R_b}$ ook analytisch oplossen:
 I = \dfrac{U}{R_i+R_b} \quad \text{en} \quad U_{R_b} = \dfrac{R_b}{R_i+R_b}\cdot U
 \end{equation}
 
-
 Maar bij het gebruik van niet-lineaire elementen zoals de diode komt de methode goed tot zijn recht.
 In figuur~\ref{fig:gelserieweerstandenled} is een netwerk getekend met een weerstand in serie met een
 led. De led gedraagt zich als een diode. De spanning-stroomcurve van een led is sterk niet-lineair en een
 analytische oplossing van de spanningen en stromen in het netwerk is niet realiseerbaar.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V_>={$3{,}3$ V}] (0,-2);
@@ -794,13 +1039,12 @@ analytische oplossing van de spanningen en stromen in het netwerk is niet realis
 \label{fig:gelserieweerstandenled}
 \end{figure}
 
-De open klemspanning bedraagt $3,3$ V. De kortsluitstroom is $3,3/150 = 22$ mA.
+De open klemspanning bedraagt \SI{3.3}{\volt}. De kortsluitstroom is $\num{3.3}/\num{150} = \SI{22}{\milli\ampere}$.
 We tekenen de belastingslijn in een grafiek, te zien in figuur~\ref{fig:gelbelastingweerstandenled}.
 De rechte lijn wordt getrokken tussen het kortsluitpunt en het nullastpunt. De belastingslijn van
-de led wordt eveneens in de grafiek getrokken. Te zien is dat de ledstroom tot 1,5 V nagenoeg 0 is.
+de led wordt eveneens in de grafiek getrokken. Te zien is dat de ledstroom tot \SI{1.5}{\volt} nagenoeg 0 is.
 Daarna stijgt de stroom zeer snel. 
  
-
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
@@ -846,10 +1090,12 @@ Daarna stijgt de stroom zeer snel.
 	% Calculate the intersection coordinates and print them
 	\path(op) node [above right,xshift=5pt] {\footnotesize werkpunt \pgfgetlastxy{\macrox}{\macroy}
         \transformxdimension{\macrox}%
-        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\udiode{\dummy}%
+%        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\udiode{\dummy}%
+        \pgfmathsetmacro{\dummy}{\pgfmathresult}\global\edef\udiode{\dummy}%
         %\pgfmathprintnumber[use comma]{\pgfmathresult},%
         \transformydimension{\macroy}%
-        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\idiode{\dummy}%
+%        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\idiode{\dummy}%
+        \pgfmathsetmacro{\dummy}{\pgfmathresult}\global\edef\idiode{\dummy}%
         %\pgfmathprintnumber[use comma]{\pgfmathresult}%
         };
 
@@ -861,12 +1107,15 @@ Daarna stijgt de stroom zeer snel.
 \end{figure}
 
 Het snijpunt van de twee lijnen is het punt waarop het netwerk zich zal instellen. Dit wordt het werkpunt,
-belastingspunt of instelpunt genoemd. We lezen nu uit de grafiek af dat de diodespanning $U_D$ zo'n 1,8 V
-bedraagt. De stroom bedraagt zo'n 10 mA.
+belastingspunt of instelpunt genoemd. We lezen nu uit de grafiek af dat de diodespanning $U_D$ zo'n
+\SI[round-mode=places,round-precision=1]{\udiode}{\volt} bedraagt. De stroom bedraagt zo'n
+\SI[round-mode=places,round-precision=0]{\idiode}{\milli\ampere}.
 
-Nauwkeurige analyse van het instelpunt toont aan dat de spanning over de diode \udiode\ V is. De stroom door de
-diode (en dus ook de weerstand en de bron) is \idiode\ mA.
+Nauwkeurige analyse van het instelpunt toont aan dat de spanning over de diode
+\SI[round-mode=places,round-precision=2]{\udiode}{\volt} is. De stroom door de diode (en dus ook de
+weerstand en de bron) is \SI[round-mode=places,round-precision=2]{\idiode}{\milli\ampere}.
 
+\subsection{De belastingskarakteristiek met een stroombron}
 Het is ook mogelijk om een belastingsweerstand aan te sturen met een stroombron met een inwendige weerstand.
 Dit is te zien in figuur~\ref{fig:gelschemavoorbelastingskarakteristiekstroombron}.
 
@@ -901,7 +1150,7 @@ We kunnen $I_i$ vervangen zodat volgt dat:
 I_b = -\dfrac{1}{R_i}\cdot U_{R_b} + I
 \end{equation}
 %
-Verder volgt dat als $R_b$ kortgesloten is, de spanning over de weerstanden 0 V is en dat de
+Verder volgt dat als $R_b$ kortgesloten is, de spanning over de weerstanden \SI{0}{\volt} is en dat de
 volledige bronstroom door de kortsluiting loopt. Dus geldt $I=I_k$. We kunnen de vergelijking
 dus ook schrijven als:
 %
@@ -1291,6 +1540,7 @@ R_T = R_N
 
 
 \section{Het superpositiebeginsel}
+\label{sec:gelsuperpositie}
 In een netwerk met lineaire netwerkelementen kunnen we gebruik maken van 
 \textsl{superpositie}. Het superpositiebeginsel stelt dat we van elke bron
 afzonderlijk de stromen en spanningen berekenen die de bron realiseert.
@@ -1400,33 +1650,32 @@ P_{R_3} = U_{xa}\cdot I_{xa} + U_{xb}\cdot I_{xb}
 \end{equation}
 
 
-\subsubsection*{Voorbeeld}
+\begin{example}[Het superpositiebeginsel]
 We geven nu een voorbeeld. We nemen voor de spanning van de spanningsbron
-van 10 V en een stroom van de stroombron van 0,5 A. Verder zijn de weerstandswaarden
-$R_1 = 6\ \Omega$, $R_2 = 8\ \Omega$ en $R_3 = 3\ \Omega$. In
+van \SI{10}{\volt} en een stroom van de stroombron van \SI{0.5}{\ampere}. Verder zijn de weerstandswaarden
+$R_1 = \SI{6}{\ohm}$, $R_2 = \SI{8}{\ohm}$ en $R_3 = \SI{3}{\ohm}$. In
 figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginsel2} is het schema te zien.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to [V<=10 V] ++(0,2) to [R=$6\ \Omega$, -*] ++(2,0) node[above] {$U_x$}
-            to [R=$3\ \Omega$, i>^=$I_x$,-*] ++(0,-2) to [open] ++(0,2) to [R=$8\ \Omega$] ++(2,0)
-            to [I_>=, l=$\frac{1}{2}$ A, invert] ++(0,-2) to [short, -.] (0,0);
+\draw (0,0) to [V<=10 V] ++(0,2) to [R=$\SI{6}{\ohm}$, -*] ++(2,0) node[above] {$U_x$}
+            to [R=$\SI{3}{\ohm}$, i>^=$I_x$,-*] ++(0,-2) to [open] ++(0,2) to [R=$\SI{8}{\ohm}$] ++(2,0)
+            to [I_>=, l=$\dfrac{1}{2}\si{\ampere}$, invert] ++(0,-2) to [short, -.] (0,0);
 \end{tikzpicture}
 \caption{Netwerk voor berekening met superpositie.}
 \label{fig:gelnetwerkvoorsuperpositiebeginsel2}
 \end{figure}
 
-We splitsen dit schema in twee deelschema's. Deze zijn te zien in
+We splitsen dit netwerk in twee deelnetwerken. Deze zijn te zien in
 figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplitab2}.
 
-\begin{figure}[!ht]
-\centering
+\begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to [V<=10 V] ++(0,2) to [R=$6\ \Omega$, -*] ++(2,0) node[above] {$U_{xa}$}
-            to [R=$3\ \Omega$, i>^=$I_{xa}$,-*] ++(0,-2) to [open] ++(0,2) to [R=$8\ \Omega$] ++(2,0)
+\draw (0,0) to [V<=$\SI{10}{\volt}$] ++(0,2) to [R=$\SI{6}{\ohm}$, -*] ++(2,0) node[above] {$U_{xa}$}
+            to [R=$\SI{3}{\ohm}$, i>^=$I_{xa}$,-*] ++(0,-2) to [open] ++(0,2) to [R=$\SI{8}{\ohm}$] ++(2,0)
             to [open] ++(0,-2) to [short, -.] (0,0);
 \end{tikzpicture}
 \caption{Berekening vanuit de spanningsbron.}
@@ -1435,9 +1684,9 @@ figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplitab2}.
 \begin{subfigure}{0.48\textwidth}
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to [short] ++(0,2) to [R=$6\ \Omega$, -*] ++(2,0) node[above] {$U_{xb}$}
-            to [R=$3\ \Omega$, i>^=$I_{xb}$,-*] ++(0,-2) to [open] ++(0,2) to [R=$8\ \Omega$] ++(2,0)
-            to [I_>=, l=$\frac{1}{2}$ A, invert] ++(0,-2) to [short, -.] (0,0);
+\draw (0,0) to [short] ++(0,2) to [R=$\SI{6}{\ohm}$, -*] ++(2,0) node[above] {$U_{xb}$}
+            to [R=$\SI{3}{\ohm}$, i>^=$I_{xb}$,-*] ++(0,-2) to [open] ++(0,2) to [R=$\SI{8}{\ohm}$] ++(2,0)
+            to [I_>=, l=$\frac{1}{2}$\si{\ampere}, invert] ++(0,-2) to [short, -.] (0,0);
 \end{tikzpicture}
 \caption{Berekening vanuit de stroombron.}
 \label{fig:gelnetwerkvoorsuperpositiebeginselsplitb2}
@@ -1451,37 +1700,47 @@ we opstellen:
 %
 \begin{equation}
 \begin{split}
-U_{xa} &= \dfrac{3}{3+6}\cdot 10 = 3\frac{1}{3}\text{ V} \\
-I_{xa} &= \dfrac{10}{3+6} = 1\frac{1}{9}\text{ A}
+U_{xa} &= \dfrac{\num{3}}{\num{3}+\num{6}}\cdot \num{10} = 3\frac{1}{3}\si{\volt} \\
+I_{xa} &= \dfrac{\num{10}}{\num{3}+\num{6}} = 1\frac{1}{9}\si{\ampere}
 \end{split}
 \end{equation}
-%
+
 Voor de $U_{xb}$ en $I_{xb}$ in netwerk~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplitb2} kunnen
 we opstellen:
 %
 \begin{equation}
 \begin{split}
-U_{xb} &= (6//3)\cdot\dfrac{1}{2}  = 1\text{ V} \\
-I_{xb} &= \dfrac{6}{3+6}\cdot\dfrac{1}{2} = \frac{1}{3}\text{ A}
+U_{xb} &= (\num{6}//\num{3})\cdot\dfrac{1}{2}  = \SI{1}{\volt} \\
+I_{xb} &= \dfrac{\num{6}}{\num{3}+\num{6}}\cdot\dfrac{1}{2} = \frac{1}{3}\si{\ampere}
 \end{split}
 \end{equation}
 %
 Hieruit berekenen we de spanning $U_x$ en de stroom $I_x$:
 \begin{equation}
 \begin{split}
-U_{x} &= U_{ax} + U_{bx} = 3\frac{1}{3} + 1 = 4\frac{1}{3}\text{ V} \\
-I_{x} &= I_{ax} + I_{bx} = 1\frac{1}{9} + \frac{1}{3} = 1\frac{4}{9}\text{ A}
+U_{x} &= U_{ax} + U_{bx} = 3\frac{1}{3} + 1 = 4\frac{1}{3}\si{\volt} \\
+I_{x} &= I_{ax} + I_{bx} = 1\frac{1}{9} + \frac{1}{3} = \num{1}\SI[quotient-mode = fraction,fraction-function = \dfrac]{4 / 9}{\ampere} \\
 \end{split}
 \end{equation}
 %
 Het vermogen ontwikkeld in $R_3$ is nu uit te rekenen:
 %
 \begin{equation}
-P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\text{ W}
+P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\si{\watt}
 \end{equation}
+\end{example}
 
 
-
+\section{Gestuurde bronnen}
+%\begin{tikzpicture}[bookcircuit]
+%% european controlled current source
+%\draw (0,0) to[cV, v<=$2U$] ++(0,2);
+%\draw (2,0) to[cV, v<=$2I$] ++(0,2);
+%\draw (4,0) to[cI, i_>=,l=$2U\,$] ++(0,2);
+%\draw (6,0) to[cI, l=$2I\ $] ++(0,2);
+%%\draw (6,2) to[cI,l=$\ 2U_x$,invert] ++(0,-2);
+%%\draw (8,2) to[cI,l=$2U_x$] ++(2,0);
+%\end{tikzpicture}
 
 
 
