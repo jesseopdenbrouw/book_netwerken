@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{calc}
 \usepackage{tikz}
-\usepackage[european,betterproportions,americaninductors]{circuitikz}
+\usepackage[european,betterproportions,americaninductors,siunitx]{circuitikz}
 %\usepackage[]{circuitikz}
 \usepackage{pgfplots}
 \usetikzlibrary{intersections}
@@ -219,6 +219,120 @@
 		\fi
 	\fi
 }
+
+% Dutch controlled current source
+\pgfcircdeclarebipole{}{\ctikzvalof{bipoles/cisource/height}}{cisource}{\ctikzvalof{bipoles/cisource/height}}{\ctikzvalof{bipoles/cisource/width}}{
+
+	\pgfsetlinewidth{\pgfkeysvalueof{/tikz/circuitikz/bipoles/thickness}\pgfstartlinewidth}
+	
+			\pgfpathmoveto{\pgfpoint{\pgf@circ@res@left}{\pgf@circ@res@zero}}
+			\pgfpathlineto{\pgfpoint{\pgf@circ@res@zero}{\pgf@circ@res@up}}
+			\pgfpathlineto{\pgfpoint{\pgf@circ@res@right}{\pgf@circ@res@zero}}
+			\pgfpathlineto{\pgfpoint{\pgf@circ@res@zero}{\pgf@circ@res@down}}
+			\pgfpathlineto{\pgfpoint{\pgf@circ@res@left}{\pgf@circ@res@zero}}
+			\pgfpathmoveto{\pgfpoint{\pgf@circ@res@zero}{\pgf@circ@res@up}}
+			\pgfpathlineto{\pgfpoint{\pgf@circ@res@zero}{\pgf@circ@res@down}}
+			\pgfusepath{draw}		
+  			\pgfscope
+			    \pgfsetarrowsend{latex'}
+			    \pgfpathmoveto{\pgfpoint{0.8\pgf@circ@res@left}{1.3\pgf@circ@res@up}}
+			    \pgfpathlineto{\pgfpoint{0.8\pgf@circ@res@right}{1.3\pgf@circ@res@up}}
+			    \pgfusepath{draw}   %draw arrow
+			\endpgfscope
+}
+
+%% Output routine 
+%%%\def\pgf@circ@drawcurrent{
+%%%	\pgfextra{
+%%%		\edef\pgf@circ@ffffff{\pgf@circ@direction}
+%%%		\def\pgfcircmathresult{\expandafter\pgf@circ@stripdecimals\pgf@circ@ffffff\pgf@nil}
+%%%
+%%%		\ifnum\pgfcircmathresult >4 \ifnum\pgfcircmathresult <86
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				\def\pgf@circ@dir{north west} \else \def\pgf@circ@dir{south east}
+%%%			\fi
+%%%		\fi\fi
+%%%		\ifnum\pgfcircmathresult >85 \ifnum\pgfcircmathresult <95
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				\def\pgf@circ@dir{west} \else \def\pgf@circ@dir{east} 
+%%%			\fi
+%%%		\fi\fi
+%%%		\ifnum\pgfcircmathresult >94 \ifnum\pgfcircmathresult <176
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				 \def\pgf@circ@dir{south west}\else \def\pgf@circ@dir{north east}
+%%%			\fi
+%%%		\fi\fi
+%%%		\ifnum\pgfcircmathresult >175 \ifnum\pgfcircmathresult <185
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				  \def\pgf@circ@dir{south}\else\def\pgf@circ@dir{north}
+%%%			\fi
+%%%		\fi\fi
+%%%		\ifnum\pgfcircmathresult >184 \ifnum\pgfcircmathresult <266
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				 \def\pgf@circ@dir{south east}\else\def\pgf@circ@dir{north west}
+%%%			\fi
+%%%		\fi\fi
+%%%		\ifnum\pgfcircmathresult >265 \ifnum\pgfcircmathresult <275
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				 \def\pgf@circ@dir{east}\else \def\pgf@circ@dir{west}
+%%%			\fi
+%%%		\fi\fi
+%%%		\ifnum\pgfcircmathresult >274 \ifnum\pgfcircmathresult <356
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				  \def\pgf@circ@dir{north east}\else\def\pgf@circ@dir{south west}
+%%%			\fi
+%%%		\fi\fi
+%%%		\ifnum\pgfcircmathresult <5
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				 \def\pgf@circ@dir{north}\else\def\pgf@circ@dir{south} 
+%%%			\fi
+%%%		\fi
+%%%		\ifnum\pgfcircmathresult >355
+%%%			\ifpgf@circuit@bipole@current@below
+%%%				 \def\pgf@circ@dir{north}\else\def\pgf@circ@dir{south} 
+%%%			\fi
+%%%		\fi
+%%%		
+%%%		\ifpgf@circuit@bipole@current@below
+%%%			\def\pgf@circ@bipole@current@label@where{-90}
+%%%		\else
+%%%			\def\pgf@circ@bipole@current@label@where{+90}
+%%%		\fi
+%%%	}
+%%%	
+%%%	\pgfextra{\def\pgf@temp{short}\edef\pgf@circ@temp{\ctikzvalof{bipole/kind}}}
+%%%		\ifx\pgf@circ@temp\pgf@temp%draw current at a short at middle of the line
+%%%				(\tikztostart)--(\tikztotarget)
+%%%		\else% normal bipole or source
+%%%			\ifpgf@circuit@bipole@current@before
+%%%				 (\tikztostart)--(anchorstartnode)
+%%%			\else
+%%%				(anchorendnode)--(\tikztotarget)
+%%%			\fi
+%%%		\fi
+%%%		\ifpgf@circuit@bipole@current@backward
+%%%			\pgfextra{
+%%%				\pgfmathsubtract{\pgf@circ@ffffff}{180}
+%%%				\edef\pgf@circ@ffffff{\expandafter\pgf@circ@stripdecimals\pgfmathresult\pgf@nil}
+%%%				}
+%%%		\fi
+%%%		
+%%%%%		\ifpgf@circuit@bipole@current@below
+%%%%%		coordinate (pgfcirc@Vfrom) at ($(\ctikzvalof{bipole/name}.center) ! 0.5 ! (\ctikzvalof{bipole/name}.-120)$)
+%%%%%		coordinate (pgfcirc@Vto) at ($(\ctikzvalof{bipole/name}.center) ! 0.5 ! (\ctikzvalof{bipole/name}.-60)$)
+%%%%%	\else
+%%%%%		coordinate (pgfcirc@Vfrom) at ($ (\ctikzvalof{bipole/name}.center) ! 0.5 ! (\ctikzvalof{bipole/name}.120)$)
+%%%%%		coordinate (pgfcirc@Vto) at ($ (\ctikzvalof{bipole/name}.center) ! 0.5 ! (\ctikzvalof{bipole/name}.60)$)
+%%%%%	\fi
+%%%%%
+%%%%%			coordinate (Vlab) at ($(pgfcirc@Vto)!0.5!(pgfcirc@Vfrom) $)
+%%%%%			node [anchor=\pgf@circ@dir, inner sep=14pt]
+%%%%%					  at (Vlab) { \pgf@circ@finallabels{current/label} }
+%%%%%
+%%%	coordinate[currarrow,pos=\ctikzvalof{current/distance},rotate=\pgf@circ@ffffff](Iarrow)
+%%%	(Iarrow.\pgf@circ@bipole@current@label@where) node[anchor=\pgf@circ@dir]{\pgf@circ@finallabels{current/label}}
+%%%}
+
 \makeatother
 
 \usepackage{sansmath}
