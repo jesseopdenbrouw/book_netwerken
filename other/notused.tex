@@ -1,0 +1,68 @@
+%%%We berekenen nu eerst de stroom die de bron moet leveren. Daarvoor moeten we de weerstand bepalen
+%%%die de bron ziet. De weerstand wordt gevormd door de parallelschakeling van $R_p$ met $R_u$, in serie
+%%%met $R_s$. We kunnen dus voor $I$ schrijven dat:
+%%%%
+%%%\begin{equation}
+%%%I = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}
+%%%\end{equation}
+%%%%
+%%%Vervolgens berekenen we de stroom $I_u$ door gebruik te maken van stroomdeling:
+%%%%
+%%%\begin{equation}
+%%%I_u = I\cdot\dfrac{R_p}{R_p+R_u}
+%%%\end{equation}
+%%%%
+%%%Combineren we de twee vorige vergelijkingen dan vinden we:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}\cdot\dfrac{R_p}{R_p+R_u}
+%%%\end{equation}
+%%%%
+%%%We mogen in bovenstaande vergelijking $R_s$ ook schrijven als:
+%%%%
+%%%\begin{equation}
+%%%R_s = \dfrac{R_s\cdot(R_p+R_u) + R_p\cdot R_u}{R_p+R_u} = \dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}
+%%%\end{equation}
+%%%%
+%%%
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U\cdot\dfrac{R_p}{R_p+R_u}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}}
+%%%\end{equation}
+%%%%
+%%%Zowel in de teller als de noemer wordt gedeeld door $R_p+R_u$. We kunnen dit tegen elkaar wegstrepen:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U\cdot R_p}{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}
+%%%\end{equation}
+%%%%
+%%%De delen nu teller en noemer door $R_s+R_p$:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_s+R_p}}
+%%%    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_u\cdot(R_s+R_p)}{R_s+R_p}}
+%%%    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p}{R_s+R_p}+R_u} 
+%%%\end{equation}
+%%%%
+%%%Over deze laatste vergelijking kunnen we twee opmerkingen maken. De teller vertegenwoordigt een spanning en
+%%%wel de open klemspanning van de schakeling. We noemen deze spanning de th\'eveninspanning $U_T$.
+%%%De noemer beschrijft een weerstandswaarde gevormd door de parallelschakeling van $R_s$ en $R_p$ in serie
+%%%met $R_u$. De parallelschakeling van $R_s$ en $R_p$ wordt de th\'eveninweerstand  $R_T$ genoemd. We krijgen dus:
+%%%%
+%%%\begin{equation}
+%%%U_T = U\cdot\dfrac{R_p}{R_s+R_p} \qquad\text{en}\qquad R_T = \dfrac{R_s\cdot R_p}{R_s+R_p}
+%%%\end{equation}
+%%%%
+%%%De stroom $I_u$ wordt dus beschreven met de vergelijking:
+%%%%
+%%%\begin{equation}
+%%%I_u = \dfrac{U_T}{R_T+R_u}
+%%%\end{equation}
+%%%%
+
+
+%%%We hebben hier te maken met een niet-ideale spanningsbron uit paragraaf~\ref{sec:gelnietidealespanningsbron}.
+
+%%%\begin{tikzpicture}[bookcircuit]
+%%%\draw (0,0) to [cV<=$2I_1$] +(0,2);
+%%%\end{tikzpicture}
