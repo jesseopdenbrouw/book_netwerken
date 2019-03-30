@@ -1,466 +1,313 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
-%%%   VOORWOORD
+%%%   OPLOSSEN
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Rekenen met complexe getallen}
-\label{cha:complex}
-In de elektrotechniek wordt gebruik gemaakt van complexe getallen. Dit is een uitbreiding op de verzameling reële getallen. Het gebruik van complexe getallen zorgt ervoor dat ingewikkelde berekeningen met \textsl{sinusvormige signalen} eenvoudig kunnen worden uitgewerkt. De oorsprong van de complexe getallen komt voor uit het oplossen van differentiaalvergelijkingen. Stel, we hebben het volgende schema met een spoel, een condensator en een schakelaar. Dit wordt een LC-kring genoemd en is te zien in figuur~\ref{fig:comlckring}.
+\chapter{Oplossen van lineaire vergelijkingen}
+\label{cha:linsolve}
+In de elektrotechniek komen veelvuldig \textsl{stelsels van lineaire vergelijkingen} voor bij het berekenen van spanningen en stromen. Er zijn diverse technieken om zulke stelsels op te lossen, bijvoorbeeld Gauss-eliminatie en de regel van Cramer.
 
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[L,l=$L$] ++(0,2) to[short,i=$i(t)$] ++(1,0) to [switch] ++(1.5,0) to [C,l_=$C$,v^=$U_0$] ++(0,-2) to [short,-.] (0,0);
-\end{tikzpicture}
-\caption{Een simpele LC-kring.}
-\label{fig:comlckring}
-\end{figure}
+De vergelijking:
+\begin{equation}
+5x_1 + 2x_2 + 8x_3 - 6x_4 = 12
+\end{equation}
+heet een lineaire vergelijking in de onbekenden $x_1$, $x_2$, $x_3$ en $x_4$. De getallen $5$, $2$, $8$, $-6$ en $12$ heten de coëfficiënten van deze vergelijking; het getal 12 wordt ook wel het rechterlid genoemd. Deze vergelijking heeft een oneindig aantal oplossingen voor $x_1$ t/m $x_4$. Als de onbekenden aan meerdere vergelijkingen moeten voldoen, dan spreken we van een stelsel van vergelijkingen. Een stelsel van $n$ lineaire vergelijkingen met $n$ onbekenden is in principe oplosbaar, maar er zijn wel voorwaarden aan verbonden.
 
-Op tijdstip $t=\SI{0}{\second}$ is de beginspanning van de condensator en spoel $u(0_+)=U_0\ \si{\volt}$. Op hetzelfde tijdstip is beginstroom $i(0_+)=\SI{0}{\ampere}$. Dit zijn de beginvoorwaarden voor het netwerk.
-
-Volgens de spanningswet van Kirchoff geldt:
-\begin{equation}
-u(t) = u_L(t) = u_C(t)
-\end{equation}
-%
-Volgens de stroomwet van Kirchoff geldt:
-%
-\begin{equation}
-i(t) = i_L(t) = i_C(t)
-\end{equation}
-%
-Verder gelden de spanning-stroomrelaties van spoel en condensator:
-%
-\begin{equation}
-u_L(t) = -L\dfrac{\mathrm{d}i(t)}{\mathrm{d}t} \qquad \text{en} \qquad i(t) = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t}
-\end{equation}
-
-We willen graag een uitdrukking voor de spanning $u(t)$. Daarvoor moeten we de spanning-stroomrelatie van de spel anders opschrijven:
-%
-\begin{equation}
-u_L(t) = -L\dfrac{\mathrm{d}i(t)}{\mathrm{d}t} \quad\longrightarrow\quad i(t) = -\dfrac{1}{L}\int u(t) \mathrm{d}t
-\end{equation}
-%
-Zoals eerder vermeld, is de stroom door de spoel en de condensator identiek:
-%
-\begin{equation}
-i(t) = i_L(t) = i_C(t)
-\end{equation}
-%
-We kunnen dus de volgende vergelijking voor de spanning opstellen:
-%
-\begin{equation}
--\dfrac{1}{L}\int u(t) \mathrm{d}t = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t}
-\end{equation}
-%
-Beide kanten eenmaal differentiëren en delen door $C$:
-%
-\begin{equation}
--\dfrac{1}{LC}u(t) =\dfrac{\mathrm{d}^2u_C(t)}{\mathrm{d}t^2}
-\end{equation}
-%
-Nu brengen we de term aan de rechterkant van het isgelijkteken naar de linkerkant en schrappen het minteken:
-%
-\begin{equation}
-\dfrac{\mathrm{d}^2u_C(t)}{\mathrm{d}t^2} + \dfrac{1}{LC}u(t) = 0
-\end{equation}
-%
-De algemene oplossing voor deze lineaire differentiaalvergelijking met constante coëfficiënten is:
-%
-\begin{equation}
-u(t) = C_1\epowre{\lambda_1} + C_2\epowre{\lambda_2}
-\end{equation}
-%
-Voor het vinden van $\lambda_1$ en $\lambda_2$ moeten we de wortels bepalen van de karakteristieke vergelijking:
-%
-\begin{equation}
-\lambda^2 = -\dfrac{1}{LC}
-\end{equation}
-%
-Helaas heeft deze vergelijking geen reële oplossingen. We kunnen $\lambda_{1,2}$ niet bepalen.
-
-%
-%\begin{equation}
-%i(t) = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t} \quad\longrightarrow\quad u_C(t) = \dfrac{1}{C}\int i(t)\mathrm{d}t
-%\end{equation}
-%%
-%Zoals eerder vermeld, zijn de spanning over de spoel en de condensator identiek:
-%%
-%\begin{equation}
-%u(t) = u_L(t) = u_C(t)
-%\end{equation}
-%
-%%
-
-
-
-% Stel, we hebben een lineaire differentiaalvergelijking met constante coëfficiënten:
-%%
-%\begin{equation}
-%\label{equ:comdiffequ}
-%\dfrac{\mathrm{d}^2\,f(x)}{\mathrm{d}\,x^2} = -f(x)% \qquad\text{met }f(0)=1\text{, }f'(0) = 0
-%\end{equation}
-%%
-%Voor welke functie $f(x)$ geldt dat de tweede afgeleide de functie $f(x)$ is maar nu negatief? Er zijn twee functies die hier aan voldoen:
-%%
-%\begin{equation}
-%f(x) = 0 \qquad\vee\qquad f(x) = \sin{(x+C)}
-%\end{equation}
-%%
-%De oplossing $f(x)=0$ is triviaal en negeren we. In de tweede oplossing stellen we de constante $C$ op 0. Als oplossing krijgen we dus:
-%%
-%\begin{equation}
-%f(x) = \sin x
-%\end{equation}
-%%
-%Bij het oplossen van lineaire differentiaalvergelijkingen met constante coëfficiënten maken we gebruik van de \textsl{karakteristieke vergelijking}:
-%%
-%\begin{equation}
-%\lambda^2 = -1
-%\end{equation}
-%%
-%Deze vergelijking heeft geen reële oplossingen. Er is geen getal dat gekwadrateerd $-1$ oplevert. Toch
-%stelt de vergelijking in~\eqref{equ:comdiffequ} een fysisch probleem voor. Er moeten dus oplossingen zijn.
-%%
-%
-
-
-\section{Imaginaire getallen}
-
-Bij het vinden van de wortels van de vergelijking:
-%
-\begin{equation}
-a^2 - b^2 = 0
-\end{equation}
-%
-kunnen we de vergelijking factoriseren in:
-%
-\begin{equation}
-(a+b)(a-b) = 0
-\end{equation}
-%
-Hierdoor krijgen we twee oplossingen:
-%
-\begin{equation}
-a=b \quad \vee\quad a=-b
-\end{equation}
-%
-%\section{Complexe getallen}
-We hebben echter een probleem bij de vergelijking:
-%
-\begin{equation}
-a^2 + b^2 = 0
-\end{equation}
-%
-die, zoals bekend is, geen reële oplossingen heeft. We introduceren nu een constante $\imunit$ zodanig dat geldt dat:
-%
-\begin{equation}\fboxsep=7pt
-\boxed{\imunit^2 = -1}
-\end{equation}
-%
-De vergelijking wordt nu:
-%
-\begin{equation}
-a^b - \imunit^2b^2 = 0
-\end{equation}
-%
-We kunnen de vergelijking nu alsnog ontbinden:
-%
-\begin{equation}
-(a+\imunit b)(a-\imunit b) = 0
-\end{equation}
-%
-Aldus volgt de oplossing:
-%
-\begin{equation}
-a = \imunit b \quad\vee\quad a = -\imunit b
-\end{equation}
-
-%Als $\imunit^2$ gelijk is aan $-1$, dan moet gelden dat:
-%%
-%\begin{equation}
-%\imunit^4 = \imunit^2\cdot\imunit^2 = -1\cdot-1 = 1
-%\end{equation} 
-
-Maar wat stelt de constante $\imunit$ nu eigenlijk voor? De constante $\imunit$ stelt een getal voor zodanig dat $\imunit^2 = -1$. Er is echter geen reëel getal waarvoor dat geldt. Dat betekent dat $\imunit b$ ook geen reëel getal voorstelt. We noemen $\imunit b$ daarom een \textsl{imaginair getal} en $\imunit$ noemen we de \textsl{imaginaire eenheid}\footnote{In de wiskunde wordt de letter i gebruikt voor de imaginaire eenheid. In de elektrotechniek wordt echter de letter j gebruikt omdat de letter i doorgaans wordt gebruikt voor stroom(sterkte).}.\index{imaginair getal}\index{imaginaire eenheid} Het blijkt dat we met behulp van imaginaire getallen berekeningen aan elektrische netwerken kunnen verrichten.
-
-\subsubsection*{Opmerking}
-In de literatuur wordt ook wel geschreven dat:
-%
-\begin{equation}
-\imunit = \sqrt{-1}
-\end{equation}
-%
-Dat is echter niet juist. Bij het uitwerken van een kwadraat zijn namelijk twee oplossingen mogelijk:
-%
-\begin{equation}
-\imunit^2 = -1 \quad \longrightarrow \quad \imunit = +\sqrt{-1} \quad\vee\quad \imunit = -\sqrt{-1}
-\end{equation}
-%
-Wiskundigen hanteren daarom ook liever de definitie $\imunit^2=-1$. Toch is de wortelschrijfwijze nuttig, bijvoorbeeld bij het oplossen bij vierkantsvergelijkingen (de discriminant is dan kleiner dan 0).
-
-\section{Complexe getallen}
-Laten we nu eens de volgende kwadratische vergelijking bekijken:
-%
-\begin{equation}
-x^2 - 4x + 5 = 0
-\end{equation}
-%
-We kunnen deze vergelijking als volgt ontbinden in factoren:
+Om twee vergelijkingen met twee onbekenden op te lossen, kunnen we de \textsl{regel van Cramer} gebruiken. Aanschouw onderstaande vergelijkingen:
 %
 \begin{equation}
 \begin{split}
-x^2 - 4x + 5 = 0 \\
-x^2 - 4x + 4 + 1 = 0 \\
-(x-2)(x-2) + 1 = 0 \\
-(x-2)^2 - (-1) = 0 \\
-(x-2)^2  - \imunit^2 = 0 \\
-(x-2+\imunit)(x-2-\imunit) = 0 \\
+a_{11}x_1 + a_{12}x_2 &= b_1 \\
+a_{21}x_1 + a_{22}x_2 &= b_2
 \end{split}
 \end{equation}
 %
-De wortels zijn dus:
+Dit kan worden geschreven in een matrixnotatie:
 %
 \begin{equation}
-x=2+\imunit \quad\vee\quad x=2-\imunit
+\begin{bmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix} =
+\begin{bmatrix}
+b_1 \\
+b_2
+\end{bmatrix}
 \end{equation}
 %
-Het kan ook via de wortelformule:
-%
-\begin{equation}
-x = \dfrac{-b\pm\sqrt{b^2-4ac}}{2a} = \dfrac{+4\pm\sqrt{4\cdot4-4\cdot1\cdot5}}{2} = \dfrac{+4\pm\sqrt{4\cdot\imunit^2}}{2} = \dfrac{+4\pm\imunit2}{2} \\
-\end{equation}
-%
-Voor $x$ volgt dan:
-%
-\begin{equation}
-x = +2+\imunit \quad\vee\quad x = +2-\imunit
-\end{equation}
-
-Een getal dat is samengesteld uit een reëel deel en een imaginair deel wordt een \textsl{complex getal} genoemd. Een complex getal $\underline{z}$ heeft de vorm:\index{complex getal}
-%
-\begin{equation}
-\underline{z} = a +\imunit b \qquad\qquad (\text{met } a,b \in \mathbb{R})
-\end{equation}
-%
-waarbij $a$ en $b$ reële getallen zijn. Om het verschil aan te duiden met een reële variabele wordt een complexe variabele onderstreept. De verzameling van complexe getallen wordt met $\mathbb{C}$ aangeduid.
-
-
-\section{Complex toegevoegde getal}
-Als voor een complex getal $\underline{z}$ geldt dat:
-%
-\begin{equation}
-\underline{z} = a + \imunit b
-\end{equation}
-%
-dan is het \textsl{complex toegevoegde} of \textsl{complex geconjungeerde} getal $\underline{z}^*$:
-%
-\begin{equation}
-\underline{z}^* = a - \imunit b
-\end{equation}
-%
-Het reële deel is hetzelfde, maar het imaginaire deel is tegengesteld. Dan geldt vervolgens:
-%
-\begin{equation}
-\begin{split}
-\underline{z} + \underline{z}^* &= a + \imunit b + a -\imunit b = 2a \\
-\underline{z} - \underline{z}^* &= a + \imunit b - (a -\imunit b) = 2\imunit b \\
-\underline{z} \cdot \underline{z}^* &= (a + \imunit b)(a - \imunit b) = a^2 + b^2
-\end{split}
-\end{equation}
-
-
-\section{Rekenregels voor complexe getallen}
-Voor complexe getallen gelden de gewone rekenregels voor optellen en aftrekken:
-%
-\begin{equation}
-\begin{split}
-(a + \imunit b) + (c + \imunit d) &= (a + c) + \imunit(b + d) \\
-(a + \imunit b) - (c + \imunit d) &= (a - c) + \imunit(b - d) \\
-\end{split}
-\end{equation}
-%
-De reële delen en imaginaire delen moeten dus apart worden opgeteld of afgetrokken. Ook voor vermenigvuldigen gelden de gewone rekenregels:
-%
-\begin{equation}
-(a + \imunit b) \cdot (c + \imunit d) = ac + \imunit ad + \imunit bc + \imunit^2 bd = (ac - bd) + \imunit(ad + bc)
-\end{equation}
-%
-Het delen van twee complexe getallen vergt wat meer werk:
-%
-\begin{equation}
-\dfrac{a+\imunit b}{c+\imunit d} = \dfrac{a+\imunit b}{c+\imunit d}\cdot\dfrac{c-\imunit d}{c-\imunit d} = \dfrac{(ac+bd)+j(bc-ad)}{c^2+d^2} \qquad(\text{met } c^2+d^2 \neq 0)
-\end{equation}
-
-
-\section{Het complexe vlak}
-%Meetkundig gezien betekent een complexe oplossing dat de parabool $x^2 - 4x + 5$ geen snijpunten heeft met de x-as.
-
-%Een reëel getallen wordt als een punt afgebeeld op de reële getallenlijn.
-%
-% Als we het reële getal $a$ vermenigvuldigen met $\imunit^2$ dan verandert $a$ van teken:
-%%
-%\begin{equation}
-%\imunit^2 a = -a 
-%\end{equation}
-%%
-%Vermenigvuldigen met $\imunit^2$ zorgt ervoor dat $a$ negatief wordt.
-%Als we vervolgens $a$ en $-a$ op een getallenlijn afbeelden dan zien we dat er tussen $a$ en $-a$ een hoek van $180^{\circ}$ ligt. Dit is weergegeven in figuur~\ref{fig:reelegetallenlijn}.
-%
-%\begin{figure}[H]
-%\centering
-%\begin{tikzpicture}
-%\draw (-5,0) -- (5,0);
-%\draw[fill] (0,0) circle (2pt);
-%\draw[fill] (-2,0) circle (2pt);
-%\draw[fill] (2,0) circle (2pt);
-%\node at (0,0) [above] {$0$};
-%\node at (2,0) [above right] {$a$};
-%\node at (-2,0) [above left] {$-a$};
-%\draw[-latex, shorten >=2pt] (0:2) arc (0:180:2);
-%\node at (0,1.5) {$180^{\circ}$};
-%\end{tikzpicture}
-%\caption{$a$ en $-a$ liggen $180^{\circ}$ verschoven t.o.v.\@ elkaar.}
-%\label{fig:reelegetallenlijn}
-%\end{figure}
-%
-%We kunnen dit ook doen voor het imaginaire getal $\imunit b$. Vermenigvuldigen met $\imunit^2$ levert:
-%%
-%\begin{equation}
-%\imunit^2\cdot\imunit b = -1\cdot\imunit b = \imunit(-b)
-%\end{equation}
-%%
-%Hieruit blijkt dat het imaginaire getal imaginair blijft, maar tegengesteld. Ook het imaginaire getal is $180^{\circ}$ gedraaid.
-%%Als we nu het complexe getal $\underline{z}$ met $\imunit^2$ vermenigvuldigen dan krijgen we:
-%%%
-%%\begin{equation}
-%%\imunit^2 \underline{z} = \imunit^2(a+\imunit b) = \imunit^2 a + \imunit^2\imunit b = -a -\imunit b
-%%\end{equation}
-%%
-%%
-%Maar hoe moeten we complexe getallen afbeelden?
-%Hiervoor doen we een gedurfde stap: we vermenigvuldigen een complex getal met de imaginaire eenheid $\imunit$:
-%%
-%\begin{equation}
-%\imunit \underline{z} = \imunit(a + \imunit b) = \imunit a + \imunit^2 b = \imunit a -1\cdot b = -b + \imunit a
-%\end{equation}
-%%
-%Wat blijkt? Het reële getal a is imaginair geworden en het imaginaire getal $\imunit b$ is reëel geworden.
-%Als we $\imunit \underline{z}$ nogmaals met $\imunit$ vermenigvuldigen, dan krijgen we:
-%%
-%\begin{equation}
-%\imunit(\imunit\underline{z}) = \imunit(\imunit a + \imunit^2 b) = \imunit^2a + \imunit^3 b = -1\cdot a +  (-1)\cdot\imunit\cdot b = -a -\imunit b
-%\end{equation}
-%%
-%Het blijkt dat het imaginaire getal $\imunit a$ is weer reëel geworden maar is nu negatief. Het reële getal $b$ is nu weer imaginair geworden maar is nu negatief.
-%
-%% Als we $a$ en $-a$ op een getallenlijn afbeelden dan zien we dat $-a$ $180^{\circ}$ gedraaid is ten opzichte van $a$. Zie figuur~\ref{com:reelegetallenlijn}.
-%
-%Alle reële getallen wordt afgebeeld op de reële getallenlijn, de imaginaire getallen worden afgebeeld op de imaginaire getallenlijn. 
-%
-%De imaginaire getallen wordt afgebeeld op de imaginaire as, de y-as. Samen beschrijven zijn een punt in het \textsl{complexe vlak}.
-
-Een getal dat is samengesteld uit een reëel deel en een imaginair deel wordt een complex getal genoemd. Een complex getal kan worden afgebeeld als punt op het \textsl{complexe vlak}. In het complexe vlak worden de reële getallen afgebeeld op de reële as die gelijk loopt met de x-as. Imaginaire getallen worden worden afgebeeld op de imaginaire as die loodrecht staat op de reële as. Een complex getal is dus een punt ergens in het complexe vlak
-In figuur~\ref{fig:comvierpunten} zijn enkele complexe getallen afgebeeld in het complexe vlak.
-
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}
-\draw[ultra thin, gray!40] (-3.9,-2.9) grid (4.9,2.9);
-\draw[-latex,thick,black] (-4,0) -- (5,0) node[right] {$\Re$};
-\draw[-latex,thick,black] (0,-3) -- (0,3) node[above] {$\Im$};
-\draw[fill] (3,2) circle (2pt) node[right,xshift=2mm] {$3+\imunit 2$};
-\draw[fill] (3,-2) circle (2pt) node[right,xshift=2mm] {$3-\imunit 2$};
-\draw[fill] (-2,1) circle (2pt) node[left,xshift=-2mm] {$-2+\imunit$};
-\draw[fill] (-1,-2) circle (2pt) node[left,xshift=-2mm] {$-1-\imunit 2$};
-\end{tikzpicture}
-\caption{Vier punten in het complexe vlak.}
-\label{fig:comvierpunten}
-\end{figure}
-
-Als we nu in het complexe vlak een \textsl{wijzer} tekenen vanuit de oorsprong (het complexe getal $0+\imunit0$) naar het complexe punt $\underline{z}$, dan kunnen we het punt $\underline{z}$ ook uitdrukken in \textsl{poolcoördinaten}. Hierbij worden een lengte vanuit de oorsprong tot aan het punt $\underline{z}$ en een hoek t.o.v de x-as opgegeven. In figuur~\ref{fig:compuntinhetcomplexevlak} zijn de wijzer en het punt $\underline{z}$ getekend.
-
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}[scale=3.6] % scale is radius in cm
-\def\uangle{33.7}
-\draw[-latex,thick] (0,-0.1) -- (0,0.9) node[above] {$\Im$};
-\draw[-latex,thick] (-.1,0) -- (1.1,0) node[right] {$\Re$};
-\draw[-latex,thick] (0,0) --(\uangle:1) node[midway,above] {$r$} node[right] {$\underline{z}=a+\imunit b$};
-\draw[dashed] (\uangle:1) -| (0,0);
-\draw[dashed] (\uangle:1) |- (0,0);
-\draw[decorate,decoration={brace,amplitude=4pt,mirror,raise=2pt}] (0,0) -- node[below,yshift=-2mm] {$r\cos\alpha$} ({cos(\uangle)},0);
-\draw[decorate,decoration={brace,amplitude=4pt,raise=2pt}] (0,0) -- node[left,xshift=-2mm] {$r\sin\alpha$} (0,{sin(\uangle)});
-\draw[-latex] (0.3,0) arc (0:\uangle:0.3);
-\node at (\uangle/2:0.4) {$\alpha$};
-\end{tikzpicture}
-\caption{Een punt in het complexe vlak.}
-\label{fig:compuntinhetcomplexevlak}
-\end{figure}
-
-De lengte van de wijzer is $r$ en de hoek van de wijzer ten opzichte van de reële as is $\alpha$. We kunnen het punt $\underline{z}$ nu ook beschrijven met behulp van de lengte en de hoek:
-%
-\begin{equation}
-\underline{z} = a + \imunit b = r\cos\alpha + \imunit r\sin\alpha = r(\cos\alpha + \imunit\sin\alpha)
-\end{equation}
-%
-
-We kunnen nu een aantal conversieregels beschrijven. Vanuit poolcoördinaten naar rechthoekcoördinaten:
-%
-\begin{equation}
-\begin{split}
-a &= r\cos\alpha \\
-b &= r\sin\alpha \\
-\end{split}
-\end{equation}
-En vanuit rechthoekcoördinaten naar rechthoekcoördinaten:
-\begin{equation}
-\begin{split}
-r &= \sqrt{a^2 + b ^2} \\
-\alpha &= \arctan\left(\dfrac{b}{a}\right)
-\end{split}
-\end{equation}
-%
-Merk op dat de hoek $\alpha$ doorgaans in radialen wordt gegeven.
-Ten aanzien van de poolcoördinaten kunnen we nog het volgende melden:
+De regel van Cramer zegt nu het volgende:
 \begin{itemize}
-\item Bij een gelijkblijvende lengte $r$ en een oplopende hoek $\alpha$ beschrijft het punt $\underline{z}$ een \textsl{cirkel} in het complexe vlak.
-\item Bij het punt $\underline{z} = 0 + \imunit0$ is de lengte 0 en de hoek is \textsl{onbepaald}.
-\item Voor de hoek $\alpha$ geldt:
-\begin{equation}
-\alpha = \begin{dcases}
-\arctan\left(\frac{b}{a}\right)       & \text{voor } a>0 \\
-\arctan\left(\frac{b}{a}\right) + \pi & \text{voor } a<0, b \geq 0 \\
-\arctan\left(\frac{b}{a}\right) - \pi & \text{voor } a<0, b < 0 \\
-+\dfrac{1}{2}\pi                      & \text{voor } a=0, b > 0 \\
--\dfrac{1}{2}\pi                      & \text{voor } a=0, b < 0 \\
-\text{onbepaald}                      & \text{voor } a=0, b = 0
-\end{dcases}
-\end{equation}
+\item Bereken de hoofddeterminant (dat is $a_{11}$ t/m $a_{22}$ tussen haken)
+\item Bereken de hulpdeterminant voor de te vinden variabele. Om $x_1$ uit te rekenen moet de eerste
+kolom van de hoofddeterminant ($a_{11}$ en $a_{21}$) vervangen worden door de $b$-vector (kolom met
+$b_1$ en $b_2$). Om $x_2$ te vinden moeten $a_{12}$ en $a_{22}$ vervangen worden door $b_1$ en $b_2$.
 \end{itemize}
+%
+De hoofddeterminant is:
+%
+\begin{equation}
+\det A = \begin{vmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{vmatrix} = a_{11}a_{22} - a_{12}a_{21}
+\end{equation}
+%
+Het stelsel is oplosbaar dan en slechts dan als de hoofddeterminant ongelijk aan 0 is.
+%
+De hulpdeterminanten voor $x_1$ en $x_2$ zijn
+%
+\begin{equation}
+\det u_1 = \begin{vmatrix}
+b_{1} & a_{12} \\
+b_{2} & a_{22}
+\end{vmatrix} = b_{1}a_{22} - a_{12}b_{2}
+\end{equation}
+%
+en
+%
+\begin{equation}
+\det u_2 = \begin{vmatrix}
+a_{11} & b_{1} \\
+a_{21} & b_{2}
+\end{vmatrix} = a_{11}b_{2} - b_{1}a_{21}
+\end{equation}
+%
+Nu kunnen $x_1$ en $x_2$ als volgt gevonden worden:
+%
+\begin{equation}
+x_1 = \dfrac{\det x_1}{\det A} = \dfrac{\begin{vmatrix}
+b_{1} & a_{12} \\
+b_{2} & a_{22}
+\end{vmatrix}}{\begin{vmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{vmatrix}} = \dfrac{b_{1}a_{22} - a_{12}b_{2}}{a_{11}a_{22} - a_{12}a_{21}}
+\end{equation}
+%
+en
+%
+\begin{equation}
+x_2 = \dfrac{\det x_2}{\det A} = \dfrac{\begin{vmatrix}
+a_{11} & b_{1} \\
+a_{21} & b_{2}
+\end{vmatrix}}{\begin{vmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{vmatrix}} = \dfrac{a_{11}b_{2} - b_{1}a_{21}}{a_{11}a_{22} - a_{12}a_{21}}
+\end{equation}
 
-
-Voor de imaginaire eenheid gelden een aantal interessante machtsregels:
-
+\begin{example}[Oplossen twee vergelijkingen met twee onbekenden]
+Een getallenvoorbeeld:
+%
 \begin{equation}
 \begin{split}
-\imunit^0 &= 1 \\
-\imunit^1 &= \imunit \\
-\imunit^2 &= -1 \\
-\imunit^3 &= \imunit^2\cdot\imunit = -1\cdot\imunit = -\imunit\\
-\imunit^4 &= \imunit^2\cdot\imunit^2 = -1\cdot-1 = 1 \\
-\imunit^5 &= \imunit^4\cdot\imunit = 1\cdot\imunit = \imunit
+4x_1 - x_2 &= 24 \\
+-2x_1 + 5x_2 &= 12
+\end{split}
+\end{equation}
+%
+In matrixnotatie wordt dit:
+\begin{equation}
+\begin{bmatrix*}[r]
+4 & -1 \\
+-2 & 5
+\end{bmatrix*} \cdot
+\begin{bmatrix}
+x_1 \\ x_2
+\end{bmatrix} =
+\begin{bmatrix}
+24 \\ 12
+\end{bmatrix}
+\end{equation}
+%
+Voor $x_1$ wordt nu gevonden:
+%
+\begin{equation}
+x_1 = \dfrac{\begin{vmatrix}
+24 & -1 \\
+12 & 5
+\end{vmatrix}}{\begin{vmatrix}
+4 & -1 \\
+-2 & 5
+\end{vmatrix}} = \dfrac{24\cdot5 - (-1)\cdot12}{4\cdot5 - (-1)\cdot(-2)} = \dfrac{132}{18} = 7\dfrac{1}{3}
+\end{equation}
+%
+en voor $x_2$ wordt gevonden:
+%
+\begin{equation}
+x_2 = \dfrac{\begin{vmatrix}
+4 & 24 \\
+-2 & 12
+\end{vmatrix}}{\begin{vmatrix}
+4 & -1 \\
+-2 & 5
+\end{vmatrix}} = \dfrac{4\cdot12-24\cdot(-2)}{4\cdot5 - (-1)\cdot(-2)} = \dfrac{96}{18} = 5\dfrac{1}{3}
+\end{equation}
+\end{example}
+
+De regel van Cramer werkt ook met stelsels met meer dan twee vergelijkingen, maar het berekenen van de diverse determinanten wordt dan wel lastiger. Om een stelsel van drie vergelijkingen op te lossen moeten vier determinanten worden uitgerekend. Gegeven is het stelsel:
+%
+\begin{equation}
+\begin{split}
+a_{11}x_1 + a_{12}x_2 + a_{13}x_3 &= b_1 \\
+a_{12}x_1 + a_{22}x_2 + a_{23}x_3 &= b_2 \\
+a_{32}x_1 + a_{32}x_2 + a_{33}x_3 &= b_3
+\end{split}
+\end{equation}
+%
+of in matrixnotatie:
+%
+\begin{equation}
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix} =
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+b_3
+\end{bmatrix}
+\end{equation}
+
+De hoofddeterminant $A$ is te berekenen met:
+%
+\begin{equation}
+\begin{split}
+\det A &= \begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{vmatrix} \\&=
+ a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31} -a_{12}a_{21}a_{33} - a_{11}a_{23}a_{32}
 \end{split}
 \end{equation}
 
-Verder geldt:
-
+Voor het berekenen van $x_1$ moet de eerste kolom vervangen worden door de $b$-vector en de hulpdeterminant worden berekend. De hulpdeterminant gedeeld door de hoofddeterminant geeft dan de waarde van $x_1$.
+%
 \begin{equation}
 \begin{split}
-\imunit^{-1} &= \dfrac{1}{\imunit} = \dfrac{1}{\imunit}\cdot\dfrac{\imunit}{\imunit} = \dfrac{\imunit}{-1} = -\imunit \\
-\imunit^{-2} &= \dfrac{1}{\imunit^2} = -1 \\
-\imunit^{-3} &= \dfrac{1}{\imunit^3} = \dfrac{1}{\imunit^3}\cdot\dfrac{\imunit}{\imunit} = \dfrac{\imunit}{1} = \imunit
+\det x_1 &= \begin{vmatrix}
+b_{1} & a_{12} & a_{13} \\
+b_{2} & a_{22} & a_{23} \\
+b_{3} & a_{32} & a_{33}
+\end{vmatrix} \\&=
+ b_{1}a_{22}a_{33}+a_{12}a_{23}b_{3}+a_{13}b_{2}a_{32} - a_{13}a_{22}b_{3} -a_{12}b_{2}a_{33} - b_{1}a_{23}a_{32}
 \end{split}
 \end{equation}
+%
+Op deze manier kunnen ook $x_2$ en $x_3$ worden berekend. De procedure is niet ingewikkeld maar het rekenwerk is aanzienlijk.
+
+\begin{example}[Oplossen van drie vergelijkingen met drie onbekenden]
+Gegeven is het stelsel:
+%
+\begin{equation}
+\begin{split}\label{equ:linsystem3}
+4x_1 + -5x_2 + 7x_3 &= 6 \\
+-x_1 + 3x_2 + -2x_3 &= 7 \\
+12x_1 + 3x_2 + 9x_3 &= 8
+\end{split}
+\end{equation}
+%
+of in matrixnotatie:
+%
+\begin{equation}
+\begin{bmatrix}
+4 & -5 & 7 \\
+-1 & 3 & -2 \\
+12 & 3 & 9
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix} =
+\begin{bmatrix}
+6 \\
+7 \\
+8
+\end{bmatrix}
+\end{equation}
+%
+De hoofddeterminant levert:
+\begin{equation}
+\det A = 
+\begin{vmatrix}
+4 & -5 & 7 \\
+-1 & 3 & -2 \\
+12 & 3 & 9
+\end{vmatrix} = -66 
+\end{equation}
+%
+Voor de determinant van $x_1$ wordt gevonden:
+\begin{equation}
+\det x_1 = 
+\begin{vmatrix}
+6 & -5 & 7 \\
+7 & 3 & -2 \\
+8 & 3 & 9
+\end{vmatrix} = -572 
+\end{equation}
+%
+Nu is $x_1$ uit te rekenen:
+%
+\begin{equation}
+x_1 = \dfrac{\det x_1}{\det A} = \dfrac{-572}{-66} = -8\dfrac{2}{3}
+\end{equation}
+%
+Op vergelijkbare wijze wordt voor $x_2$ en $x_3$ gevonden:
+%
+\begin{equation}
+x_2 = \dfrac{\det x_2}{\det A} = \dfrac{-418}{-66} = 6\dfrac{1}{3} \qquad\text{en}\qquad x_3 = \dfrac{\det x_3}{\det A} = \dfrac{-682}{-66} = 10\dfrac{1}{3}
+\end{equation}
+\end{example}
+
+Met behulp van de programmeertaal Python kunnen gemakkelijk determinanten berekend en lineaire stelsels opgelost worden. De bibliotheek \lstinline|numpy| bevat alle noodzakelijke routines. In listing~\ref{cod:lindet} is te zien hoe de determinant van een 3x3-matrix moet worden berekend. Het betreft hier reële coëfficiënten.
+%
+\begin{lstlisting}[language=Python,caption=Berekenen van de determinant van een 3x3-matrix.,label=cod:lindet]
+import numpy as np
+
+matrix = [[-3, -5, 6], [1, -3, 4], [8, 5, 1]]
+det = np.linalg.det(matrix)
+
+print det                 # prints 88.0
+\end{lstlisting}
+
+Het is in Python mogelijk om complexe getallen te gebruiken, bijvoorbeeld bij netwerken met complexe impedanties. Zie listing~\ref{cod:lindet2}.
+%
+\begin{lstlisting}[language=Python,caption=Berekenen van de determinant van een 3x3-matrix met complexe getallen.,label=cod:lindet2]
+import numpy as np
+
+matrix = [[6+2j, 1-1j, 3+5j], [3j, -3, 4+4j], [8, 5, 1]]
+det = np.linalg.det(matrix)
+
+print det            # prints (-40-4j)
+\end{lstlisting}
+
+Een lineair stelsel van $n$ vergelijkingen en $n$ onbekenden is op te lossen met de \lstinline|solve|-routine. Ook hier kan weer gebruik gemaakt worden van complexe getallen. In listing~\ref{cod:linsolve} is het Python-programma te zien dat de oplossing van het lineaire systeem uit~\eqref{equ:linsystem3} berekent. Als de hoofddeterminant ongelijk is aan 0, kan de oplossing berekend worden.
+%
+\begin{lstlisting}[language=Python,caption=Berekenen van de oplossing van een lineair systeem met drie vergelijkingen.,label=cod:linsolve]
+# Use the numpy numeric library
+import numpy as np
+
+a = np.array([[4,-5,7], [-1,3,-2], [12,3,9]])   # Matrix of coeffs
+b = np.array([6,7,8])                           # Vector of results
+
+try:
+        x = np.linalg.solve(a, b)               # Solve lin system
+        print "Solution:", x
+        print "Correct solution:", np.allclose(np.dot(a, x), b)
+except:
+        print "No solutions for this system"
+\end{lstlisting}
