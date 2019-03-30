@@ -1,5 +1,8 @@
 \chapter{Gelijkstroomtheorie}
 \label{cha:gelijkstroomtheorie}
+
+\iffalse
+
 In dit hoofdstuk behandelen we de gelijkstroomtheorie. Nu suggereert het woord
 gelijkstroomtheorie dat de theorie alleen de stromen betreft. Dat is echter niet
 het geval; het betreft ook de spanningen. We kunnen dus net zo goed spreken over
@@ -1744,71 +1747,520 @@ P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\si{\wa
 
 
 
-%%%We berekenen nu eerst de stroom die de bron moet leveren. Daarvoor moeten we de weerstand bepalen
-%%%die de bron ziet. De weerstand wordt gevormd door de parallelschakeling van $R_p$ met $R_u$, in serie
-%%%met $R_s$. We kunnen dus voor $I$ schrijven dat:
-%%%%
-%%%\begin{equation}
-%%%I = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}
-%%%\end{equation}
-%%%%
-%%%Vervolgens berekenen we de stroom $I_u$ door gebruik te maken van stroomdeling:
-%%%%
-%%%\begin{equation}
-%%%I_u = I\cdot\dfrac{R_p}{R_p+R_u}
-%%%\end{equation}
-%%%%
-%%%Combineren we de twee vorige vergelijkingen dan vinden we:
-%%%%
-%%%\begin{equation}
-%%%I_u = \dfrac{U}{R_s + \dfrac{R_p\cdot R_u}{R_p+R_u}}\cdot\dfrac{R_p}{R_p+R_u}
-%%%\end{equation}
-%%%%
-%%%We mogen in bovenstaande vergelijking $R_s$ ook schrijven als:
-%%%%
-%%%\begin{equation}
-%%%R_s = \dfrac{R_s\cdot(R_p+R_u) + R_p\cdot R_u}{R_p+R_u} = \dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}
-%%%\end{equation}
-%%%%
-%%%
-%%%%
-%%%\begin{equation}
-%%%I_u = \dfrac{U\cdot\dfrac{R_p}{R_p+R_u}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_p+R_u}}
-%%%\end{equation}
-%%%%
-%%%Zowel in de teller als de noemer wordt gedeeld door $R_p+R_u$. We kunnen dit tegen elkaar wegstrepen:
-%%%%
-%%%\begin{equation}
-%%%I_u = \dfrac{U\cdot R_p}{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}
-%%%\end{equation}
-%%%%
-%%%De delen nu teller en noemer door $R_s+R_p$:
-%%%%
-%%%\begin{equation}
-%%%I_u = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_s\cdot R_u + R_p\cdot R_u}{R_s+R_p}}
-%%%    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p + R_u\cdot(R_s+R_p)}{R_s+R_p}}
-%%%    = \dfrac{U\cdot\dfrac{R_p}{R_s+R_p}}{\dfrac{R_s\cdot R_p}{R_s+R_p}+R_u} 
-%%%\end{equation}
-%%%%
-%%%Over deze laatste vergelijking kunnen we twee opmerkingen maken. De teller vertegenwoordigt een spanning en
-%%%wel de open klemspanning van de schakeling. We noemen deze spanning de th\'eveninspanning $U_T$.
-%%%De noemer beschrijft een weerstandswaarde gevormd door de parallelschakeling van $R_s$ en $R_p$ in serie
-%%%met $R_u$. De parallelschakeling van $R_s$ en $R_p$ wordt de th\'eveninweerstand  $R_T$ genoemd. We krijgen dus:
-%%%%
-%%%\begin{equation}
-%%%U_T = U\cdot\dfrac{R_p}{R_s+R_p} \qquad\text{en}\qquad R_T = \dfrac{R_s\cdot R_p}{R_s+R_p}
-%%%\end{equation}
-%%%%
-%%%De stroom $I_u$ wordt dus beschreven met de vergelijking:
-%%%%
-%%%\begin{equation}
-%%%I_u = \dfrac{U_T}{R_T+R_u}
-%%%\end{equation}
-%%%%
 
+\fi
+\section{Knooppuntspanningsmethode}
+De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt worden. Bekijk het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis}. Op geen enkele wijze is een combinatie van weerstanden te vereenvoudigen als serie- of parallelweerstand. Dat betekent dat technieken als spanningsdeling en stroomdeling niet kunnen worden toegepast\footnote{Overigens is dit netwerk wel met behulp van een Thévenin-vervangingsschema door te rekenen maar dat kost veel rekenwerk.}.
 
-%%%We hebben hier te maken met een niet-ideale spanningsbron uit paragraaf~\ref{sec:gelnietidealespanningsbron}.
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=$U$,-*]   ++(0,2) node (1) {} node [left] {}
+            to[R, R=$R_1$, -*] ++(2,0) node (2) {} node [above] {}
+			to[R, R=$R_2$, -*] ++(2,0) node (3) {} node [right] {}
+			to[R, R=$R_4$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[R, R=$R_5$]     ++(4,0)	
+			to[short]          ++(0,-1)
+		(2) to[R, R=$R_3$, -*] ++(0,-2)
+			to node[sground]{} ++(0,-0.0)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelnetwerkvoornodalanalysis}
+\end{figure}
 
-%%%\begin{tikzpicture}[bookcircuit]
-%%%\draw (0,0) to [cV<=$2I_1$] +(0,2);
-%%%\end{tikzpicture}
+We zoeken dus naar een methode die systematisch het netwerk beschrijft. Met de \textsl{knooppuntspanningsmethode} gaan we uit van de stroomwet van Kirchhoff en de wet van Ohm. Een \textsl{knooppunt} is een punt waar twee of meer netwerkelementen met elkaar verbonden zijn. We nemen één knooppunt als referentiepunt. In principe kan elk knooppunt als referentiepunt dienen, maar het is handig om een uiteinde van een onafhankelijke spanningsbron te kiezen. De andere knooppunten hebben een bekende of onbekende spanning t.o.v.\@ het referentieknooppunt. Vervolgens stellen we voor elk knooppunt met een onbekende spanning de stroomwet van Kirchhoff op: alle stromen naar een knooppunt toe zijn opgeteld 0, maar voor deze methode is het handiger om de stroomwet iets anders te definiëren: alle stromen van een knooppunt af zijn opgeteld 0. We krijgen zo een stelsel vergelijkingen met bekende en onbekende spanningen dat op te lossen is. Het voordeel van deze methode is dat het te implementeren is in een computerprogramma, bijvoorbeeld in een netwerksimulatieprogramma.
+
+\subsection{Onafhankelijke stroombronnen}
+Onafhankelijke stroombronnen kunnen zonder problemen in een netwerk ingepast worden. In de vergelijkingen die het netwerk beschrijven, komen dan de stromen van de stroombronnen te staan. Bij onafhankelijke stroombronnen zijn de stromen constant. In figuur~\ref{fig:gelnetwerkvoornodalanalysis4} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[I, l=$I_1$, i^<=$I_a$, -*]  ++(0,2) node (1) {} node [left] {1}
+            to[R, R=$R_1$, i>_=$I_b$, -*] ++(2,0) node (2) {} node [above] {2}
+			to[short, i=$I_d$] ++(-0.7,0)
+			to[short]          ++(0.7,0) 
+			to[I, l=$I_2$, i>^=$I_f$,-*, invert] ++(2,0) node (3) {} node [right] {3}
+			to[open, i>^=$I_g$]           ++(-1.5,0)
+			to[open]           ++(1.5,0)
+			to[R, R=$R_4$, i>^=$I_h$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short, i>_=$I_c$]          ++(0,1)
+            to[R, R=$R_5$]     ++(4,0)	
+			to[short, i<=$I_i$]          ++(0,-1)
+		(2) to[R, R=$R_3$, i>^=$I_e$, -*] ++(0,-2)
+			to node[sground]{} ++(0,-0.0)
+;
+\end{tikzpicture}
+\caption{Netwerk met onafhankelijke stroombronnen.}
+\label{fig:gelnetwerkvoornodalanalysis4}
+\end{figure}
+
+%Er is geen onafhankelijke spanningsbron aanwezig met een uiteinde aan het referentieknooppunt. Dat betekent dat geen enkele spanning op voorhand bekend is. We stellen voor dit netwerk de stroomvergelijkingen op voor alle knooppunten (behalve het referentieknooppunt natuurlijk):
+
+Er is geen enkele spanning op voorhand bekend, $U_1$, $U_2$ en $U_3$ zijn allemaal onbekend. Er zijn dus drie vergelijkingen nodig om het netwerk te beschrijven, voor elk knooppunt één. Voor een knooppunt moet gelden dat alle wegvloeiende stromen opgeteld 0 zijn. De vergelijking voor knooppunt 1 is dus:
+%
+\begin{equation}
+I_a + I_b + I_c = 0
+\end{equation}
+%
+Nu is $I_a$ gelijk aan $-I_1$ (let op de richting van de stromen). De stroom $I_b$ wordt gevonden door de spanning over $R_1$ te delen door $R_1$. De stroom $I_c$ wordt gevonden door de spanning over $R_5$ te delen door $R_5$. De vergelijking voor knooppunt 1 wordt dan:
+%
+\begin{equation}
+-I_1 + \dfrac{U_1-U_2}{R_1} + \dfrac{U_1-U_3}{R_5} = 0
+\end{equation}
+%
+De vergelijking voor knooppunt 2 is:
+%
+\begin{equation}
+I_d + I_e + I_f = 0
+\end{equation}
+%
+Na invullen van de spanningen, weerstanden en stroombron krijgen we:
+%
+\begin{equation}
+\dfrac{U_2-U_1}{R_1} + \dfrac{U_2-0}{R_3} - I_2 = 0
+\end{equation}
+%
+De vergelijking voor knooppunt 3 is:
+%
+\begin{equation}
+I_g + I_h + I_i= 0
+\end{equation}
+%
+Na invullen krijgen we:
+%
+\begin{equation}
+I_2 + \dfrac{U_3-0}{R_4} + \dfrac{U_3-U_1}{R_5} = 0
+\end{equation}
+%
+We vatten het stelsel van vergelijkingen even samen:
+%
+\begin{equation}
+\begin{split}
+\text{Knooppunt 1:} & \qquad & -I_1 + \dfrac{U_1-U_2}{R_1} + \dfrac{U_1-U_3}{R_5} &= 0 \\
+\text{Knooppunt 2:} &        & \dfrac{U_2-U_1}{R_1} + \dfrac{U_2-0}{R_3} - I_2 &= 0 \\
+\text{Knooppunt 3:} &        & I_2 + \dfrac{U_3-0}{R_4} + \dfrac{U_3-U_1}{R_5} &= 0
+\end{split}
+\end{equation}
+%
+We herschrijven de vergelijkingen zodanig dat de onbekende spanningen links van het isgelijkteken staan en de bekende stromen rechts van het isgelijkteken staan:
+%
+\begin{equation}\label{equ:gellinsolve5}
+\begin{matrix*}[r]
+\left(\dfrac{1}{R_1}+\dfrac{1}{R_5}\right)U_1 & -\dfrac{1}{R_1}U_2 & -\dfrac{1}{R_5}U_3 &=& I_1 \\[1em]
+-\dfrac{1}{R_1}U_1 & +\left(\dfrac{1}{R_1}+\dfrac{1}{R_3}\right)U_2 &  & = & I_2 \\[1em]
+-\dfrac{1}{R_5}U_1 && +\left(\dfrac{1}{R_4}+\dfrac{1}{R_5}\right)U_3 & = &-I_2
+\end{matrix*}
+\end{equation}
+%
+Merk op dat in de vergelijking voor knooppunt 2 geen term met spanning $U_3$ voorkomt. Dit komt omdat de stroom van knooppunt 3 naar knooppunt 2 bekend is, namelijk $-I_2$ (maar rechts van het isgelijkteken natuurlijk $I_2$). In de vergelijking voor knooppunt 3 komt de spanning $U_2$ niet voor vanwege dezelfde stroombron, maar de stroom $I_2$ is nu positief gesteld (gaat van het knooppunt af, rechts van het isgelijkteken $-I_2$).
+
+We kunnen het stelsel vergelijkingen in~\eqref{equ:gellinsolve5} in de matrixnotatie schrijven:
+%
+\begin{equation}\label{equ:gelmatrixnotatie1}
+\begin{bmatrix*}[c]
+\dfrac{1}{R_1}+\dfrac{1}{R_5} & -\dfrac{1}{R_1} &  -\dfrac{1}{R_5} \\[1em]
+-\dfrac{1}{R_1} & \dfrac{1}{R_1}+\dfrac{1}{R_3} & 0 \\[1em]
+-\dfrac{1}{R_5} & 0 & \dfrac{1}{R_4}+\dfrac{1}{R_5}
+\end{bmatrix*} \times
+\begin{bmatrix*}[c]
+\\[-0.3em] U_1 \\[1em] U_2 \\[1em] U_3 \\ \\[-0.3em]
+\end{bmatrix*} = 
+\begin{bmatrix*}[c]
+\\[-0.3em] I_1 \\[1em] I_2\\[1em] -I_2 \\ \\[-0.3em]
+\end{bmatrix*}
+\end{equation}
+%
+Merk op dat in de coëfficiëntenmatrix (links in de vergelijking) steeds de omgekeerden (of \textsl{reciproken}) van de weerstanden. De omgekeerde van de weerstandswaarde wordt geleiding genoemd. De coëfficiëntenmatrix wordt daarom ook wel de geleidingsmatrix genoemd. De vector met de spanningen wordt de onbekendenvector genoemd en de vector met de stromen (het rechterlid) wordt de bekendenvector genoemd.
+
+De algemene gedaante voor dit stelsel van vergelijkingen is:
+%
+\begin{equation}
+\begin{bmatrix*}[c]
+G_{11} & G_{12} & G_{13} \\
+G_{21} & G_{22} & G_{23} \\
+G_{31} & G_{32} & G_{33}
+\end{bmatrix*} = 
+\begin{bmatrix*}[c]
+U_1 \\ U_2 \\ U_3
+\end{bmatrix*} =
+\begin{bmatrix*}[c]
+I_1 \\ I_2 \\ I_3
+\end{bmatrix*}
+\end{equation}
+%
+waarbij $I_1$, $I_2$ en $I_3$ niet verward moeten worden met de stromen in~\eqref{equ:gelmatrixnotatie1}.
+De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de vergelijkingen:
+
+\begin{itemize}
+\item Er zijn evenveel vergelijkingen nodig als dat er onbekende spanningen zijn;
+\item Elke regel bevat de vergelijking voor het betreffende knooppunt;
+\item Voor de elementen op de hoofddiagonaal ($G_{11}$, $G_{22}$ en $G_{33}$, van linksboven naar rechtsonder) geldt dat dit de som is van de geleidingen die direct met het knooppunt van de onbekende spanning verbonden zijn;
+\item Voor de elementen niet op de hoofddiagonaal geldt dat dit de geleiding is die rechtstreeks tussen twee onbekende spanningen is verbonden en is altijd negatief. Deze elementen komen altijd in paren voor, gespiegeld in de hoofddiagonaal: zo is de waarde van knooppunt $G_{32}$ hetzelfde als de waarde van $G_23$. De coëfficiëntenmatrix is dus symmetrisch t.o.v.\@ de hoofddiagonaal;
+\item Een element niet op de hoofddiagonaal kan 0 zijn; er is dan geen geleiding tussen de twee knooppunten;
+\item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de stromen naar het desbetreffende knooppunt toe.
+\end{itemize}
+
+Als de maxtrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
+
+\begin{example}[Netwerk met onafhankelijke stroombronnen]
+In figuur~\ref{fig:gelnetwerkvoornodalanalysis5} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden. Bepaal de spanningen op de knooppunten en de vermogens van de stroombronnen.
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[I, l=$\SI{10}{\mA}$,-*]  ++(0,2) node (1) {} node [left] {1}
+            to[R, R=$\SI{820}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {2}
+			to[I, l=$\SI{5}{\mA}$, -*, invert] ++(2,0) node (3) {} node [right] {3}
+			to[open]           ++(-1.5,0)
+			to[open]           ++(1.5,0)
+			to[R, R=$\SI{1200}{\ohm}$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[R, R=$\SI{680}{\ohm}$]     ++(4,0)	
+			to[short]          ++(0,-1)
+		(2) to[R, R=$\SI{470}{\ohm}$, -*] ++(0,-2)
+			to node[sground]{} ++(0,-0.0)
+;
+\end{tikzpicture}
+\captionof{figure}{Netwerk met onafhankelijke stroombronnen.}
+\label{fig:gelnetwerkvoornodalanalysis5}
+\end{center}
+
+We kunnen voor het berekenen van de knooppuntspanningen de vergelijkingen van~\eqref{equ:gellinsolve5} gebruiken:
+%
+\begin{equation}
+\begin{matrix*}[r]
+\left(\dfrac{1}{820}+\dfrac{1}{680}\right)U_1 & -\dfrac{1}{820}U_2 & -\dfrac{1}{680}U_3 &=& \num{10e-3} \\[1em]
+-\dfrac{1}{820}U_1 & +\left(\dfrac{1}{820}+\dfrac{1}{470}\right)U_2 &  & = & \num{5e-3} \\[1em]
+-\dfrac{1}{680}U_1 && +\left(\dfrac{1}{1200}+\dfrac{1}{680}\right)U_3 & = &\num{-5e-3}
+\end{matrix*}
+\end{equation}
+%
+We rekenen de coëfficiënten links van de isgelijktekens uit:
+%
+\begin{equation}
+\begin{matrix*}[r]
+\num{2.69e-3}U_1 & \num{-1.22e-3}U_2 & \num{-1.47e-3}U_3 &=& \num{10e-3} \\[1em]
+\num{-1.22e-3}U_1 & +\num{3.35e-3}U_2 &  & = & \num{5e-3} \\[1em]
+\num{-1.47e-3}U_1 && +\num{2.30e-3}U_3 & = &\num{-5e-3}
+\end{matrix*}
+\end{equation}
+%
+Door gebruik te maken van de matrixrekenkunde (zie hiervoor bijlage~\ref{cha:linsolve}) volgt dat:
+%
+\begin{equation}
+U_1 = \SI{6.60}{\volt} \quad U_2=\SI{3.90}{\volt} \quad U_3 = \SI{2.05}{\volt}
+\end{equation}
+%
+We kunnen nu de vermogens van de stroombronnen uitrekenen. Hierbij moeten we letten op de stroomrichting van $I_1$ en $I_2$:
+%
+\begin{equation}
+\begin{split}
+P_{I1} &= (U_1-0)\cdot I_1 = \num{6,60}\cdot\num{10e-3} = \SI{0.066e-3}{\watt} = \SI{66}{\mW} \\
+P_{I2} &= (U_2-U_3)\cdot I_2 = \num{1.86}\cdot\num{5e-3} = \SI{9.28e-3}{\watt} = \SI{9.28}{\mW}
+\end{split}
+\end{equation}
+\end{example}
+
+\subsection{Onafhankelijke spanningsbronnen}
+In figuur~\ref{fig:gelnetwerkvoornodalanalysis2} is een netwerk te zien met een onafhankelijke spanningsbron en vijf weerstanden. Om tot een oplossing te komen van de spanningen moeten we een aantal stappen doorlopen. De eerste stap is het kiezen van het referentieknooppunt. In de figuur is dit het knooppunt onderaan, gekozen aan een uiteinde van de onafhankelijke spanningsbron. Vervolgens geven we de knooppunten een nummer en een bijbehorende bekende of onbekende spanningswaarde. De spanning op knooppunt 1 is bekend; die is $U$ \si{\volt}. De spanningen op de knooppunten 2 ($U_2$) en 3 ($U_3$) zijn onbekend. Er zijn twee onbekende spanningen dus we moeten twee vergelijkingen opstellen.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=$U$,-*]   ++(0,2) node (1) {} node [left] {1}
+            to[R, R=$R_1$, -*, i_<=$I_a$] ++(2,0) node (2) {} node [above] {2}
+			to[R, R=$R_2$, -*, i>_=$I_b$] ++(2,0) node (3) {} node [right] {3}
+			to[open]           ++(-1.5,0)
+			to[open, i^<=$I_d$] ++(1.5,0)
+			to[R, R=$R_4$, i>^=$I_e$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[R, R=$R_5$]     ++(4,0)	
+			to[short, i<=$I_f$]          ++(0,-1)
+		(2) to[R, R=$R_3$, -*, i>=$I_c$] ++(0,-2)
+			to node[sground]{} ++(0,-0.0)
+;
+\end{tikzpicture}
+\caption{Netwerk voor knooppuntspanningsmethode.}
+\label{fig:gelnetwerkvoornodalanalysis2}
+\end{figure}
+
+We stellen nu de stroomvergelijkingen op voor de knooppunten 2 en 3. De vergelijking voor knooppunt 2 is.
+%
+\begin{equation}
+I_a+I_b+I_c = 0
+\end{equation}
+%
+We kunnen de stroom $I_a$ uitdrukken in de spanningen $U_1$ en $U_2$ en de weerstand $R_1$. Iets dergelijks geldt ook voor $I_b$ en $I_c$. Dus geldt:
+%
+\begin{equation}
+I_a = \dfrac{U_2-U_1}{R_1} \qquad I_b = \dfrac{U_2-U_3}{R_2} \qquad I_c = \dfrac{U_2-0}{R_3}
+\end{equation}
+%
+We vullen dit in en krijgen dan:
+%
+\begin{equation}
+\dfrac{U_2-U_1}{R_1} + \dfrac{U_2 - U_3}{R_2} + \dfrac{U_2-0}{R_3} = 0
+\end{equation}
+
+%
+De vergelijking voor knooppunt 3 is:
+%
+\begin{equation}
+I_d + I_e + I_f = 0
+\end{equation}
+%
+met:
+%
+\begin{equation}
+I_d = \dfrac{U_3-U_2}{R_2} \qquad I_e = \dfrac{U_3-0}{R_4} \qquad I_f = \dfrac{U_3-U_1}{R_5}
+\end{equation}
+%
+De vergelijking voor knooppunt 3 is dus:
+%
+\begin{equation}
+\dfrac{U_3-U_2}{R_2} + \dfrac{U_3 - 0}{R_4} +  \dfrac{U_3-U_1}{R_5} = 0
+\end{equation}
+
+We hebben nu een stelsel van twee vergelijkingen en twee onbekenden ($U_2$ en $U_3$, $U_1$ is een bekende spanning):
+%
+\begin{equation}
+\begin{split}
+\dfrac{U_2-U_1}{R_1} + \dfrac{U_2 - U_3}{R_2} + \dfrac{U_2-0}{R_3} &= 0 \\[.5em]
+\dfrac{U_3-U_2}{R_2} + \dfrac{U_3 - 0}{R_4} +  \dfrac{U_3-U_1}{R_5} &= 0
+\end{split}
+\end{equation}
+
+We schrijven de onbekende spanningen nu expliciet op als functie van de weerstanden en brengen alle bekende spanningen naar de rechterkant van het isgelijkteken: 
+%
+%%%\begin{equation}
+%%%\jot=5pt
+%%%\begin{split}
+%%%%\text{Knooppunt 1:} &\quad& U_1 = U \\
+%%%\left(\dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_3}\right)U_2 - \dfrac{1}{R_2}U_3 &= \dfrac{U_1}{R_1} \\
+%%%-\dfrac{1}{R_2}U_2 + \left(\dfrac{1}{R_2}+\dfrac{1}{R_4}+\dfrac{1}{R_5}\right)U_3 &= \dfrac{U_1}{R_5}
+%%%\end{split}
+%%%\end{equation}
+%
+%\begin{equation}
+%\begin{vmatrix}
+%G_{11} & G_{12} \\
+%G_{21} & G_{22}
+%\end{vmatrix}
+%\begin{vmatrix}
+%U_2 \\
+%U_3
+%\end{vmatrix} = 
+%\begin{vmatrix}
+%I_1 \\
+%I_2
+%\end{vmatrix}
+%\end{equation}
+%
+%
+%\begin{equation}
+%\begin{vmatrix}
+%\dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_3} & - \dfrac{1}{R_2} \\[2em]
+%-\dfrac{1}{R_2} & \dfrac{1}{R_2}+\dfrac{1}{R_4}+\dfrac{1}{R_5}
+%\end{vmatrix}
+%\begin{vmatrix}
+%U_2 \\[2em]
+%U_3
+%\end{vmatrix}
+%\end{equation}
+%
+\begin{equation}
+\begin{matrix*}[r]
+\left(\dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_3}\right)U_2 & - \dfrac{1}{R_2}U_3 &= \dfrac{U_1}{R_1} \\[1em]
+-\dfrac{1}{R_2}U_2 & + \left(\dfrac{1}{R_2}+\dfrac{1}{R_4}+\dfrac{1}{R_5}\right)U_3 &= \dfrac{U_1}{R_5}
+\end{matrix*}
+\end{equation}
+%
+Dit stelsel vergelijkingen is op te lossen met technieken uit de matrixrekenkunde, zie hiervoor bijlage~\ref{cha:linsolve}. Nadat de spanningen $U_2$ en $U_3$ berekend zijn, kunnen de stromen en vermogens in het netwerk berekend worden.
+
+\begin{example}[Netwerk voor berekenen knooppuntspanningen]
+Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis3}. Bereken de spanningen $U_2$ en $U_3$ en de stroom die door de spanningsbron geleverd wordt.
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=$\SI{12}{\volt}$,-*]   ++(0,2) node (1) {} node [left] {$U_1$}
+            to[R, R=$\SI{1200}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {$U_2$}
+			to[R, R=$\SI{1500}{\ohm}$, -*] ++(2,0) node (3) {} node [right] {$U_3$}
+			to[R, R=$\SI{2200}{\ohm}$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[R, R=$\SI{1800}{\ohm}$]     ++(4,0)	
+			to[short]          ++(0,-1)
+		(2) to[R, R=$\SI{1000}{\ohm}$, -*] ++(0,-2)
+			to node[sground]{} ++(0,-0.0)
+;
+\end{tikzpicture}
+\captionof{figure}{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelnetwerkvoornodalanalysis3}
+\end{center}
+We stellen eerst de stroomwet op voor knooppunt 2:
+%
+\begin{equation}
+\dfrac{U_2-12}{1200} + \dfrac{U_2-0}{1000} + \dfrac{U_2-U_3}{1500} = 0
+\end{equation}
+%
+En voor knooppunt 3:
+%
+\begin{equation}
+\dfrac{U_3-U_2}{1500} + \dfrac{U_3-0}{2200} + \dfrac{U_3-12}{1800} = 0
+\end{equation}
+%
+We herschrijven de twee vergelijkingen zodat $U_2$ en $U_3$ expliciet worden:
+%
+\begin{equation}
+\begin{matrix*}[r]
+\left(\dfrac{1}{1200} + \dfrac{1}{1500} + \dfrac{1}{1000}\right)U_2 & - \dfrac{1}{1500}U_3 &= \dfrac{12}{1200} \\[1em]
+- \dfrac{1}{1500}U_2 & + \left(\dfrac{1}{2200} + \dfrac{1}{1800} + \dfrac{1}{1500}\right)U_3 & = \dfrac{12}{1800}
+\end{matrix*}
+\end{equation}
+%
+We rekenen alle bekende waarden uit:
+%
+\begin{equation}
+\begin{matrix*}[r]
+\num{2.500e-3}U_2 & -\num{0.667e-3}U_3 &= \num{10.000e-3} \\
+\num{-0.667e-3}U_2 & + \num{1,677e-3}U_3 &= \num{6.667e-3}
+\end{matrix*}
+\end{equation}
+%
+Met behulp van matrixrekenmethoden vinden we voor $U_2 = \SI{5.67}{\volt}$ en $U_3 = \SI{6.27}{\volt}$.
+Om de stroom die de spanningsbron levert te bepalen, moeten we de stromen uitrekenen door de weerstanden van \SI{1200}{\ohm} en \SI{1800}{\ohm}:
+\begin{equation}
+\begin{split}
+I_{12V} &= I_{2200\Omega} + I_{1800\Omega} = \dfrac{12-\num{5.67}}{1200} + \dfrac{12-\num{6.27}}{1800} \\
+        &= \num{5.275e-3}+\num{3,183e-3} \\
+        &= \SI{8,458}{\mA}
+\end{split}
+\end{equation}
+\end{example}
+
+We hebben nu gezien dat een onafhankelijke spanningsbron met één uiteinde aan de referentie ervoor zorgt dat het aantal benodigde vergelijkingen met één verminderd wordt. Als er echter een ``zwevende'' spanningsbron in het netwerk geplaatst is, een spanningsbron tussen twee onbekende knooppuntspanningen, dan is er een extra vergelijking nodig voor het vinden van de knooppuntspanningen. Die extra vergelijking is nodig omdat de stroom die de spanningsbron levert onbekend is.
+
+In figuur~\ref{fig:gelnetwerkvoornodalanalysis6} is een netwerk te zien met een zwevende spanningsbron. Geen van de uiteinden van de bron is verbonden met het referentieknooppunt. Dat betekent dat alle spanningen in het netwerk onbekend zijn. Verder is de stroom die bron levert onbekend. Deze stroom stellen we $I_x$. Merk op dat $I_x$ gezien moet worden als een bronstroom en dat de referentierichting van de bronstroom van de `+' naar de `$-$' is genomen.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[R, R=$R_6$, -*] ++(0,2) node (1) {} node [left] {1}
+            to[V, v<=$U$, i<=$I_x$, -*]  ++(2,0) node (2) {} node [above] {2}
+			to[R, R=$R_2$, -*] ++(2,0) node (3) {} node [right] {3}
+			to[open]           ++(-1.5,0)
+			to[open]           ++(1.5,0)
+			to[R, R=$R_4$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[R, R=$R_5$]     ++(4,0)	
+			to[short]          ++(0,-1)
+		(2) to[R, R=$R_3$, -*] ++(0,-2)
+			to node[sground]{} ++(0,-0.0)
+;
+\end{tikzpicture}
+\caption{Netwerk voor knooppuntspanningsmethode.}
+\label{fig:gelnetwerkvoornodalanalysis6}
+\end{figure}
+
+We stellen nu de stroomvergelijkingen op voor de knooppunten. Voor knooppunt 1:
+%
+\begin{equation}
+\dfrac{U_1-0}{R_6} + \dfrac{U_1-U_3}{R_5} - I_x = 0
+\end{equation}
+%
+Voor knooppunt 2:
+%
+\begin{equation}
+\dfrac{U_2-0}{R_3} + \dfrac{U_2-U_3}{R_2} + I_x = 0
+\end{equation}
+%
+Voor knooppunt 3:
+%
+\begin{equation}
+\dfrac{U_3-U_1}{R_5} + \dfrac{U_3-U_2}{R_2} + \dfrac{U_3-0}{R_4} = 0
+\end{equation}
+%
+We hebben nu drie vergelijkingen maar er zijn vier onbekenden: $U_1$, $U_2$, $U_3$ en $I_x$. Er is dus nog één vergelijking nodig om tot een oplossing te komen. We weten wel wat de spanning is tussen $U_2$ en $U_1$: die is $U$ \si{\volt}. De vierde vergelijking is dus:
+%
+\begin{equation}
+U_2-U_1 = U
+\end{equation}
+%
+Merk op dat deze laatste vergelijking geen stroomvergelijking is maar een spanningsvergelijking. Het stelsel van vergelijkingen wordt dus:
+%
+\begin{equation}
+\begin{matrix*}[r]
+\left(\dfrac{1}{R_6}+\dfrac{1}{R_5}\right)U_1 & & -\dfrac{1}{R_5}U_3 & -I_x &=& 0 \\[1em]
+ & \left(\dfrac{1}{R_3}+\dfrac{1}{R_4}\right)U_2 & -\dfrac{1}{R_2}U_3 & +Ix &=& 0 \\[1em]
+-\dfrac{1}{R_5}U_1 & -\dfrac{1}{R_2}U_2 & +\left(\dfrac{1}{R_5}+\dfrac{1}{R_2}+\dfrac{1}{R_4}\right)U_3 & &=& 0 \\[1.5em]
+-U_1 & +U_2 & & &= &U
+\end{matrix*}
+\end{equation}
+%
+In matrixnotatie wordt dit:
+%
+\begin{equation}
+\begin{bmatrix*}[c]
+\dfrac{1}{R_6}+\dfrac{1}{R_5} & 0 & -\dfrac{1}{R_5} & -1 \\[1em]
+0 & \dfrac{1}{R_3}+\dfrac{1}{R_4} & -\dfrac{1}{R_2} & 1  \\[1em]
+-\dfrac{1}{R_2} & -\dfrac{1}{R_2} & \dfrac{1}{R_5}+\dfrac{1}{R_2}+\dfrac{1}{R_4} & 0 \\[1.5em]
+-1 & 1 & 0 & 0
+\end{bmatrix*} =
+\begin{bmatrix*}[c]
+U_1 \\[1em] U_2\\[1em] U_3\\[1em] I_x
+\end{bmatrix*} = 
+\begin{bmatrix*}[c]
+0 \\[1em] 0 \\[1em] 0 \\[1em] U
+\end{bmatrix*}
+\end{equation}
+%
+Merk op dat niet alle elementen uit de coëfficiëntenmatrix nu de dimensie geleiding hebben, maar dat enkele elementen dimensieloos zijn. Door de keuze van de richting van $I_x$ is de matrix echter wel symmetrisch ten opzichte van de hoofddiagonaal. In de onbekendenvector is naast onbekende spanningen ook een onbekende stroom te vinden.
+
+\begin{example}[Netwerk met zwevende, onafhankelijke spanningsbron]
+In figuur~\ref{fig:gelnetwerkvoornodalanalysis7} is een netwerk te zien met een zwevende spanningsbron. Er zijn drie onbekende spanningen en één onbekende bronstroom. Er zijn dus vier vergelijkingen nodig voor het vinden van de onbekende spanningen en stroom.
+
+\begin{center}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[R, R=$\SI{4}{\ohm}$,-*]   ++(0,2) node (1) {} node [left] {1}
+            to[R, R=$\SI{6}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {2}
+			to[R, R=$\SI{2}{\ohm}$, -*] ++(2,0) node (3) {} node [right] {3}
+			to[open]           ++(-1.5,0)
+			to[open] ++(1.5,0)
+			to[R, R=$\SI{3}{\ohm}$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[V, v=$\SI{12}{\volt}$, i>=$I_x$]     ++(4,0)	
+			to[short,]          ++(0,-1)
+		(2) to[R, R=$\SI{5}{\ohm}$, -*] ++(0,-2)
+			to node[sground]{} ++(0,-0.0)
+;
+\end{tikzpicture}
+\captionof{figure}{Netwerk voor knooppuntspanningsmethode.}
+\label{fig:gelnetwerkvoornodalanalysis7}
+\end{center}
+
+We stellen direct de matrixvergelijking uit het netwerk op:
+%
+\begin{equation}
+\begin{bmatrix*}[c]
+\dfrac{1}{4}+\dfrac{1}{6} & -\dfrac{1}{6}  & 0 & 1 \\[1em]
+-\dfrac{1}{6} & \dfrac{1}{6}+\dfrac{1}{5}+\dfrac{1}{2} & -\dfrac{1}{2} & 0 \\[1em] 
+0 & -\dfrac{1}{2} & \dfrac{1}{2}+\dfrac{1}{3} & -1 \\[1em]
+1 & 0 & -1 & 0
+\end{bmatrix*} =
+\begin{bmatrix*}[c]
+U_1 \\[1em] U_2\\[1em] U_3\\[1em] I_x
+\end{bmatrix*} = 
+\begin{bmatrix*}[c]
+0 \\[1em] 0 \\[1em] 0 \\[1em] 12
+\end{bmatrix*}
+\end{equation}
+%
+Met behulp van de matrixrekenkunde vinden we voor de spanningen en de stroom: $U_1 = \SI{7.30}{\volt}$, $U_2 = \SI{-1.30}{\volt}$, $U_3 = \SI{-4.70}{\volt}$ en $I_x = \SI{-3.26}{\ampere}$. Merk op dat de bronstroom $I_x$ negatief is door de keuze van de richting van de stroom.
+\end{example}
