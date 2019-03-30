@@ -199,10 +199,11 @@
   \selectfont%                  % activate font
   \vspace*{-0.5\baselineskip}	% half baseline skip up
 }
-\colorlet{chapnumcol}{gray!90}  % color for chapter number
+%\colorlet{chapnumcol}{gray!90}  % color for chapter number
 \titleformat{\chapter}[display]
 {\bfseries}
-{\chapnumfont\textcolor{chapnumcol}{\thechapter}}
+%{\chapnumfont\textcolor{chapnumcol}{\thechapter}}
+{\chapnumfont\textcolor{infoboxline}{\thechapter}}
 {0ex}
 {\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\Huge\bfseries}
 [{\vspace*{1ex}\titlerule[0.8pt]}]
@@ -314,6 +315,7 @@
 \definecolor{lightgray}{rgb}{0.95,0.95,0.95}
 \definecolor{GKYgray}{rgb}{0.65,0.65,0.65}
 \definecolor{lightpink}{HTML}{F8E0E0}%{FBF3F3}%
+\colorlet{listingsbg}{red!50!black}
 
 %% Use computer code listings
 \usepackage{listings}
@@ -328,15 +330,15 @@
   language=VHDL,
   basicstyle=\footnotesize\ttfamily,
   numbers=left,
-  numberstyle=\tiny\color{gray},
+  numberstyle=\tiny\ifusebookasbook\color{gray}\else\color{infoboxline}\fi,
   stepnumber=1,                           
   numbersep=8pt,
-  backgroundcolor=\ifusebookasbook\color{lightgray}\else\color{lightpink}\fi,
+  backgroundcolor=\ifusebookasbook\color{lightgray}\else\color{white}\fi,
   showspaces=false,
   showstringspaces=false,
   showtabs=false,
   frame=lines,
-  rulecolor=\color{black},
+  rulecolor=\ifusebookasbook\color{black}\else\color{infoboxline}\fi,
   tabsize=4,
   captionpos=b,
   breaklines=true,
@@ -365,8 +367,9 @@
 \else
 \hypersetup{
 	colorlinks=true,
-	linkcolor=blue,
-	citecolor=purple,
+	linkcolor=infoboxline,
+	citecolor=infoboxline,
+	urlcolor=infoboxline,
     pdftitle={\booktitleI\ \booktitleII, \booksubtitle},
     pdfauthor={\bookauthor},
     %pdfsubject={Beginselen van de digitale techniek},
