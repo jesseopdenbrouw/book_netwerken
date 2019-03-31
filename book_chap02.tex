@@ -69,7 +69,7 @@ andere spanning in het netwerk. De verhouding tussen de geleverde spanning en de
 in het netwerk is constant. Hierdoor is de spanningsgestuurde spanningsbron een lineair netwerkelement.
 Een stroomgestuurde spanningsbron levert een constante spanning die afhankelijk is van een stroom in
 het netwerk. Ook deze verhouding is constant en is de stroomgestuurde spanningsbron een lineair
-netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroomgestuurde spanningsbron.
+netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroomgestuurde stroombron.
 
 \begin{figure}[!ht]
 \centering
@@ -84,7 +84,7 @@ netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroom
 \begin{subfigure}{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
-\draw (2,0) to[cV, v<=$aI$] ++(0,2);
+\draw (2,0) to[cV, v<=$bI$] ++(0,2);
 %\node[left=2pt] at (I.n) {$I$};
 \end{tikzpicture}
 \caption{Symbool stroomgestuurde spanningsbron.}
@@ -92,14 +92,14 @@ netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroom
 \begin{subfigure}{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
-\draw (4,0) to[cI, i_>=,l=$aU\,$] ++(0,2);
+\draw (4,0) to[cI, i_>=,l=$cU\,$] ++(0,2);
 \end{tikzpicture}
 \caption{Symbool spanningsgestuurde stroombron.}
 \end{subfigure}
 \begin{subfigure}{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
-\draw (6,0) to[cI, l=$aI\ $] ++(0,2);
+\draw (6,0) to[cI, l=$dI\ $] ++(0,2);
 \end{tikzpicture}
 \caption{Symbool stroomgestuurde stroombron.}
 \end{subfigure}
@@ -1289,14 +1289,14 @@ We werken deze uitdrukking om:
 %
 \begin{equation}
 - \left(\dfrac{1}{R_p}+\dfrac{1}{R_s}\right) = - \left(\dfrac{R_s}{R_p\cdot R_s}+\dfrac{R_p}{R_p\cdot R_s}\right) =
--\dfrac{R_p+R_s}{R_p\cdot R_s} = - \dfrac{1}{\ \dfrac{R_p\cdot R_s}{R_p+R_s}\ } = -\dfrac{1}{R_p // R_s}
+-\dfrac{R_p+R_s}{R_p\cdot R_s} = - \dfrac{1}{\ \dfrac{R_p\cdot R_s}{R_p+R_s}\ } = -\dfrac{1}{R_p \parallel R_s}
 \end{equation}
 %
-In de uitdrukking staat $R_p // R_s$ voor de parallelvervangingsweerstand van $R_p$ en $R_s$. We kunnen de
+In de uitdrukking staat $R_p \parallel R_s$ voor de parallelvervangingsweerstand van $R_p$ en $R_s$. We kunnen de
 belastingkarakteristiek dus schrijven als:
 %
 \begin{equation}
-I_u = -\dfrac{1}{R_p//R_s}\cdot U_u + I_k
+I_u = -\dfrac{1}{R_p\parallel R_s}\cdot U_u + I_k
 \end{equation}
 %
 Vergelijken we dit met vergelijking~\eqref{equ:gelbelastingsfunctie} dan zien we dat $R_i$ overeenkomt
@@ -1339,6 +1339,62 @@ R_T = \dfrac{U_o}{I_k}
 Th\'evenin heeft aangetoond dat een netwerk gevormd door een willekeurig aantal spanningsbronnen,
 stroombronnen en weerstanden kan worden vervangen door een netwerk met spanningsbron $U_T$ en
 serieweerstand $R_T$.
+
+\begin{example}[Thévenin-vervangingsnetwerk]
+Gegeven is het netwerk in figuur~\ref{fig:gelthevenin1}. Bepaal het Thévenin-vervangingsnetwerk.
+
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V, V<=$\SI{12}{\volt}$] ++(0,2)
+            to [R, R=$\SI{1.2}{\kilo\ohm}$, -*] ++(2,0) node (1) {} node [above] {$U_x$}
+			to [R, R=$\SI{2.7}{\kilo\ohm}$, -*] ++(0,-2)
+        (1) to [R, R=$\SI{3.3}{\kilo\ohm}$, -o] ++(2,0) node (a) [right] {A}
+            to [open] ++(0,-2) node (b) [right] {B}
+            to [short, o-.] (0,0)
+;
+\end{tikzpicture}
+\captionof{figure}{Netwerk voor berekenen Thévenin-vervangingsnetwerk.}
+\label{fig:gelthevenin1}
+\end{center}
+
+De open klemspanning tussen de punten $A$ en $B$ bedraagt:
+%
+\begin{equation}
+U_{TH} = U_{AB,open} = \dfrac{2700}{1200+2700}12 = \num{0.6923}\cdot12 = \SI{8.3077}{\volt}
+\end{equation}
+%
+Om de kortsluitstroom tussen de punten $A$ en $B$ te berekenen moet punt $A$ met $B$ verbonden worden middels een kortsluiting. Om de stroom voor de weerstand van \SI{3.3}{\kilo\ohm} te berekenen, bepalen we eerst de spanning $U_x$:
+%
+\begin{equation}
+U_{x,kort} = \dfrac{2700\parallel3300}{1200 + (2700\parallel3300)}\cdot12 = \dfrac{1485}{1200+1485}\cdot12 = \SI{6.6369}{\volt}
+\end{equation}
+%
+Vervolgens kunnen de kortsluitstroom uitrekenen:
+%
+\begin{equation}
+I_k = \dfrac{\num{6.6369}}{\num{3300}} = \num{2.0112e-3} = \SI{2.0112}{\mA}
+\end{equation}
+%
+We vinden de Thévenin-weerstand door de open klemspanning te delen door de kortsluitstroom:
+%
+\begin{equation}
+R_{TH} = \dfrac{U_{AB,open}}{I_k} = \dfrac{\num{8.3077}}{\num{2.0112e-3}} = \SI{4131}{\ohm}
+\end{equation}
+%
+Het vervangingsnetwerk bestaat dus uit een spanningsbron van \SI{8.3077}{\volt} en een serieweerstand van \SI{4131}{\ohm}. Zie figuur~\ref{fig:gelthevenin2}.
+
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V, V<=$\SI{8.3077}{\volt}$] ++(0,2)
+            to [R, R=$\SI{4131}{\ohm}$, -o] ++(2,0) node (a) [right] {A}
+            to [open] ++(0,-2) node (b) [right] {B}
+            to [short, o-.] (0,0)
+;
+\end{tikzpicture}
+\captionof{figure}{Het Thévenin-vervangingsnetwerk.}
+\label{fig:gelthevenin2}
+\end{center}
+\end{example}
 
 
 \section{Het theorema van Norton}
@@ -1617,7 +1673,7 @@ $\Omega$). Voor de spanning over en stroom door $R_3$ kunnen we opstellen:
 %
 \begin{equation}
 \begin{split}
-U_{xb} &= (R_1//R_3)\cdot I \\
+U_{xb} &= (R_1\parallel R_3)\cdot I \\
 I_{xb} &= \dfrac{R_1}{R_1+R_3}\cdot I
 \end{split}
 \end{equation}
@@ -1627,7 +1683,7 @@ de deelstromen en deelspanningen op te tellen:
 %
 \begin{equation}
 \begin{split}
-U_x &= U_{xa} + U_{xb} = \dfrac{R_3}{R_1+R_3}\cdot U + (R_1//R_3)\cdot I \\
+U_x &= U_{xa} + U_{xb} = \dfrac{R_3}{R_1+R_3}\cdot U + (R_1\parallel R_3)\cdot I \\
 I_x &= I_{xb} + I_{xb} = \dfrac{U}{R_1+R_3} + \dfrac{R_1}{R_1+R_3}\cdot I
 \end{split}
 \end{equation}
@@ -1713,7 +1769,7 @@ we opstellen:
 %
 \begin{equation}
 \begin{split}
-U_{xb} &= (\num{6}//\num{3})\cdot\dfrac{1}{2}  = \SI{1}{\volt} \\
+U_{xb} &= (\num{6}\parallel\num{3})\cdot\dfrac{1}{2}  = \SI{1}{\volt} \\
 I_{xb} &= \dfrac{\num{6}}{\num{3}+\num{6}}\cdot\dfrac{1}{2} = \frac{1}{3}\si{\ampere}
 \end{split}
 \end{equation}
@@ -1735,6 +1791,120 @@ P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\si{\wa
 
 
 \section{Gestuurde bronnen}
+
+Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afhankelijke} of \textsl{gestuurde} bronnen bevatten. Er zijn vier vormen mogelijk van gestuurde bronnen:
+
+\begin{itemize}
+\item De spanningsgestuurde spanningsbron (Engels: voltage controlled voltage source, afgekort vcvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vcvs}. De spanning van deze bron is afhankelijk van een (andere) spanning in het netwerk. De parameter $a$ is de versterkingsfactor en is dimensieloos;
+\item De stroomgestuurde spanningsbron (Engels: current controlled voltage source, afgekort ccvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2ccvs}. De spanning van deze bron is afhankelijk van een stroom in het netwerk. De parameter $b$ is de versterkingsfactor en heeft de dimensie \si{\ohm}. Een andere naam voor dit netwerkelement is \textsl{transimpedantieversterker};
+\item De spanningsgestuurde stroombron (Engels: voltage controlled current source, afgekort vccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vccs}. De stroom van deze bron is afhankelijk van een spanning in het netwerk. De parameter $c$ is de versterkingsfactor en heeft de dimensie \si{\siemens}. Een andere naam voor dit netwerkelement is \textsl{transconductantieversterker}.;
+\item De stroomgestuurde stroombron (Engels: current controlled current source, afgekort cccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2cccs}. De stroom van deze bron is afhankelijk van een (andere )stroom in het netwerk. De parameter $d$ is de versterkingsfactor en is dimensieloos.
+\end{itemize}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (0,0) to[cV, v<=$aU$] ++(0,2);
+\end{tikzpicture}
+\caption{Symbool spanningsgestuurde spanningsbron.}
+\label{fig:gelsymbolengestuuurdebronnenen2vcvs}
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (2,0) to[cV, v<=$bI$] ++(0,2);
+%\node[left=2pt] at (I.n) {$I$};
+\end{tikzpicture}
+\caption{Symbool stroomgestuurde spanningsbron.}
+\label{fig:gelsymbolengestuuurdebronnenen2ccvs}
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (4,0) to[cI, i_>=,l=$cU\,$] ++(0,2);
+\end{tikzpicture}
+\caption{Symbool spanningsgestuurde stroombron.}
+\label{fig:gelsymbolengestuuurdebronnenen2vccs}
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (6,0) to[cI, l=$dI\ $] ++(0,2);
+\end{tikzpicture}
+\caption{Symbool stroomgestuurde stroombron.}
+\label{fig:gelsymbolengestuuurdebronnenen2cccs}
+\end{subfigure}
+%\caption{blabla \protect\subref{fig:gelidealespanningsbron} blabla}
+\caption{Symbolen voor gestuurde bronnen.}
+\label{fig:gelsymbolengestuuurdebronnenen2}
+\end{figure}
+
+In netwerkberekeningen worden de parameters $a$, $b$, $c$ en $d$ als constant beschouwd. Hierdoor gedragen de bronnen zich als lineaire netwerkelelementen. Praktische bronnen, zoals diodes en transistoren, zijn over het algemeen niet-lineair maar kunnen over een klein gebied rond het \textsl{werkpunt} als lineair worden beschouwd.
+
+\begin{example}[Netwerk met stroomgestuurde spanningsbron]
+Gegeven is het netwerk in figuur~\ref{fig:gelccvs1}. Bepaal de spanning $U_x$ als functie van $U$, $R_1$, $R_2$ en $b$. Bepaal $U_x$ en $I_x$ voor $U=\SI{12}{\volt}$, $R_1=\SI{285}{\ohm}$, $R_2=\SI{120}{\ohm}$ en $b=\SI{400}{\ohm}$.
+
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) to[V, V<=$U$] ++(0,4)
+            to[short, i=$I_x$] ++(3,0)
+            to[R, R=$R_1$,-*] ++(0,-2) node (1) {} node[below] {$U_x$}
+            to[short] ++(-1,0)
+			to[R,R=$R_2$,-*] ++(0,-2)
+%			to[short] ++(1,0) node (2) {}
+        (1) to[short] ++(1,0)
+			to[cV, v>=$bI_x$] ++(0,-2)
+			to[short,-.] (0,0) 
+;
+\end{tikzpicture}
+\captionof{figure}{Netwerk met stroomgestuurde spanningsbron.}
+\label{fig:gelccvs1}
+\end{center}
+
+De spanning $U_x$ wordt door de stroomgestuurde spanningsbron op een waarde gezet. De spanning over het hele rechterdeel van het netwerk is gelijk aan $U_x$ en de spanning $U_{R1}$ over weerstand $R_1$. Deze spanning is weer afhankelijk van de stroom door $R_1$ en de waarde van $R_1$. Dus geldt:
+%
+\begin{equation}
+U_x = bI_x \qquad\text{en}\qquad U = U_{R1}+U_x \qquad\text{en}\qquad U_{R1} = I_xR_1
+\end{equation}
+%
+De relatie tussen $U$ en $I_x$ kan als volgt bepaald worden:
+%
+\begin{equation}
+U = U_{R1} + U_x = I_xR_1 + bI_x = (R_1+b)I_x
+\end{equation}
+%
+Dus voor $I_x$ geldt:
+%
+\begin{equation}
+I_x = \dfrac{U}{R_1+b}
+\end{equation}
+%
+Vullen we dit in de vergelijking $U_x = bI_x$ in, dan krijgen we:
+\begin{equation}
+U_x = \dfrac{b}{R_1+b}U
+\end{equation}
+%
+Voor de gegeven waarden van de parameters volgt dat:
+%
+\begin{equation}
+\begin{split}
+U_x &= \dfrac{400}{285+400}\cdot12 = \SI{7.0}{volt} \\
+I_x &= \dfrac{12}{285+400} = \num{0.01752} = \SI{17.52}{\mA}
+\end{split}
+\end{equation}
+
+Merk op dat $R_2$ niet in de formules voorkomt. De waarde van $R_2$ is voor het berekenen van $U_x$ en $I_x$ kennelijk niet van belang, maar $R_2$ mag geen kortsluiting veroorzaken. We kunnen de stroom door $R_2$ berekenen:
+%
+\begin{equation}\label{key}
+I_2 = \dfrac{U_x}{R_2} = \dfrac{\num{7.0}}{\num{120}} = \num{0.05839} = \SI{58,39}{\mA}
+\end{equation}
+%
+Deze stroom is de som van $I_x$ en de stroom die de stroomgestuurde spanningsbron levert. De stroom die de stroomgestuurde spanningsbron levert is dus \SI{40.87}{\mA}. 
+\end{example}
+
+
 %\begin{tikzpicture}[bookcircuit]
 %% european controlled current source
 %\draw (0,0) to[cV, v<=$2U$] ++(0,2);
@@ -1748,7 +1918,6 @@ P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\si{\wa
 
 
 
-\fi
 \section{Knooppuntspanningsmethode}
 De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt worden. Bekijk het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis}. Op geen enkele wijze is een combinatie van weerstanden te vereenvoudigen als serie- of parallelweerstand. Dat betekent dat technieken als spanningsdeling en stroomdeling niet kunnen worden toegepast\footnote{Overigens is dit netwerk wel met behulp van een Thévenin-vervangingsschema door te rekenen maar dat kost veel rekenwerk.}.
 
@@ -1774,7 +1943,7 @@ De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt 
 We zoeken dus naar een methode die systematisch het netwerk beschrijft. Met de \textsl{knooppuntspanningsmethode} gaan we uit van de stroomwet van Kirchhoff en de wet van Ohm. Een \textsl{knooppunt} is een punt waar twee of meer netwerkelementen met elkaar verbonden zijn. We nemen één knooppunt als referentiepunt. In principe kan elk knooppunt als referentiepunt dienen, maar het is handig om een uiteinde van een onafhankelijke spanningsbron te kiezen. De andere knooppunten hebben een bekende of onbekende spanning t.o.v.\@ het referentieknooppunt. Vervolgens stellen we voor elk knooppunt met een onbekende spanning de stroomwet van Kirchhoff op: alle stromen naar een knooppunt toe zijn opgeteld 0, maar voor deze methode is het handiger om de stroomwet iets anders te definiëren: alle stromen van een knooppunt af zijn opgeteld 0. We krijgen zo een stelsel vergelijkingen met bekende en onbekende spanningen dat op te lossen is. Het voordeel van deze methode is dat het te implementeren is in een computerprogramma, bijvoorbeeld in een netwerksimulatieprogramma.
 
 \subsection{Onafhankelijke stroombronnen}
-Onafhankelijke stroombronnen kunnen zonder problemen in een netwerk ingepast worden. In de vergelijkingen die het netwerk beschrijven, komen dan de stromen van de stroombronnen te staan. Bij onafhankelijke stroombronnen zijn de stromen constant. In figuur~\ref{fig:gelnetwerkvoornodalanalysis4} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden.
+Onafhankelijke stroombronnen kunnen zonder problemen in een netwerk ingepast worden. In de vergelijkingen die het netwerk beschrijven, komen dan de stromen van de stroombronnen te staan. Bij onafhankelijke stroombronnen zijn de stromen constant. Voor het berekenen van de knooppuntspanningen moeten we eerst een referentieknooppunt kiezen. Dit is het knooppunt onderaan het netwerk. Daarna geven we elk knooppunt een nummer en een bijbehorende (onbekende) spanning. In figuur~\ref{fig:gelnetwerkvoornodalanalysis4} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden. De spanningen zijn respectievelijk $U_1$ (knooppunt 1), $U_2$ (knooppunt 3) en $U_3$ (knooppunt 3).
 
 \begin{figure}[!ht]
 \centering
@@ -1875,7 +2044,7 @@ We kunnen het stelsel vergelijkingen in~\eqref{equ:gellinsolve5} in de matrixnot
 \end{bmatrix*}
 \end{equation}
 %
-Merk op dat in de coëfficiëntenmatrix (links in de vergelijking) steeds de omgekeerden (of \textsl{reciproken}) van de weerstanden. De omgekeerde van de weerstandswaarde wordt geleiding genoemd. De coëfficiëntenmatrix wordt daarom ook wel de geleidingsmatrix genoemd. De vector met de spanningen wordt de onbekendenvector genoemd en de vector met de stromen (het rechterlid) wordt de bekendenvector genoemd.
+Merk op dat in de coëfficiëntenmatrix (links in de vergelijking) steeds de omgekeerden (of \textsl{reciproken}) van de weerstanden voorkomen. De omgekeerde van de weerstandswaarde wordt geleiding genoemd. De coëfficiëntenmatrix wordt daarom ook wel de geleidingsmatrix genoemd. De vector met de spanningen wordt de onbekendenvector genoemd en de vector met de stromen (het rechterlid) wordt de bekendenvector genoemd.
 
 De algemene gedaante voor dit stelsel van vergelijkingen is:
 %
@@ -1900,7 +2069,7 @@ De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de ver
 \item Er zijn evenveel vergelijkingen nodig als dat er onbekende spanningen zijn;
 \item Elke regel bevat de vergelijking voor het betreffende knooppunt;
 \item Voor de elementen op de hoofddiagonaal ($G_{11}$, $G_{22}$ en $G_{33}$, van linksboven naar rechtsonder) geldt dat dit de som is van de geleidingen die direct met het knooppunt van de onbekende spanning verbonden zijn;
-\item Voor de elementen niet op de hoofddiagonaal geldt dat dit de geleiding is die rechtstreeks tussen twee onbekende spanningen is verbonden en is altijd negatief. Deze elementen komen altijd in paren voor, gespiegeld in de hoofddiagonaal: zo is de waarde van knooppunt $G_{32}$ hetzelfde als de waarde van $G_23$. De coëfficiëntenmatrix is dus symmetrisch t.o.v.\@ de hoofddiagonaal;
+\item Voor de elementen niet op de hoofddiagonaal geldt dat dit de geleiding is die rechtstreeks tussen twee onbekende spanningen is verbonden en is altijd negatief. Deze elementen komen altijd in paren voor, gespiegeld in de hoofddiagonaal: zo is de waarde van knooppunt $G_{32}$ hetzelfde als de waarde van $G_{23}$. De coëfficiëntenmatrix is dus symmetrisch t.o.v.\@ de hoofddiagonaal;
 \item Een element niet op de hoofddiagonaal kan 0 zijn; er is dan geen geleiding tussen de twee knooppunten;
 \item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de stromen naar het desbetreffende knooppunt toe.
 \end{itemize}
@@ -1966,7 +2135,7 @@ P_{I2} &= (U_2-U_3)\cdot I_2 = \num{1.86}\cdot\num{5e-3} = \SI{9.28e-3}{\watt} =
 \end{example}
 
 \subsection{Onafhankelijke spanningsbronnen}
-In figuur~\ref{fig:gelnetwerkvoornodalanalysis2} is een netwerk te zien met een onafhankelijke spanningsbron en vijf weerstanden. Om tot een oplossing te komen van de spanningen moeten we een aantal stappen doorlopen. De eerste stap is het kiezen van het referentieknooppunt. In de figuur is dit het knooppunt onderaan, gekozen aan een uiteinde van de onafhankelijke spanningsbron. Vervolgens geven we de knooppunten een nummer en een bijbehorende bekende of onbekende spanningswaarde. De spanning op knooppunt 1 is bekend; die is $U$ \si{\volt}. De spanningen op de knooppunten 2 ($U_2$) en 3 ($U_3$) zijn onbekend. Er zijn twee onbekende spanningen dus we moeten twee vergelijkingen opstellen.
+In figuur~\ref{fig:gelnetwerkvoornodalanalysis2} is een netwerk te zien met een onafhankelijke spanningsbron en vijf weerstanden. We kiezen de `$-$'-uiteinde van de spanningsbron als referentieknooppunt. In de figuur is dit het knooppunt onderaan. Vervolgens geven we de knooppunten een nummer en een bijbehorende bekende of onbekende spanningswaarde. De spanning op knooppunt 1 is bekend; die is $U$ \si{\volt}. De spanningen op de knooppunten 2 ($U_2$) en 3 ($U_3$) zijn onbekend. Er zijn twee onbekende spanningen dus we moeten twee vergelijkingen opstellen.
 
 \begin{figure}[!ht]
 \centering
@@ -2035,7 +2204,7 @@ We hebben nu een stelsel van twee vergelijkingen en twee onbekenden ($U_2$ en $U
 \end{split}
 \end{equation}
 
-We schrijven de onbekende spanningen nu expliciet op als functie van de weerstanden en brengen alle bekende spanningen naar de rechterkant van het isgelijkteken: 
+We schrijven de onbekende spanningen nu expliciet op als functie van de weerstanden en brengen alle bekende stromen naar de rechterkant van het isgelijkteken: 
 %
 %%%\begin{equation}
 %%%\jot=5pt
@@ -2264,3 +2433,8 @@ U_1 \\[1em] U_2\\[1em] U_3\\[1em] I_x
 %
 Met behulp van de matrixrekenkunde vinden we voor de spanningen en de stroom: $U_1 = \SI{7.30}{\volt}$, $U_2 = \SI{-1.30}{\volt}$, $U_3 = \SI{-4.70}{\volt}$ en $I_x = \SI{-3.26}{\ampere}$. Merk op dat de bronstroom $I_x$ negatief is door de keuze van de richting van de stroom.
 \end{example}
+
+\fi
+
+\section{Opgaven}
+\input{book_chap02_ques}
