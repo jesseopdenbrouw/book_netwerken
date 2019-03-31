@@ -1,0 +1,74 @@
+
+\documentclass[a4paper,12pt,fleqn]{book}
+
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}}
+%\usepackage{amssymb}
+\setlength{\mathindent}{1em}
+\DeclareMathSymbol{,}{\mathord}{letters}{"3B}
+\abovedisplayskip=30pt
+\belowdisplayskip=30pt
+\abovedisplayshortskip=30pt
+\belowdisplayskip=30pt
+\input{../book_preamble_tikz}
+
+\begin{document}
+
+Gegeven is het netwerk in figuur XXX. Bepaal het Thèvenin-vervangingsschema.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V, V<=$\SI{12}{\volt}$] ++(0,2)
+            to [R, R=$\SI{1.2}{\kilo\ohm}$, -*] ++(2,0) node (1) {} node [above] {$U_x$}
+			to [R, R=$\SI{2.7}{\kilo\ohm}$, -*] ++(0,-2)
+        (1) to [R, R=$\SI{3.3}{\kilo\ohm}$, -o] ++(2,0) node (a) [right] {A}
+            to [open] ++(0,-2) node (b) [right] {B}
+            to [short, o-.] (0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk voor berekenen Thèvenin-vervangingsschema.}
+\end{figure}
+
+De open klemspanning tussen de punten $A$ en $B$ bedraagt:
+%
+\begin{equation}
+U_{TH} = U_{AB,open} = \dfrac{2700}{1200+2700}12 = \num{0.6923}\cdot12 = \SI{8.3077}{\volt}
+\end{equation}
+%
+Om de kortsluitstroom tussen de punten $A$ en $B$ te berekenen moet punt $A$ met $B$ verbonden worden middels een kortsluiting. Om de stroom voor de weerstand van \SI{3.3}{\kilo\ohm} te berekenen, bepalen we eerst de spanning $U_x$:
+%
+\begin{equation}
+U_{x,kort} = \dfrac{2700\parallel3300}{1200 + (2700\parallel3300)}\cdot12 = \dfrac{1485}{1200+1485}\cdot12 = \SI{6.6369}{\volt}
+\end{equation}
+%
+Vervolgens kunnen de kortsluitstroom uitrekenen:
+%
+\begin{equation}
+I_k = \dfrac{\num{6.6369}}{\num{3300}} = \num{2.0112e-3} = \SI{2.0112}{\mA}
+\end{equation}
+%
+We vinden de Thèvenin-weerstand door de open klemspanning te delen door de kortsluitstroom:
+%
+\begin{equation}
+R_{TH} = \dfrac{U_{AB,open}}{I_k} = \dfrac{\num{8.3077}}{\num{2.0112e-3}} = \SI{4131}{\ohm}
+\end{equation}
+%
+Het vervangingsschema bestaat dus uit een spanningsbron van \SI{8.3077}{\volt} en een serieweerstand van \SI{4131}{\ohm}:
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V, V<=$\SI{8.3077}{\volt}$] ++(0,2)
+            to [R, R=$\SI{4131}{\ohm}$, -o] ++(2,0) node (a) [right] {A}
+            to [open] ++(0,-2) node (b) [right] {B}
+            to [short, o-.] (0,0)
+;
+\end{tikzpicture}
+\caption{Het Thèvenin-vervangingsschema.}
+\end{figure}
+
+
+\end{document}
