@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%   GELIJKSPANNINGSTHEORIE - OPGAVEN
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{enumerate}[labelindent=0pt,labelwidth=\widthof{8.88.\ },label=\textbf{\thechapter.\arabic*.},leftmargin=!,ref=\thechapter.\arabic*]
+
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\setcounter{lstlisting}{0}
+\makeatletter 
+\renewcommand{\thefigure}{P\thechapter.\@arabic\c@figure}
+\renewcommand{\thetable}{P\thechapter.\@arabic\c@table}
+\renewcommand{\theequation}{P\thechapter.\@arabic\c@equation}
+\renewcommand{\thelstlisting}{P\thechapter.\@arabic\c@lstlisting}
+\makeatother
+
+
+\item
+\label{que:gellatticenetwork}
+
+Gegeven het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de vervangingsweerstand tussen punten A en B.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) node [left] {A}
+	to[short,*-*]                  ++(1,0) node (1) {}
+    to[R, R=\SI{60}{\kilo\ohm},-*] ++ (0,-2)
+(1) to[R, R=\SI{35}{\kilo\ohm},o-] ++(2,0) node (2) {}
+    to[R, R=\SI{50}{\kilo\ohm},-*] ++(0,-2)
+(2) to[R, R=\SI{25}{\kilo\ohm},-*] ++(2,0) node (3) {}
+    to[R, R=\SI{50}{\kilo\ohm},-*] ++(0,-2)
+(3) to[R, R=\SI{30}{\kilo\ohm},-*] ++(2,0)
+    to[R, R=\SI{20}{\kilo\ohm}]    ++(0,-2)
+	to[short,-*]                   (0,-2) node (4) [left] {B}
+;
+\end{tikzpicture}
+\caption{Laddernetwerk van weerstanden.}
+\label{fig:gellatticenetwork}
+\end{figure}
+
+\iffalse
+Dit weerstandnetwerk wordt ook wel \textsl{laddernetwerk} genoemd en bestaat uit een combinatie van parallel- en serieweerstanden. De niet-vereenvoudigde formule is:
+\begin{equation}
+ R_{AB} = 60\parallel(35+(50\parallel(25+50\parallel(30+20)))) \qquad\text{(alle waarden in \si{\kilo\ohm})}
+\end{equation}
+waarbij $\parallel$ de zogenaamde paralleloperator is. Het uitrekenen is eenvoudig door steeds serie- en parallelberekeningen uit te voeren. De achterste twee weerstanden (\SI{20}{\kilo\ohm}+\SI{30}{\kilo\ohm}) levert \SI{50}{\kilo\ohm} op en dat staat weer parallel aan de achterste \SI{50}{\kilo\ohm}. Dus dat levert \SI{25}{\kilo\ohm} op. Dat staat dan weer in serie met de \SI{25}{\kilo\ohm} (midden-boven) en levert dus weer \SI{50}{\kilo\ohm} etc. Uitwerken levert uiteindelijk op:
+\begin{equation}
+R_{AB} = \SI{30}{\kilo\ohm}
+\end{equation}
+\fi
+
+\end{enumerate}
