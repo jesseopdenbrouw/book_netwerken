@@ -1897,7 +1897,7 @@ I_x &= \dfrac{12}{285+400} = \num{0.01752} = \SI{17.52}{\mA}
 
 Merk op dat $R_2$ niet in de formules voorkomt. De waarde van $R_2$ is voor het berekenen van $U_x$ en $I_x$ kennelijk niet van belang, maar $R_2$ mag geen kortsluiting veroorzaken. We kunnen de stroom door $R_2$ berekenen:
 %
-\begin{equation}\label{key}
+\begin{equation}
 I_2 = \dfrac{U_x}{R_2} = \dfrac{\num{7.0}}{\num{120}} = \num{0.05839} = \SI{58,39}{\mA}
 \end{equation}
 %
@@ -1915,6 +1915,7 @@ Deze stroom is de som van $I_x$ en de stroom die de stroomgestuurde spanningsbro
 %%\draw (8,2) to[cI,l=$2U_x$] ++(2,0);
 %\end{tikzpicture}
 
+\fi
 
 
 
@@ -1933,14 +1934,17 @@ De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt 
             to[R, R=$R_5$]     ++(4,0)	
 			to[short]          ++(0,-1)
 		(2) to[R, R=$R_3$, -*] ++(0,-2)
-			to node[sground]{} ++(0,-0.0)
+			to node[sground]{} ++(0,0)
+%        (3) to[I, l=$I$, invert]       ++(2,0)
 ;
 \end{tikzpicture}
 \caption{Netwerk met spanningsbron en weerstanden.}
 \label{fig:gelnetwerkvoornodalanalysis}
 \end{figure}
 
-We zoeken dus naar een methode die systematisch het netwerk beschrijft. Met de \textsl{knooppuntspanningsmethode} gaan we uit van de stroomwet van Kirchhoff en de wet van Ohm. Een \textsl{knooppunt} is een punt waar twee of meer netwerkelementen met elkaar verbonden zijn. We nemen één knooppunt als referentiepunt. In principe kan elk knooppunt als referentiepunt dienen, maar het is handig om een uiteinde van een onafhankelijke spanningsbron te kiezen. De andere knooppunten hebben een bekende of onbekende spanning t.o.v.\@ het referentieknooppunt. Vervolgens stellen we voor elk knooppunt met een onbekende spanning de stroomwet van Kirchhoff op: alle stromen naar een knooppunt toe zijn opgeteld 0, maar voor deze methode is het handiger om de stroomwet iets anders te definiëren: alle stromen van een knooppunt af zijn opgeteld 0. We krijgen zo een stelsel vergelijkingen met bekende en onbekende spanningen dat op te lossen is. Het voordeel van deze methode is dat het te implementeren is in een computerprogramma, bijvoorbeeld in een netwerksimulatieprogramma.
+We zoeken dus naar een methode die systematisch het netwerk beschrijft. Met de \textsl{knooppuntspanningsmethode} gaan we uit van de stroomwet van Kirchhoff en de wet van Ohm. Een \textsl{knooppunt} is een punt waar twee of meer netwerkelementen met elkaar verbonden zijn. We nemen één knooppunt als referentiepunt. In principe kan elk knooppunt als referentiepunt dienen, maar het is handig om een uiteinde van een onafhankelijke spanningsbron te kiezen (we zullen later zien waarom). De andere knooppunten hebben een bekende of onbekende spanning t.o.v.\@ het referentieknooppunt. Vervolgens stellen we voor elk knooppunt met een onbekende spanning de stroomwet van Kirchhoff op: alle stromen naar een knooppunt toe zijn opgeteld 0, maar voor deze methode is het handiger om de stroomwet iets anders te definiëren: alle stromen van een knooppunt af zijn opgeteld 0. We krijgen zo een stelsel vergelijkingen met bekende en onbekende spanningen dat op te lossen is. Het voordeel van deze methode is dat het te implementeren is in een computerprogramma, bijvoorbeeld in een netwerksimulatieprogramma.
+
+De knooppuntspanningsmethode werkt vooral goed voor netwerken met stroombronnen. Als er in het netwerk spanningsbronnen zijn die tussen twee onbekende spanningen zijn geplaatst, moet het stelsel van vergelijkingen worden uitgebreid. De stroom die de spanningsbron levert is namelijk onbekend, dus die kan niet zonder meer gebruikt worden in de stroomvergelijkingen. Er zijn dan extra (spannings-)vergelijkingen nodig om tot een oplosbaar stelsel van vergelijkingen te komen.
 
 \subsection{Onafhankelijke stroombronnen}
 Onafhankelijke stroombronnen kunnen zonder problemen in een netwerk ingepast worden. In de vergelijkingen die het netwerk beschrijven, komen dan de stromen van de stroombronnen te staan. Bij onafhankelijke stroombronnen zijn de stromen constant. Voor het berekenen van de knooppuntspanningen moeten we eerst een referentieknooppunt kiezen. Dit is het knooppunt onderaan het netwerk. Daarna geven we elk knooppunt een nummer en een bijbehorende (onbekende) spanning. In figuur~\ref{fig:gelnetwerkvoornodalanalysis4} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden. De spanningen zijn respectievelijk $U_1$ (knooppunt 1), $U_2$ (knooppunt 3) en $U_3$ (knooppunt 3).
@@ -2074,7 +2078,7 @@ De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de ver
 \item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de stromen naar het desbetreffende knooppunt toe.
 \end{itemize}
 
-Als de maxtrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
+Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
 
 \begin{example}[Netwerk met onafhankelijke stroombronnen]
 In figuur~\ref{fig:gelnetwerkvoornodalanalysis5} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden. Bepaal de spanningen op de knooppunten en de vermogens van de stroombronnen.
@@ -2434,7 +2438,143 @@ U_1 \\[1em] U_2\\[1em] U_3\\[1em] I_x
 Met behulp van de matrixrekenkunde vinden we voor de spanningen en de stroom: $U_1 = \SI{7.30}{\volt}$, $U_2 = \SI{-1.30}{\volt}$, $U_3 = \SI{-4.70}{\volt}$ en $I_x = \SI{-3.26}{\ampere}$. Merk op dat de bronstroom $I_x$ negatief is door de keuze van de richting van de stroom.
 \end{example}
 
-\fi
+\subsection{Gestuurde bronnen}
 
-\section{Opgaven}
-\input{book_chap02_ques}
+\begin{example}[Operational amplifier]
+De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \textsl{opamp} (Nederlands), is een bijzonder nuttige component in de elektrotechniek. Het wordt gebruikt in signaalverwerkende elektronica. Het gedrag van een opamp kan zeer goed benaderd worden door drie netwerkelementen: een ingangsweerstand, een uitgangsweerstand en een spanningsgestuurde spanningsbron. Wat een opamp in feite doet is de spanning tussen twee ingangsklemmen, waartussen de ingangsweerstand is geplaatst, een groot aantal keer versterken. In het uitgangsnetwerk is de uitgangsweerstand opgenomen. Het model is te vinden in figuur~\ref{fig:gelmodelopamp}.
+
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[short,o-] ++(1,0)
+            to[R=$R_{in}$, v=$U_{in}$] ++(0,-2) node (1) {}
+            to[short,-o] ++(-1,0)
+            to[open] ++(5.5,2) %node (3) {} node[right] {$U_{2}$}
+            to[R=$R_{out}$,o-] ++(-2,0)
+            to[cV, v_>=$aU_{in}$] ++(0,-2) node (2) {}
+            to[short,-o] ++(2,0)
+        (1) to[short,*-*] (2)
+;
+\end{tikzpicture}
+\captionof{figure}{Een vereenvoudigd model van een opamp.}
+\label{fig:gelmodelopamp}
+\end{center}
+
+We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinverter}. Voor het opstellen van de vergelijkingen is het handig om met geleiding te werken en niet met weerstanden. Bij het gebruik van weerstanden krijgen we steeds breuken, bij gebruik van geleidingen niet. Verder moet opgemerkt worden dat de `$-$'-ingang van de ingangsweerstand met $U_x$ verbonden is en de `+'-ingang met de referentie.
+
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=$U$]        ++(0,2) node[above] {$U_1$}
+            to[R, R=$G_1$, -*]   ++(2,0) node (2) {} node[below] {$U_x$}
+        (2) to[short] ++(1,0)
+            to[open] ++(0,-2)
+            to[R, a=$G_{in}$, v^<=$U_{in}$,*-] ++(0,2) 
+        (2) to[short] ++(0,1)
+            to[R=$G_2$] ++(5.5,0)
+            to[short, -*] ++(0,-1)  node (3) {} node[right] {$U_{2}$}
+            to[R=$G_{out}$]  ++(-2,0)  node [above] {$U_y$}
+            to[cV, v_>=$aU_{in}$] ++(0,-2)
+            to[short, -.] (0,0)
+;
+\end{tikzpicture}
+\captionof{figure}{Een netwerk van een vereenvoudigd model van een opamp.}
+\label{fig:gelmodelopampinverter}
+\end{center}
+
+We willen graag weten wat de uitgangsspanning $U_2$ is voor een bepaalde ingangsspanning $U_1$. We stellen eerst de vergelijkingen op die nodig zijn om dit netwerk te beschrijven.
+
+Voor het knooppunt bij $U_x$ geldt:
+%
+\begin{equation}
+(U_x-U_1)G_1 + (U_x-0)G_{in} + (U_x-U_2)G_2 = 0
+\end{equation}
+%
+Voor het knooppunt bij $U_2$ geldt:
+%
+\begin{equation}
+(U_2-U_x)G_2 + (U_2-U_y)G_{out} = 0
+\end{equation}
+%
+Verder is direct te zien dat de spanning op het knooppunt bij $U_y$ wordt gerealiseerd door de gestuurde spanningsbron:
+%
+\begin{equation}
+U_y = aU_{in} = a(0-U_x) = -aU_x
+\end{equation}
+%
+Als we het stelsel vergelijkingen nu opschrijven en $U_y$ invullen dan krijgen we:
+%
+\begin{subequations}
+\begin{align}
+\label{equ:gelopampa}
+(G_1+G_{in}+G_2)U_x- G_2U_2 &= G_1U_1 \\
+\label{equ:gelopampb}
+(-G_2+aG_{out})U_x + (G_2+G_{out})U_2 &= 0
+\end{align}
+\end{subequations}
+%
+We kunnen via~\eqref{equ:gelopampb} $U_x$ expliciet maken:
+%
+\begin{equation}
+\label{equ:gelopampux}
+U_x - -\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2
+\end{equation}
+%
+We kunnen vergelijking~\eqref{equ:gelopampa} dan schrijven als:
+%
+\begin{equation}
+-(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2- G_2U_2 = G_1U_1 \\
+\end{equation}
+%
+We hebben nu een vergelijking waar alleen $U_1$ en $U_2$, de geleidingen en de versterkingsfactor $a$ in voorkomen. We kunnen $U_2$ nu expliciet schrijven:
+%
+\begin{equation}
+\label{equ:gelopampreal}
+U_2 = -\dfrac{G_1}{(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}+G_2}U_1
+\end{equation}
+%
+Laten we nu eens kijken naar de term:
+%
+\begin{equation}
+(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}
+\end{equation}
+%
+De ingangsweerstand $R_{i}$ is in de regel zeer groot zodat $G_{in}$ zeer klein is. Dat betekent dat de factor
+$G_1+G_{in}+G_2$ vereenvoudigd kan worden tot $G_1+G_2$. De versterkingsfactor $a$ is zeer groot en de uitgangsweerstand $R_{out}$ is klein (dus $G_{out}$ is groot). In de breuk is de factor $-G_2+aG_{out}$ dus dominant. We kunnen dan stellen dat:
+%
+\begin{equation}
+(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}} \approx 0
+\end{equation}
+%
+Daarmee vereenvoudigd~\ref{equ:gelopampreal} zich tot:
+%
+\begin{equation}
+U_2 = -\dfrac{G_1}{G_2}U_1
+\end{equation}
+of uitgedrukt in de weerstandswaarden:
+%
+\begin{equation}
+U_2 = -\dfrac{R_2}{R_1}U_1
+\end{equation}
+%
+De spanning $U_2$ kan dus met alleen de weerstanden $R_1$ en $R_2$ vastgelegd worden. Een zeer praktische schakeling! Merk wel op dat $U_2$ negatief is bij een positieve spanning voor $U_1$ en positief is bij een negatieve spanning voor $U_1$. Deze schakeling wordt de \textsl{inverterende versterker} genoemd. Overigens blijkt uit~\eqref{equ:gelopampux} dat de spanning $U_x$ erg klein is. We hebben nu een \textsl{virtueel aardpunt} gemaakt. De spanningsbron $U$ ``ziet'' dus alleen de weerstand $R_1$ omdat de spanning $U_x$ ongeveer \SI{0}{\volt} is.
+
+\begin{center}
+\captionof{table}{Enige kenmerken van opamps (bij gelijkstroom).}
+\begin{tabular}{lSSS[table-format = 4.1,table-align-text-post = false]l}
+\toprule
+Type & {$R_{in}$ (\si{\ohm})} & {$a$} & {$R_{out}$ (\si{\ohm})} & Ingangstype \\
+\midrule
+uA741   & 200e3 & 200e3 & 75  & bipolair \\
+NE5532  & 300e3 & 100e3 & 0.3 & bipolair\\
+TL072   & 1e12  & 200e3 & 200 & FET \\
+LT1028  & 300e3 & 20e6  & 80  & bipolair \\
+OPA177E & 200e6 & 12e6  & 60  & FET \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+OPERATIONAL TRANSCONDUCTANCE AMPLIFIER
+
+\end{example}
+
+%\section{Opgaven}
+%\input{book_chap02_ques}
