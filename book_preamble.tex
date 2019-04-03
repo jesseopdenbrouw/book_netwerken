@@ -61,7 +61,7 @@
                                                                
 %% Use of dashed lines in tables
 \usepackage{tabu}
-%\usepackage{booktabs}
+\usepackage{booktabs}
 \usepackage{multirow}
 
 %% Use array's
@@ -526,7 +526,7 @@
 \colorlet{infoboxline}{red!55!black} % Global example color
 \colorlet{infoboxbg}{brown!10}
 \colorlet{infoboxbgtitle}{brown!20}
-\newtcolorbox{infobox}[1]{title=#1,colback=infoboxbg,colframe=infoboxline,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt}
+\newtcolorbox{infobox}[1][]{title=#1,colback=infoboxbg,colframe=infoboxline,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt,parbox=false}
 
 \colorlet{colorexample}{red!55!black} % Global example color
 \newcounter{example}[chapter]
