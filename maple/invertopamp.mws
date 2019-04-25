@@ -1,0 +1,60 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Output" -1 
+11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 
+0 0 0 1 0 1 0 2 2 0 1 }}
+{SECT 0 {EXCHG {PARA 0 "" 0 "" {TEXT -1 139 "Dit is een Maple file om \+
+de overdracht van een inverterende opamp te berekenen. R1 is de ingaan
+de weerstand, R2 is de terugkoppelweerstand." }}{PARA 0 "" 0 "" {TEXT 
+-1 86 "Rin is de ingangsweerstand, Rout is de uitgangsweerstand en a i
+s de versterkingsfactor" }}{PARA 0 "" 0 "" {TEXT -1 0 "" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 10 "R1:=10000;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#R1
+G\"&++\"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "R2:=20000;" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#R2G\"&++#" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 14 "Rin := 200000;" }}{PARA 11 "" 1 "" {XPPMATH 20 "
+6#>%$RinG\"'++?" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "Rout := \+
+75;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%RoutG\"#v" }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 12 "a := 200000;" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%\"aG\"'++?" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 
+11 "G1 := 1/R1;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#G1G#\"\"\"\"&++
+\"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "G2 := 1/R2;" }}{PARA 
+11 "" 1 "" {XPPMATH 20 "6#>%#G2G#\"\"\"\"&++#" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 11 "Gin:=1/Rin;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>
+%$GinG#\"\"\"\"'++?" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "Gout
+:=1/Rout;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%GoutG#\"\"\"\"#v" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 48 "term := (G1+Gin+G2)/(G2)*(G2
++Gout)/(-G2+a*Gout);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%termG#\"&$*
+[#\"+q*****f\"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 12 "evalf(ter
+m);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$\"+HD\"eb\"!#9" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 25 "A := -G1/G2*(1/(1+term));" }}{PARA 
+11 "" 1 "" {XPPMATH 20 "6#>%\"AG#!+S*****>$\"+j[-+;" }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 9 "evalf(A);" }}{PARA 11 "" 1 "" {XPPMATH 20 
+"6#$!+%))o***>!\"*" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "Atinf
+ := -R2/R1;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%&AtinfG!\"#" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 27 "thediff := (Atinf-A)/Atinf;
+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%(thediffG#\"&$*[#\"+j[-+;" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "evalf(thediff);" }}{PARA 11 
+"" 1 "" {XPPMATH 20 "6#$\"+C$)yb:!#9" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "18 0 0" 0 }
+{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }
