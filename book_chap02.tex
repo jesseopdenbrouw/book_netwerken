@@ -302,10 +302,10 @@ In veel berekeningen wordt gerekend met de reciproke (of omgekeerde) waarde van 
 de \textsl{geleidbaarheid} of \textsl{geleiding} genoemd. De eenheid van geleiding is siemens (\si{\siemens}).
 Meestal gebruiken we voor geleiding de letter $G$:
 \begin{equation}
+\label{equ:geleiding}
 G = \dfrac{1}{R}
 \end{equation}
-In de literatuur wordt ook wel de naam mho (omgekeerde van ohm) gebruikt en als symbool wordt ook wel \si{\mho}
-of \si{\per\ohm} gebruikt.
+In de literatuur wordt ook wel de naam mho (omgekeerde van ohm) gebruikt en als symbool wordt ook wel \si{\mho} of \si{\per\ohm} gebruikt.
 
 
 \section{Serieschakeling van weerstanden}
@@ -460,6 +460,20 @@ Dus geldt voor $R_p$:
 R_p = \dfrac{1}{\SI{0,572e-3}{\siemens}} = \SI{1,748}{\kilo\ohm}
 \end{equation}
 \end{example}
+
+\section{Serie- en parallelschakeling van geleidingen}
+Met behulp van~\eqref{equ:geleiding} kunnen we de formules afleiden voor serie- en parallelschakeling van geleidingen. Voor serieschakeling van geleidingen geldt:
+%
+\begin{equation}
+\dfrac{1}{G_s} = \dfrac{1}{G_1} + \dfrac{1}{G_2} + \cdots + \dfrac{1}{G_n}
+\end{equation}
+%
+Voor parallelschakeling van geleidingen geldt:
+%
+\begin{equation}
+G_p = G_1 + G_2 + \cdots + G_n
+\end{equation}
+
 
 \section{Spanningsdeling}
 In figuur~\ref{fig:gelspanningsdeling} is een schema te zien van een bron met twee in
@@ -917,8 +931,11 @@ de waarde van $R_u$ voor maximale vermogensoverdracht en bereken het overgebrach
 \end{figure}
 
 Oplossing: maximaal vermogensoverdracht bij $R_u=R_i=\SI{4.5}{\ohm}$. Het gedissipeerde vermogen
-in $R_u$ is: $P_{max} = \dfrac{U^2}{4R_i} = \dfrac{81}{\num{4}\cdot\num{4.5}} = \SI{18}{\watt}$
-\end{example}
+in $R_u$ is:
+%
+\begin{equation}
+P_{max} = \dfrac{U^2}{4R_i} = \dfrac{81}{\num{4}\cdot\num{4.5}} = \SI{18}{\watt}
+\end{equation}\end{example}
 
 
 \section{De belastingskarakteristiek}
@@ -1789,6 +1806,9 @@ P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\si{\wa
 \end{equation}
 \end{example}
 
+\fi
+
+\iffalse
 
 \section{Gestuurde bronnen}
 
@@ -1797,8 +1817,8 @@ Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afh
 \begin{itemize}
 \item De spanningsgestuurde spanningsbron (Engels: voltage controlled voltage source, afgekort vcvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vcvs}. De spanning van deze bron is afhankelijk van een (andere) spanning in het netwerk. De parameter $a$ is de versterkingsfactor en is dimensieloos;
 \item De stroomgestuurde spanningsbron (Engels: current controlled voltage source, afgekort ccvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2ccvs}. De spanning van deze bron is afhankelijk van een stroom in het netwerk. De parameter $b$ is de versterkingsfactor en heeft de dimensie \si{\ohm}. Een andere naam voor dit netwerkelement is \textsl{transimpedantieversterker};
-\item De spanningsgestuurde stroombron (Engels: voltage controlled current source, afgekort vccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vccs}. De stroom van deze bron is afhankelijk van een spanning in het netwerk. De parameter $c$ is de versterkingsfactor en heeft de dimensie \si{\siemens}. Een andere naam voor dit netwerkelement is \textsl{transconductantieversterker}.;
-\item De stroomgestuurde stroombron (Engels: current controlled current source, afgekort cccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2cccs}. De stroom van deze bron is afhankelijk van een (andere )stroom in het netwerk. De parameter $d$ is de versterkingsfactor en is dimensieloos.
+\item De spanningsgestuurde stroombron (Engels: voltage controlled current source, afgekort vccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vccs}. De stroom van deze bron is afhankelijk van een spanning in het netwerk. De parameter $c$ is de versterkingsfactor en heeft de dimensie \si{\siemens}. Een andere naam voor dit netwerkelement is \textsl{transconductantieversterker};
+\item De stroomgestuurde stroombron (Engels: current controlled current source, afgekort cccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2cccs}. De stroom van deze bron is afhankelijk van een (andere) stroom in het netwerk. De parameter $d$ is de versterkingsfactor en is dimensieloos.
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -1841,13 +1861,13 @@ Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afh
 \label{fig:gelsymbolengestuuurdebronnenen2}
 \end{figure}
 
-In netwerkberekeningen worden de parameters $a$, $b$, $c$ en $d$ als constant beschouwd. Hierdoor gedragen de bronnen zich als lineaire netwerkelelementen. Praktische bronnen, zoals diodes en transistoren, zijn over het algemeen niet-lineair maar kunnen over een klein gebied rond het \textsl{werkpunt} als lineair worden beschouwd.
+In netwerkberekeningen worden de parameters $a$, $b$, $c$ en $d$ als constant beschouwd. Hierdoor gedragen de bronnen zich als lineaire netwerkelelementen. Praktische bronnen, zoals transistoren, zijn over het algemeen niet-lineair maar kunnen over een klein gebied rond het \textsl{werkpunt} als lineair worden beschouwd.
 
 \begin{example}[Netwerk met stroomgestuurde spanningsbron]
-Gegeven is het netwerk in figuur~\ref{fig:gelccvs1}. Bepaal de spanning $U_x$ als functie van $U$, $R_1$, $R_2$ en $b$. Bepaal $U_x$ en $I_x$ voor $U=\SI{12}{\volt}$, $R_1=\SI{285}{\ohm}$, $R_2=\SI{120}{\ohm}$ en $b=\SI{400}{\ohm}$.
+Gegeven is het netwerk in figuur~\ref{fig:gelccvs1}. Bepaal de spanning $U_x$ als functie van $U$, $R_1$, $R_2$ en $b$. Bepaal $U_x$ en $I_x$ voor $U=\SI{12}{\volt}$, $R_1=\SI{285}{\ohm}$, $R_2=\SI{120}{\ohm}$ en $b=\SI{400}{\ohm}$ (merk op dat $b$ de dimensie \si{\ohm} heeft).
 
 \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, V<=$U$] ++(0,4)
             to[short, i=$I_x$] ++(3,0)
             to[R, R=$R_1$,-*] ++(0,-2) node (1) {} node[below] {$U_x$}
@@ -1904,6 +1924,95 @@ I_2 = \dfrac{U_x}{R_2} = \dfrac{\num{7.0}}{\num{120}} = \num{0.05839} = \SI{58,3
 Deze stroom is de som van $I_x$ en de stroom die de stroomgestuurde spanningsbron levert. De stroom die de stroomgestuurde spanningsbron levert is dus \SI{40.87}{\mA}. 
 \end{example}
 
+\begin{example}[De bipolaire transistor als transimpedantieversterker]
+In dit voorbeeld bespreken we de bipolaire transistor als stroomgestuurde spanningsversterker. We bespreken hier alleen de zogenoemde NPN-transistor. Het symbool en het vereenvoudigde model voor gelijkstroomnetwerken is te zien in figuur~\ref{fig:gelnpntransistor1}. De transistor heeft drie aansluitpunten: de \textsl{basis} (b), de \textsl{collector} (c) en de \textsl{emitter} (e). Als in de basis een (kleine) stroom wordt gestuurd, dan zal transistor via de collector een grotere stroom leveren. De verhouding tussen de collectorstroom en de basisstroom wordt aangegeven met de parameter $\beta$ (in de literatuur wordt ook wel $H_{FE}$ gebruikt). Beide stromen verlaten de transistor via de emitter.
+
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) node[right] {$T$} node[npn] (npn) {}
+                      (npn.E) node[right] {e}
+                      (npn.C) node[right] {c}
+                      (npn.B) node[left] {b}
+;
+\draw (npn.C)  ++(3,.15) node (0) {}
+                       to[short, i=$I_b$] ++(1,0) node (1) {} node [right] {b}
+                       to[diode, l=D,] ++(0,-1.5) node (1a) {}
+(1) ++(1.5,0) node (2) {} node[left] {c}
+                       to[cI, l=$\beta I_b$] ++(0,-1.5)
+                       to[short] (1a) 
+       (1a) ++(0.75,0) node[above] {e}
+                       to[short, i=$I_e$, *-] ++(0,-0.5)
+                   (2) to[short, i<=$I_c$] ++(1,0)
+;
+\end{tikzpicture}
+\captionof{figure}{Schemasymbool en vereenvoudigd model van de bipolaire NPN-transistor.}
+\label{fig:gelnpntransistor1}
+\end{center}
+
+De stromen $I_c$ en $I_e$ laten zich als volgt beschrijven:
+%
+\begin{equation}
+\begin{split}
+I_c &= \beta I_c \\
+I_e &= I_c + I_b = (\beta + 1)I_b
+\end{split}
+\end{equation}
+%
+De transistor is een passieve component. Met name de stroombron kan niet werken zonder dat er een spanning over de colletor-emitterovergang staat. De transistor regelt de collectorstroom die door de spanningsbron geleverd wordt.
+De basis-emitterovergang gedraagt zich als een diode. De spanning-stroomrelatie is niet-lineair. Vandaar dat we de transistor sturen met een stroombron (in de praktijk kan ook een spanningsbron gebruikt worden met een voorschakelweerstand).
+
+In figuur~\ref{fig:gelnpntransistor2} is een transistor geschakeld als stroomgestuurde spanningsversterker, ook wel transimpedantieversterker genoemd. Aan de basis sluiten we een stroombron aan met een constante stroom van \SI{100}{\micro\ampere}. Aan de collector is een weerstand van \SI{500}{\ohm} gekoppeld in serie met een spanningsbron van \SI{12}{\volt}. De stroomversterkingsfactor $\beta$ is~100.
+
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) node (0) {}
+                       to[I, l=\SI{100}{\micro\ampere}] ++(0,2)
+                       to[short, i=$I_b$] ++(1.5,0) node (1) {} node [right] {b}
+                       to[diode, l=D, -*] ++(0,-2) node (1a) {}
+%                       to[short,-*] ++(1.5,0)
+(1) ++(1.5,0) node (2) {} node[left] {c}
+                       to[cI, l=$100 I_b$, -*] ++(0,-2)
+                   (2) to[R=\SI{500}{\ohm}, i<=$I_c$] ++(2,0)
+                       to[V=\SI{12}{\volt}] ++(0,-2)
+                       to[short] (0)
+(1a) ++(0.75,0) node[above] {e}
+%                       to[short,-*] ++(0,0)
+                       to[short,*-] ++(0,-0.2)
+                       node[sground] {}
+;
+\end{tikzpicture}
+\captionof{figure}{Eenvoudig netwerk met een bipolaire NPN-transistor.}
+\label{fig:gelnpntransistor2}
+\end{center}
+
+De collectorstroom is:
+%
+\begin{equation}
+I_c = 100I_b = \num{100}\cdot\num{100e-6} = \SI{10}{\milli\ampere}
+\end{equation}
+%
+De collectorstroom vloeit ook door de weerstand van \SI{500}{\ohm}. De spanningsval over deze weerstand is:
+%
+\begin{equation}
+U_{500\Omega} = \SI{10e-3}\cdot{500} = \SI{5}{\volt}
+\end{equation}
+%
+De spanning op de collector (t.o.v.\@ de referentie) is dan \SI{7}{\volt}. We kunnen de relatie van de ingangsstroom naar de collectorspanning als volgt beschrijven:
+%
+\begin{equation}
+U_c = 12 - \num{50000}I_b
+\end{equation}
+%
+In de formule staat een minteken. Een grotere stroom in de basis leidt tot een lagere spanning op de collector. Overigens kan de collectorspanning nooit lager worden dan de emitterspanning. De maximale collectorstroom is te berekenen met:
+%
+\begin{equation}
+I_{c,max} = \dfrac{12}{500} = \SI{24}{\milli\ampere}
+\end{equation}
+%
+De maximale basistroom waarvoor dit netwerk nog werkt is een $\beta$ keer kleiner (een factor 100), dus $I_{b,max}=\SI{240}{\micro\ampere}$. Let wel, de basisstroom mag we groter zijn maar $I_c$ is begrensd tot \SI{24}{\milli\ampere}.
+
+De transistor is verre van een ideale component. Zo is versterkingsfactor $\beta$ is in de regel groot, tussen de 100 en de 600, maar de variatie is enorm. Van eenzelfde type transistor kan $\beta$ behoorlijk variëren. Dat betekent dat in ontwerpen moet worden gezorgd dat de invloed van $\beta$ niet al te groot is. De collectorspanning kan niet lager worden dan de emitterspanning. Als de basistroom te groot is, zal de collectorspanning enkele tientallen \si{\milli\volt} boven de emitterspanning blijven. Dit wordt de \textsl{kniespanning} genoemd. De transistor is dan \textsl{in verzadiging}. 
+\end{example}
 
 %\begin{tikzpicture}[bookcircuit]
 %% european controlled current source
@@ -1917,6 +2026,7 @@ Deze stroom is de som van $I_x$ en de stroom die de stroomgestuurde spanningsbro
 
 \fi
 
+\iffalse
 
 
 \section{Knooppuntspanningsmethode}
@@ -1942,7 +2052,7 @@ De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt 
 \label{fig:gelnetwerkvoornodalanalysis}
 \end{figure}
 
-We zoeken dus naar een methode die systematisch het netwerk beschrijft. Met de \textsl{knooppuntspanningsmethode} gaan we uit van de stroomwet van Kirchhoff en de wet van Ohm. Een \textsl{knooppunt} is een punt waar twee of meer netwerkelementen met elkaar verbonden zijn. We nemen één knooppunt als referentiepunt. In principe kan elk knooppunt als referentiepunt dienen, maar het is handig om een uiteinde van een onafhankelijke spanningsbron te kiezen (we zullen later zien waarom). De andere knooppunten hebben een bekende of onbekende spanning t.o.v.\@ het referentieknooppunt. Vervolgens stellen we voor elk knooppunt met een onbekende spanning de stroomwet van Kirchhoff op: alle stromen naar een knooppunt toe zijn opgeteld 0, maar voor deze methode is het handiger om de stroomwet iets anders te definiëren: alle stromen van een knooppunt af zijn opgeteld 0. We krijgen zo een stelsel vergelijkingen met bekende en onbekende spanningen dat op te lossen is. Het voordeel van deze methode is dat het te implementeren is in een computerprogramma, bijvoorbeeld in een netwerksimulatieprogramma.
+We zoeken dus naar een methode die systematisch het netwerk beschrijft. Met de \textsl{knooppuntspanningsmethode} gaan we uit van de stroomwet van Kirchhoff en de wet van Ohm. Een \textsl{knooppunt} is een punt waar twee of meer netwerkelementen met elkaar verbonden zijn. We nemen één knooppunt als referentiepunt. In principe kan elk knooppunt als referentiepunt dienen, maar het is handig om een uiteinde van een onafhankelijke spanningsbron te kiezen (we zullen later zien waarom). De andere knooppunten hebben een bekende of onbekende spanning t.o.v.\@ het referentieknooppunt. Vervolgens stellen we voor elk knooppunt met een onbekende spanning de stroomwet van Kirchhoff op: alle stromen naar een knooppunt toe zijn opgeteld 0, maar voor deze methode is het handiger om de stroomwet iets anders te definiëren: alle stromen van een knooppunt af zijn opgeteld 0. We krijgen zo een stelsel vergelijkingen met bekende en onbekende spanningen dat op te lossen is met behulp van matrixrekenkunde. Het voordeel van deze methode is dat elk netwerk door te rekenen is, ongeacht de complexiteit. Verder is deze methode te implementeren in een computerprogramma, bijvoorbeeld in een netwerksimulatieprogramma.
 
 De knooppuntspanningsmethode werkt vooral goed voor netwerken met stroombronnen. Als er in het netwerk spanningsbronnen zijn die tussen twee onbekende spanningen zijn geplaatst, moet het stelsel van vergelijkingen worden uitgebreid. De stroom die de spanningsbron levert is namelijk onbekend, dus die kan niet zonder meer gebruikt worden in de stroomvergelijkingen. Er zijn dan extra (spannings-)vergelijkingen nodig om tot een oplosbaar stelsel van vergelijkingen te komen.
 
@@ -2048,37 +2158,38 @@ We kunnen het stelsel vergelijkingen in~\eqref{equ:gellinsolve5} in de matrixnot
 \end{bmatrix*}
 \end{equation}
 %
-Merk op dat in de coëfficiëntenmatrix (links in de vergelijking) steeds de omgekeerden (of \textsl{reciproken}) van de weerstanden voorkomen. De omgekeerde van de weerstandswaarde wordt geleiding genoemd. De coëfficiëntenmatrix wordt daarom ook wel de geleidingsmatrix genoemd. De vector met de spanningen wordt de onbekendenvector genoemd en de vector met de stromen (het rechterlid) wordt de bekendenvector genoemd.
+Merk op dat in de coëfficiëntenmatrix (links in de vergelijking) steeds de omgekeerden (of \textsl{reciproken}) van de weerstanden voorkomen. De omgekeerde van de weerstandswaarde wordt geleiding genoemd. De coëfficiëntenmatrix wordt daarom ook wel de geleidingsmatrix genoemd. De vector met de spanningen wordt de onbekendenvector genoemd en de vector met de stromen (het rechterlid) wordt de bekendenvector genoemd. Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
 
-De algemene gedaante voor dit stelsel van vergelijkingen is:
-%
-\begin{equation}
-\begin{bmatrix*}[c]
-G_{11} & G_{12} & G_{13} \\
-G_{21} & G_{22} & G_{23} \\
-G_{31} & G_{32} & G_{33}
-\end{bmatrix*} = 
-\begin{bmatrix*}[c]
-U_1 \\ U_2 \\ U_3
-\end{bmatrix*} =
-\begin{bmatrix*}[c]
-I_1 \\ I_2 \\ I_3
-\end{bmatrix*}
-\end{equation}
-%
-waarbij $I_1$, $I_2$ en $I_3$ niet verward moeten worden met de stromen in~\eqref{equ:gelmatrixnotatie1}.
-De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de vergelijkingen:
 
-\begin{itemize}
-\item Er zijn evenveel vergelijkingen nodig als dat er onbekende spanningen zijn;
-\item Elke regel bevat de vergelijking voor het betreffende knooppunt;
-\item Voor de elementen op de hoofddiagonaal ($G_{11}$, $G_{22}$ en $G_{33}$, van linksboven naar rechtsonder) geldt dat dit de som is van de geleidingen die direct met het knooppunt van de onbekende spanning verbonden zijn;
-\item Voor de elementen niet op de hoofddiagonaal geldt dat dit de geleiding is die rechtstreeks tussen twee onbekende spanningen is verbonden en is altijd negatief. Deze elementen komen altijd in paren voor, gespiegeld in de hoofddiagonaal: zo is de waarde van knooppunt $G_{32}$ hetzelfde als de waarde van $G_{23}$. De coëfficiëntenmatrix is dus symmetrisch t.o.v.\@ de hoofddiagonaal;
-\item Een element niet op de hoofddiagonaal kan 0 zijn; er is dan geen geleiding tussen de twee knooppunten;
-\item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de stromen naar het desbetreffende knooppunt toe.
-\end{itemize}
-
-Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
+%%%%De algemene gedaante voor dit stelsel van vergelijkingen is:
+%%%%%
+%%%%\begin{equation}
+%%%%\begin{bmatrix*}[c]
+%%%%G_{11} & G_{12} & G_{13} \\
+%%%%G_{21} & G_{22} & G_{23} \\
+%%%%G_{31} & G_{32} & G_{33}
+%%%%\end{bmatrix*} = 
+%%%%\begin{bmatrix*}[c]
+%%%%U_1 \\ U_2 \\ U_3
+%%%%\end{bmatrix*} =
+%%%%\begin{bmatrix*}[c]
+%%%%I_1 \\ I_2 \\ I_3
+%%%%\end{bmatrix*}
+%%%%\end{equation}
+%%%%%
+%%%%waarbij $I_1$, $I_2$ en $I_3$ niet verward moeten worden met de stromen in~\eqref{equ:gelmatrixnotatie1}.
+%%%%De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de vergelijkingen:
+%%%%
+%%%%\begin{itemize}
+%%%%\item Er zijn evenveel vergelijkingen nodig als dat er onbekende spanningen zijn;
+%%%%\item Elke regel bevat de vergelijking voor het betreffende knooppunt;
+%%%%\item Voor de elementen op de hoofddiagonaal ($G_{11}$, $G_{22}$ en $G_{33}$, van linksboven naar rechtsonder) geldt dat dit de som is van de geleidingen die direct met het knooppunt van de onbekende spanning verbonden zijn;
+%%%%\item Voor de elementen niet op de hoofddiagonaal geldt dat dit de geleiding is die rechtstreeks tussen twee onbekende spanningen is verbonden en is altijd negatief. Deze elementen komen altijd in paren voor, gespiegeld in de hoofddiagonaal: zo is de waarde van knooppunt $G_{32}$ hetzelfde als de waarde van $G_{23}$. De coëfficiëntenmatrix is dus symmetrisch t.o.v.\@ de hoofddiagonaal;
+%%%%\item Een element niet op de hoofddiagonaal kan 0 zijn; er is dan geen geleiding tussen de twee knooppunten;
+%%%%\item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de stromen naar het desbetreffende knooppunt toe.
+%%%%\end{itemize}
+%%%%
+%%%%Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
 
 \begin{example}[Netwerk met onafhankelijke stroombronnen]
 In figuur~\ref{fig:gelnetwerkvoornodalanalysis5} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden. Bepaal de spanningen op de knooppunten en de vermogens van de stroombronnen.
@@ -2132,7 +2243,7 @@ We kunnen nu de vermogens van de stroombronnen uitrekenen. Hierbij moeten we let
 %
 \begin{equation}
 \begin{split}
-P_{I1} &= (U_1-0)\cdot I_1 = \num{6,60}\cdot\num{10e-3} = \SI{0.066e-3}{\watt} = \SI{66}{\mW} \\
+P_{I1} &= (U_1-0)\cdot I_1 = \num{6,60}\cdot\num{10e-3} = \SI{6.60e-2}{\watt} = \SI{66.0}{\mW} \\
 P_{I2} &= (U_2-U_3)\cdot I_2 = \num{1.86}\cdot\num{5e-3} = \SI{9.28e-3}{\watt} = \SI{9.28}{\mW}
 \end{split}
 \end{equation}
@@ -2317,7 +2428,7 @@ I_{12V} &= I_{2200\Omega} + I_{1800\Omega} = \dfrac{12-\num{5.67}}{1200} + \dfra
 
 We hebben nu gezien dat een onafhankelijke spanningsbron met één uiteinde aan de referentie ervoor zorgt dat het aantal benodigde vergelijkingen met één verminderd wordt. Als er echter een ``zwevende'' spanningsbron in het netwerk geplaatst is, een spanningsbron tussen twee onbekende knooppuntspanningen, dan is er een extra vergelijking nodig voor het vinden van de knooppuntspanningen. Die extra vergelijking is nodig omdat de stroom die de spanningsbron levert onbekend is.
 
-In figuur~\ref{fig:gelnetwerkvoornodalanalysis6} is een netwerk te zien met een zwevende spanningsbron. Geen van de uiteinden van de bron is verbonden met het referentieknooppunt. Dat betekent dat alle spanningen in het netwerk onbekend zijn. Verder is de stroom die bron levert onbekend. Deze stroom stellen we $I_x$. Merk op dat $I_x$ gezien moet worden als een bronstroom en dat de referentierichting van de bronstroom van de `+' naar de `$-$' is genomen.
+In figuur~\ref{fig:gelnetwerkvoornodalanalysis6} is een netwerk te zien met een zwevende spanningsbron. Geen van de uiteinden van de bron is verbonden met het referentieknooppunt. Dat betekent dat alle spanningen in het netwerk onbekend zijn. Verder is de stroom die de bron levert onbekend. Deze stroom stellen we $I_x$. Merk op dat $I_x$ gezien moet worden als een bronstroom en dat de referentierichting van de bronstroom van de `+' naar de `$-$' is genomen.
 
 \begin{figure}[!ht]
 \centering
@@ -2452,7 +2563,7 @@ De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \tex
             to[R=$R_{out}$,o-] ++(-2,0)
             to[cV, v_>=$aU_{in}$] ++(0,-2) node (2) {}
             to[short,-o] ++(2,0)
-        (1) to[short,*-*] (2)
+%        (1) to[short,*-*] (2)
 ;
 \end{tikzpicture}
 \captionof{figure}{Een vereenvoudigd model van een opamp.}
@@ -2470,10 +2581,12 @@ We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinver
             to[R, a=$G_{in}$, v^<=$U_{in}$,*-] ++(0,2) 
         (2) to[short] ++(0,1)
             to[R=$G_2$] ++(5.5,0)
-            to[short, -*] ++(0,-1)  node (3) {} node[right] {$U_{2}$}
-            to[R=$G_{out}$]  ++(-2,0)  node [above] {$U_y$}
-            to[cV, v_>=$aU_{in}$] ++(0,-2)
-            to[short, -.] (0,0)
+            to[short, -*] ++(0,-1)  node (3) {} %node[right] {$U_{2}$}
+			to[short, -o] ++(0.5,0) node[right] {$U_{2}$}
+        (3) to[R=$G_{out}$]  ++(-2,0)  node [above] {$U_y$}
+            to[cV, v_>=$aU_{in}$, -*] ++(0,-2)
+			to[open] ++(2.5,0)
+            to[short, o-.] (0,0)
 ;
 \end{tikzpicture}
 \captionof{figure}{Een netwerk van een vereenvoudigd model van een opamp.}
@@ -2502,79 +2615,429 @@ U_y = aU_{in} = a(0-U_x) = -aU_x
 %
 Als we het stelsel vergelijkingen nu opschrijven en $U_y$ invullen dan krijgen we:
 %
-\begin{subequations}
-\begin{align}
+\begin{equation}
+\begin{matrix*}[r]
 \label{equ:gelopampa}
-(G_1+G_{in}+G_2)U_x- G_2U_2 &= G_1U_1 \\
-\label{equ:gelopampb}
-(-G_2+aG_{out})U_x + (G_2+G_{out})U_2 &= 0
-\end{align}
-\end{subequations}
-%
-We kunnen via~\eqref{equ:gelopampb} $U_x$ expliciet maken:
-%
-\begin{equation}
-\label{equ:gelopampux}
-U_x - -\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2
+(G_1+G_{in}+G_2)U_x &- G_2U_2 &=& G_1U_1 \\
+%\label{equ:gelopampb}
+(-G_2+aG_{out})U_x & + (G_2+G_{out})U_2 &=& 0
+\end{matrix*}
 \end{equation}
 %
-We kunnen vergelijking~\eqref{equ:gelopampa} dan schrijven als:
+Door toepassing van de regel van Cramer vinden we voor $U_2$:
 %
 \begin{equation}
--(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2- G_2U_2 = G_1U_1 \\
+\label{equ:gelopampreal1}
+U_2 = \dfrac{-G_1(-G_2+aG_{out})}{(G_1+G_{in}+G_2)(G_2+G_{out}) + G_2(-G_2+aG_{out})}U_1
 \end{equation}
 %
-We hebben nu een vergelijking waar alleen $U_1$ en $U_2$, de geleidingen en de versterkingsfactor $a$ in voorkomen. We kunnen $U_2$ nu expliciet schrijven:
+%%%We vermenigvuldigen teller en noemer uit en zetten het minteken in de teller voor de breuk:
+%%%%
+%%%\begin{equation}
+%%%\label{equ:gelopampreal2}
+%%%U_2 = -\dfrac{-G_1G_2 + aG_1G_{out}}{G_1G_2 + G_{in}G_2 + G_1G_{out} + G_{in}G_{out} + G_2G_{out} + aG_2G_{out}}U_1
+%%%\end{equation}
+%%%%
+%%%We halen bij de teller $G_1$ buiten haakjes en bij de noemer $G_2$ buiten haakjes:
+%%%%
+%%%\begin{equation}
+%%%\label{equ:gelopampreal3}
+%%%U_2 = -\dfrac{G_1}{G_2}\cdot\dfrac{-G_2+aG_{out}}{G_1+G_{in}+\dfrac{G_1G_{out}}{G_2}+\dfrac{G_{in}G_{out}}{G_2}+G_{out}+aG_{out}}U_1
+%%%\end{equation}
+%%%%
+%%%Nu delen we teller en noemer door $G_{out}$:
+%%%%
+%%%\begin{equation}
+%%%\label{equ:gelopampreal4}
+%%%U_2 = -\dfrac{G_1}{G_2}\cdot\dfrac{a - \dfrac{G_2}{G_{out}}}{a+1+\dfrac{G_1}{G_2}+\dfrac{G_{in}}{G_{out}}+\dfrac{G_1}{G_2}+\dfrac{G_{in}}{G_2}}U_1
+%%%\end{equation}
+%
+Door teller en noemer te delen door $-G_2+aG_{out}$ en het minteken bij $G_1$ voor de breuk te schrijven, krijgen we voor $U_2$:
 %
 \begin{equation}
-\label{equ:gelopampreal}
-U_2 = -\dfrac{G_1}{(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}+G_2}U_1
+\label{equ:gelopampreal2}
+U_2 = -\dfrac{G_1}{(G_1+G_{in}+G_2)\left(\dfrac{G_2+G_{out}}{-G_2+aG_{out}}\right)+G_2}U_1
 \end{equation}
 %
-Laten we nu eens kijken naar de term:
+Hierbij moet opgelet worden dat de term $-G_2+aG_{out}$ niet 0 mag worden, anders wordt er gedeeld door 0. In dat geval moeten we~\eqref{equ:gelopampreal1} gebruiken en dan vinden we dat $U_2=0$.
+
+We kunnen~\eqref{equ:gelopampreal2} nog anders opschrijven door de term $G_1+G_{in}+G_2$ te vermenigvuldigen én te delen door $G_2$:
 %
 \begin{equation}
-(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}
+\label{equ:gelopampreal3}
+U_2 = -\dfrac{G_1}{G_2\left(\dfrac{G_1+G_{in}+G_2}{G_2}\right)\left(\dfrac{G_2+G_{out}}{-G_2+aG_{out}}\right)+G_2}U_1
 \end{equation}
 %
-De ingangsweerstand $R_{i}$ is in de regel zeer groot zodat $G_{in}$ zeer klein is. Dat betekent dat de factor
-$G_1+G_{in}+G_2$ vereenvoudigd kan worden tot $G_1+G_2$. De versterkingsfactor $a$ is zeer groot en de uitgangsweerstand $R_{out}$ is klein (dus $G_{out}$ is groot). In de breuk is de factor $-G_2+aG_{out}$ dus dominant. We kunnen dan stellen dat:
+We halen $G_1$ en $G_2$ nu naar voren, zodat volgt dat:
 %
 \begin{equation}
-(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}} \approx 0
+\label{equ:gelopampreal4}
+U_2 = -\dfrac{G_1}{G_2}\times \dfrac{1}{1+\left(\dfrac{G_1+G_{in}+G_2}{G_2}\right)\left(\dfrac{G_2+G_{out}}{-G_2+aG_{out}}\right)}U_1
 \end{equation}
 %
-Daarmee vereenvoudigd~\ref{equ:gelopampreal} zich tot:
+We bekijken nu de term:
 %
 \begin{equation}
+\label{equ:gelopampreal5}
+\left(\dfrac{G_1+G_{in}+G_2}{G_2}\right)\left(\dfrac{G_2+G_{out}}{-G_2+aG_{out}}\right)
+\end{equation}
+%
+We kunnen de invloed van deze term willekeurig klein maken door aan de parameters van de opamp eisen te stellen, de weerstanden $R_1$ en $R_2$ zijn door de ontwerper in te stellen. Zo kunnen we ervoor zorgen dat de uitgangsweerstand $R_{out}$ klein is (dus $G_{out}$ is groot). Verder kunnen we ervoor zorgen dat de ingangsweerstand zeer groot is zodat $G_{in}$ zeer klein is en zorgen we ervoor dat $a$ groot is. Dan volgt voor de term in~\eqref{equ:gelopampreal5}:
+%%%
+%%\begin{equation}
+%%\dfrac{G_1+G_2}{G_2}\times\dfrac{1}{a}
+%%\end{equation}
+\begin{equation}
+\label{equ:gelopampreal6}
+\left(\dfrac{G_1+G_{in}+G_2}{G_2}\right)\left(\dfrac{G_2+G_{out}}{-G_2+aG_{out}}\right) \approx 0
+\end{equation}
+%
+%
+%
+%%We kunnen via~\eqref{equ:gelopampb} $U_x$ expliciet maken:
+%%%
+%%\begin{equation}
+%%\label{equ:gelopampux}
+%%U_x = -\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2
+%%\end{equation}
+%%%
+%%We kunnen vergelijking~\eqref{equ:gelopampa} dan schrijven als:
+%%%
+%%\begin{equation}
+%%-(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2- G_2U_2 = G_1U_1 \\
+%%\end{equation}
+%%%
+%%We hebben nu een vergelijking waar alleen $U_1$ en $U_2$, de geleidingen en de versterkingsfactor $a$ in voorkomen. We kunnen $U_2$ nu expliciet schrijven:
+%%%
+%%\begin{equation}
+%%\label{equ:gelopampreal}
+%%U_2 = -\dfrac{G_1}{(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}+G_2}U_1
+%%\end{equation}
+%%%
+%%Laten we nu eens kijken naar de term:
+%%%
+%%\begin{equation}
+%%(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}
+%%\end{equation}
+%%%
+%%De ingangsweerstand $R_{in}$ is in de regel zeer groot zodat $G_{in}$ zeer klein is. Dat betekent dat de factor
+%%$G_1+G_{in}+G_2$ vereenvoudigd kan worden tot $G_1+G_2$. De versterkingsfactor $a$ is zeer groot en de uitgangsweerstand $R_{out}$ is klein (dus $G_{out}$ is groot). In de breuk is de factor $-G_2+aG_{out}$ dus dominant. We kunnen dan stellen dat:
+%%%
+%%\begin{equation}
+%%(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}} \approx 0
+%%\end{equation}
+%%%
+%
+%
+%
+Daarmee vereenvoudigt~\eqref{equ:gelopampreal4} zich tot:
+%
+\begin{equation}
+\label{equ:gelopampreal7}
 U_2 = -\dfrac{G_1}{G_2}U_1
 \end{equation}
+%
 of uitgedrukt in de weerstandswaarden:
 %
 \begin{equation}
+\label{equ:gelopampreal8}
 U_2 = -\dfrac{R_2}{R_1}U_1
 \end{equation}
 %
-De spanning $U_2$ kan dus met alleen de weerstanden $R_1$ en $R_2$ vastgelegd worden. Een zeer praktische schakeling! Merk wel op dat $U_2$ negatief is bij een positieve spanning voor $U_1$ en positief is bij een negatieve spanning voor $U_1$. Deze schakeling wordt de \textsl{inverterende versterker} genoemd. Overigens blijkt uit~\eqref{equ:gelopampux} dat de spanning $U_x$ erg klein is. We hebben nu een \textsl{virtueel aardpunt} gemaakt. De spanningsbron $U$ ``ziet'' dus alleen de weerstand $R_1$ omdat de spanning $U_x$ ongeveer \SI{0}{\volt} is.
+De spanning $U_2$ kan dus met alleen de weerstanden $R_1$ en $R_2$ vastgelegd worden. Een zeer praktische schakeling! Merk wel op dat $U_2$ negatief is bij een positieve spanning voor $U_1$ en positief is bij een negatieve spanning voor $U_1$. Deze schakeling wordt de \textsl{inverterende versterker} genoemd.
+Overigens kunnen we $U_x$ ook vinden door toepassen van de regel van Cramer:
+%
+\begin{equation}
+\label{equ:gelopampreal9}
+U_x = \dfrac{G_1(G_2+G_{out})}{(G_1+G_{in}+G_2)(G_2+G_{out}) + G_2(-G_2+aG_{out})}U_1
+\end{equation}
+%
+We zien in de de versterkingsfactor $a$ alleen in de noemer voorkomt. Aangezien $a$ groot is zal volgen dat:
+%
+\begin{equation}
+U_x \approx 0
+\end{equation}
+%
+We hebben nu een \textsl{virtueel aardpunt} gemaakt. De spanningsbron $U$ ``ziet'' dus alleen de weerstand $R_1$ omdat de spanning $U_x$ ongeveer \SI{0}{\volt} is.
+
+In de praktijk hebben we te maken met niet-ideale opamps. Zo is de gestuurde spanningsbron een actief netwerkelement en moet ergens zijn (elektrische) energie vandaan halen. Daarom is er voor een opamp altijd een voeding nodig. Meestal is dit een zogenoemde duale voeding omdat de opamp ook negatieve spanningen kan versterken. Een veel gebruikte waarde voor de voedingsspanningen is \SI[retain-explicit-plus]{+15}{\volt} en \SI{-15}{\volt}. Dat heeft als consequentie dat de uitgangsspanning binnen het bereik van de voedingsspanning zal blijven. Door de opbouw van de opamp moeten we daar nog enkele volts vanaf trekken (positieve voedingsspanning) en bij optellen (negatieve voedingsspanning). De versterkingsfactor $a$ is in de regel zeer groot, maar alleen voor gelijkspanning. Bij wisselspanning neemt de versterking af bij toenemende frequentie. De versterking volgt het gedrag van een laagdoorlaatfilter waarbij het kantelpunt tussen de \SIrange{10}{100}{\hertz} ligt. In tabel~\ref{tab:gelkenmerkenopamps} zijn enkele parameters gegeven.
 
 \begin{center}
 \captionof{table}{Enige kenmerken van opamps (bij gelijkstroom).}
+\label{tab:gelkenmerkenopamps}
+\begin{threeparttable}
 \begin{tabular}{lSSS[table-format = 4.1,table-align-text-post = false]l}
 \toprule
 Type & {$R_{in}$ (\si{\ohm})} & {$a$} & {$R_{out}$ (\si{\ohm})} & Ingangstype \\
 \midrule
-uA741   & 200e3 & 200e3 & 75  & bipolair \\
-NE5532  & 300e3 & 100e3 & 0.3 & bipolair\\
+\si{\uA}741   & 200e3 & 200e3 & 75  & bipolair \\
+NE5534  & 300e3 & 100e3 & 0.3\tnote{1} & bipolair\\
+LF411   & 1e12  & 200e3 & 1\tnote{2} & FET \\
 TL072   & 1e12  & 200e3 & 200 & FET \\
 LT1028  & 300e3 & 20e6  & 80  & bipolair \\
 OPA177E & 200e6 & 12e6  & 60  & FET \\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}[flushleft]
+\item[1] Bij een versterking van 1000.
+\item[2] Bij een versterking van 100.
+\end{tablenotes}
+\end{threeparttable}
 \end{center}
 
-OPERATIONAL TRANSCONDUCTANCE AMPLIFIER
+We vullen voor de weerstandswaarden en versterkingsfactor nu enkele praktische waarden in. We nemen voor de opamp-parameters de waarden van de bekende \si{\uA}741. Van deze opamp is $R_{in}=\SI{200}{\kilo\ohm}$, $R_{out}=\SI{75}{\ohm}$ en $a=\num{200e3}$. Verder nemen we $R_1 = \SI{10}{\kilo\ohm}$, $R_2 = \SI{20}{\kilo\ohm}$. We nemen voor het gemak een bronspanning van $U_1 = \SI{1}{\volt}$.
+
+Als we de waarden invullen in~\eqref{equ:gelopampreal4}, dan vinden we $U_2 = \SI{-1.999968884}{\volt}$. Voor de term in~\eqref{equ:gelopampreal5} vinden we \num{1.555812529e-5}. Voor $U_x$ vinden we \SI{10.037344}{\micro\volt}. Nu heeft het weinig zin om getallen in zoveel decimalen te schrijven maar het geeft wel goed aan hoe nauwkeurig de versterking van $U_1$ naar $U_2$ is. We kunnen dus stellen dat $U_2 = \SI{-2}{\volt}$ en dat $U_x = \SI{0}{\volt}$ is. Uiteraard is dit een theoretisch model en zal de uitgangsspanning iets afwijken van de berekende waarden. Om een realistischer beeld te krijgen van de spanningen en stromen moeten we een netwerksimulator gebruiken.
+
+%\num[round-mode=places,round-precision=3{1.555812529e-5}
+
+%OPERATIONAL TRANSCONDUCTANCE AMPLIFIER
+\end{example}
+
+\subsection{Opstellen van de vergelijkingen}
+De algemene gedaante voor het stelsel van vergelijkingen met onafhankelijke stroombronnen is:
+%
+\begin{equation}
+\begin{bmatrix*}[c]
+G_{11} & G_{12} & G_{13} & \cdots & G_{1n} \\
+G_{21} & G_{22} & G_{23} & \cdots & G_{2n} \\
+G_{31} & G_{32} & G_{33} & \cdots & G_{3n} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+G_{n1} & G_{n2} & G_{n3} & \cdots & G_{nn} \\
+\end{bmatrix*} = 
+\begin{bmatrix*}[c]
+U_1 \\ U_2 \\ U_3 \\ \vdots \\ U_n
+\end{bmatrix*} =
+\begin{bmatrix*}[c]
+I_1 \\ I_2 \\ I_3 \\ \vdots \\ I_n
+\end{bmatrix*}
+\end{equation}
+%
+%waarbij $I_1$, $I_2$ en $I_3$ niet verward moeten worden met de stromen in~\eqref{equ:gelmatrixnotatie1}.
+De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de vergelijkingen:
+
+\begin{itemize}
+\item Er zijn evenveel vergelijkingen nodig als dat er onbekende spanningen zijn;
+\item Elke regel bevat de vergelijking voor het betreffende knooppunt;
+\item Voor de elementen op de hoofddiagonaal ($G_{11}$, $G_{22}$, $G_{33}$ tot en met $G_{nn}$, van linksboven naar rechtsonder) geldt dat dit de som is van de geleidingen die direct met het knooppunt van de onbekende spanning verbonden zijn;
+\item Voor de elementen niet op de hoofddiagonaal geldt dat dit de geleiding is die rechtstreeks tussen twee onbekende spanningen is verbonden en is altijd negatief. Deze elementen komen altijd in paren voor, gespiegeld in de hoofddiagonaal: zo is de waarde van knooppunt $G_{32}$ hetzelfde als de waarde van $G_{23}$. De coëfficiëntenmatrix is dus symmetrisch t.o.v.\@ de hoofddiagonaal;
+\item Een element niet op de hoofddiagonaal kan 0 zijn; er is dan geen geleiding tussen de twee knooppunten;
+\item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de stromen naar het desbetreffende knooppunt toe.
+\end{itemize}
+
+Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
+
+
+
+\fi
+\iffalse
+
+\section{Maasstroommethode}
+We hebben gezien dat de knooppuntspanningsmethode goed werkt bij netwerken waar alleen stroombronnen in voorkomen. Als we te maken hebben met spanningsbronnen, kunnen we ook kiezen voor de \textsl{maasstroommethode}. Deze methode gaat uit van denkbeeldige stroom in de \textsl{mazen} van het netwerk en gebruikt de spanningswet van Kirchhoff en de wet van Ohm voor de op te stellen vergelijkingen.
+
+% https://www.electrical4u.com/planar-and-non-planar-graphs-of-circuit/
+We gaan bij de maasstroommethode uit van \textsl{planaire netwerken}. In een planair netwerk kruizen de netwerkelementen elkaar niet. Nu is niet altijd direct duidelijk of een netwerk planair is of niet. In figuur~\ref{fig:gelplanairnetwerk} is links een netwerk te zien waarbij het lijkt dat twee weerstanden elkaar kruizen. We kunnen echter een van de twee weerstanden ``buitenom'' tekenen waardoor het netwerk planair blijkt te zijn.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\coordinate (mid) at (1.5,1);
+\draw (0,0) to[V, v<=$U$, -*] ++(0,2) node (1) {} node [above] {1}
+            to[R=$R_1$, -*]   ++(3,0) node (2){} node [above] {2}
+            to[R=$R_2$, -*]   ++(0,-2) node (3){} node [below] {3}
+            to[R=$R_3$, -*] (0,0) node (4){} node [below] {4}
+        (1) to[R,a=$R_4$] (mid) to[short] (3)
+        (2) to[R=$R_5$] (mid) to [short] (4)
+;
+\draw (5,0.5) to[V, v<=$U$, -*] ++(0,2) node (1a) {} node [above] {1}
+            to[R=$R_1$, -*]   ++(2,0) node (2a){} node [above] {2}
+            to[R=$R_2$, -*]   ++(0,-2) node (3a){} node [below] {3}
+            to[R=$R_3$, -*] (5,0.5) node (4a){} node [left] {4}
+       (1a) to[R=$R_4$] (3a)
+       (2a) to[short] ++(1,0)
+            to[R=$R_5$] ++(0,-3)
+            to[short] ++(-3,0)
+            to[short] ++(0,1)
+;
+\end{tikzpicture}
+\caption{Twee planaire netwerken.}
+\label{fig:gelplanairnetwerk}
+\end{figure}
+
+Zoals gezegd, gebruiken we de spanningswet van Kirchoff en maasstromen om de netwerkvergelijkingen op te stellen. In figuur~\ref{fig:gelnetwerkvoormeshanalysis} is een netwerk gegeven met een spanningsbron en een vijftal weerstanden. In het netwerk zijn de drie mazen aangegeven. Een maas bestaat uit een gesloten rondgang langs een aantal netwerkelementen zonder een verbinding te kruizen. De bijbehorende denkbeeldige stroom vloeit dan door de netwerkelementen die bij een maas horen. Voor elke rondgang kunnen we de spanningen die de maasstromen veroorzaken optellen en gelijkstellen aan 0.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=$U$,-*]   ++(0,2) node (1) {} node [left] {}
+            to[R, R=$R_1$, -*] ++(2,0) node (2) {} node [above] {}
+			to[R, R=$R_2$, -*] ++(2,0) node (3) {} node [right] {}
+			to[R, R=$R_4$]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,2)
+            to[R, R=$R_5$]     ++(4,0)	
+			to[short]          ++(0,-2)
+		(2) to[R, R=$R_3$, -*] ++(0,-2)
+			to node[sground]{} ++(0,0)
+;
+
+\draw[thin, <-, >=triangle 45,path picture={
+            \node[anchor=center]  at (path picture bounding box.center) {$I_1$};
+            }] (1,1) ++(-160:0.5) arc (-160:160:0.5);
+\draw[thin, <-, >=triangle 45,path picture={
+            \node[anchor=center]  at (path picture bounding box.center) {$I_2$};
+            }] (3.1,1) ++(-160:0.5) arc (-160:160:0.5);
+\draw[thin, <-, >=triangle 45,path picture={
+            \node[anchor=center]  at (path picture bounding box.center) {$I_3$};
+            }] (2,3) ++(-160:0.5) arc (-160:160:0.5);
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelnetwerkvoormeshanalysis}
+\end{figure}
+
+In principe kan de richting van de maasstroom willekeurig gekozen worden, maar het is handig om de richtingen allemaal dezelfde kant op te nemen. Daardoor blijft het stelsel van vergelijkingen consistent.
+
+Het kan voorkomen dat een netwerkelement bij twee mazen hoort. We moeten dan het verschil van de twee maasstromen gebruiken in de vergelijkingen. Zo is de spanningsval over $R_1$ voor de maasstroom $I_1$ te berekenen met $(I_1-I_3)R_1$ en voor maasstroom $I_3$ met $(I_3-I_1)R_1$.
+
+Het is zinvol om de volgende strategie voor het opstellen van de vergelijkingen te hanteren. Voor elke maas geldt: alle spanningen van de bronnen opgeteld is gelijk aan alle spanningen over de passieve netwerkelementen. Het gevolg is dat er minder mintekens in de vergelijkingen voorkomen dan wanneer we de spanningswet van Kirchhoff strikt hanteren.
+
+De vergelijking voor maasstroom $I_1$ is:
+%
+\begin{equation}
+(I_1 - I_3)R_1 + (I_1-I_2)R_3 = U
+\end{equation}
+%
+De vergelijking voor maasstroom $I_2$ is:
+%
+\begin{equation}
+(I_2-I_1)R_3 + (I_2-I_3)R_2 + I_2R_4=0
+\end{equation}
+%
+De vergelijking voor maasstroom $I_3$ is:
+%
+\begin{equation}
+(I_3-I_1)R_1 + I_3R_5 + (I_3-I_2)R_2 = 0
+\end{equation}
+%
+We hebben nu drie vergelijkingen met drie onbekenden ($I_1$, $I_2$ en $I_3$, $U$ is bekend). We schrijven alle stromen expliciet op en krijgen dan:
+%
+\begin{equation}
+\begin{matrix*}[r]
+(R_1+R_3)I_1 & -R_3I_2 & -R_1I_3 &= U \\
+-R_3I_1 & +(R_2+R_3+R_4)I_2 & -R_2I_3 &= 0\\
+-R_1I_1 & -R_2I_2 & +(R_1+R_2+R_5)I_3 &=0
+\end{matrix*}
+\end{equation}
+%
+of, in matrixnotatie:
+%
+\begin{equation}
+\begin{bmatrix}
+R_1+R_3 & -R_3 & -R_1 \\
+-R_3 & R_2+R_3+R_4 & -R_2 \\
+-R_1 & -R_2 & R_1+R_2+R_5
+\end{bmatrix} = 
+\begin{bmatrix}
+I_1 \\ I_2 \\ I_3
+\end{bmatrix} =
+\begin{bmatrix}
+U \\ 0 \\ 0
+\end{bmatrix}
+\end{equation}
+%
+Met behulp van de matrixrekenkunde kunnen de stromen $I_1$, $I_2$ en $I_3$ berekend worden.
+
+
+\begin{example}[Maasstroommethode]
+We geven nu een voorbeeld van de maasstroommethode. In figuur~\ref{fig:gelnetwerkvoormeshanalysis2} is een netwerk gegeven met een spanningsbron en vijf weerstanden. Het netwerk heeft drie mazen en dus ook drie maasstromen.
+\begin{center}
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[R, R=\SI{330}{\ohm}, -*]   ++(0,2) node (1) {} node [left] {1}
+            to[R, R=\SI{120}{\ohm}, -*] ++(3,0) node (2) {} node [above] {2}
+			to[R, R=\SI{220}{\ohm}, -*] ++(3,0) node (3) {} node [right] {3}
+			to[V, v=\SI{9}{\volt}]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,2)
+            to[R, R=\SI{270}{\ohm}]     ++(6,0)	
+			to[short]          ++(0,-2)
+		(2) to[R, R=\SI{390}{\ohm}, -*] ++(0,-2)
+			to node[sground]{} ++(0,0)
+;
+
+\draw[thin, <-, >=triangle 45,path picture={
+            \node[anchor=center]  at (path picture bounding box.center) {$I_1$};
+            }] (1.5,1) ++(-160:0.5) arc (-160:160:0.5);
+\draw[thin, <-, >=triangle 45,path picture={
+            \node[anchor=center]  at (path picture bounding box.center) {$I_2$};
+            }] (4.8,1) ++(-160:0.5) arc (-160:160:0.5);
+\draw[thin, <-, >=triangle 45,path picture={
+            \node[anchor=center]  at (path picture bounding box.center) {$I_3$};
+            }] (3,3.1) ++(-160:0.5) arc (-160:160:0.5);
+\end{tikzpicture}
+\captionof{figure}{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelnetwerkvoormeshanalysis2}
+\end{center}
+
+Voor maasstroom $I_1$ stellen we op:
+%
+\begin{equation}
+330I_1 + 120(I_1-I_3) + 390(I_1-I_2) = 0
+\end{equation}
+%
+Voor maasstroom $I_2$ stellen we op:
+%
+\begin{equation}
+390(I_2-I_1) + 220(I_2-I_3) = -9
+\end{equation}
+%
+Merk op dat de spanning in de vergelijking \SI{-9}{\volt} bedraagt. Maasstroom $I_2$ loopt immers van `$+$' naar `$-$'. Voor maasstroom $I_3$ stellen we op:
+%
+\begin{equation}
+270I_3 + 220(I_3-I_2) + 120(I_3-I_1) = 0
+\end{equation}
+%
+We schrijven nu direct het stelsel vergelijkingen in de matrixnotatie:
+%
+\begin{equation}
+\begin{bmatrix*}[c]
+330+120+390 & -390 & -120 \\
+-390 & 390+220 & -220 \\
+-120 & -220 & 270+220+120
+\end{bmatrix*} =
+\begin{bmatrix*}[c]
+I_1 \\ I_2 \\ I_3
+\end{bmatrix*}=
+\begin{bmatrix*}[c]
+0 \\ -9 \\ 0
+\end{bmatrix*}
+\end{equation}
+%
+Met behulp van de matrixrekenkunde vinden we voor de maasstromen:
+%
+\begin{equation}
+I_1 = \SI{-0.01588}{\ampere} \qquad I_2 = \SI{-0.02993}{\ampere} \qquad I_3=\SI{-0.01392}{\ampere}
+\end{equation}
+%
+Te zien is dat alle maasstromen negatief zijn. Dat is te verklaren omdat de spanningen op de punten 1 en 2 lager moeten zijn dan \SI{9}{\volt}, er is immers geen andere bron in het netwerk.
+
+We kunnen nu de spanningen op de punten 1 en 2 berekenen. De spanning op punt~1 is uit te rekenen door de spanningsval over de weerstand van \SI{330}{\ohm} te bepalen:
+%
+\begin{equation}
+U_1 = \num{0} - 330I_1 = \num{0} - \num{330}\cdot(\num{-0.01588}) = \SI{5.24}{\volt} 
+\end{equation}
+%
+Voor de spanning op punt~2 vinden we:
+\begin{equation}
+U_2 = \num{0} - 390\cdot(I_2-I_1) = \num{0} - 390\cdot(\num{-0.02993} - (\num{-0.01588})) = \SI{5.48}{\volt}
+\end{equation}
+%
+Nu alle spanningen bekend zijn, kunnen de takstromen berekend worden.
 
 \end{example}
 
-%\section{Opgaven}
-%\input{book_chap02_ques}
+
+
+\fi
+
+\section{Opgaven}
+\input{book_chap02_ques}
