@@ -18,25 +18,111 @@
 \renewcommand{\thelstlisting}{P\thechapter.\@arabic\c@lstlisting}
 \makeatother
 
+\item
+\label{que:gelstroomwet1}
+Gegeven is het netwerk in figuur~\ref{fig:gelstroomwet1} met stroomtakken. Bereken de stroom $I$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (-2,1) to [short, i=\SI{5}{\ampere}, -*] (0,0);
+\draw (-1.5,-1.5) to [short, i=\SI{2}{\ampere}, -*] (0,0);
+\draw (2,0.5) to [short, i=\SI{3}{\ampere}, -*] (0,0);
+\draw (1,-1.5) to [short, i=$I$, -*] (0,0);
+\end{tikzpicture}
+\caption{Stroomvoerende verbindingen.}
+\label{fig:gelstroomwet1}
+\end{figure}
+
+
+\item
+\label{que:gelstroomwet2}
+Gegeven is het netwerk in figuur~\ref{fig:gelstroomwet2} met stroomtakken. Bereken de stroom $I$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[line width=1pt]
+\draw (-2,1) to [short, i=\SI{3}{\ampere}, -*] (0,0);
+\draw (-1.5,-1.5) to [short, i<=\SI{5}{\ampere}, -*] (0,0);
+\draw (2,0.5) to [short, i<=\SI{2}{\ampere}, -*] (0,0);
+\draw (1,-1.5) to [short, i<=$I$, -*] (0,0);
+\end{tikzpicture}
+\caption{Stroomvoerende verbindingen.}
+\label{fig:gelstroomwet2}
+\end{figure}
+
+\item
+\label{que:gelspanningswet1}
+Gegeven is de netwerken in figuur~\ref{fig:gelspanningswet1} met spanningsbronnen. Bereken van beide netwerken de spanning $U_X$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v=\SI{10}{\volt}] ++(0,2)
+            to[V, v<=\SI{-5}{\volt}] ++(2,0)
+            to[R, v^=$U_X$] ++(0,-2)
+            to[V, v<=\SI{7}{\volt},-.] ++(-2,0) 
+;
+\draw (6,0) to[V, v<=\SI{3.5}{\volt}] ++(0,2)
+            to[V, v<=\SI{2.7}{\volt}] ++(2,0)
+            to[R, v^=$U_X$] ++(0,-2)
+            to[V, v<=\SI{-1.9}{\volt},-.] ++(-2,0) 
+;
+\end{tikzpicture}
+\caption{Spanningsbronnen in een kring.}
+\label{fig:gelspanningswet1}
+\end{figure}%
+
+\item
+\label{que:gelserie1}
+Drie weerstanden van \SI{1.2}{\kilo\ohm}, \SI{2.7}{\kilo\ohm} en \SI{3.9}{\kilo\ohm} zijn in serie geschakeld. Bepaal de totale weerstand.
+
+\item
+\label{que:gelparallel1}
+Drie weerstanden van \SI{2.7}{\kilo\ohm}, \SI{5.6}{\kilo\ohm} en \SI{8.2}{\kilo\ohm} zijn parallel geschakeld. Bepaal de totale weerstand.
+
+\item
+\label{que:gelserieparallel1}
+Gegeven is het netwerk in figuur~\ref{fig:gelserieparallel1}. Bepaal de totale weerstand tussen de punten A en B.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) node[left] {A} 
+			to[R=\SI{3.3}{\kilo\ohm}, o-*] ++(2,0) node (1) {}
+			to[short] ++(0,0.5)
+			to[R=\SI{4.7}{\kilo\ohm}] ++(2,0)
+			to[short,-*] ++(0,-0.5) node (2) {}
+			to[short,-o] ++(1,0) node[right] {B}
+		(1) to[short] ++(0,-0.5)
+			to[R=\SI{5.6}{\kilo\ohm}] ++(2,0)
+			to[short] (2)
+;
+\end{tikzpicture}
+\caption{Netwerk van weerstanden.}
+\label{fig:gelserieparallel1}
+\end{figure}
+
+
 
 \item
 \label{que:gellatticenetwork}
 
-Gegeven het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de vervangingsweerstand tussen punten A en B.
+Gegeven het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de vervangingsweerstand tussen de punten A en B.
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) node [left] {A}
-	to[short,*-*]                  ++(1,0) node (1) {}
-    to[R, R=\SI{60}{\kilo\ohm},-*] ++ (0,-2)
-(1) to[R, R=\SI{35}{\kilo\ohm},o-] ++(2,0) node (2) {}
-    to[R, R=\SI{50}{\kilo\ohm},-*] ++(0,-2)
-(2) to[R, R=\SI{25}{\kilo\ohm},-*] ++(2,0) node (3) {}
-    to[R, R=\SI{50}{\kilo\ohm},-*] ++(0,-2)
-(3) to[R, R=\SI{30}{\kilo\ohm},-*] ++(2,0)
-    to[R, R=\SI{20}{\kilo\ohm}]    ++(0,-2)
-	to[short,-*]                   (0,-2) node (4) [left] {B}
+	to[short,o-*]                  ++(1,0) node (1) {}
+    to[R, R=\SI{25}{\kilo\ohm},-*] ++ (0,-2)
+(1) to[R, R=\SI{20}{\kilo\ohm},-*] ++(2,0) node (2) {}
+    to[R, R=\SI{60}{\kilo\ohm},-*] ++(0,-2)
+(2) to[R, R=\SI{80}{\kilo\ohm},-*] ++(2,0) node (3) {}
+    to[R, R=\SI{30}{\kilo\ohm},-*] ++(0,-2)
+(3) to[R, R=\SI{40}{\kilo\ohm}] ++(2,0)
+    to[R, R=\SI{10}{\kilo\ohm}]    ++(0,-2)
+	to[short,-o]                   (0,-2) node (4) [left] {B}
 ;
 \end{tikzpicture}
 \caption{Laddernetwerk van weerstanden.}
@@ -44,7 +130,7 @@ Gegeven het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de v
 \end{figure}
 
 \iffalse
-Dit weerstandnetwerk wordt ook wel \textsl{laddernetwerk} genoemd en bestaat uit een combinatie van parallel- en serieweerstanden. De niet-vereenvoudigde formule is:
+Dit weerstandsnetwerk wordt ook wel \textsl{laddernetwerk} genoemd en bestaat uit een combinatie van parallel- en serieweerstanden. De niet-vereenvoudigde formule is:
 \begin{equation}
  R_{AB} = 60\parallel(35+(50\parallel(25+50\parallel(30+20)))) \qquad\text{(alle waarden in \si{\kilo\ohm})}
 \end{equation}
@@ -53,5 +139,203 @@ waarbij $\parallel$ de zogenaamde paralleloperator is. Het uitrekenen is eenvoud
 R_{AB} = \SI{30}{\kilo\ohm}
 \end{equation}
 \fi
+
+\item
+\label{gel:spanningsdeling1}
+Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling1}. De interne weerstand van de spanningsmeter is \SI{10}{\mega\ohm}. Bereken spanning die de spanningsmeter meet.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=\SI{24}{\volt}] ++(0,2)
+			to[R=\SI{1}{\mega\ohm},-*] ++(2,0) node (1) {}
+			to[R=\SI{1}{\mega\ohm},-*] ++(0,-2) node (2) {}
+			to[short,-.] (0,0)
+		(1) to[short] ++(2,0)
+			to node[draw,circle,fill=white] {V} ++(0,-2)
+			to [short,-.] (0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk van weerstanden en spanningsmeter.}
+\label{fig:gelspanningsdeling1}
+\end{figure}
+
+% Vmeter = (1//10) / (1+(1//10))*24 = 11,428571428571428571428571428571 V
+
+
+\item
+\label{que:gelkarimp1}
+Gegeven is het netwerk in figuur~\ref{fig:gelkarimp1}. De waarden voor de weerstanden is als volgt: $R_1 = \SI{100}{\ohm}$, $R_2 = \SI{150}{\ohm}$ en $R_L = \SI{200}{\ohm}$. Bepaal de vervangingsweerstand tussen de punten A en B.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) node [left] {A}
+    to[R, R=$R_1$,-*] ++(2,0) node (2) {} node[above] {X}
+    to[R, R=$R_2$,-*] ++(0,-2)
+(2) to[R, R=$R_1$]    ++(2,0) node (3) {}  node[above] {Y}
+    to[R, R=$R_L$]    ++(0,-2)
+	to[short,-o]        (0,-2) node (4) [left] {B}
+;
+\end{tikzpicture}
+\caption{Netwerk van weerstanden.}
+\label{fig:gelkarimp1}
+\end{figure}
+
+\item
+\label{que:gelkarimp2}
+Gegeven is het netwerk in figuur~\ref{fig:gelkarimp1}. De waarden voor de weerstanden is als volgt: $R_1 = \SI{25}{\ohm}$, $R_2 = \SI{100}{\ohm}$ en $R_L = \SI{75}{\ohm}$. Bepaal de vervangingsweerstand tussen de punten A en B.
+
+
+\item
+\label{que:gelkarimp3}
+Gegeven is het weerstandennetwerk in figuur~\ref{fig:gelkarimp1}. De waarden van de weerstanden zijn als in opgave~\ref{que:gelkarimp2}. Tussen de punten A en B worden een ideale spanningsbron aangesloten met de waarde $U_{AB}$ = \SI{1}{\volt}. Bepaal de spanningen op punt X en Y (dus $U_{XB}$ en $U_{YB}$).
+
+\itemstar 
+\label{que:gelkarimp4}
+Gegeven is het weerstandennetwerk in figuur~\ref{fig:gelkarimp1}. We stellen nu dat $R_{AB}$ gelijk is aan $R_L$, dus als we het netwerk inkijken vanuit de punten A en B dan meten we dezelfde waarde als $R_L$ (ja dat kan, zie de uitkomsten van opgave~\ref{que:gelkarimp1} en~\ref{que:gelkarimp2}). Bewijs nu dat geldt:
+%
+\begin{equation}
+R_L^2 = \sqrt{R_1^2 + 2R_1R_2}
+\end{equation}
+%
+Hint: stel eerst de vergelijking op voor de vervangingsweerstand $R_{AB}$, dus zoiets als $R_{AB} = \ldots$ (een functie van $R_1$, $R_2$ en $R_L$). Vul daarna voor $R_{AB}$ gewoon $R_L$ in, dus dan krijgen we iets van $R_L = \ldots$ (een functie van $R_1$, $R_2$ en $R_L$). Daarna is het gewoon wat eenvoudige wiskunde. Stug doorrekenen en zorgen dat de basisregels van de rekenkunde netjes gehanteerd worden.
+
+\itemstar 
+\label{que:gelkarimp5}
+Gegeven is het weerstandennetwerk in figuur~\ref{fig:gelkarimp1}. We stellen nu dat $R_{AB}$ gelijk is aan $R_L$, dus als we het netwerk inkijken vanuit de punten A en B dan meten we dezelfde waarde als $R_L$ (ja dat kan, zie de uitkomsten van opgave~\ref{que:gelkarimp1} en~\ref{que:gelkarimp2}). Bewijs nu dat geldt:
+%
+\begin{equation}
+\dfrac{U_{YB}}{U_{AB}} = \dfrac{R_L-R_1}{R_L+R_1}
+\end{equation}
+
+Hint: deze is ondoenlijk, maar wel leuk. Hierbij komt echt inzicht kijken.
+
+\item
+\label{equ:gelstroomdeling1}
+Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling1}. Het netwerk bestaat uit een parallelschakeling van een weerstand van \SI{3.3}{\kilo\ohm} en een weerstand van \SI{5.6}{\kilo\ohm}. In serie met deze (deel-)schakeling staat een onbekende weerstand $R_X$. De bron levert een spanning van \SI{48}{\volt} en een onbekende stroom $I_X$. De deelstroom door de weerstand van \SI{5.6}{\kilo\ohm} is \SI{5}{\milli\ampere}. Bepaal de waarden voor $R_X$ en $I_X$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+%%%\draw (0,0) to[V, v<=\SI{12}{\volt}]   ++(0,4) node (1) {} node [left] {}
+%%%			to[short, -*, i=\SI{10}{\milli\ampere}] ++(2,0) node (1) {}
+%%%            to[R,R=\SI{5}{\kilo\ohm}, i=\SI{2}{\milli\ampere}] ++(0,-2)
+%%%			to[short, -*] ++(1,0) node (2) {}
+%%%			to[R,R=$R_Y$] ++(0,-2)
+%%%			to[short, -.] (0,0)
+%%%        (1) to[short] ++(2,0)
+%%%            to[R, R=$R_X$] ++(0,-2)
+%%%            to[short] (2) 
+\draw (0,0) to[V, v<=\SI{48}{\volt}]   ++(0,4) node (1) {} node [left] {}
+            to[short, i=$I_x$] ++(3,0)
+			to[R=$R_X$, -*] ++(0,-2) node (1) {}
+			to[short] ++(-1,0)
+			to[R=\SI{3.3}{\kilo\ohm},-*] ++(0,-2)
+        (1) to[short] ++(1,0)
+            to[R=\SI{5.6}{\kilo\ohm}, i=\SI{5}{\milli\ampere}] ++(0,-2)
+			to[short,-.] (0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelstroomdeling1}
+\end{figure}
+
+% U_56 = 5.6*5 = 28 V
+% I_39 = 28/3.9 = 8.4848484848... = 8.5 mA
+% I_X  = 8.5+5.0 = 13.5 mA
+% R_X  = (48-28) / 13.484848484 = 1483 ohm
+
+\item
+\label{que:gelthevenin1}
+Gegeven zijn de netwerken in figuur~\ref{fig:gelnetwerkvoortheveninanalysis1}. Bepaal voor elk netwerk het Thévenin-vervangingsnetwerk.
+
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,1) to[V, v<=\SI{12}{\volt}] ++(0,2) %node (1) {} node [left] {}
+            to[R=\SI{10}{\kilo\ohm}, -*] ++(2,0) node (1) {}
+			to[short,-o] ++(1,0) node[right] {A}
+        (1) to[R=\SI{5}{\kilo\ohm},-*] ++(0,-2)
+			to[open,-o] ++(1,0) node[right] {B}
+			to[short,-.] ++(-3,0)
+;
+\draw (6,0) to[V,v<=\SI{12}{\volt}] ++(0,2) node(1) {}
+			to[V,v<=\SI{6}{\volt}] ++(0,2)
+			to[R=\SI{12}{\kilo\ohm},-*] ++(2,0) node (2) {}
+			to[short,-o] ++(1,0) node[right] {A}
+		(2) to[R=\SI{18}{\kilo\ohm},-*] ++(0,-4)
+			to[open,-o] ++(1,0) node[right] {B}
+			to[short,-.] ++(-3,0)
+		(1) to[short] ++(1,0)
+		    node[sground]{}
+;
+\end{tikzpicture}
+\caption{Netwerken met spanningsbron en weerstanden.}
+\label{fig:gelnetwerkvoortheveninanalysis1}
+\end{figure}
+
+% U_AB_open =U_th= 5/(10+5)*12 = 4 V
+% I_k = 12/10kohm = 1,2 mA
+% Rth = 4/1,2 mA = 3,33.. kohm
+
+
+
+\item
+\label{que:gelthevenin2}
+Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepaal het Thévenin-vervangingsnetwerk tussen de punten A en B. De weerstand tussen A en B is nu \SI{1.8}{\kilo\ohm}. Deze weerstand wordt vervangen door een andere weerstand zodanig dat maximale vermogensoverdracht plaatsvindt in deze weerstand. Bepaal de waarde van de vervangende weerstand.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=\SI{12}{\volt},-*]   ++(0,2) node (1) {} node [left] {}
+            to[R, R=\SI{1.2}{\kilo\ohm}, -*] ++(2,0) node (2) {} node [above] {A}
+			to[R, R=\SI{3.9}{\kilo\ohm}, -*] ++(2,0) node (3) {} node [right] {}
+			to[R, R=\SI{2.7}{\kilo\ohm}]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[R, R=\SI{3.3}{\kilo\ohm}]     ++(4,0)	
+			to[short]          ++(0,-1)
+		(2) to[R, R=\SI{1.8}{\kilo\ohm}, -*] ++(0,-2) node [below] {B}
+%			to node[sground]{} ++(0,0)
+%        (3) to[I, l=$I$, invert]       ++(2,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelnetwerkvoortheveninanalysis2}
+\end{figure}
+
+%%
+%% Uth = 10.7973 V, Ik = 11.00 mA, Rth = 981.57 \ohm. nodal8.asc
+
+\item
+\label{que:gelthevenin3}
+Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis3}. Bereken het maximale vermogen dat in $R_X$ gedissipeerd kan worden.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=\SI{12}{\volt}]   ++(0,4) %node (1) {} node [left] {}
+            to[short,-*] ++(2,0) node (1) {}
+            to[R=\SI{10}{\ohm},-*] ++(0,-2) node (A) {} node[left] {A}
+			to[R=\SI{20}{\ohm},-*] ++(0,-2) node (C) {}
+        (1) to[short] ++(2,0)
+            to[R=\SI{40}{\ohm},-*] ++(0,-2) node (B) {} node[right] {B}
+            to[R=\SI{20}{\ohm}] ++(0,-2)
+            to[short, -.] (0,0)
+        (A) to[R=$R_X$] (B)
+		(C) to node[sground] {} ++(0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelnetwerkvoortheveninanalysis3}
+\end{figure}
+
+\item
+\label{que:gelnodal1}
+Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis3}. Neem $R_X=\SI{30}{\ohm}$. Bereken de spanningen op de punten A en B met behulp van de knooppuntspanningsmethode.
+
+% VA = 7.46667, VB = 5.06667, nodal9.asc
 
 \end{enumerate}
