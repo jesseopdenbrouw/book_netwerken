@@ -7,7 +7,9 @@
 
 \chapter{Rekenen met complexe getallen}
 \label{cha:complex}
-In de elektrotechniek wordt gebruik gemaakt van complexe getallen. Dit is een uitbreiding op de verzameling reële getallen. Het gebruik van complexe getallen zorgt ervoor dat ingewikkelde berekeningen met \textsl{sinusvormige signalen} eenvoudig kunnen worden uitgewerkt. De oorsprong van de complexe getallen komt voor uit het oplossen van differentiaalvergelijkingen. Stel, we hebben het volgende schema met een spoel, een condensator en een schakelaar. Dit wordt een LC-kring genoemd en is te zien in figuur~\ref{fig:comlckring}.
+In de elektrotechniek wordt gebruik gemaakt van complexe getallen. Dit is een uitbreiding op de verzameling reële getallen. Het gebruik van complexe getallen zorgt ervoor dat ingewikkelde berekeningen met \textsl{sinusvormige signalen} eenvoudig kunnen worden uitgewerkt. De oorsprong van het gebruik van de complexe getallen komt voor uit het oplossen van differentiaalvergelijkingen.
+\iffalse
+Stel, we hebben het volgende schema met een spoel, een condensator en een schakelaar. Dit wordt een LC-kring genoemd en is te zien in figuur~\ref{fig:comlckring}.
 
 \begin{figure}[!ht]
 \centering
@@ -125,7 +127,7 @@ Helaas heeft deze vergelijking geen reële oplossingen. We kunnen $\lambda_{1,2}
 %stelt de vergelijking in~\eqref{equ:comdiffequ} een fysisch probleem voor. Er moeten dus oplossingen zijn.
 %%
 %
-
+\fi
 
 \section{Imaginaire getallen}
 
@@ -424,8 +426,9 @@ Een complex getal kan worden afgebeeld als punt op het \textsl{complexe vlak}. I
 \draw[fill] (3,-2) circle (2pt) node[right,xshift=2mm] {$3-\imunit 2$};
 \draw[fill] (-2,1) circle (2pt) node[left,xshift=-2mm] {$-2+\imunit$};
 \draw[fill] (-1,-2) circle (2pt) node[left,xshift=-2mm] {$-1-\imunit 2$};
+\draw[fill] (0,0) circle (2pt) node[above right,xshift=0mm] {$0+\imunit 0$};
 \end{tikzpicture}
-\caption{Vier punten in het complexe vlak.}
+\caption{Vijf punten in het complexe vlak.}
 \label{fig:comvierpunten}
 \end{figure}
 
@@ -480,7 +483,7 @@ r       &= \sqrt{\mathstrut a^2 + b ^2} \\
 \end{split}
 \end{equation}
 %
-Merk op dat de hoek $\varphi$ doorgaans in radialen wordt gegeven.
+Merk op dat de hoek $\varphi$ in radialen wordt gegeven maar het is niet ongebruikelijk om de hoek in graden op te geven.
 Ten aanzien van de poolcoördinaten kunnen we nog het volgende melden:
 \begin{itemize}
 \item Bij een gelijkblijvende lengte $r$ en een oplopende hoek $\varphi$ beschrijft het punt $\underline{z}$ een \textsl{cirkel} in het complexe vlak.
@@ -500,3 +503,68 @@ Ten aanzien van de poolcoördinaten kunnen we nog het volgende melden:
 \end{itemize}
 
 
+\section{De stelling van Euler}
+Euler heeft de relatie gelegd tussen de complexe e-macht en de goniometrische functies sinus en cosinus:
+%
+\begin{equation}
+\boxed{\epowim{\varphi} = \cis{\varphi}}
+\end{equation}
+%
+Dus is $\epowim{\varphi}$ een complex getal met een reëel deel $\cos\varphi$ en een imaginair deel $\sin\varphi$. De lengte van $\epowim{\varphi}$ is:
+%
+\begin{equation}
+|\epowim{\varphi}| = \sqrt{\cos^2\varphi + \sin^2\varphi} = 1
+\end{equation}
+%
+Als we $\epowim{\varphi}$ in het complexe vlak tekenen, dan krijgen we een punt op de eenheidscirkel. Dit is te zien in figuur~\ref{fig:comeenheidscirkel}.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[scale=3] % scale is radius in cm
+\def\uangle{33.7}
+\draw[thick,dashed] (0,0) circle (1);
+\draw[-latex,thick] (0,-1.1) -- (0,1.1) node[above] {$\Im$};
+\draw[-latex,thick] (-1.1,0) -- (1.1,0) node[right] {$\Re$};
+\draw[-latex,thick] (0,0) --(\uangle:1) node[midway,yshift=3mm] {$1$} node[right,xshift=2mm] {$\underline{z}=\epowim{\varphi}$};
+\draw[dashed] (\uangle:1) -| (0,0);
+\draw[dashed] (\uangle:1) |- (0,0);
+\draw[decorate,decoration={brace,amplitude=4pt,mirror,raise=2pt}] (0,0) -- node[below,yshift=-2mm] {$\cos\varphi$} ({cos(\uangle)},0);
+\draw[decorate,decoration={brace,amplitude=4pt,raise=2pt}] (0,0) -- node[left,xshift=-2mm] {$\sin\varphi$} (0,{sin(\uangle)});
+\draw[-latex] (0.3,0) arc (0:\uangle:0.3);
+\node at (\uangle/2:0.4) {$\varphi$};
+\end{tikzpicture}
+\caption{Een punt op de eenheidscirkel.}
+\label{fig:comeenheidscirkel}
+\end{figure}
+
+Enkele markante punten op de eenheidscirkel:
+%
+\begin{equation}
+\begin{split}
+\epowim{0} &= 1 \\
+\epowim{\frac{\pi}{6}} &= \frac{1}{2}\sqrt{3} + \imunit\frac{1}{2}\\
+\epowim{\frac{\pi}{4}} &= \frac{1}{2}\sqrt{2} + \imunit\frac{1}{2}\sqrt{2}\\
+\epowim{\frac{\pi}{3}} &= \frac{1}{2} + \imunit\frac{1}{2}\sqrt{3}\\
+\epowim{\frac{\pi}{2}} &= \imunit \\
+\epowim{\pi} &= -1 \\
+\epowim{\frac{3}{2}\pi} &= -\imunit \\
+\epowim{2\pi} &= 1 \\
+\end{split}
+\end{equation}
+%
+%
+Als we voor de hoek $\varphi$ de waarde $\pi$ invullen, dan krijgen we de identiteit van Euler:
+%
+\begin{equation}
+\epowim{\pi} + 1 = 0
+\end{equation}Door $\epowim{\varphi}$ met een reële waarde $r$ te vermenigvuldigen, krijgen we een cirkel met straal van $r$:
+%
+\begin{equation}
+r\epowim{\varphi} = r\cos\varphi + \imunit\, r\sin\varphi
+\end{equation}
+%
+We kunnen een complex getal nu op drie manieren uitdrukken: met poolcoördinaten, met een e-macht en met rechthoekcoördinaten:
+%
+\begin{equation}
+r\angle\varphi = r\epowim{\varphi} = r\cos\varphi + \imunit\, r\sin\varphi
+\end{equation}
