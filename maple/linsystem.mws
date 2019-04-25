@@ -1,0 +1,31 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "Maple Output" 0 11 1 
+{CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 }3 3 0 -1 -1 -1 0 
+0 0 0 0 0 -1 0 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "with(LinearAlgebra):
+" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 75 "A := <<330+120+390,-390
+,-120>|<-390,390+220,-220>|<-120,-220,270+220+120>>:" }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 14 "b := <0,-9,0>:" }}}{EXCHG {PARA 0 "> " 0 
+"" {MPLTEXT 1 0 21 "S:=LinearSolve(A, b);" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%\"SG-%'RTABLEG6%\"*3p\">:-%'MATRIXG6#7%7##!%VE\"'!Rm
+\"7##!$)\\\"&Rm\"7##!%e6\"&&>$)&%'VectorG6#%'columnG" }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 9 "evalf(S);" }}{PARA 11 "" 1 "" {XPPMATH 20 
+"6#-%'RTABLEG6%\"*Oq\">:-%'MATRIXG6#7%7#$!+0oV)e\"!#67#$!+F$oH*HF.7#$!
++s0\">R\"F.&%'VectorG6#%'columnG" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 0 "" }}}}{MARK "6" 0 }{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }
+{PAGENUMBERS 0 1 2 33 1 1 }{RTABLE_HANDLES 151916908 151917036 }
+{RTABLE 
+M7R0
+I6RTABLE_SAVE/151916908X*%)anythingG6"F%[gl!#%!!!"$"$#!%VE"'!Rm"#!$)\"&Rm"#!%e6
+"&&>$)F%
+}
+{RTABLE 
+M7R0
+I6RTABLE_SAVE/151917036X*%)anythingG6"F%[gl!#%!!!"$"$$!+0oV)e"!#6$!+F$oH*HF($!+
+s0">R"F(F%
+}
+
