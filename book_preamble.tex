@@ -20,11 +20,10 @@
 %% PDF Version and compression...
 \pdfminorversion=5
 \pdfobjcompresslevel=1
-\fi
+%% Set input encoding to UTF-8
+\usepackage[utf8]{inputenc}\fi
 \fi
 
-%% Set input encoding to UTF-8
-\usepackage[utf8]{inputenc}
 %% Use T1 output font encoding
 \usepackage[T1]{fontenc}
 
@@ -101,9 +100,9 @@
 \usepackage{threeparttable}
 %\renewcommand{\TPTminimum}{1em}
 \renewcommand{\TPTnoteSettings}{\footnotesize}
-\makeatletter
+%\makeatletter
 %\setlist[tablenotes]{label=\tnote{\alph*},ref=\alph*,itemsep=\z@,topsep=\z@skip,partopsep=\z@skip,parsep=\z@,itemindent=\z@,labelindent=\tabcolsep,labelsep=.2em,leftmargin=*,align=left,before={\footnotesize}}
-\makeatother
+%\makeatother
 
 % Use sansmath (load before DeclareMath below because Sansmath
 % redefines the comma as:
@@ -136,6 +135,7 @@
 \usepackage{mathtools}
 \usepackage{siunitx}
 \sisetup{output-decimal-marker = {,}}
+\sisetup{tophrase={{\ en\ }}}
 %\usepackage{amssymb}
 \setlength{\mathindent}{1em}
 \DeclareMathSymbol{,}{\mathord}{letters}{"3B}
@@ -203,7 +203,7 @@
 \titleformat{\chapter}[display]
 {\bfseries}
 %{\chapnumfont\textcolor{chapnumcol}{\thechapter}}
-{\chapnumfont\textcolor{infoboxline}{\thechapter}}
+{\chapnumfont\textcolor{bookcolor}{\thechapter}}
 {0ex}
 {\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\Huge\bfseries}
 [{\vspace*{1ex}\titlerule[0.8pt]}]
@@ -330,7 +330,7 @@
   language=VHDL,
   basicstyle=\footnotesize\ttfamily,
   numbers=left,
-  numberstyle=\tiny\ifusebookasbook\color{gray}\else\color{infoboxline}\fi,
+  numberstyle=\tiny\ifusebookasbook\color{gray}\else\color{bookcolor}\fi,
   stepnumber=1,                           
   numbersep=8pt,
   backgroundcolor=\ifusebookasbook\color{lightgray}\else\color{white}\fi,
@@ -338,7 +338,7 @@
   showstringspaces=false,
   showtabs=false,
   frame=lines,
-  rulecolor=\ifusebookasbook\color{black}\else\color{infoboxline}\fi,
+  rulecolor=\ifusebookasbook\color{black}\else\color{bookcolor}\fi,
   tabsize=4,
   captionpos=b,
   breaklines=true,
@@ -367,9 +367,9 @@
 \else
 \hypersetup{
 	colorlinks=true,
-	linkcolor=infoboxline,
-	citecolor=infoboxline,
-	urlcolor=infoboxline,
+	linkcolor=bookcolor,
+	citecolor=bookcolor,
+	urlcolor=bookcolor,
     pdftitle={\booktitleI\ \booktitleII, \booksubtitle},
     pdfauthor={\bookauthor},
     %pdfsubject={Beginselen van de digitale techniek},
@@ -462,8 +462,8 @@
 \newcommand\ph[1]{\if-#1\mathbin{\textcolor{white}{-}}\else\textcolor{white}{#1}\fi}
 
 %% The askmaps package for displaying K-maps Amarican style
-\usepackage{askmaps}
-\askmapunitlength=0.88cm
+%\usepackage{askmaps}
+%\askmapunitlength=0.88cm
 
 %% Import the binary number cirlces package
 %%%\usepackage[reddash]{binarynumbercircles}
@@ -523,12 +523,11 @@
 
 %% Uning tcolorbox for Infobox environment settings
 \usepackage[most]{tcolorbox}
-\colorlet{infoboxline}{red!55!black} % Global example color
+\colorlet{bookcolor}{red!55!black} % Global book color
 \colorlet{infoboxbg}{brown!10}
 \colorlet{infoboxbgtitle}{brown!20}
-\newtcolorbox{infobox}[1][]{title=#1,colback=infoboxbg,colframe=infoboxline,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt,parbox=false}
+\newtcolorbox{infobox}[1][]{title=#1,colback=infoboxbg,colframe=bookcolor,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt,parbox=false}
 
-\colorlet{colorexample}{red!55!black} % Global example color
 \newcounter{example}[chapter]
 \setcounter{example}{0}
 \newtcolorbox[use counter=example,number within=chapter,list inside=example]{example}[1][]{%
@@ -542,17 +541,17 @@
     minipage boxed title,
     % (boxed title style requires an overlay)
     boxed title style={empty,size=minimal,toprule=0pt,top=4pt,bottom=2pt,left=3mm,overlay={}},
-    coltitle=colorexample,fonttitle=\bfseries,
+    coltitle=bookcolor,fonttitle=\bfseries,
     before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=3mm,right=0mm,top=5pt,breakable,pad at break=0mm,
        before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
     % Handles box when it exists on one page only
-    overlay unbroken={\draw[colorexample,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    overlay unbroken={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
     % Handles multipage box: first page
-    overlay first={\draw[colorexample,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    overlay first={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
     % Handles multipage box: middle page
-    overlay middle={\draw[colorexample,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    overlay middle={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
     % Handles multipage box: last page
-    overlay last={\draw[colorexample,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
+    overlay last={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
 }
 \makeatletter % no indent for entries
 \renewcommand{\l@tcolorbox}{\@dottedtocline{1}{0pt}{2.3em}}
