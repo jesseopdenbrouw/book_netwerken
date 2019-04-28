@@ -2024,9 +2024,12 @@ De transistor is verre van een ideale component. Zo is versterkingsfactor $\beta
 %%\draw (8,2) to[cI,l=$2U_x$] ++(2,0);
 %\end{tikzpicture}
 
+Veel literatuur schrijft dat superpositie niet gebruikt kan worden met gestuurde bronnen. Dat is niet waar. Superpositie kan prima gebruikt worden met gestuurde bronnen. Zie~\cite{leachapplication} voor meer informatie.
+
+
 \fi
 
-\iffalse
+\iftrue
 
 
 \section{Knooppuntspanningsmethode}
@@ -2410,18 +2413,18 @@ We rekenen alle bekende waarden uit:
 %
 \begin{equation}
 \begin{matrix*}[r]
-\num{2.500e-3}U_2 & -\num{0.667e-3}U_3 &= \num{10.000e-3} \\
-\num{-0.667e-3}U_2 & + \num{1,677e-3}U_3 &= \num{6.667e-3}
+\num{2.50000e-3}U_2 & -\num{0.66667e-3}U_3 &= \num{10.00000e-3} \\
+\num{-0.66667e-3}U_2 & + \num{1,67677e-3}U_3 &= \num{6.66667e-3}
 \end{matrix*}
 \end{equation}
 %
-Met behulp van matrixrekenmethoden vinden we voor $U_2 = \SI{5.67}{\volt}$ en $U_3 = \SI{6.27}{\volt}$.
+Met behulp van matrixrekenmethoden vinden we voor $U_2 = \SI{5.660}{\volt}$ en $U_3 = \SI{6.226}{\volt}$.
 Om de stroom die de spanningsbron levert te bepalen, moeten we de stromen uitrekenen door de weerstanden van \SI{1200}{\ohm} en \SI{1800}{\ohm}:
 \begin{equation}
 \begin{split}
-I_{12V} &= I_{2200\Omega} + I_{1800\Omega} = \dfrac{12-\num{5.67}}{1200} + \dfrac{12-\num{6.27}}{1800} \\
-        &= \num{5.275e-3}+\num{3,183e-3} \\
-        &= \SI{8,458}{\mA}
+I_{12V} &= I_{2200\Omega} + I_{1800\Omega} = \dfrac{12-\num{5.660}}{1200} + \dfrac{12-\num{6.226}}{1800} \\
+        &= \num{5.283e-3}+\num{3,208e-3} \\
+        &= \SI{8,491}{\mA}
 \end{split}
 \end{equation}
 \end{example}
@@ -2480,7 +2483,7 @@ Merk op dat deze laatste vergelijking geen stroomvergelijking is maar een spanni
 \begin{equation}
 \begin{matrix*}[r]
 \left(\dfrac{1}{R_6}+\dfrac{1}{R_5}\right)U_1 & & -\dfrac{1}{R_5}U_3 & -I_x &=& 0 \\[1em]
- & \left(\dfrac{1}{R_3}+\dfrac{1}{R_4}\right)U_2 & -\dfrac{1}{R_2}U_3 & +Ix &=& 0 \\[1em]
+ & \left(\dfrac{1}{R_3}+\dfrac{1}{R_4}\right)U_2 & -\dfrac{1}{R_2}U_3 & +I_x &=& 0 \\[1em]
 -\dfrac{1}{R_5}U_1 & -\dfrac{1}{R_2}U_2 & +\left(\dfrac{1}{R_5}+\dfrac{1}{R_2}+\dfrac{1}{R_4}\right)U_3 & &=& 0 \\[1.5em]
 -U_1 & +U_2 & & &= &U
 \end{matrix*}
@@ -2552,11 +2555,13 @@ Met behulp van de matrixrekenkunde vinden we voor de spanningen en de stroom: $U
 \subsection{Gestuurde bronnen}
 
 \begin{example}[Operational amplifier]
-De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \textsl{opamp} (Nederlands), is een bijzonder nuttige component in de elektrotechniek. Het wordt gebruikt in signaalverwerkende elektronica. Het gedrag van een opamp kan zeer goed benaderd worden door drie netwerkelementen: een ingangsweerstand, een uitgangsweerstand en een spanningsgestuurde spanningsbron. Wat een opamp in feite doet is de spanning tussen twee ingangsklemmen, waartussen de ingangsweerstand is geplaatst, een groot aantal keer versterken. In het uitgangsnetwerk is de uitgangsweerstand opgenomen. Het model is te vinden in figuur~\ref{fig:gelmodelopamp}.
+De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \textsl{opamp} (Nederlands), is een bijzonder nuttige component in de elektrotechniek. Het wordt gebruikt in signaalverwerkende elektronica. Het gedrag van een opamp kan zeer goed benaderd worden door drie netwerkelementen: een ingangsweerstand, een uitgangsweerstand en een spanningsgestuurde spanningsbron. Wat een opamp in feite doet is de spanning tussen de twee ingangsklemmen, waartussen de ingangsweerstand is geplaatst, een groot aantal keer versterken. In het uitgangsnetwerk is de uitgangsweerstand opgenomen. Het symbool en het model zijn te vinden in figuur~\ref{fig:gelmodelopamp}.
 
 \begin{center}
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[short,o-] ++(1,0)
+\draw (0,-1) node[op amp,yscale=-1] (opamp) {}
+;
+\draw (3,0) to[short,o-] ++(1,0)
             to[R=$R_{in}$, v=$U_{in}$] ++(0,-2) node (1) {}
             to[short,-o] ++(-1,0)
             to[open] ++(5.5,2) %node (3) {} node[right] {$U_{2}$}
@@ -2566,7 +2571,7 @@ De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \tex
 %        (1) to[short,*-*] (2)
 ;
 \end{tikzpicture}
-\captionof{figure}{Een vereenvoudigd model van een opamp.}
+\captionof{figure}{Symbool en het vereenvoudigd model van een opamp.}
 \label{fig:gelmodelopamp}
 \end{center}
 
@@ -2804,7 +2809,7 @@ G_{21} & G_{22} & G_{23} & \cdots & G_{2n} \\
 G_{31} & G_{32} & G_{33} & \cdots & G_{3n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 G_{n1} & G_{n2} & G_{n3} & \cdots & G_{nn} \\
-\end{bmatrix*} = 
+\end{bmatrix*} \times
 \begin{bmatrix*}[c]
 U_1 \\ U_2 \\ U_3 \\ \vdots \\ U_n
 \end{bmatrix*} =
@@ -3039,5 +3044,5 @@ Nu alle spanningen bekend zijn, kunnen de takstromen berekend worden.
 
 \fi
 
-\section{Opgaven}
-\input{book_chap02_ques}
+%\section{Opgaven}
+%\input{book_chap02_ques}
