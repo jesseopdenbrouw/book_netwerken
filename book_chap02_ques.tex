@@ -103,8 +103,6 @@ Gegeven is het netwerk in figuur~\ref{fig:gelserieparallel1}. Bepaal de totale w
 \label{fig:gelserieparallel1}
 \end{figure}
 
-
-
 \item
 \label{que:gellatticenetwork}
 
@@ -141,8 +139,29 @@ R_{AB} = \SI{30}{\kilo\ohm}
 \fi
 
 \item
+\label{que:gelspanningsdeling1}
+Gegeven is het netwerk in figuur. Bepaal de spanningen $U_1$ en $U_2$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=\SI{12}{\volt}] ++(0,2)
+			to[short] ++(0.5,0)
+            to[R=\SI{6}{\ohm}, v=$U_1$] ++(2,0)
+			to[short] ++(0.5,0)
+			to[R=\SI{18}{\ohm}, v=$U_2$] ++(0,-2)
+			to[short,-.] (0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelspanningsdeling1}
+\end{figure}
+
+
+
+\item
 \label{gel:spanningsdeling1}
-Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling1}. De interne weerstand van de spanningsmeter is \SI{10}{\mega\ohm}. Bereken spanning die de spanningsmeter meet.
+Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling2}. De interne weerstand van de spanningsmeter is \SI{10}{\mega\ohm}. Bereken spanning die de spanningsmeter meet.
 
 \begin{figure}[!ht]
 \centering
@@ -157,7 +176,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling1}. De interne weers
 ;
 \end{tikzpicture}
 \caption{Netwerk van weerstanden en spanningsmeter.}
-\label{fig:gelspanningsdeling1}
+\label{fig:gelspanningsdeling2}
 \end{figure}
 
 % Vmeter = (1//10) / (1+(1//10))*24 = 11,428571428571428571428571428571 V
@@ -284,7 +303,7 @@ Gegeven zijn de netwerken in figuur~\ref{fig:gelnetwerkvoortheveninanalysis1}. B
 
 \item
 \label{que:gelthevenin2}
-Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepaal het Thévenin-vervangingsnetwerk tussen de punten A en B. De weerstand tussen A en B is nu \SI{1.8}{\kilo\ohm}. Deze weerstand wordt vervangen door een andere weerstand zodanig dat maximale vermogensoverdracht plaatsvindt in deze weerstand. Bepaal de waarde van de vervangende weerstand.
+Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepaal het Thévenin-vervangingsnetwerk tussen de punten A en B. 
 
 \begin{figure}[!ht]
 \centering
@@ -308,6 +327,12 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepa
 
 %%
 %% Uth = 10.7973 V, Ik = 11.00 mA, Rth = 981.57 \ohm. nodal8.asc
+
+\item
+\label{que:gelthevenin2b}
+Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. De weerstand tussen A en B is nu \SI{1.8}{\kilo\ohm}. Deze weerstand wordt vervangen door een andere weerstand zodanig dat maximale vermogensoverdracht plaatsvindt in deze weerstand. Bepaal de waarde van de vervangende weerstand.
+
+
 
 \item
 \label{que:gelthevenin3}
@@ -337,5 +362,63 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis3}. Bere
 Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis3}. Neem $R_X=\SI{30}{\ohm}$. Bereken de spanningen op de punten A en B met behulp van de knooppuntspanningsmethode.
 
 % VA = 7.46667, VB = 5.06667, nodal9.asc
+
+\item
+\label{que:gelnodal2}
+Gegeven is het netwerk in figuur~\ref{fig:gelnodal2}. Een ontwerper wil de spanning $U_x$ op \SI{3}{\volt} hebben.
+Bepaal de waarde van $R_x$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v<=\SI{8}{\volt}]   ++(0,2) %node (1) {} node [left] {}
+            to[R=\SI{2}{\ohm},-*] ++(2,0) node (A) {} node[above] {$U_x$}
+			to[R=\SI{4}{\ohm}] ++(2,0)
+			to[V, v=\SI{6}{\volt}]   ++(0,-2) %node (1) {} node [left] {}
+            to[short, -.] (0,0)
+        (A) to[R=$R_x$] ++(0,-2)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbronnen en weerstanden.}
+\label{fig:gelnodal2}
+\end{figure}
+
+%% (Ux-U1)G1 + (Ux-0)G3 + (Ux-U2)G2 = 0
+%%
+%% G2 = (U1-Ux)G1 + (U2-Ux)G2 / Ux
+%%
+%% Rx = 12/13 Ohm
+
+\item
+\label{que:nodal3}
+Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ en $U_x$ als functie van de overige parameters.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V<=$U_1$] ++(0,4)
+            to[short] ++(2,0)
+            to[R=$R_{in}$, v=$U_{in}$,-*] ++(0,-2) node (1) {} node[left] {$U_x$}
+            to[R=$R_1$,-*] ++(0,-2)
+			node[sground] {}
+            to[short,-.] ++(-2,0)
+            to[open] ++(6.5,4) %node (3) {} node[right] {$U_{2}$}
+            to[R=$R_{out}$,] ++(-2,0)
+            to[cV, v_>=$aU_{in}$] ++(0,-2) node (2) {}
+			to[short] ++(0,-2) node (2) {}
+			to[short] ++(-2.5,0)
+		(1) to[short] ++(2.5,0)
+			to[R=$R_2$] ++(2,0)
+			to[short,-*] ++(0,2)
+			to[short, -o] ++(1,0) node[right] {$U_2$}
+		(2) to[short, o-*] ++(3,0)
+;
+\end{tikzpicture}
+\captionof{figure}{Opamp-netwerk.}
+\label{fig:gelnodal3}
+\end{figure}
+
+
+
 
 \end{enumerate}
