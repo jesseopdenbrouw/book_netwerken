@@ -1,0 +1,69 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Output" -1 
+11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 
+0 0 0 1 0 1 0 2 2 0 1 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "with(LinearAlgebra):" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 45 "A := <<Gin+G1+G2,-G2>|<(a*Gout-G2),
+Gout+G2>>:" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 24 "b := <U1*Gin,
+U1*a*Gout>:" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 21 "S:=LinearSol
+ve(A, b);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"SG-%'RTABLEG6%\")%)Qs
+i-%'MATRIXG6#7$7#*(%#U1G\"\"\",**&%$GinGF0%%GoutGF0F0*&F3F0%#G2GF0F0*(
+F6F0%\"aGF0F4F0F0*&)F8\"\"#F0)F4F;F0!\"\"F0,.F7F0F2F0F5F0*&%#G1GF0F4F0
+F0*&F@F0F6F0F0*&F6F0F4F0F0F=7#*(F/F0,**(F3F0F8F0F4F0F0F5F0*(F@F0F8F0F4
+F0F0F7F0F0F>F=&%'VectorG6#%'columnG" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 11 "Gout:=1/75;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%Gou
+tG#\"\"\"\"#v" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 12 "G1:=1/1000
+0;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#G1G#\"\"\"\"&++\"" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 12 "G2:=1/20000;" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%#G2G#\"\"\"\"&++#" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 10 "a:=200000;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"aG
+\"'++?" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "Gin:=1/200000;" }
+}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$GinG#\"\"\"\"'++?" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "U1:=1.0;" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%#U1G$\"#5!\"\"" }}}{EXCHG {PARA 11 "" 1 "" {XPPMATH 
+20 "6#>%#U1G\"\"\"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 9 "evalf(
+S);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#-%'RTABLEG6%\")W[si-%'MATRIXG6#
+7$7#$!+e.DL`!\"#7#$\"+J=&**4$!\"*&%'VectorG6#%'columnG" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 2 "S;" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#-%'RTABLEG6%\")%)Qsi-%'MATRIXG6#7$7#$!
++e.DL`!\"#7#$\"+J=&**4$!\"*&%'VectorG6#%'columnG" }}}{EXCHG {PARA 0 ">
+ " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "
+" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 12 "evalf(S(2));" }}{PARA 11 "" 1 "" {XPPMATH 20 "
+6#*(%#U1G\"\"\",**(%$GinGF%%\"aGF%%%GoutGF%F%*&F(F%%#G2GF%F%*(%#G1GF%F
+)F%F*F%F%*(F,F%F)F%F*F%F%F%,.F/F%*&F(F%F*F%F%F+F%*&F.F%F*F%F%*&F.F%F,F
+%F%*&F,F%F*F%F%!\"\"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}
+}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}}{MARK "20 0 0" 0 }{VIEWOPTS 1 1 0 1 1 1803 1 
+1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }{RTABLE_HANDLES 62723884 62724844 }
+{RTABLE 
+M7R0
+I5RTABLE_SAVE/62723884X*%)anythingG6"F%[gl!#%!!!"#"#*(%#U1G""",**&%$GinGF(%%Gou
+tGF(F(*&F+F(%#G2GF(F(*(F.F(%"aGF(F,F(F(*&F0""#F,F2!""F(,.F/F(F*F(F-F(*&%#G1GF(F
+,F(F(*&F6F(F.F(F(*&F.F(F,F(F(F3*(F'F(,**(F+F(F0F(F,F(F(F-F(*(F6F(F0F(F,F(F(F/F(
+F(F4F3F%
+}
+{RTABLE 
+M7R0
+I5RTABLE_SAVE/62724844X*%)anythingG6"F%[gl!#%!!!"#"#*(%#U1G""",**&%$GinGF(%%Gou
+tGF(F(*&F+F(%#G2GF(F(*(F.F(%"aGF(F,F(F(*&F0""#F,F2$!""""!F(,.F/F(F*F(F-F(*&%#G1
+GF(F,F(F(*&F8F(F.F(F(*&F.F(F,F(F(F4*(F'F(,**(F+F(F0F(F,F(F(F-F(*(F8F(F0F(F,F(F(
+F/F(F(F6F4F%
+}
+
