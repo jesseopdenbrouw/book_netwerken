@@ -1808,17 +1808,20 @@ P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\si{\wa
 
 \fi
 
-\iffalse
+\iftrue
 
 \section{Gestuurde bronnen}
 
 Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afhankelijke} of \textsl{gestuurde} bronnen bevatten. Er zijn vier vormen mogelijk van gestuurde bronnen:
 
 \begin{itemize}
-\item De spanningsgestuurde spanningsbron (Engels: voltage controlled voltage source, afgekort vcvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vcvs}. De spanning van deze bron is afhankelijk van een (andere) spanning in het netwerk. De parameter $a$ is de versterkingsfactor en is dimensieloos;
-\item De stroomgestuurde spanningsbron (Engels: current controlled voltage source, afgekort ccvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2ccvs}. De spanning van deze bron is afhankelijk van een stroom in het netwerk. De parameter $b$ is de versterkingsfactor en heeft de dimensie \si{\ohm}. Een andere naam voor dit netwerkelement is \textsl{transimpedantieversterker};
-\item De spanningsgestuurde stroombron (Engels: voltage controlled current source, afgekort vccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vccs}. De stroom van deze bron is afhankelijk van een spanning in het netwerk. De parameter $c$ is de versterkingsfactor en heeft de dimensie \si{\siemens}. Een andere naam voor dit netwerkelement is \textsl{transconductantieversterker};
-\item De stroomgestuurde stroombron (Engels: current controlled current source, afgekort cccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2cccs}. De stroom van deze bron is afhankelijk van een (andere) stroom in het netwerk. De parameter $d$ is de versterkingsfactor en is dimensieloos.
+\item De spanningsgestuurde spanningsbron (Engels: voltage controlled voltage source, afgekort vcvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vcvs}. De spanning van deze bron is afhankelijk van een (andere) spanning tussen twee knooppunten in het netwerk. De parameter $a$ is de versterkingsfactor en is dimensieloos;
+
+\item De stroomgestuurde spanningsbron (Engels: current controlled voltage source, afgekort ccvs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2ccvs}. De spanning van deze bron is afhankelijk van een stroom in een tak in het netwerk. De parameter $b$ is de versterkingsfactor en heeft de dimensie \si{\ohm}. Een andere naam voor dit netwerkelement is \textsl{transimpedantieversterker};
+
+\item De spanningsgestuurde stroombron (Engels: voltage controlled current source, afgekort vccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2vccs}. De stroom van deze bron is afhankelijk van een spanning tussen twee knooppunten in het netwerk. De parameter $c$ is de versterkingsfactor en heeft de dimensie \si{\siemens}. Een andere naam voor dit netwerkelement is \textsl{transconductantieversterker};
+
+\item De stroomgestuurde stroombron (Engels: current controlled current source, afgekort cccs). Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbolengestuuurdebronnenen2cccs}. De stroom van deze bron is afhankelijk van een (andere) stroom in een tak in het netwerk. De parameter $d$ is de versterkingsfactor en is dimensieloos.
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -1925,7 +1928,7 @@ Deze stroom is de som van $I_x$ en de stroom die de stroomgestuurde spanningsbro
 \end{example}
 
 \begin{example}[De bipolaire transistor als transimpedantieversterker]
-In dit voorbeeld bespreken we de bipolaire transistor als stroomgestuurde spanningsversterker. We bespreken hier alleen de zogenoemde NPN-transistor. Het symbool en het vereenvoudigde model voor gelijkstroomnetwerken is te zien in figuur~\ref{fig:gelnpntransistor1}. De transistor heeft drie aansluitpunten: de \textsl{basis} (b), de \textsl{collector} (c) en de \textsl{emitter} (e). Als in de basis een (kleine) stroom wordt gestuurd, dan zal transistor via de collector een grotere stroom leveren. De verhouding tussen de collectorstroom en de basisstroom wordt aangegeven met de parameter $\beta$ (in de literatuur wordt ook wel $H_{FE}$ gebruikt). Beide stromen verlaten de transistor via de emitter.
+In dit voorbeeld bespreken we de bipolaire transistor als stroomgestuurde spanningsversterker. We bespreken hier alleen de zogenoemde NPN-transistor. Het symbool en het vereenvoudigde model voor gelijkstroomnetwerken is te zien in figuur~\ref{fig:gelnpntransistor1}. De transistor heeft drie aansluitpunten: de \textsl{basis} (b), de \textsl{collector} (c) en de \textsl{emitter} (e). Als in de basis een (kleine) stroom wordt gestuurd, dan zal transistor via de collector een grotere stroom leveren. De verhouding tussen de collectorstroom en de basisstroom wordt aangegeven met de parameter $\beta$ (in de literatuur wordt ook wel $h_{FE}$ gebruikt). Beide stromen verlaten de transistor via de emitter.
 
 \begin{center}
 \begin{tikzpicture}[bookcircuit]
@@ -2009,9 +2012,9 @@ In de formule staat een minteken. Een grotere stroom in de basis leidt tot een l
 I_{c,max} = \dfrac{12}{500} = \SI{24}{\milli\ampere}
 \end{equation}
 %
-De maximale basistroom waarvoor dit netwerk nog werkt is een $\beta$ keer kleiner (een factor 100), dus $I_{b,max}=\SI{240}{\micro\ampere}$. Let wel, de basisstroom mag we groter zijn maar $I_c$ is begrensd tot \SI{24}{\milli\ampere}.
+De maximale basistroom waarvoor dit netwerk nog werkt is een $\beta$ keer kleiner (een factor 100), dus $I_{b,max}=\SI{240}{\micro\ampere}$. Let wel, de basisstroom mag wel groter zijn maar $I_c$ is begrensd tot \SI{24}{\milli\ampere}.
 
-De transistor is verre van een ideale component. Zo is versterkingsfactor $\beta$ is in de regel groot, tussen de 100 en de 600, maar de variatie is enorm. Van eenzelfde type transistor kan $\beta$ behoorlijk variëren. Dat betekent dat in ontwerpen moet worden gezorgd dat de invloed van $\beta$ niet al te groot is. De collectorspanning kan niet lager worden dan de emitterspanning. Als de basistroom te groot is, zal de collectorspanning enkele tientallen \si{\milli\volt} boven de emitterspanning blijven. Dit wordt de \textsl{kniespanning} genoemd. De transistor is dan \textsl{in verzadiging}. 
+De transistor is verre van een ideale component. Zo is versterkingsfactor $\beta$ is in de regel groot, tussen de 100 en de 600, maar de spreiding is enorm. Van eenzelfde type transistor kan $\beta$ behoorlijk variëren. Dat betekent dat in ontwerpen moet worden gezorgd dat de invloed van $\beta$ niet al te groot is. De collectorspanning kan niet lager worden dan de emitterspanning. Als de basistroom te groot is, zal de collectorspanning enkele tientallen \si{\milli\volt} boven de emitterspanning blijven. Dit wordt de \textsl{kniespanning} genoemd. De transistor is dan \textsl{in verzadiging}.
 \end{example}
 
 %\begin{tikzpicture}[bookcircuit]
@@ -2029,7 +2032,7 @@ Veel literatuur schrijft dat superpositie niet gebruikt kan worden met gestuurde
 
 \fi
 
-\iftrue
+\iffalse
 
 
 \section{Knooppuntspanningsmethode}
@@ -2506,7 +2509,7 @@ U_1 \\[1em] U_2\\[1em] U_3\\[1em] I_x
 \end{bmatrix*}
 \end{equation}
 %
-Merk op dat niet alle elementen uit de coëfficiëntenmatrix nu de dimensie geleiding hebben, maar dat enkele elementen dimensieloos zijn. Door de keuze van de richting van $I_x$ is de matrix echter wel symmetrisch ten opzichte van de hoofddiagonaal. In de onbekendenvector is naast onbekende spanningen ook een onbekende stroom te vinden.
+We zien dat niet alle elementen uit de coëfficiëntenmatrix nu de dimensie geleiding hebben, maar dat enkele elementen dimensieloos zijn. Door de keuze van de richting van $I_x$ is de matrix echter wel symmetrisch ten opzichte van de hoofddiagonaal. In de onbekendenvector is naast onbekende spanningen ook een onbekende stroom te vinden.
 
 \begin{example}[Netwerk met zwevende, onafhankelijke spanningsbron]
 In figuur~\ref{fig:gelnetwerkvoornodalanalysis7} is een netwerk te zien met een zwevende spanningsbron. Er zijn drie onbekende spanningen en één onbekende bronstroom. Er zijn dus vier vergelijkingen nodig voor het vinden van de onbekende spanningen en stroom.
@@ -2636,27 +2639,6 @@ Door toepassing van de regel van Cramer vinden we voor $U_2$:
 U_2 = \dfrac{-G_1(-G_2+aG_{out})}{(G_1+G_{in}+G_2)(G_2+G_{out}) + G_2(-G_2+aG_{out})}U_1
 \end{equation}
 %
-%%%We vermenigvuldigen teller en noemer uit en zetten het minteken in de teller voor de breuk:
-%%%%
-%%%\begin{equation}
-%%%\label{equ:gelopampreal2}
-%%%U_2 = -\dfrac{-G_1G_2 + aG_1G_{out}}{G_1G_2 + G_{in}G_2 + G_1G_{out} + G_{in}G_{out} + G_2G_{out} + aG_2G_{out}}U_1
-%%%\end{equation}
-%%%%
-%%%We halen bij de teller $G_1$ buiten haakjes en bij de noemer $G_2$ buiten haakjes:
-%%%%
-%%%\begin{equation}
-%%%\label{equ:gelopampreal3}
-%%%U_2 = -\dfrac{G_1}{G_2}\cdot\dfrac{-G_2+aG_{out}}{G_1+G_{in}+\dfrac{G_1G_{out}}{G_2}+\dfrac{G_{in}G_{out}}{G_2}+G_{out}+aG_{out}}U_1
-%%%\end{equation}
-%%%%
-%%%Nu delen we teller en noemer door $G_{out}$:
-%%%%
-%%%\begin{equation}
-%%%\label{equ:gelopampreal4}
-%%%U_2 = -\dfrac{G_1}{G_2}\cdot\dfrac{a - \dfrac{G_2}{G_{out}}}{a+1+\dfrac{G_1}{G_2}+\dfrac{G_{in}}{G_{out}}+\dfrac{G_1}{G_2}+\dfrac{G_{in}}{G_2}}U_1
-%%%\end{equation}
-%
 Door teller en noemer te delen door $-G_2+aG_{out}$ en het minteken bij $G_1$ voor de breuk te schrijven, krijgen we voor $U_2$:
 %
 \begin{equation}
@@ -2688,52 +2670,11 @@ We bekijken nu de term:
 \end{equation}
 %
 We kunnen de invloed van deze term willekeurig klein maken door aan de parameters van de opamp eisen te stellen, de weerstanden $R_1$ en $R_2$ zijn door de ontwerper in te stellen. Zo kunnen we ervoor zorgen dat de uitgangsweerstand $R_{out}$ klein is (dus $G_{out}$ is groot). Verder kunnen we ervoor zorgen dat de ingangsweerstand zeer groot is zodat $G_{in}$ zeer klein is en zorgen we ervoor dat $a$ groot is. Dan volgt voor de term in~\eqref{equ:gelopampreal5}:
-%%%
-%%\begin{equation}
-%%\dfrac{G_1+G_2}{G_2}\times\dfrac{1}{a}
-%%\end{equation}
+%
 \begin{equation}
 \label{equ:gelopampreal6}
 \left(\dfrac{G_1+G_{in}+G_2}{G_2}\right)\left(\dfrac{G_2+G_{out}}{-G_2+aG_{out}}\right) \approx 0
 \end{equation}
-%
-%
-%
-%%We kunnen via~\eqref{equ:gelopampb} $U_x$ expliciet maken:
-%%%
-%%\begin{equation}
-%%\label{equ:gelopampux}
-%%U_x = -\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2
-%%\end{equation}
-%%%
-%%We kunnen vergelijking~\eqref{equ:gelopampa} dan schrijven als:
-%%%
-%%\begin{equation}
-%%-(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}U_2- G_2U_2 = G_1U_1 \\
-%%\end{equation}
-%%%
-%%We hebben nu een vergelijking waar alleen $U_1$ en $U_2$, de geleidingen en de versterkingsfactor $a$ in voorkomen. We kunnen $U_2$ nu expliciet schrijven:
-%%%
-%%\begin{equation}
-%%\label{equ:gelopampreal}
-%%U_2 = -\dfrac{G_1}{(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}+G_2}U_1
-%%\end{equation}
-%%%
-%%Laten we nu eens kijken naar de term:
-%%%
-%%\begin{equation}
-%%(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}}
-%%\end{equation}
-%%%
-%%De ingangsweerstand $R_{in}$ is in de regel zeer groot zodat $G_{in}$ zeer klein is. Dat betekent dat de factor
-%%$G_1+G_{in}+G_2$ vereenvoudigd kan worden tot $G_1+G_2$. De versterkingsfactor $a$ is zeer groot en de uitgangsweerstand $R_{out}$ is klein (dus $G_{out}$ is groot). In de breuk is de factor $-G_2+aG_{out}$ dus dominant. We kunnen dan stellen dat:
-%%%
-%%\begin{equation}
-%%(G_1+G_{in}+G_2)\dfrac{G_2+G_{out}}{-G_2+aG_{out}} \approx 0
-%%\end{equation}
-%%%
-%
-%
 %
 Daarmee vereenvoudigt~\eqref{equ:gelopampreal4} zich tot:
 %
