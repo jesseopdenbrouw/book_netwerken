@@ -113,13 +113,13 @@ Gegeven het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de v
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) node [left] {A}
 	to[short,o-*]                  ++(1,0) node (1) {}
-    to[R, R=\SI{25}{\kilo\ohm},-*] ++ (0,-2)
+    to[R, R=\SI{70}{\kilo\ohm},-*] ++ (0,-2)
 (1) to[R, R=\SI{20}{\kilo\ohm},-*] ++(2,0) node (2) {}
-    to[R, R=\SI{60}{\kilo\ohm},-*] ++(0,-2)
+    to[R, R=\SI{100}{\kilo\ohm},-*] ++(0,-2)
 (2) to[R, R=\SI{80}{\kilo\ohm},-*] ++(2,0) node (3) {}
     to[R, R=\SI{30}{\kilo\ohm},-*] ++(0,-2)
 (3) to[R, R=\SI{40}{\kilo\ohm}] ++(2,0)
-    to[R, R=\SI{10}{\kilo\ohm}]    ++(0,-2)
+    to[R, R=\SI{20}{\kilo\ohm}]    ++(0,-2)
 	to[short,-o]                   (0,-2) node (4) [left] {B}
 ;
 \end{tikzpicture}
@@ -329,9 +329,54 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepa
 %% Uth = 10.7973 V, Ik = 11.00 mA, Rth = 981.57 \ohm. nodal8.asc
 
 \item
+\label{que:gelsuperpos1}
+Gegeven is het netwerk in figuur~\ref{fig:gelsuperpos1}. Bepaal de spanning $U_x$ door middel van superpositie.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V<=\SI{6}{\volt}] ++(0,2)
+			to[R=\SI{4}{\ohm}] ++(3,0) node[above] {$U_x$}
+			to[short] ++(2,0)
+			to[R=\SI{8}{\ohm}] ++(0,-2)
+			to[short] ++(-2,0) node (1) {}
+			to[short,*-.] (0,0)
+		(1) to[I,l=$\dfrac{1}{4}$\si{\ampere},*-*] ++(0,2)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron, stroombron en weerstanden.}
+\label{fig:gelsuperpos1}
+\end{figure}
+
+%% Ubron: Ux = 4 V
+%% Ibron: Ux = 2/3 V
+%% Uxtotaal = 4 2/3 V
+
+
+\item
 \label{que:gelthevenin2b}
 Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. De weerstand tussen A en B is nu \SI{1.8}{\kilo\ohm}. Deze weerstand wordt vervangen door een andere weerstand zodanig dat maximale vermogensoverdracht plaatsvindt in deze weerstand. Bepaal de waarde van de vervangende weerstand.
 
+\item
+\label{que:gelthevenin4}
+Gegeven is het netwerk in figuur~\ref{fig:gelthevenin4}. Bepaal het thévenin-vervangingsschema tussen de punten A en B.
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[R=\SI{30}{\ohm},-*] ++(0,2) node (1) {}
+            to[V, v=\SI{10}{\volt},-*] ++(2,0) node (2) {}
+            to[V, v=\SI{10}{\volt},-*] ++(2,0) node (3) {} node[right] {A}
+			to[R=\SI{30}{\ohm}] ++(0,-2) node[right] {B}
+			to[short] (0,0)
+		(1) to[short] ++(0,1.5)
+			to[R=\SI{15}{\ohm}] ++(4,0)
+			to[short] ++(0,-1.5)
+		(2) to[R=\SI{30}{\ohm},-*] ++(0,-2)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbronnen en weerstanden.}
+\label{fig:gelthevenin4}
+\end{figure}
 
 
 \item
@@ -391,7 +436,7 @@ Bepaal de waarde van $R_x$.
 
 \item
 \label{que:nodal3}
-Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ en $U_x$ als functie van de overige parameters.
+Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ en $U_x$ als functie van de overige parameters. Gebruik hiervoor de knooppuntspanningsmethode.
 
 \begin{figure}[!ht]
 \centering
