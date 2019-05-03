@@ -5,9 +5,11 @@
 \section{Spanning en stroom}
 De elektrische grootheden spanning en stroom komen voort uit de theorie van de \textsl{elektromagnetische velden}. Een elektromagnetisch veld is een natuurkundig verschijnsel geproduceerd door elektrisch geladen objecten. Het is een van de vier fundamentele krachten in de natuur, naast de zwaartekracht, de zwakke wisselwerking en sterke wisselwerking. Het is lastig om een elektromagnetisch veld voor te stellen, het is immers niet te zien. We kunnen het wel meten met behulp van een \textsl{veldsterktemeter}.
 
-Materie bestaat uit atomen die zijn opgebouwd uit protonen, neutronen en elektronen. Protonen hebben een positieve lading ter grootte van de \textsl{elementaire lading}. Deze lading is gedefinieerd als \SI{1.602176634e-19}{\coulomb} (vanaf 20 mei 2019) en wordt doorgaans aangegeven met de constante $e$ (niet te verwarren met e, het grondtal van de natuurlijke logaritme). Elektronen hebben dezelfde lading maar dan tegengesteld, dus $-e$. Neutronen hebben geen lading. De keuze voor positieve en negatieve lading is ingegeven door het historische feit dat de positieve lading (althans, wat we verstaan onder positieve lading) eerder is ontdekt dan negatieve lading. Pas later werd bekend dat elektriciteit grotendeels wordt veroorzaakt door bewegende elektronen.
+Materie bestaat uit atomen die zijn opgebouwd uit protonen, neutronen en elektronen. Protonen en elektronen hebben een \textsl{lading}. Lading wordt uitgedrukt in coulomb, afgekort tot \si{\coulomb}. Protonen hebben een positieve lading ter grootte van de \textsl{elementaire lading}. Deze lading is gedefinieerd als \SI{1.602176634e-19}{\coulomb} (vanaf 20 mei 2019) en wordt doorgaans aangegeven met de constante $e$ (niet te verwarren met e, het grondtal van de natuurlijke logaritme). Elektronen hebben dezelfde lading maar dan tegengesteld, dus $-e$. Neutronen hebben geen lading. De keuze voor positieve en negatieve lading is ingegeven door het historische feit dat de positieve lading (althans, wat we verstaan onder positieve lading) eerder is ontdekt dan negatieve lading. Pas later werd bekend dat elektriciteit grotendeels wordt veroorzaakt door bewegende elektronen.
 
 Metaalatomen zijn opgelijnd in een zogenoemd kristalrooster. De elektronen in de buitenste schil van een metaalatoom kunnen zich vrijelijk bewegen. Ze springen van de ene atoom naar de andere atoom. Als een elektron migreert naar een atoom, dan wordt dit atoom tijdelijk negatief geladen. Het atoom waar de elektron is weggegaan, is dan positief geladen. Er is een \textsl{gat} ontstaan. Dit ladingsverschil zorgt ervoor dat elektronen zich naar het gat bewegen. Het nettoresultaat van de lading in een metalen geleider is dus 0.
+
+%The moving charged particles in an electric current are called charge carriers. In metals, one or more electrons from each atom are loosely bound to the atom, and can move freely about within the metal. These conduction electrons are the charge carriers in metal conductors.
 
 Elektrische spanning is het verschil in \textsl{potentiële elektrische energie} tussen twee punten per eenheid van lading. In het SI-stelsel kan dit worden uitgedrukt in joule per coulomb (\si[per-mode=symbol]{\joule\per\coulomb}), maar spanning heeft een eigen eenheid gekregen: de \textsl{volt}, afgekort tot \si{\volt}. Als symbool voor de elektrische spanning wordt $U$ gebruikt maar in Engelstalige literatuur wordt $V$ gebruikt. Als we een spanningsverschil over een metalen geleider plaatsen, dan geven we de elektronen de mogelijkheid om deze potentiële energie te benutten. Het gevolg is dat de elektronen zich makkelijker kunnen losmaken van de atomen. Omdat positieve en negatieve lading elkaar aantrekken, verplaatsen de elektronen zich naar de positieve spanningspunt. Zodoende vormt zich een \textsl{elektrische stroom}. Er ontstaat dan een tekort aan elektronen aan het negatieve spanningspunt. Om het evenwicht te bewaren, moeten de spanningsbron en de metalen geleider dus een gesloten lus vormen zodat de elektronen vrijelijk kunnen bewegen. We noemen dit een \textsl{stroomkring}. Is de lus niet gesloten, dan ontstaat er geen stroom.
 
@@ -36,8 +38,39 @@ In twee rechte geleiders loopt een stroom van \SI{1}{\ampere} als de twee geleid
 \subsubsection*{Vanaf 20 mei 2019}
 Vanaf deze datum is de elementaire lading vastgesteld op \SI{1.602176634e-19}{\coulomb}. De stroom is gedefinieerd op basis van de elementaire lading. Dit zorgt ook voor de herdefinitie van de coulomb. In een geleider loopt een stroom van \SI{1}{\ampere} als per seconde een lading $\frac{1}{\num{1.602176634e-19}}\si{\coulomb}$ passeert.
 
+\subsection{Definitie van spanning}
+Spanning is een afgeleide grootheid. Het is gedefinieerd op basis van \textsl{vermogen} en stroom. Over een geleider staat een spanning (of spanningsverschil) van \SI{1}{\volt} als in de geleider een vermogen wordt gedissipeerd van \SI{1}{\watt} bij een stroom van \SI{1}{\ampere}. Dit is uitgebeeld in figuur~\ref{fig:intdefinitievolt}.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V<=\SI{1}{\volt}] ++(0,2) to [short, i=\SI{1}{\ampere}] ++(2.5,0) to [short,n=R] ++(0,-2) to [short,-.] (0,0);
+\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.2) -> ++(2,0.2);
+ \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.0) -> ++(2,0.0) node[right] {\SI{1}{\watt}};
+\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,-0.2) -> ++(2,-0.2); \end{tikzpicture}
+\caption{Definitie van de volt.}
+\label{fig:intdefinitievolt}
+\end{figure}
+
+\subsection{Definitie van vermogen}
+Vermogen is een afgeleide grootheid. Het is het product van de spanning over en stroom door een geleider en wordt uitgedrukt in watt, afgekort tot \si{\watt}:
+%
+\begin{equation}
+\SI{1}{\watt} = \SI{1}{\volt}\cdot\si{\ampere} = \SI[per-mode=fraction]{1}{\joule\per\coulomb}\cdot\si[per-mode=fraction]{\coulomb\per\second} = \SI[per-mode=fraction]{1}{\joule\per\second}
+\end{equation}
+%
+Dit is precies wat vermogen inhoudt: energieafgifte (of opname) per tijdseenheid.
+
 \section{Meten van spanning en stroom}
 Om een spanning tussen twee punten te meten, gebruiken we een \textsl{spanningsmeter}. De spanningsmeter heeft twee ingangen, de `+'-ingang en de `$-$'-ingang. Als de spanning op de `+'-ingang groter is dan de spanning op de `$-$'-ingang, dan geeft de meter een positieve spanning aan. Omgekeerd heeft de meter een negatieve spanning aan.
+
+Om een stroom te meten in een (metalen) geleider, gebruiken we een stroommeter. Ook de stroommeter heeft twee aansluitpunten, de `+'-ingang en de `$-$'-ingang. Als de stroom van `+' naar `$-$' vloeit, dan meten we een positieve stroom. Als de stroom van `$-$' naar `+' vloeit, dan meten we een negatieve stroom.
+
+Een meting moet de stromen en spanningen in het elektrisch netwerk niet beïnvloeden. Helaas zijn praktische meters
+
+\textsl{Een meting beïnvloedt altijd de spanningen en stromen in het netwerk.}
+
+We kunnen er alleen voor zorgen dat de meting de stromen en spanningen zeer licht beïnvloeden.
 
 \begin{infobox}[Naming and shaming\ldots]
 Een spanningsmeter wordt in de volksmond ook wel een \textsl{voltmeter} genoemd. Dit is echter niet juist. Er wordt een grootheid gemeten, spanning, die wordt uitgedrukt in volt. Evenzo wordt voor het meten van een stroom een stroommeter gebruikt, in de volksmond een \textsl{ampèremeter} genoemd. Ook dit is niet juist. Een stroommeter meet de grootheid stoom en die wordt uitgedrukt in ampère. En zo kunnen we doorgaan: een vermogensmeter en geen \textsl{wattmeter}, een frequentiemeter en geen \textsl{hertzmeter}, een thermometer en geen \textsl{kelvinmeter} (of graden-celsiusmeter)
@@ -46,8 +79,6 @@ In Amerika wordt echter wel de termen \textsl{voltmeter} en \textsl{ammeter} geb
 
 Soms wordt voor spanning het woord \textsl{voltage}, voor stroom \textsl{ampèrage} en voor vermogen \textsl{wattage} gebruikt. Allemaal onjuist, hoewel voltage nog wel enigszins kan.
 \end{infobox}
-
-
 
 \begin{table}[!ht]
 \centering
@@ -65,6 +96,47 @@ Aluminium & 2.65e-8 & 0.0043 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\section{Netwerken}
+
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V<=$U_1$] ++(0,2)
+			to[short] ++(2,0)
+			to[V=$U_2$] ++(0,-2)
+            to[short,-.] (0,0)
+;
+\draw[color=red] (current bounding box.south west) -- (current bounding box.north east);
+\draw[color=red] (current bounding box.north west) -- (current bounding box.south east);
+\draw (6,-1) to[V<=$U_1$] ++(0,2)
+			to[V<=$U_2$] ++(0,2)
+;
+\end{tikzpicture}
+\caption{Twee spanningsbronnen mogen niet parallel geschakeld worden, maar wel in serie.}
+\label{fig:intvolagesources}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[I, l=$I_1$] ++(0,2)
+			to[I, l=$I_2$] ++(0,2)
+;
+\draw[color=red] (current bounding box.south west) -- (current bounding box.north east);
+\draw[color=red] (current bounding box.north west) -- (current bounding box.south east);
+\draw (4,1) to[I, l=$I_1$] ++(0,2)
+			to[short] ++(2,0)
+			to[I, l=$I_2$] ++(0,-2)
+            to[short,-.] (4,1)
+;
+\end{tikzpicture}
+\caption{Twee spanningsbronnen mogen niet in serie geschakeld worden, maar wel parallel.}
+\label{fig:intcurrentsources}
+\end{figure}
+
+
 
 %\section{Opgaven}
 %\input{book_chap01_ques}
