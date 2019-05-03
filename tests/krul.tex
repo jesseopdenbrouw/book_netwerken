@@ -1,0 +1,25 @@
+\documentclass{article}
+%\url{https://tex.stackexchange.com/q/313281/86}
+% Uses:
+%\url{https://tex.stackexchange.com/q/54771/86} (hobby package)
+%\url{https://tex.stackexchange.com/q/16899/86} (calligraphy)
+\usepackage{tikz}
+\usetikzlibrary{calligraphy,hobby}
+
+\AtBeginDocument{%
+\setbox0=\vbox{\tikz \path[use Hobby shortcut,save Hobby path={krul}] (-.2,0.25) ..  (0,.45) .. (.2,.65) ..  (0.3,0.76) .. (0.4,.97) .. (.1,.8) .. (.05,.65) .. (.3,.5) .. (.3,.4) .. (.15,.1) .. (.15,.05) .. (.3,.05) .. (1,.7);}%
+}
+
+\newcommand{\krul}{%
+  \tikz[scale=1em/1cm] \calligraphy[copperplate,restore and use Hobby path={krul}{}];%
+}
+
+\begin{document}
+
+This statement is true \krul
+
+{\Large This statement is true \krul }
+
+{\Huge This statement is true \krul }
+
+\end{document}
