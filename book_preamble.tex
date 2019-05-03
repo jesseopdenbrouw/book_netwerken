@@ -108,11 +108,6 @@
 %\setlist[tablenotes]{label=\tnote{\alph*},ref=\alph*,itemsep=\z@,topsep=\z@skip,partopsep=\z@skip,parsep=\z@,itemindent=\z@,labelindent=\tabcolsep,labelsep=.2em,leftmargin=*,align=left,before={\footnotesize}}
 %\makeatother
 
-% Use sansmath (load before DeclareMath below because Sansmath
-% redefines the comma as:
-% \DeclareMathSymbol{,}{\mathpunct}{operators}{`\,}
-%\usepackage{sansmath}
-
 % http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
 \PassOptionsToPackage{hyphens}{url}
 \usepackage[
@@ -201,10 +196,9 @@
   \selectfont%                  % activate font
   \vspace*{-0.5\baselineskip}	% half baseline skip up
 }
-%\colorlet{chapnumcol}{bookcolor}  % color for chapter number
 \titleformat{\chapter}[display]
 {\bfseries}
-{\chapnumfont\textcolor{bookcolor}{\thechapter}}
+{\chapnumfont\ifusebookasbook\color{gray!90}\else\textcolor{bookcolor\fi}{\thechapter}}
 {0ex}
 {\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\Huge\bfseries}
 [{\vspace*{1ex}\titlerule[0.8pt]}]
@@ -320,14 +314,13 @@
 \definecolor{lightpink}{HTML}{F8E0E0}%{FBF3F3}%
 \colorlet{bookcolor}{red!55!black} % Global book color
 \colorlet{listingcolor}{red!30!white}
+\colorlet{infoboxbg}{brown!10}
+\colorlet{infoboxbgtitle}{brown!20}
 
 %% Use computer code listings
 \usepackage{listings}
 %% Use textcomp for upright quotes in listings
 \usepackage{textcomp}
-%%%\input{book_lstlisting_modelsim}
-%%%\input{book_lstlisting_asmlang}
-%%%\input{book_lstlisting_pseulang}
 
 %% Define listing style for VHDL
 \lstset{%
@@ -465,13 +458,6 @@
 %% http://tex.stackexchange.com/questions/21598/how-to-color-math-symbols
 \newcommand\ph[1]{\if-#1\mathbin{\textcolor{white}{-}}\else\textcolor{white}{#1}\fi}
 
-%% The askmaps package for displaying K-maps Amarican style
-%\usepackage{askmaps}
-%\askmapunitlength=0.88cm
-
-%% Import the binary number cirlces package
-%\usepackage[reddash]{binarynumbercircles}
-
 %% Lesser and more space around the binay dot and plus and xor
 \let\oldcdot\cdot
 \renewcommand{\cdot}{\kern-.10em\oldcdot\kern-.10em}
@@ -527,8 +513,6 @@
 
 %% Using tcolorbox for Infobox environment settings
 \usepackage[most]{tcolorbox}
-\colorlet{infoboxbg}{brown!10}
-\colorlet{infoboxbgtitle}{brown!20}
 \newtcolorbox{infobox}[1][]{title=#1,colback=infoboxbg,colframe=bookcolor,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt,parbox=false}
 
 \newcounter{example}[chapter]
