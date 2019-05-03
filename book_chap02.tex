@@ -11,11 +11,25 @@ grootheid elektrische stroom als een van de zeven grondgrootheden in
 het SI-stelsel is gekozen.
 
 In de gelijkstroomtheorie veronderstellen we dat de alle spanningen en stromen
-een constante waarden hebben over de tijd. De spanningen en stromen vari\"eren
+een constante waarden hebben over de tijd. De spanningen en stromen variëren
 dus niet als functie van de tijd\footnote{Formeel gezien is een spanning of stroom
 die niet van polariteit veranderd ook een gelijkspanning of gelijkstroom. We
 veronderstellen hier echter dat de spanningen en stromen constant zijn.}.
 Ze kunnen zowel positief als negatief zijn, of nul.
+
+We beginnen dit hoofdstuk met enkele eenvoudige wetten en regels zoals de spannings-
+en stroomwetten van Kirchhoff, de wet van Ohm, serie- en parallelschakeling van
+weerstanden, spanningsdeling en stroomdeling.
+De theorema's van Thévenin en Norton laten zien dat spanningsbronnen en stroombronnen
+uitgewisseld kunnen worden. Deze theorema's zijn handig bij het bepalen van
+maximale vermogensoverdracht. Het superpositiebeginsel is een eenvoudige methode
+om de stromen en spanningen in een netwerk te bepalen en werkt goed met de
+eerder genoemde eenvoudige methoden.
+Het is echter niet altijd mogelijk de spanningen en stromen in een netwerk met
+deze eenvoudige methoden te bepalen. We laten twee methoden zien, de
+knooppuntspanningsmethode en maasstroommethode, die bruikbaar zijn in elk netwerk,
+hoe complex ze ook zijn. Hierbij moet worden opgemerkt dat kennis van matrixrekenkunde
+nodig is. De knooppuntspanningsmethode wordt ook gebruikt in netwerksimulatieprogramma's.
 
 In de gelijkstroomtheorie hebben we drie componenten: de ideale spanningsbron,
 de ideale stroombron en de ideale weerstand. De symbolen die gebruikt worden in
@@ -437,6 +451,12 @@ Voor twee parallel geschakelde weerstanden geldt dat:
 \end{equation}
 %
 Dit kan worden omgewerkt tot:
+%
+\begin{equation}
+\dfrac{1}{R_p} = \dfrac{R_2}{R_1R_2} + \dfrac{R_1}{R_1R_2} = \dfrac{R_1+R_2}{R_1R_2}
+\end{equation}
+%
+Als we $1/R_p$ omkeren, krijgen we:
 \begin{equation}
 R_p = \dfrac{R_1\cdot R_2}{R_1+R_2}
 \end{equation}
@@ -476,7 +496,7 @@ G_p = G_1 + G_2 + \cdots + G_n
 
 
 \section{Spanningsdeling}
-In figuur~\ref{fig:gelspanningsdeling} is een schema te zien van een bron met twee in
+In figuur~\ref{fig:gelspanningsdeling} is een netwerk te zien van een bron met twee in
 serie geschakelde weerstanden. De spanning $U$ zal zich in een bepaalde verhouding
 verdelen over de twee weerstanden. Er is sprake van spanningsdeling.
 
@@ -487,7 +507,7 @@ verdelen over de twee weerstanden. Er is sprake van spanningsdeling.
             to [R, l=$R_1$,v=$U_1$] ++(2,0) to [R, l=$R_2$, v=$U_2$] ++(2,0)
             to [short] ++(0.5,0) to [short] ++(0,-2) to [short,-.] (0,0);
 \end{tikzpicture}
-\caption{Schema voor spanningsdeling.}
+\caption{Netwerk voor spanningsdeling.}
 \label{fig:gelspanningsdeling}
 \end{figure}
 
@@ -515,7 +535,7 @@ U_2 = I\cdot R_2 = \dfrac{R_2}{R_1+R_2}\cdot U = \dfrac{\SI{3.9}{\kilo\ohm}}{\SI
 
 
 \section{Stroomdeling}
-In figuur~\ref{fig:gelstroomdeling} is een schema te zien van een bron met twee parallel
+In figuur~\ref{fig:gelstroomdeling} is een netwerk te zien van een bron met twee parallel
 geschakelde weerstanden. De stroom $I$ zal zich in een bepaalde verhouding
 verdelen over de twee weerstanden. Er is sprake van stroomdeling.
 
@@ -527,7 +547,7 @@ verdelen over de twee weerstanden. Er is sprake van stroomdeling.
 %% Draw resistor R2 and wire to minus of resistor R1
 \draw (A) to[short] ++(2,0) coordinate (B) to [short] ++(0,-0.25) to [R=$R_2$,i>^=\small $I_2$, v=\small $U$] ++(0,-2) to [short] ++(-2,0);
 \end{tikzpicture}
-\caption{Schema voor stroomdeling.}
+\caption{Netwerk voor stroomdeling.}
 \label{fig:gelstroomdeling}
 \end{figure}
 
@@ -567,7 +587,7 @@ $R_2=\SI{9}{\ohm}$ en $R_3=\SI{12}{\ohm}$. Bereken de stroom $I_3$.
 \draw (A) to[short] ++(2,0) coordinate (B) to [R=$R_2$,i>^=\small $I_2$,-*] ++(0,-2) to [short] ++(-2,0);
 \draw (B) to[short] ++(2,0) coordinate (C) to [R=$R_3$,i>^=\small $I_3$] ++(0,-2) to [short] ++(-2,0);
 \end{tikzpicture}
-\caption{Schema voor stroomdeling.}
+\caption{Netwerk voor stroomdeling.}
 \label{fig:gelstroomdeling2}
 \end{figure}
 Oplossing: De totale stroom die de bron levert is $I=\SI{2}{\ampere}$. Om gebruik te maken van de formules
@@ -720,7 +740,7 @@ W = P\cdot t
 %
 De variabele $W$ staat voor het Engelse woord \textsl{work}. Een veel gebruikte eenheid van energie
 is de \si{\kWh} (kilowattuur). Dit komt overeen met de hoeveelheid energie als een component een vermogen van
-\SI{1000}{\watt} een uur lang dissipeert. De hoeveelheid energie is:
+\SI{1000}{\watt} een uur lang dissipeert. De hoeveelheid energie bedraagt:
 %
 \begin{equation}
 \SI{1}{\kWh} = \SI{1000}{\watt}  \times 1\ \mathrm{uur} = \SI{1000}{\joule\per\second} \times \SI{3600}{\second} = \SI{3600000}{\joule} = \SI{3.6}{\mega\joule}
@@ -764,7 +784,7 @@ Voor de netwerkelementen geldt dat $U_1 = \SI{10}{\volt}$, $U_2 = \SI{6}{\volt}$
 \caption{Netwerk voor het berekenen van geleverde vermogens.}
 \label{fig:gelgeleverdvermogen}
 \end{figure}
-De stroom $I$ bedraagt \SI{4}{\ampere}. Merk op dat de stroom bron $U_2$ ingaat. Het vermogen geleverd
+De spanning over de weerstand bedraagt \SI{4}{\volt}. De stroom $I$ bedraagt \SI{1}{\ampere}. Merk op dat de stroom bron $U_2$ ingaat. Het vermogen geleverd
 door bron $U_1$ bedraagt \SI{10}{\watt}. Weerstand $R$ dissipeert \SI{4}{\watt}. Dat betekent dat bron
 $U_2$ een vermogen van \SI{6}{\watt} dissipeert.
 \end{example}
@@ -956,11 +976,11 @@ is variabel gemaakt en kan vari\"eren tussen $R_b = \SI{0}{\ohm}$ en $R_b \right
 \draw[draw=none] (A) -- (B) node[midway] {$U_{R_b}$};
 \end{tikzpicture}
 \captionsetup{width=.9\linewidth}
-\caption{Schema voor de belastingskarakteristiek.}
+\caption{Netwerk voor de belastingskarakteristiek.}
 \label{fig:gelschemavoorbelastingskarakteristiek}
 \end{figure}
 
-Voor de spanningen in het schema kunnen we opstellen dat:
+Voor de spanningen in het netwerk kunnen we opstellen dat:
 %
 \begin{equation}
 U = U_{R_i} + U_{R_b}
@@ -1149,7 +1169,7 @@ Dit is te zien in figuur~\ref{fig:gelschemavoorbelastingskarakteristiekstroombro
             to [short,-.] (0,0);
 \draw[draw=none] (A) -- (B) node[midway] {$U_{R_b}$};
 \end{tikzpicture}
-\caption{Schema voor de belastingskarakteristiek.}
+\caption{Netwerk voor de belastingskarakteristiek.}
 \label{fig:gelschemavoorbelastingskarakteristiekstroombron}
 \end{figure}
 
@@ -1208,7 +1228,7 @@ Hier volgt uit dat de inwendige weerstanden gelijk zijn.
 \section{Het theorema van Th\'evenin}
 Aansluitend op de belastingskarakteristiek bespreken we nu het theorema van Th\'evenin.
 Dit theorema is bijzonder handig bij het vereenvoudigen van netwerken. Het bespaart veel
-rekenwerk door van een netwerk het th\'eveningvervangingsschema op te stellen.
+rekenwerk door van een netwerk het th\'eveningvervangingsnetwerk op te stellen.
 
 In figuur~\ref{fig:geltheveninbeginschema} is een netwerk getekend met een spanningsbron $U$,
 serieweerstand $R_s$ en parallelweerstand weerstand $R_p$. Het netwerk wordt belast met uitwendige $R_u$.
@@ -1328,8 +1348,8 @@ U_o = \dfrac{R_p}{R_p+R_s}\cdot U
 \end{equation}
 %
 We zijn nu zover gekomen dat we een theoretisch model kunnen opstellen voor het netwerk in
-figuur~\ref{fig:geltheveninbeginschema}. Dit wordt het \textsl{th\'eveninvervangingsschema} genoemd. Het
-vervangingsschema is
+figuur~\ref{fig:geltheveninbeginschema}. Dit wordt het \textsl{th\'eveninvervangingsnetwerk} genoemd. Het
+vervangingsnetwerk is
 te zien in figuur~\ref{fig:geltheveninvervangingsschema}. We vervangen bron $U$ door een bron met de open
 klemspanning. Deze spanning wordt de th\'eveninspanning $U_T$ genoemd. De weerstanden $R_s$ en $R_p$ worden
 vervangen door de parallelweerstandswaarde van $R_s$ en $R_p$. Dit wordt de th\'eveninweerstand $R_T$
@@ -1400,7 +1420,8 @@ R_{TH} = \dfrac{U_{AB,open}}{I_k} = \dfrac{\num{8.3077}}{\num{2.0112e-3}} = \SI{
 %
 Het vervangingsnetwerk bestaat dus uit een spanningsbron van \SI{8.3077}{\volt} en een serieweerstand van \SI{4131}{\ohm}. Zie figuur~\ref{fig:gelthevenin2}.
 
-\begin{center}
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V, V<=$\SI{8.3077}{\volt}$] ++(0,2)
             to [R, R=$\SI{4131}{\ohm}$, -o] ++(2,0) node (a) [right] {A}
@@ -1408,9 +1429,9 @@ Het vervangingsnetwerk bestaat dus uit een spanningsbron van \SI{8.3077}{\volt} 
             to [short, o-.] (0,0)
 ;
 \end{tikzpicture}
-\captionof{figure}{Het Thévenin-vervangingsnetwerk.}
+\caption{Het Thévenin-vervangingsnetwerk.}
 \label{fig:gelthevenin2}
-\end{center}
+\end{figure}
 \end{example}
 
 
@@ -1512,7 +1533,7 @@ De vergelijking beschrijft weer een rechte lijn. De richtingsco\"effici\"ent van
 Verder geldt dat bij kortsluiting van $R_u$ (of anders: $R_u = 0\ \Omega$) de volledige bronstroom door
 de kortsluiting vloeit. We kunnen het netwerk in figuur~\ref{fig:gelnetwerkvoornorton} dus vervangen door
 een stroombron met stroom $I_k$ en een parallelweerstand van $R_s+R_p$, zie
-figuur~\ref{fig:gelnortonvervangingsschema}. Dit wordt het \textsl{nortonvervangingsschema} genoemd. De
+figuur~\ref{fig:gelnortonvervangingsschema}. Dit wordt het \textsl{nortonvervangingsnetwerk} genoemd. De
 kortsluitstroom wordt de nortonstroom $I_N$ genoemd. De parallelweerstand wordt de nortonweerstand $R_N$
 genoemd. 
 
@@ -1524,7 +1545,7 @@ genoemd.
             to [short,-*] ++(-2,0) to [short,-.] (0,0);
 %\draw [draw=none] (A) -- (B) node[midway] {$U_u$};
 \end{tikzpicture}
-\caption{Nortonvervangingsschema.}
+\caption{Nortonvervangingsnetwerk.}
 \label{fig:gelnortonvervangingsschema}
 \end{figure}
 
@@ -1541,9 +1562,9 @@ parallelweerstand $R_N$.
 \section{Th\'evenen versus Norton}
 We hebben in paragraaf~\ref{sec:belastingskarakteristiek} gezien dat een spanningsbron met serieweerstand
 en een stroombron met parallelweerstand uitwisselbaar zijn. Voor de belasting is er geen verschil.
-We kunnen nu de relatie tussen het th\'eveninvervangingsschema en nortonvervangingschema onderzoeken.
+We kunnen nu de relatie tussen het th\'eveninvervangingsnetwerk en nortonvervangingnetwerk onderzoeken.
 
-In figuur~\ref{fig:gelopenklemspanningbijtheveninennorton} zijn de vervangingsschema's van Th\'evenin
+In figuur~\ref{fig:gelopenklemspanningbijtheveninennorton} zijn de vervangingsnetwerken van Th\'evenin
 en Norton te zien met betrekking tot de open klemspanning.
 
 \begin{figure}[!ht]
@@ -1623,7 +1644,9 @@ afzonderlijk de stromen en spanningen berekenen die de bron realiseert.
 Daarna tellen we alle stromen (van de afzonderlijke bronnen) door en
 alle spanningen over een netwerkelement bij elkaar op. Dit optellen wordt
 ook wel \textsl{superponeren} genoemd. Daarmee berekenen we dus de
-totale stroom door en de totale spanning over een netwerkelement.
+totale stroom door en de totale spanning over een netwerkelement. Deze
+methode is te gebruiken als we de stromen en spanningen in het netwerk
+kunnen bepalen met behulp van spanningsdeling en stroomdeling.
 
 In figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginsel} is een eenvoudig
 netwerk met een spanningsbron, stroombron en drie weerstanden te zien.
@@ -1643,7 +1666,7 @@ We berekenen eerst de stromen en spanningen in het netwerk die door de
 spanningsbron gerealiseerd worden. Daarvoor stellen de de stroom van de
 stroombron op 0 A. Dat betekent dat de stroombron wordt vervangen door
 een open verbinding; de weerstand van een ideale stroombron is immers
-oneindig groot. Het deelschema is te zien in
+oneindig groot. Het deelnetwerk is te zien in
 figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplita}. We kunnen
 voor de spanning over en stroom door $R_3$ het volgende opstellen:
 %
@@ -1730,14 +1753,14 @@ P_{R_3} = U_{xa}\cdot I_{xa} + U_{xb}\cdot I_{xb}
 We geven nu een voorbeeld. We nemen voor de spanning van de spanningsbron
 van \SI{10}{\volt} en een stroom van de stroombron van \SI{0.5}{\ampere}. Verder zijn de weerstandswaarden
 $R_1 = \SI{6}{\ohm}$, $R_2 = \SI{8}{\ohm}$ en $R_3 = \SI{3}{\ohm}$. In
-figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginsel2} is het schema te zien.
+figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginsel2} is het netwerk te zien.
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V<=10 V] ++(0,2) to [R=$\SI{6}{\ohm}$, -*] ++(2,0) node[above] {$U_x$}
             to [R=$\SI{3}{\ohm}$, i>^=$I_x$,-*] ++(0,-2) to [open] ++(0,2) to [R=$\SI{8}{\ohm}$] ++(2,0)
-            to [I_>=, l=$\dfrac{1}{2}\si{\ampere}$, invert] ++(0,-2) to [short, -.] (0,0);
+            to [I_>=, l=$\frac{1}{2}\si{\ampere}$, invert] ++(0,-2) to [short, -.] (0,0);
 \end{tikzpicture}
 \caption{Netwerk voor berekening met superpositie.}
 \label{fig:gelnetwerkvoorsuperpositiebeginsel2}
@@ -1808,7 +1831,7 @@ P_{R_3} = U_x\cdot I_x = 4\frac{1}{3} \cdot 1\frac{4}{9} = 6\dfrac{7}{27}\si{\wa
 
 \fi
 
-\iftrue
+\iffalse
 
 \section{Gestuurde bronnen}
 
@@ -1930,7 +1953,8 @@ Deze stroom is de som van $I_x$ en de stroom die de stroomgestuurde spanningsbro
 \begin{example}[De bipolaire transistor als transimpedantieversterker]
 In dit voorbeeld bespreken we de bipolaire transistor als stroomgestuurde spanningsversterker. We bespreken hier alleen de zogenoemde NPN-transistor. Het symbool en het vereenvoudigde model voor gelijkstroomnetwerken is te zien in figuur~\ref{fig:gelnpntransistor1}. De transistor heeft drie aansluitpunten: de \textsl{basis} (b), de \textsl{collector} (c) en de \textsl{emitter} (e). Als in de basis een (kleine) stroom wordt gestuurd, dan zal transistor via de collector een grotere stroom leveren. De verhouding tussen de collectorstroom en de basisstroom wordt aangegeven met de parameter $\beta$ (in de literatuur wordt ook wel $h_{FE}$ gebruikt). Beide stromen verlaten de transistor via de emitter.
 
-\begin{center}
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) node[right] {$T$} node[npn] (npn) {}
                       (npn.E) node[right] {e}
@@ -1948,9 +1972,9 @@ In dit voorbeeld bespreken we de bipolaire transistor als stroomgestuurde spanni
                    (2) to[short, i<=$I_c$] ++(1,0)
 ;
 \end{tikzpicture}
-\captionof{figure}{Schemasymbool en vereenvoudigd model van de bipolaire NPN-transistor.}
+\caption{Schemasymbool en vereenvoudigd model van de bipolaire NPN-transistor.}
 \label{fig:gelnpntransistor1}
-\end{center}
+\end{figure}
 
 De stromen $I_c$ en $I_e$ laten zich als volgt beschrijven:
 %
@@ -1966,7 +1990,8 @@ De basis-emitterovergang gedraagt zich als een diode. De spanning-stroomrelatie 
 
 In figuur~\ref{fig:gelnpntransistor2} is een transistor geschakeld als stroomgestuurde spanningsversterker, ook wel transimpedantieversterker genoemd. Aan de basis sluiten we een stroombron aan met een constante stroom van \SI{100}{\micro\ampere}. Aan de collector is een weerstand van \SI{500}{\ohm} gekoppeld in serie met een spanningsbron van \SI{12}{\volt}. De stroomversterkingsfactor $\beta$ is~100.
 
-\begin{center}
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) node (0) {}
                        to[I, l=\SI{100}{\micro\ampere}] ++(0,2)
@@ -1986,7 +2011,7 @@ In figuur~\ref{fig:gelnpntransistor2} is een transistor geschakeld als stroomges
 \end{tikzpicture}
 \captionof{figure}{Eenvoudig netwerk met een bipolaire NPN-transistor.}
 \label{fig:gelnpntransistor2}
-\end{center}
+\end{figure}
 
 De collectorstroom is:
 %
@@ -2036,7 +2061,7 @@ Veel literatuur schrijft dat superpositie niet gebruikt kan worden met gestuurde
 
 
 \section{Knooppuntspanningsmethode}
-De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt worden. Bekijk het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis}. Op geen enkele wijze is een combinatie van weerstanden te vereenvoudigen als serie- of parallelweerstand. Dat betekent dat technieken als spanningsdeling en stroomdeling niet kunnen worden toegepast\footnote{Overigens is dit netwerk wel met behulp van een Thévenin-vervangingsschema door te rekenen maar dat kost veel rekenwerk.}.
+De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt worden. Bekijk het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis}. Op geen enkele wijze is een combinatie van weerstanden te vereenvoudigen als serie- of parallelweerstand. Dat betekent dat technieken als spanningsdeling en stroomdeling niet kunnen worden toegepast\footnote{Overigens is dit netwerk wel met behulp van een Thévenin-vervangingsnetwerk door te rekenen maar dat kost veel rekenwerk.}.
 
 \begin{figure}[!ht]
 \centering
@@ -2199,7 +2224,8 @@ Merk op dat in de coëfficiëntenmatrix (links in de vergelijking) steeds de omg
 
 \begin{example}[Netwerk met onafhankelijke stroombronnen]
 In figuur~\ref{fig:gelnetwerkvoornodalanalysis5} is een netwerk te zien met twee onafhankelijke stroombronnen en vier weerstanden. Bepaal de spanningen op de knooppunten en de vermogens van de stroombronnen.
-\begin{center}
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[I, l=$\SI{10}{\mA}$,-*]  ++(0,2) node (1) {} node [left] {1}
             to[R, R=$\SI{820}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {2}
@@ -2215,9 +2241,9 @@ In figuur~\ref{fig:gelnetwerkvoornodalanalysis5} is een netwerk te zien met twee
 			to node[sground]{} ++(0,-0.0)
 ;
 \end{tikzpicture}
-\captionof{figure}{Netwerk met onafhankelijke stroombronnen.}
+\caption{Netwerk met onafhankelijke stroombronnen.}
 \label{fig:gelnetwerkvoornodalanalysis5}
-\end{center}
+\end{figure}
 
 We kunnen voor het berekenen van de knooppuntspanningen de vergelijkingen van~\eqref{equ:gellinsolve5} gebruiken:
 %
@@ -2374,7 +2400,8 @@ Dit stelsel vergelijkingen is op te lossen met technieken uit de matrixrekenkund
 
 \begin{example}[Netwerk voor berekenen knooppuntspanningen]
 Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis3}. Bereken de spanningen $U_2$ en $U_3$ en de stroom die door de spanningsbron geleverd wordt.
-\begin{center}
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, v<=$\SI{12}{\volt}$,-*]   ++(0,2) node (1) {} node [left] {$U_1$}
             to[R, R=$\SI{1200}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {$U_2$}
@@ -2388,9 +2415,9 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis3}. Bereken
 			to node[sground]{} ++(0,-0.0)
 ;
 \end{tikzpicture}
-\captionof{figure}{Netwerk met spanningsbron en weerstanden.}
+\caption{Netwerk met spanningsbron en weerstanden.}
 \label{fig:gelnetwerkvoornodalanalysis3}
-\end{center}
+\end{figure}
 We stellen eerst de stroomwet op voor knooppunt 2:
 %
 \begin{equation}
@@ -2514,7 +2541,7 @@ We zien dat niet alle elementen uit de coëfficiëntenmatrix nu de dimensie gele
 \begin{example}[Netwerk met zwevende, onafhankelijke spanningsbron]
 In figuur~\ref{fig:gelnetwerkvoornodalanalysis7} is een netwerk te zien met een zwevende spanningsbron. Er zijn drie onbekende spanningen en één onbekende bronstroom. Er zijn dus vier vergelijkingen nodig voor het vinden van de onbekende spanningen en stroom.
 
-\begin{center}
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[R, R=$\SI{4}{\ohm}$,-*]   ++(0,2) node (1) {} node [left] {1}
@@ -2531,9 +2558,9 @@ In figuur~\ref{fig:gelnetwerkvoornodalanalysis7} is een netwerk te zien met een 
 			to node[sground]{} ++(0,-0.0)
 ;
 \end{tikzpicture}
-\captionof{figure}{Netwerk voor knooppuntspanningsmethode.}
+\caption{Netwerk voor knooppuntspanningsmethode.}
 \label{fig:gelnetwerkvoornodalanalysis7}
-\end{center}
+\end{figure}
 
 We stellen direct de matrixvergelijking uit het netwerk op:
 %
@@ -2560,7 +2587,8 @@ Met behulp van de matrixrekenkunde vinden we voor de spanningen en de stroom: $U
 \begin{example}[Operational amplifier]
 De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \textsl{opamp} (Nederlands), is een bijzonder nuttige component in de elektrotechniek. Het wordt gebruikt in signaalverwerkende elektronica. Het gedrag van een opamp kan zeer goed benaderd worden door drie netwerkelementen: een ingangsweerstand, een uitgangsweerstand en een spanningsgestuurde spanningsbron. Wat een opamp in feite doet is de spanning tussen de twee ingangsklemmen, waartussen de ingangsweerstand is geplaatst, een groot aantal keer versterken. In het uitgangsnetwerk is de uitgangsweerstand opgenomen. Het symbool en het model zijn te vinden in figuur~\ref{fig:gelmodelopamp}.
 
-\begin{center}
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,-1) node[op amp,yscale=-1] (opamp) {}
 ;
@@ -2574,13 +2602,14 @@ De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \tex
 %        (1) to[short,*-*] (2)
 ;
 \end{tikzpicture}
-\captionof{figure}{Symbool en het vereenvoudigd model van een opamp.}
+\caption{Symbool en het vereenvoudigd model van een opamp.}
 \label{fig:gelmodelopamp}
-\end{center}
+\end{figure}
 
 We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinverter}. Voor het opstellen van de vergelijkingen is het handig om met geleiding te werken en niet met weerstanden. Bij het gebruik van weerstanden krijgen we steeds breuken, bij gebruik van geleidingen niet. Verder moet opgemerkt worden dat de `$-$'-ingang van de ingangsweerstand met $U_x$ verbonden is en de `+'-ingang met de referentie.
 
-\begin{center}
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, v<=$U$]        ++(0,2) node[above] {$U_1$}
             to[R, R=$G_1$, -*]   ++(2,0) node (2) {} node[below] {$U_x$}
@@ -2597,9 +2626,9 @@ We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinver
             to[short, o-.] (0,0)
 ;
 \end{tikzpicture}
-\captionof{figure}{Een netwerk van een vereenvoudigd model van een opamp.}
+\caption{Een netwerk van een vereenvoudigd model van een opamp.}
 \label{fig:gelmodelopampinverter}
-\end{center}
+\end{figure}
 
 We willen graag weten wat de uitgangsspanning $U_2$ is voor een bepaalde ingangsspanning $U_1$. We stellen eerst de vergelijkingen op die nodig zijn om dit netwerk te beschrijven.
 
@@ -2741,7 +2770,7 @@ Als we de waarden invullen in~\eqref{equ:gelopampreal4}, dan vinden we $U_2 = \S
 \end{example}
 
 \subsection{Opstellen van de vergelijkingen}
-De algemene gedaante voor het stelsel van vergelijkingen met onafhankelijke stroombronnen is:
+De algemene gedaante voor het stelsel van vergelijkingen met onafhankelijke stroombronnen en weerstanden is:
 %
 \begin{equation}
 \begin{bmatrix*}[c]
@@ -2768,8 +2797,12 @@ De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de ver
 \item Voor de elementen op de hoofddiagonaal ($G_{11}$, $G_{22}$, $G_{33}$ tot en met $G_{nn}$, van linksboven naar rechtsonder) geldt dat dit de som is van de geleidingen die direct met het knooppunt van de onbekende spanning verbonden zijn;
 \item Voor de elementen niet op de hoofddiagonaal geldt dat dit de geleiding is die rechtstreeks tussen twee onbekende spanningen is verbonden en is altijd negatief. Deze elementen komen altijd in paren voor, gespiegeld in de hoofddiagonaal: zo is de waarde van knooppunt $G_{32}$ hetzelfde als de waarde van $G_{23}$. De coëfficiëntenmatrix is dus symmetrisch t.o.v.\@ de hoofddiagonaal;
 \item Een element niet op de hoofddiagonaal kan 0 zijn; er is dan geen geleiding tussen de twee knooppunten;
-\item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de stromen naar het desbetreffende knooppunt toe.
+\item Het elementen van het rechterlid van het stelsel (de bekendenvector) worden gevormd door de som van de bekende stromen van het desbetreffende knooppunt af.
 \end{itemize}
+
+Als een onafhankelijke spanningsbron met één aansluitpunt aan de referentie in het netwerk is geplaatst, dan is van de spanning op het andere aansluitpunt bekend. Er is dan één vergelijking minder nodig.
+
+Als een onafhankelijke spanningsbron tussen twee knooppunten is geplaatst waarvan de spanningen onbekend zijn, dan moet de stroom die de bron levert als onbekende worden meegenomen in de vergelijkingen. De richting van de onbekende stroom wordt van `+' naar `$-$' genomen zodat de coëfficiëntenmatrix symmetrisch blijft t.o.v.\@ van de hoofddiagonaal. Er is nu één extra onbekende en er is een extra (spannings-)vergelijking nodig om tot een oplosbaar stelsel vergelijkingen te komen. In de coëfficiëntenmatrix komen naast de geleidingen nu de dimensieloze waarden $1$, $0$ en $-1$ te staan. In onbekendenvector komt de onbekende bronstroom te staan. De bekendenvector wordt uitgebreid met de spanning die over de onafhankelijk spanningsbron staat.
 
 Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
 
@@ -2985,5 +3018,5 @@ Nu alle spanningen bekend zijn, kunnen de takstromen berekend worden.
 
 \fi
 
-%\section{Opgaven}
-%\input{book_chap02_ques}
+\section{Opgaven}
+\input{book_chap02_ques}
