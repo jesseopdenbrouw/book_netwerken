@@ -8,21 +8,8 @@
 %% equation indent at 1 em
 \documentclass[12pt,a4paper,final,twoside,fleqn]{book}
 
-%% Find out what engine we're running...
-\usepackage{ifluatex,ifxetex}
-
-\ifluatex
-\else
-\ifxetex
-\else
-%% Suppress PTEX.FullBanner
-%\pdfsuppressptexinfo=1
-%% PDF Version and compression...
-\pdfminorversion=5
-\pdfobjcompresslevel=1
-%% Set input encoding to UTF-8
-\usepackage[utf8]{inputenc}\fi
-\fi
+% Set widow penalty
+\clubpenalty2000
 
 %% Use T1 output font encoding
 \usepackage[T1]{fontenc}
@@ -60,6 +47,7 @@
                                                                
 %% Use of dashed lines in tables
 \usepackage{tabu}
+\usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{multirow}
 
@@ -67,7 +55,7 @@
 \usepackage{array}
 
 %% Define and use colors
-\usepackage[x11names]{xcolor}
+\usepackage[x11names,table]{xcolor}
 
 %% Include rotating (includes graphicx) packages
 \usepackage{rotating}
@@ -145,6 +133,10 @@
 \abovedisplayshortskip=30pt
 \belowdisplayskip=30pt
 
+%% Find out what engine we're running...
+\usepackage{ifluatex,ifxetex}
+
+%% Settings for fonts et al.
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0
 \usepackage[math-style=TeX]{unicode-math}
 %\usepackage{unicode-math}
@@ -160,7 +152,19 @@
 \setmathfont[range=bfit]{Calibri Bold Italic}
 \setoperatorfont\normalfont % For log, sin, cos, etc.
 \def\checkmark{\textsl{v}}
-\def\muup{u}
+\def\muup{μ}
+\makeatletter
+\DeclareRobustCommand{\LaTeX}{L\kern-.20em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }%
+        \kern-.06em%
+        \TeX}
+\makeatother
 \else
 %% Use the Charter and Nimbus Mono fonts
 \usepackage{nimbusmono}
@@ -168,7 +172,52 @@
 \usepackage[bitstream-charter]{mathdesign}
 %% Use microtype
 \usepackage[stretch=10]{microtype}
+\pdfminorversion=5
+\pdfobjcompresslevel=1
+%% Set input encoding to UTF-8
+\usepackage[utf8]{inputenc}
+\makeatletter
+\DeclareRobustCommand{\LaTeX}{L\kern-.20em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }%
+        \kern-.05em%
+        \TeX}
+\makeatother
 \fi
+
+%%
+%% Find out which engine is running
+\newcount\bookmajorversion
+\newcount\bookminorversion
+
+\ifluatex
+\bookmajorversion=\luatexversion
+\bookminorversion=\luatexversion
+\divide \bookmajorversion by 100
+\multiply \bookmajorversion by 100
+\advance \bookminorversion by -\bookmajorversion
+\divide \bookmajorversion by 100
+\def\booktexbanner{Lua\LaTeX\ \the\bookmajorversion.\the\bookminorversion.\luatexrevision}
+\else
+\ifxetex
+\bookmajorversion=\XeTeXversion
+\def\booktexbanner{Xe\LaTeX\ \the\bookmajorversion\XeTeXrevision}
+\else
+\bookmajorversion=\pdftexversion
+\bookminorversion=\pdftexversion
+\divide \bookmajorversion by 100
+\multiply \bookmajorversion by 100
+\advance \bookminorversion by -\bookmajorversion
+\divide \bookmajorversion by 100
+\def\booktexbanner{pdf\LaTeX\ \the\bookmajorversion.\the\bookminorversion.\pdftexrevision}
+\fi
+\fi
+
 %%
 %% Do we include advanced sections?
 \newif\ifuseadvanced\bookuseadvanded
@@ -198,7 +247,7 @@
 }
 \titleformat{\chapter}[display]
 {\bfseries}
-{\chapnumfont\ifusebookasbook\color{gray!90}\else\textcolor{bookcolor\fi}{\thechapter}}
+{\chapnumfont\color{chapnumcolor}{\thechapter}}
 {0ex}
 {\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\Huge\bfseries}
 [{\vspace*{1ex}\titlerule[0.8pt]}]
@@ -295,7 +344,6 @@
 \renewcommand\thesubfigure{(\alph{subfigure})}
 \renewcommand\thesubtable{(\alph{subtable})}
 
-
 % Parskip et al.
 \usepackage{parskip}[=v1]
 \makeatletter
@@ -307,15 +355,33 @@
 
 %% Some colors
 \definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
+%\definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
-\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
+%\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
 \definecolor{GKYgray}{rgb}{0.65,0.65,0.65}
 \definecolor{lightpink}{HTML}{F8E0E0}%{FBF3F3}%
+\definecolor{thuasgreen}{RGB}{158,167,0}
+\definecolor{thuasgreen2}{RGB}{159,169,89}
+\ifusebookasbook
+\colorlet{bookcolor}{black}
+\colorlet{chapnumcolor}{gray!90}
+\colorlet{listingnumbercolor}{bookcolor}
+\colorlet{listingbgcolor}{gray!10}
+\colorlet{infoboxbg}{gray!5}
+\colorlet{infoboxbgtitle}{gray!15}
+\colorlet{venndiagramcolor}{lightgray}
+%\colorlet{regcell}{gray!90}
+\else
 \colorlet{bookcolor}{red!55!black} % Global book color
-\colorlet{listingcolor}{red!30!white}
+\colorlet{chapnumcolor}{bookcolor}
+\colorlet{listingnumbercolor}{bookcolor}
+\colorlet{listingbgcolor}{blue!10}
+%\colorlet{listingcolor}{red!30!white}
 \colorlet{infoboxbg}{brown!10}
 \colorlet{infoboxbgtitle}{brown!20}
+\colorlet{venndiagramcolor}{blue!15}
+\colorlet{regcell}{thuasgreen!50!white}
+\fi
 
 %% Use computer code listings
 \usepackage{listings}
@@ -327,15 +393,15 @@
   language=VHDL,
   basicstyle=\footnotesize\ttfamily,
   numbers=left,
-  numberstyle=\tiny\ifusebookasbook\color{gray}\else\color{bookcolor}\fi,
+  numberstyle=\tiny\color{listingnumbercolor},
   stepnumber=1,                           
   numbersep=8pt,
-  backgroundcolor=\ifusebookasbook\color{lightgray}\else\color{white}\fi,
+  backgroundcolor=\color{listingbgcolor},
   showspaces=false,
   showstringspaces=false,
   showtabs=false,
   frame=lines,
-  rulecolor=\ifusebookasbook\color{black}\else\color{bookcolor}\fi,
+  rulecolor=\color{bookcolor},
   tabsize=4,
   captionpos=b,
   breaklines=true,
@@ -468,36 +534,6 @@
 \newcommand{\oplusw}{\kern.08em\oplus\kern.08em}
 \newcommand{\oplusww}{\kern.16em\oplus\kern.16em}
 
-%\usepackage{ifthen} already loaded
-%% Commands to print timing parameters. They are used in dutch books.
-%% Translation table:
-%%   tpmax     --> tpd (combinational)
-%%   tpmin     --> tpd,min (combinational)
-%%   tpmax(FF) --> tclk-to-output, tco
-%%   tpmin(FF) --> tclk-to-output,min, tco,min
-%%   tsu       --> tsu
-%%   thold     --> th (\th is already used)
-%%   T         --> T
-\newcommand\tpmax[1]{t_{P(max)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-\newcommand\tpmin[1]{t_{P(min)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-\newcommand\T[1]{T%
-\ifthenelse{\equal{#1}{}}{}{_{#1}}}
-\newcommand\tsu[1]{t_{su}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-% Note: \th already exists
-\newcommand\thold[1]{t_{h}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-% Use \textdash to create parts like: clk-to-D
-\newcommand{\textdash}{\text{-}}
-%\newcommand{\txx[2]}{t_{\mathrm{#1}}(\mathrm{#2})}
-%\newcommand{\txx[2]}{t_{#1}(#2)}%
-\newcommand\twhmin[1]{t_{wh(min)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-\newcommand\tptyp[1]{t_{P(typ)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-
 %% Vertically align cell contents
 \newcolumntype{M}[1]{>{\centering\arraybackslash$\vcenter\bgroup\hbox\bgroup}m{#1}<{\egroup\egroup$}}
 \newcolumntype{C}{>{\centering\arraybackslash$\vcenter\bgroup\hbox\bgroup}c<{\egroup\egroup$}}
@@ -513,7 +549,7 @@
 
 %% Using tcolorbox for Infobox environment settings
 \usepackage[most]{tcolorbox}
-\newtcolorbox{infobox}[1][]{title=#1,colback=infoboxbg,colframe=bookcolor,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt,parbox=false}
+\newtcolorbox{infobox}[1][]{title=#1,colback=infoboxbg,colframe=bookcolor,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt,parbox=false,floatplacement=!b,float=!b}
 
 \newcounter{example}[chapter]
 \setcounter{example}{0}
@@ -544,33 +580,8 @@
 \renewcommand{\l@tcolorbox}{\@dottedtocline{1}{0pt}{2.3em}}
 \makeatother
 
-
-%%
-%% based on https://tex.stackexchange.com/questions/476045/euler-and-minus-sign
-%%
-%% Imaginary unit, e, and Euler
-\newcommand\imaginaryunit{j}                   % the imaginary unit, i for mathematician and theoretical physicist,
-                                               % j for the rest of the world.
-\newcommand\imunit{\mathrm{\imaginaryunit}}    % ... in upright math
-\newcommand\ce{\mathrm{e}}                     % the constant e, upright of course
-
-\newcommand{\epowre}[1]{\ce^{#1}}              % e to the power of real
-\makeatletter
-\newcommand{\fiximunit@@}{\if\imaginaryunit j\,\fi}
-\newcommand{\epowim}[1]{\ce^{\epowim@#1}}      % e to the power of imaginary
-\newcommand{\epowim@}{\@ifnextchar-{\epowim@@}{\epowim@@{\fiximunit@@}}}
-\newcommand{\epowim@@}[1]{#1\imunit}
-\newcommand{\epowim@@@}{\@ifnextchar-{\epowim@@@@}{+\epowim@@@@{}}}
-\newcommand{\epowim@@@@}[1]{#1\imunit}
-\newcommand{\epowcom}[2]{\ce^{#1\epowim@@@#2}} % e to the power of complex
-\newcommand{\cis}[1]{\cis@#1}                  % cos + imaginary sin
-\newcommand{\cis@}{\@ifnextchar-{\cis@@@}{\cis@@}}
-\newcommand{\cis@@}[1]{\cos#1 + \imunit\sin#1}
-\newcommand{\cis@@@}[2]{\cos#2 - \imunit\sin#2}
-\makeatother
-%\renewcommand{\Re}{\mathrm{Re}}  % Redefine \Re
-%\renewcommand{\Im}{\mathrm{Im}}  % Redefine \Im
-
+%% Hypenation of some uncommon words in Dutch
+\hyphenation{Kar-naugh-dia-gram Kar-naugh-dia-gram-men min-term min-ter-men flip-flop flip-flops im-pli-cant im-pli-can-ten twee-tal-len vier-tal-len acht-tal-len zes-tien-tal-len timing-dia-gram-men timing-dia-gram toe-stands-dia-gram toe-stands-dia-grammen ge-schre-ven}
 
 %% The really backmatter
 \newcommand{\bookbackmatter}{%
