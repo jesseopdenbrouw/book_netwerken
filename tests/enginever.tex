@@ -1,0 +1,39 @@
+% !TeX TS-program = lualatex
+
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{ifxetex,ifluatex}
+
+\newcount\bookmajorversion
+\newcount\bookminorversion
+
+\ifluatex
+\bookmajorversion=\luatexversion
+\bookminorversion=\luatexversion
+\divide \bookmajorversion by 100
+\multiply \bookmajorversion by 100
+\advance \bookminorversion by -\bookmajorversion
+\divide \bookmajorversion by 100
+\def\booktexbanner{Lua\LaTeX\ \the\bookmajorversion.\the\bookminorversion.\luatexrevision}
+\else
+\ifxetex
+\bookmajorversion=\XeTeXversion
+\def\booktexbanner{Xe\LaTeX\ \the\bookmajorversion\XeTeXrevision}
+\else
+\bookmajorversion=\pdftexversion
+\bookminorversion=\pdftexversion
+\divide \bookmajorversion by 100
+\multiply \bookmajorversion by 100
+\advance \bookminorversion by -\bookmajorversion
+\divide \bookmajorversion by 100
+\def\booktexbanner{pdf\LaTeX\ \the\bookmajorversion.\the\bookminorversion.\pdftexrevision}
+\fi
+\fi
+
+
+\begin{document}
+\vspace*{0mm}
+\par
+Gecompileerd met \booktexbanner.
+\end{document}
