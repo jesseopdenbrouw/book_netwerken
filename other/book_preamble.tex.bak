@@ -4,20 +4,17 @@
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Suppress PTEX.FullBanner
-\pdfsuppressptexinfo=1
-
 %% 12pt charachters, A4 paper size, twoside printing, equation left aligned
 %% equation indent at 1 em
 \documentclass[12pt,a4paper,final,twoside,fleqn]{book}
 
-%% Set input encoding to UTF-8
-\usepackage[utf8]{inputenc}
+% Set widow penalty
+\clubpenalty2000
+
 %% Use T1 output font encoding
 \usepackage[T1]{fontenc}
 
-%%\subtitle{This is a sub title}
-%%\renewcommand{\rmdefault}{crm}
+%% Copy credentials
 \renewcommand{\author}{\bookauthor}
 \renewcommand{\title}{\booktitle}
 \renewcommand{\date}{\today}
@@ -37,14 +34,12 @@
 \newif\ifusebookpartI\bookpartI
 \newif\ifusebookpartII\bookpartII
 \newif\ifusebookpartIII\bookpartIII
-
-%% PDF Version and compression...
-\pdfminorversion=5
-\pdfobjcompresslevel=1
+\newif\ifusebookasbook\bookasbook
 
 %% Dutch spelling of chapter, section, etc.
 \usepackage[dutch]{babel}
-\usepackage[english=american]{csquotes}
+%% Set American style quotes
+\usepackage[style=american]{csquotes}
 
 %% Set page layout
 \usepackage[a4paper,bindingoffset=0.2in,left=1.0in,right=1.0in,top=1.0in,bottom=1.4in,
@@ -52,7 +47,7 @@
                                                                
 %% Use of dashed lines in tables
 \usepackage{tabu}
-%\usepackage{booktabs}
+\usepackage{booktabs}
 \usepackage{multirow}
 
 %% Use array's
@@ -63,6 +58,10 @@
 
 %% Include rotating (includes graphicx) packages
 \usepackage{rotating}
+
+%% Nice calculations with lengths
+%% Note: calc has to be loaded before enumitem
+\usepackage{calc}
 
 %% Enumerate items
 \usepackage[inline]{enumitem}
@@ -92,21 +91,12 @@
 \usepackage{threeparttable}
 %\renewcommand{\TPTminimum}{1em}
 \renewcommand{\TPTnoteSettings}{\footnotesize}
-\makeatletter
+%\makeatletter
 %\setlist[tablenotes]{label=\tnote{\alph*},ref=\alph*,itemsep=\z@,topsep=\z@skip,partopsep=\z@skip,parsep=\z@,itemindent=\z@,labelindent=\tabcolsep,labelsep=.2em,leftmargin=*,align=left,before={\footnotesize}}
-\makeatother
-
-% Use sansmath (load before DeclareMath below because Sansmath
-% redefines the comma as:
-% \DeclareMathSymbol{,}{\mathpunct}{operators}{`\,}
-\usepackage{sansmath}
-
-%% Use the AMS Mathematical characters, no other AMS packages required
-\usepackage{mathtools}
-\setlength{\mathindent}{1em}
-\DeclareMathSymbol{,}{\mathord}{letters}{"3B}
+%\makeatother
 
 % http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+\PassOptionsToPackage{hyphens}{url}
 \usepackage[
     backend=biber,
     backref=true,
@@ -116,8 +106,9 @@
     doi=false, % doi informatie wordt niet weergegeven
     %uniquename=true,
     %uniquelist=true,
-    maxcitenames=1,
+    maxcitenames=3,
     %issn=false, werkt niet
+    language=american
 ]{biblatex}
 \addbibresource{book_citations.bib}
 \DefineBibliographyStrings{dutch}{
@@ -128,19 +119,108 @@
 \AtEveryBibitem{\clearfield{issn}}
 \AtEveryCitekey{\clearfield{issn}}
 
+%% Use the AMS Mathematical characters, no other AMS packages required
+\usepackage{mathtools}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}}
+\sisetup{tophrase={{\ en\ }}}
+%\usepackage{amssymb}
+\setlength{\mathindent}{1em}
+\DeclareMathSymbol{,}{\mathord}{letters}{"3B}
+\abovedisplayskip=30pt
+\belowdisplayskip=30pt
+\abovedisplayshortskip=30pt
+\belowdisplayskip=30pt
+
+%% Find out what engine we're running...
+\usepackage{ifluatex,ifxetex}
+
+%% Settings for fonts et al.
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0
+\usepackage[math-style=TeX]{unicode-math}
+%\usepackage{unicode-math}
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Calibri}
+\defaultfontfeatures{Scale=MatchUppercase}
+\setsansfont{Calibri}
+\setmonofont{Consolas}
+\setmathfont[slash-delimiter=frac]{Cambria Math}
+\setmathfont[range=up]{Calibri}
+\setmathfont[range=it]{Calibri Italic}
+\setmathfont[range=bfup]{Calibri Bold}
+\setmathfont[range=bfit]{Calibri Bold Italic}
+\setoperatorfont\normalfont % For log, sin, cos, etc.
+\def\checkmark{\textsl{v}}
+\def\muup{μ}
+\makeatletter
+\DeclareRobustCommand{\LaTeX}{L\kern-.20em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }%
+        \kern-.06em%
+        \TeX}
+\makeatother
+\else
 %% Use the Charter and Nimbus Mono fonts
 \usepackage{nimbusmono}
-\usepackage{charter}
+%\usepackage{charter}
 \usepackage[bitstream-charter]{mathdesign}
 %% Use microtype
 \usepackage[stretch=10]{microtype}
+\pdfminorversion=5
+\pdfobjcompresslevel=1
+%% Set input encoding to UTF-8
+\usepackage[utf8]{inputenc}
+\makeatletter
+\DeclareRobustCommand{\LaTeX}{L\kern-.20em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }%
+        \kern-.05em%
+        \TeX}
+\makeatother
+\fi
 
-%% Nice calculations with lengths
-\usepackage{calc}
+%%
+%% Find out which engine is running
+\newcount\bookmajorversion
+\newcount\bookminorversion
+
+\ifluatex
+\bookmajorversion=\luatexversion
+\bookminorversion=\luatexversion
+\divide \bookmajorversion by 100
+\multiply \bookmajorversion by 100
+\advance \bookminorversion by -\bookmajorversion
+\divide \bookmajorversion by 100
+\def\booktexbanner{Lua\LaTeX\ \the\bookmajorversion.\the\bookminorversion.\luatexrevision}
+\else
+\ifxetex
+\bookmajorversion=\XeTeXversion
+\def\booktexbanner{Xe\LaTeX\ \the\bookmajorversion\XeTeXrevision}
+\else
+\bookmajorversion=\pdftexversion
+\bookminorversion=\pdftexversion
+\divide \bookmajorversion by 100
+\multiply \bookmajorversion by 100
+\advance \bookminorversion by -\bookmajorversion
+\divide \bookmajorversion by 100
+\def\booktexbanner{pdf\LaTeX\ \the\bookmajorversion.\the\bookminorversion.\pdftexrevision}
+\fi
+\fi
 
 %%
 %% Do we include advanced sections?
 \newif\ifuseadvanced\bookuseadvanded
+
 %%
 %% Creating advanced sections with * prepended to sec number
 \newcommand*{\secmark}{}
@@ -164,16 +244,17 @@
   \selectfont%                  % activate font
   \vspace*{-0.5\baselineskip}	% half baseline skip up
 }
-\colorlet{chapnumcol}{gray!90}  % color for chapter number
 \titleformat{\chapter}[display]
 {\bfseries}
-{\chapnumfont\textcolor{chapnumcol}{\thechapter}}
+{\chapnumfont\color{chapnumcolor}{\thechapter}}
 {0ex}
-{\fontfamily{phv}\selectfont\Huge\bfseries}
+{\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\Huge\bfseries}
 [{\vspace*{1ex}\titlerule[0.8pt]}]
-\titleformat{\section}{\fontfamily{phv}\selectfont\large\bfseries}{\secmark\thesection}{1em}{}
-\titleformat{\subsection}{\fontfamily{phv}\selectfont\bfseries}{\secmark\thesubsection}{1em}{}
-\titlespacing*{\section}{0pt}{\baselineskip}{\aftersubsection}
+\titleformat{\section}{\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\large\bfseries}{\secmark\thesection}{1em}{}
+\titleformat{\subsection}{\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0\else\fontfamily{phv}\selectfont\fi\bfseries}{\secmark\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{0.4\aftersubsection}
+\titlespacing*{\subsection}{0pt}{.8\baselineskip}{0.0\aftersubsection}
+\titlespacing*{\subsubsection}{0pt}{.6\baselineskip}{0pt}
 \titlespacing*{\paragraph}{0pt}{1.0ex plus 1ex minus .2ex}{1.5em}
 \newlength{\aftersubtitle}
 \setlength{\aftersubtitle}{1.2\baselineskip}
@@ -244,10 +325,10 @@
 \makeatother
 
 %% Indexing words...
-\usepackage{imakeidx}
+\usepackage[noautomatic]{imakeidx}
 %% The index page is typeset...
 \indexsetup{othercode=\footnotesize\thispagestyle{fancy}}
-\makeindex
+\makeindex[columns=2]
 %\usepackage{showidx}
 
 %% Making captions nicer...
@@ -262,9 +343,8 @@
 \renewcommand\thesubfigure{(\alph{subfigure})}
 \renewcommand\thesubtable{(\alph{subtable})}
 
-
 % Parskip et al.
-\usepackage{parskip}
+\usepackage{parskip}[=v1]
 \makeatletter
 \setlength{\parfillskip}{00\p@ \@plus 1fil}
 \makeatother
@@ -274,34 +354,49 @@
 
 %% Some colors
 \definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
+%\definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
-\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
+%\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
 \definecolor{GKYgray}{rgb}{0.65,0.65,0.65}
 \definecolor{lightpink}{HTML}{F8E0E0}%{FBF3F3}%
+\ifusebookasbook
+\colorlet{bookcolor}{black}
+\colorlet{chapnumcolor}{gray!90}
+\colorlet{listingnumbercolor}{bookcolor}
+\colorlet{listingbgcolor}{gray!10}
+\colorlet{infoboxbg}{gray!5}
+\colorlet{infoboxbgtitle}{gray!15}
+\colorlet{venndiagramcolor}{lightgray}
+\else
+\colorlet{bookcolor}{red!55!black} % Global book color
+\colorlet{chapnumcolor}{bookcolor}
+\colorlet{listingnumbercolor}{bookcolor}
+\colorlet{listingbgcolor}{blue!10}
+%\colorlet{listingcolor}{red!30!white}
+\colorlet{infoboxbg}{brown!10}
+\colorlet{infoboxbgtitle}{brown!20}
+\colorlet{venndiagramcolor}{blue!15}
+\fi
 
 %% Use computer code listings
 \usepackage{listings}
 %% Use textcomp for upright quotes in listings
 \usepackage{textcomp}
-%%%\input{book_lstlisting_modelsim}
-%%%\input{book_lstlisting_asmlang}
-%%%\input{book_lstlisting_pseulang}
 
 %% Define listing style for VHDL
 \lstset{%
   language=VHDL,
   basicstyle=\footnotesize\ttfamily,
   numbers=left,
-  numberstyle=\tiny\color{gray},
+  numberstyle=\tiny\color{listingnumbercolor},
   stepnumber=1,                           
   numbersep=8pt,
-  backgroundcolor=\color{lightpink},
+  backgroundcolor=\color{listingbgcolor},
   showspaces=false,
   showstringspaces=false,
   showtabs=false,
   frame=lines,
-  rulecolor=\color{black},
+  rulecolor=\color{bookcolor},
   tabsize=4,
   captionpos=b,
   breaklines=true,
@@ -313,11 +408,13 @@
 
 %% Using hyperrefs...
 \usepackage{hyperref}
+\ifusebookasbook
 \hypersetup{
 	colorlinks=true,
-	linkcolor=blue,
-	citecolor=purple,
-    pdftitle={\booktitleI{}\booktitleII},
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=black,
+    pdftitle={\booktitleI\ \booktitleII, \booksubtitle},
     pdfauthor={\bookauthor},
     %pdfsubject={Beginselen van de digitale techniek},
     pdfsubject={},
@@ -325,6 +422,21 @@
 	pdfdisplaydoctitle=true,
 	pdfpagelayout=TwoPageRight
 }
+\else
+\hypersetup{
+	colorlinks=true,
+	linkcolor=bookcolor,
+	citecolor=bookcolor,
+	urlcolor=bookcolor,
+    pdftitle={\booktitleI\ \booktitleII, \booksubtitle},
+    pdfauthor={\bookauthor},
+    %pdfsubject={Beginselen van de digitale techniek},
+    pdfsubject={},
+    pdfkeywords={\bookkeywords},
+	pdfdisplaydoctitle=true,
+	pdfpagelayout=TwoPageRight
+}
+\fi
 \urlstyle{sf}%
 
 %% Lay things over a picture
@@ -333,6 +445,9 @@
 
 %% Set \FloatBarrier to empty
 \def\FloatBarrier{}
+
+%% Create EAN13 ISBN number figure
+\usepackage{ean13isbn}
 
 %%%
 %%% LaTeX installed packages loading done here
@@ -404,13 +519,6 @@
 %% http://tex.stackexchange.com/questions/21598/how-to-color-math-symbols
 \newcommand\ph[1]{\if-#1\mathbin{\textcolor{white}{-}}\else\textcolor{white}{#1}\fi}
 
-%% The askmaps package for displaying K-maps Amarican style
-\usepackage{askmaps}
-\askmapunitlength=0.88cm
-
-%% Import the binary number cirlces package
-%%%\usepackage[reddash]{binarynumbercircles}
-
 %% Lesser and more space around the binay dot and plus and xor
 \let\oldcdot\cdot
 \renewcommand{\cdot}{\kern-.10em\oldcdot\kern-.10em}
@@ -420,36 +528,6 @@
 \newcommand{\plusww}{\kern.16em+\kern.16em}
 \newcommand{\oplusw}{\kern.08em\oplus\kern.08em}
 \newcommand{\oplusww}{\kern.16em\oplus\kern.16em}
-
-%\usepackage{ifthen} already loaded
-%% Commands to print timing parameters. They are used in dutch books.
-%% Translation table:
-%%   tpmax     --> tpd (combinational)
-%%   tpmin     --> tpd,min (combinational)
-%%   tpmax(FF) --> tclk-to-output, tco
-%%   tpmin(FF) --> tclk-to-output,min, tco,min
-%%   tsu       --> tsu
-%%   thold     --> th (\th is already used)
-%%   T         --> T
-\newcommand\tpmax[1]{t_{P(max)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-\newcommand\tpmin[1]{t_{P(min)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-\newcommand\T[1]{T%
-\ifthenelse{\equal{#1}{}}{}{_{#1}}}
-\newcommand\tsu[1]{t_{su}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-% Note: \th already exists
-\newcommand\thold[1]{t_{h}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-% Use \textdash to create parts like: clk-to-D
-\newcommand{\textdash}{\text{-}}
-%\newcommand{\txx[2]}{t_{\mathrm{#1}}(\mathrm{#2})}
-%\newcommand{\txx[2]}{t_{#1}(#2)}%
-\newcommand\twhmin[1]{t_{wh(min)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
-\newcommand\tptyp[1]{t_{P(typ)}%
-\ifthenelse{\equal{#1}{}}{}{(\mathrm{#1})}}
 
 %% Vertically align cell contents
 \newcolumntype{M}[1]{>{\centering\arraybackslash$\vcenter\bgroup\hbox\bgroup}m{#1}<{\egroup\egroup$}}
@@ -464,141 +542,55 @@
 \newcommand{\iflabelexists}[3]{\@ifundefined{r@#1}{#3}{#2}}
 \makeatother
 
-%% Tikz to draw state diagrams
-\usepackage{pgf}
-\usepackage{tikz}
-\usetikzlibrary{positioning,shapes,arrows,automata}
-\tikzstyle{every picture}+=[font={\sffamily\small}]
-\tikzstyle{every state}=[fill=none,draw=black,text=black,very thick,minimum size=1.2cm,initial distance=1cm]
-% How to draw Moore states
-\newif\ifmoorenodesepslash
-\moorenodesepslashtrue
-\ifmoorenodesepslash
-\newcommand{\moorenode}[2]{$\mathsf{#1/#2}$}
-\else
-\newcommand{\moorenode}[2]{$\mathsf{\dfrac{#1}{#2}}$}
-\fi
-%% Use Venn Diagrams
-\usepackage{venndiagram}
+%% Using tcolorbox for Infobox environment settings
+\usepackage[most]{tcolorbox}
+\newtcolorbox{infobox}[1][]{title=#1,colback=infoboxbg,colframe=bookcolor,fonttitle=\large\scshape,colbacktitle=infoboxbgtitle,coltitle=black,toptitle=5pt,bottomtitle=5pt,sharp corners,boxrule=2pt,titlerule=0pt,top=7pt,parbox=false,floatplacement=!b,float=!b}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Code voor Infobox
-\makeatletter
-\newsavebox{\@saveinfobox}
-\newlength{\@infoboxparskip}\setlength{\@infoboxparskip}{\smallskipamount}
-\newcommand{\infoboxHTMLcolor}{E7FEFF}
-%% Floating minipages
-%%\newfloat{floatingminipage}{!htbp}{lfm}[section]
-%\restylefloat*{floatingminipage}
-\floatstyle{ruled}
-\newfloat{@rawinfobox}{!b}{loi}[section]
-%\newfloat{@rawinfoboxh}{!h}{loi}[section]
-\restylefloat*{@rawinfobox}
-%\restylefloat*{@rawinfoboxh}
-\floatname{@rawinfobox}{Infobox}
-%\floatname{@rawinfoboxh}{Infobox}
-
-% one length to rule them all
-\newlength\hrulethickness
-\setlength\hrulethickness{4\arrayrulewidth}
-%\newcommand{\hlinethick}{\Xhline{\hrulethickness}}
-
-% redefinition of the `ruled' floatstyle
-% (defined in the `float' package, used by the `algorithm' package)
-\renewcommand\fs@ruled{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
-  \def\@fs@pre{\hrule height \hrulethickness depth0pt }%\vskip1ex}%
-  \def\@fs@post{\hrule height \hrulethickness depth0pt \relax}%
-  \def\@fs@mid{\hrule height \hrulethickness depth0pt }%
-  \let\@fs@iftopcapt\iftrue}
-
-% make use of @... to set \parskip proper, affects all minipages!
-%\newcommand{\@minipagerestore}{\setlength{\parskip}{\smallskipamount}}
-
-% create a new environment
-% Argument #1 = box placement, one of '!hbtp' or 'H', default '!b'
-% Argument #2 = heading text, will be typeset in ...
-% See http://tex.stackexchange.com/questions/11349/how-do-you-define-your-environment-such-as-to-use-for-some-parameters
-\newenvironment{infobox}[2][!b]{%
-% Place float at ...
-\floatplacement{@rawinfobox}{#1}%
-\begin{@rawinfobox}%
-\begin{lrbox}{\@saveinfobox}%
-% Now a dirty hack: minipage within a minipage
-%\begin{minipage}[t]{\textwidth}%
-%\begin{minipage}[t]{0.985\textwidth}%
-\begin{minipage}[t]{\textwidth-\marginparsep-2\fboxrule-0.255pt}%
-\centering%
-\begin{minipage}[t]{0.95\textwidth}%
-\setlength{\parskip}{\@infoboxparskip}% restore the value
-\vspace*{1pt}\textsc{#2}\par
+\newcounter{example}[chapter]
+\setcounter{example}{0}
+\newtcolorbox[use counter=example,number within=chapter,list inside=example]{example}[1][]{%
+    % Example Frame Start
+    empty,% Empty previously set parameters
+    title={Voorbeeld \theexample\ifx\hfuzz#1\hfuzz \else : #1\fi},% use \thetcbcounter to access the example counter text
+%	list entry=Voorbeeld~\theexample.\quad#1,
+    % Attaching a box requires an overlay
+    attach boxed title to top left,
+    % Ensures proper line breaking in longer titles
+    minipage boxed title,
+    % (boxed title style requires an overlay)
+    boxed title style={empty,size=minimal,toprule=0pt,top=4pt,bottom=2pt,left=3mm,overlay={}},
+    coltitle=bookcolor,fonttitle=\bfseries,
+    before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=3mm,right=0mm,top=5pt,breakable,pad at break=0mm,
+       before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+    % Handles box when it exists on one page only
+    overlay unbroken={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: first page
+    overlay first={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: middle page
+    overlay middle={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: last page
+    overlay last={\draw[bookcolor,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
 }
-{%
-%\vspace*{1ex}
-\end{minipage}%
-\end{minipage}%
-\end{lrbox}%
-\colorbox[HTML]{\infoboxHTMLcolor}{\usebox{\@saveinfobox}}%
-\end{@rawinfobox}
-}%
+\makeatletter % no indent for entries
+\renewcommand{\l@tcolorbox}{\@dottedtocline{1}{0pt}{2.3em}}
 \makeatother
-% end code for Infobox
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\usepackage{showframe}
 
 %% Hypenation of some uncommon words in Dutch
-\hyphenation{Kar-naugh-dia-gram Kar-naugh-dia-gram-men min-term min-ter-men flip-flop flip-flops im-pli-cant im-pli-can-ten twee-tal-len vier-tal-len acht-tal-len zes-tien-tallen timing-dia-gram-men timing-dia-gram}
-
-%% The title page
-\def\maketitle{%
-\pagecolor{SkyBlue2}%
-\null%
-  \hbox{%
-  \hspace*{0.05\textwidth}%
-  \rule{3pt}{0.95\textheight}
-  \hspace*{0.10\textwidth}%
-\parbox[b]{0.70\textwidth}{%
-  \vbox{%
-%%%    \vspace{0.0\textheight}
-    {\noindent\fontsize{70pt}{80pt}\selectfont\bfseries \booktitleI \\[0.20\baselineskip] \booktitleII}\\[3\baselineskip]
-    {\fontsize{25pt}{35pt}\selectfont\itshape \booksubtitle}\\[4\baselineskip]
-    {\fontsize{30pt}{35pt}\selectfont \bookauthor}\\[\baselineskip]
-   \par%{\LARGE \bookinstitution}\par
-   \vspace{0.3\textheight}
-    {\noindent\Large \bookedition}\\[\baselineskip]
-    %\vspace{0.05\textheight}
-    }% end of vbox
-}% end of parbox
-  }% end of hbox
-\thispagestyle{empty}%
-\newpage
-\pagecolor{white}
-%%%\cleardoublepage
-%%%{\centering
-%%%\vfill\vspace*{5cm}
-%%%{\fontsize{45pt}{55pt}\selectfont\bfseries\booktitle}\par
-%%%{\fontsize{20pt}{25pt}\selectfont\itshape \booksubtitle}\par
-%%%\vspace*{2cm}
-%%%\Huge\bookauthor\par
-%%%\Large\bookinstitution\par
-%%%\vspace*{5cm}
-%%%\Large\bookedition\par
-%%%\vfill}
-%%%\thispagestyle{empty}%
-%%%\clearpage
-%%%%%\pagestyle{empty}%
-%%%\null%
-}
+\hyphenation{Kar-naugh-dia-gram Kar-naugh-dia-gram-men min-term min-ter-men flip-flop flip-flops im-pli-cant im-pli-can-ten twee-tal-len vier-tal-len acht-tal-len zes-tien-tal-len timing-dia-gram-men timing-dia-gram toe-stands-dia-gram toe-stands-dia-grammen ge-schre-ven}
 
 %% The really backmatter
 \newcommand{\bookbackmatter}{%
-%%%\cleardoublepage%
-%%%\hspace*{0pt}
-%%%\thispagestyle{empty}
-%%%\cleardoublepage
+\ifusebookasbook
+\cleardoublepage%
+\hspace*{0pt}
+\thispagestyle{empty}
+\clearpage
+\pagecolor{Sienna2}
+\hspace*{0pt}
+\vfill
+%\hfill\EANisbn[SC5b,ISBN=978-80-7340-097-2] 
+\thispagestyle{empty}
+\fi
 }
 
 %%% No package loading from here
