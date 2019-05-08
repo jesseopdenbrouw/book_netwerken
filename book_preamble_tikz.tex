@@ -340,4 +340,31 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%
+%% based on https://tex.stackexchange.com/questions/476045/euler-and-minus-sign
+%%
+%% Imaginary unit, e, and Euler
+\newcommand\imaginaryunit{j}                   % the imaginary unit, i for mathematician and theoretical physicist,
+                                               % j for the rest of the world.
+\newcommand\imunit{\mathrm{\imaginaryunit}}    % ... in upright math
+\newcommand\ce{\mathrm{e}}                     % the constant e, upright of course
+
+\newcommand{\epowre}[1]{\ce^{#1}}              % e to the power of real
+\makeatletter
+\newcommand{\fiximunit@@}{\if\imaginaryunit j\,\fi}
+\newcommand{\epowim}[1]{\ce^{\epowim@#1}}      % e to the power of imaginary
+\newcommand{\epowim@}{\@ifnextchar-{\epowim@@}{\epowim@@{\fiximunit@@}}}
+\newcommand{\epowim@@}[1]{#1\imunit}
+\newcommand{\epowim@@@}{\@ifnextchar-{\epowim@@@@}{+\epowim@@@@{}}}
+\newcommand{\epowim@@@@}[1]{#1\imunit}
+\newcommand{\epowcom}[2]{\ce^{#1\epowim@@@#2}} % e to the power of complex
+\newcommand{\cis}[1]{\cis@#1}                  % cos + imaginary sin
+\newcommand{\cis@}{\@ifnextchar-{\cis@@@}{\cis@@}}
+\newcommand{\cis@@}[1]{\cos#1 + \imunit\sin#1}
+\newcommand{\cis@@@}[2]{\cos#2 - \imunit\sin#2}
+\makeatother
+%\renewcommand{\Re}{\mathrm{Re}}  % Redefine \Re
+%\renewcommand{\Im}{\mathrm{Im}}  % Redefine \Im
+
+
 \endinput
