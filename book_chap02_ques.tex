@@ -145,7 +145,7 @@ Gegeven is het netwerk in figuur. Bepaal de spanningen $U_1$ en $U_2$.
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v<=\SI{12}{\volt}] ++(0,2)
+\draw (0,0) to[V, v=\SI{12}{\volt}] ++(0,2)
 			to[short] ++(0.5,0)
             to[R=\SI{6}{\ohm}, v=$U_1$] ++(2,0)
 			to[short] ++(0.5,0)
@@ -166,7 +166,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling2}. De interne weers
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v<=\SI{24}{\volt}] ++(0,2)
+\draw (0,0) to[V, v=\SI{24}{\volt}] ++(0,2)
 			to[R=\SI{1}{\mega\ohm},-*] ++(2,0) node (1) {}
 			to[R=\SI{1}{\mega\ohm},-*] ++(0,-2) node (2) {}
 			to[short,-.] (0,0)
@@ -253,7 +253,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling1}. Het netwerk bestaat
 %%%        (1) to[short] ++(2,0)
 %%%            to[R, R=$R_X$] ++(0,-2)
 %%%            to[short] (2) 
-\draw (0,0) to[V, v<=\SI{48}{\volt}]   ++(0,4) node (1) {} node [left] {}
+\draw (0,0) to[V, v=\SI{48}{\volt}]   ++(0,4) node (1) {} node [left] {}
             to[short, i=$I_x$] ++(3,0)
 			to[R=$R_X$, -*] ++(0,-2) node (1) {}
 			to[short] ++(-1,0)
@@ -280,15 +280,15 @@ Gegeven zijn de netwerken in figuur~\ref{fig:gelnetwerkvoortheveninanalysis1}. B
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,1) to[V, v<=\SI{12}{\volt}] ++(0,2) %node (1) {} node [left] {}
+\draw (0,1) to[V, v=\SI{12}{\volt}] ++(0,2) %node (1) {} node [left] {}
             to[R=\SI{10}{\kilo\ohm}, -*] ++(2,0) node (1) {}
 			to[short,-o] ++(1,0) node[right] {A}
         (1) to[R=\SI{5}{\kilo\ohm},-*] ++(0,-2)
 			to[open,-o] ++(1,0) node[right] {B}
 			to[short,-.] ++(-3,0)
 ;
-\draw (6,0) to[V,v<=\SI{12}{\volt}] ++(0,2) node(1) {}
-			to[V,v<=\SI{6}{\volt}] ++(0,2)
+\draw (6,0) to[V,v=\SI{12}{\volt}] ++(0,2) node(1) {}
+			to[V,v=\SI{6}{\volt}] ++(0,2)
 			to[R=\SI{12}{\kilo\ohm},-*] ++(2,0) node (2) {}
 			to[short,-o] ++(1,0) node[right] {A}
 		(2) to[R=\SI{18}{\kilo\ohm},-*] ++(0,-4)
@@ -315,7 +315,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepa
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v<=\SI{12}{\volt},-*]   ++(0,2) node (1) {} node [left] {}
+\draw (0,0) to[V, v=\SI{12}{\volt},-*]   ++(0,2) node (1) {} node [left] {}
             to[R, R=\SI{1.2}{\kilo\ohm}, -*] ++(2,0) node (2) {} node [above] {A}
 			to[R, R=\SI{3.9}{\kilo\ohm}, -*] ++(2,0) node (3) {} node [right] {}
 			to[R, R=\SI{2.7}{\kilo\ohm}]     ++(0,-2)
@@ -335,6 +335,33 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepa
 %%
 %% Uth = 10.7973 V, Ik = 11.00 mA, Rth = 981.57 \ohm. nodal8.asc
 
+
+\item
+\label{que:gelthevenin2b}
+Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. De weerstand tussen A en B is nu \SI{1.8}{\kilo\ohm}. Deze weerstand wordt vervangen door een andere weerstand zodanig dat maximale vermogensoverdracht plaatsvindt in deze weerstand. Bepaal de waarde van de vervangende weerstand.
+
+\item
+\label{que:gelthevenin4}
+Gegeven is het netwerk in figuur~\ref{fig:gelthevenin4}. Bepaal het thévenin-vervangingsschema tussen de punten A en B.
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[R=\SI{30}{\ohm},-*] ++(0,2) node (1) {}
+            to[V, v<=\SI{10}{\volt},-*] ++(2,0) node (2) {}
+            to[V, v<=\SI{10}{\volt},-*] ++(2,0) node (3) {} node[right] {A}
+			to[R=\SI{30}{\ohm}] ++(0,-2) node[right] {B}
+			to[short] (0,0)
+		(1) to[short] ++(0,1.5)
+			to[R=\SI{15}{\ohm}] ++(4,0)
+			to[short] ++(0,-1.5)
+		(2) to[R=\SI{30}{\ohm},-*] ++(0,-2)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbronnen en weerstanden.}
+\label{fig:gelthevenin4}
+\end{figure}
+
+
 \item
 \label{que:gelsuperpos1}
 Gegeven is het netwerk in figuur~\ref{fig:gelsuperpos1}. Bepaal de spanning $U_x$ door middel van superpositie.
@@ -342,7 +369,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelsuperpos1}. Bepaal de spanning $U_x
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V<=\SI{6}{\volt}] ++(0,2)
+\draw (0,0) to[V=\SI{6}{\volt}] ++(0,2)
 			to[R=\SI{4}{\ohm}] ++(3,0) node[above] {$U_x$}
 			to[short] ++(2,0)
 			to[R=\SI{8}{\ohm}] ++(0,-2)
@@ -358,32 +385,6 @@ Gegeven is het netwerk in figuur~\ref{fig:gelsuperpos1}. Bepaal de spanning $U_x
 %% Ubron: Ux = 4 V
 %% Ibron: Ux = 2/3 V
 %% Uxtotaal = 4 2/3 V
-
-
-\item
-\label{que:gelthevenin2b}
-Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. De weerstand tussen A en B is nu \SI{1.8}{\kilo\ohm}. Deze weerstand wordt vervangen door een andere weerstand zodanig dat maximale vermogensoverdracht plaatsvindt in deze weerstand. Bepaal de waarde van de vervangende weerstand.
-
-\item
-\label{que:gelthevenin4}
-Gegeven is het netwerk in figuur~\ref{fig:gelthevenin4}. Bepaal het thévenin-vervangingsschema tussen de punten A en B.
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[R=\SI{30}{\ohm},-*] ++(0,2) node (1) {}
-            to[V, v=\SI{10}{\volt},-*] ++(2,0) node (2) {}
-            to[V, v=\SI{10}{\volt},-*] ++(2,0) node (3) {} node[right] {A}
-			to[R=\SI{30}{\ohm}] ++(0,-2) node[right] {B}
-			to[short] (0,0)
-		(1) to[short] ++(0,1.5)
-			to[R=\SI{15}{\ohm}] ++(4,0)
-			to[short] ++(0,-1.5)
-		(2) to[R=\SI{30}{\ohm},-*] ++(0,-2)
-;
-\end{tikzpicture}
-\caption{Netwerk met spanningsbronnen en weerstanden.}
-\label{fig:gelthevenin4}
-\end{figure}
 
 
 \item
@@ -423,10 +424,10 @@ Bepaal de waarde van $R_x$.
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v<=\SI{8}{\volt}]   ++(0,2) %node (1) {} node [left] {}
+\draw (0,0) to[V, v=\SI{8}{\volt}]   ++(0,2) %node (1) {} node [left] {}
             to[R=\SI{2}{\ohm},-*] ++(2,0) node (A) {} node[above] {$U_x$}
 			to[R=\SI{4}{\ohm}] ++(2,0)
-			to[V, v=\SI{6}{\volt}]   ++(0,-2) %node (1) {} node [left] {}
+			to[V, v<=\SI{6}{\volt}]   ++(0,-2) %node (1) {} node [left] {}
             to[short, -.] (0,0)
         (A) to[R=$R_x$] ++(0,-2)
 ;
@@ -448,7 +449,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ e
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V<=$U_1$] ++(0,4)
+\draw (0,0) to[V=$U_1$] ++(0,4)
             to[short] ++(2,0)
             to[R=$R_{in}$, v=$U_{in}$,-*] ++(0,-2) node (1) {} node[left] {$U_x$}
             to[R=$R_1$,-*] ++(0,-2)
@@ -456,7 +457,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ e
             to[short,-.] ++(-2,0)
             to[open] ++(6.5,4) %node (3) {} node[right] {$U_{2}$}
             to[R=$R_{out}$,] ++(-2,0)
-            to[cV, v_>=$aU_{in}$] ++(0,-2) node (2) {}
+            to[cV, v_<=$aU_{in}$] ++(0,-2) node (2) {}
 			to[short] ++(0,-2) node (2) {}
 			to[short] ++(-2.5,0)
 		(1) to[short] ++(2.5,0)
@@ -470,7 +471,29 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ e
 \label{fig:gelnodal3}
 \end{figure}
 
+\item
+\label{que:gelwheatstone1}
+Gegeven is het netwerk in figuur~\ref{fig:gelwheatstone1}. Bepaal de waarde van $R$ als geldt dat de weerstand van \SI{1.5}{\kilo\ohm} stroomloos is.
 
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V=\SI{12}{\volt},-*]   ++(0,2) node (1) {} node [left] {}
+            to[R=\SI{1.2}{\kilo\ohm}, -*] ++(2,0) node (2) {} node [above] {A}
+			to[R=\SI{1.5}{\kilo\ohm}, -*] ++(2,0) node (3) {} node [right] {B}
+			to[R=\SI{2.2}{\kilo\ohm}]     ++(0,-2)
+			to[short]          (0,0)
+	    (1) to[short]          ++(0,1)
+            to[R=\SI{1.8}{\kilo\ohm}]     ++(4,0)	
+			to[short]          ++(0,-1)
+		(2) to[R=$R$, -*] ++(0,-2) %node [below] {B}
+%			to node[sground]{} ++(0,0)
+%        (3) to[I, l=$I$, invert]       ++(2,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbron en weerstanden.}
+\label{fig:gelwheatstone1}
+\end{figure}
 
 
 \end{enumerate}
