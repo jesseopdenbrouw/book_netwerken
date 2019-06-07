@@ -60,12 +60,12 @@ Gegeven is de netwerken in figuur~\ref{fig:gelspanningswet1} met spanningsbronne
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, v=\SI{10}{\volt}] ++(0,2)
             to[V, v<=\SI{-5}{\volt}] ++(2,0)
-            to[R, v^=$U_X$] ++(0,-2)
+            to[R, v^=$U_x$] ++(0,-2)
             to[V, v<=\SI{7}{\volt},-.] ++(-2,0) 
 ;
 \draw (6,0) to[V, v<=\SI{3.5}{\volt}] ++(0,2)
             to[V, v<=\SI{2.7}{\volt}] ++(2,0)
-            to[R, v^=$U_X$] ++(0,-2)
+            to[R, v^=$U_y$] ++(0,-2)
             to[V, v<=\SI{-1.9}{\volt},-.] ++(-2,0) 
 ;
 \end{tikzpicture}
@@ -106,7 +106,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelserieparallel1}. Bepaal de totale w
 \item
 \label{que:gellatticenetwork}
 
-Gegeven het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de vervangingsweerstand tussen de punten A en B.
+Gegeven is het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de vervangingsweerstand tussen de punten A en B.
 
 \begin{figure}[!ht]
 \centering
@@ -140,7 +140,7 @@ R_{AB} = \SI{30}{\kilo\ohm}
 
 \item
 \label{que:gelspanningsdeling1}
-Gegeven is het netwerk in figuur. Bepaal de spanningen $U_1$ en $U_2$.
+Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling1}. Bepaal de spanningen $U_1$ en $U_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -181,6 +181,99 @@ Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling2}. De interne weers
 
 % Vmeter = (1//10) / (1+(1//10))*24 = 11,428571428571428571428571428571 V
 
+\item
+\label{que:gelstroomdeling3}
+Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling3}. Bereken de stromen $I_1$ en $I_2$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[I, l=\SI{15}{\milli\ampere}] ++(0,2)
+			to[short,-*] ++(2,0) node (A) {}
+			to[R=\SI{680}{\ohm},-*,i>^=$I_1$] ++(0,-2)
+		(A) to[short] ++(2,0) 
+			to[R=\SI{820}{\ohm},i>^=$I_2$] ++(0,-2)
+			to[short,-.] (0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met stroombron en weerstanden.}
+\label{fig:gelstroomdeling3}
+\end{figure}
+
+% I_1 = 8,2 mA, I_2 = 6,8 mA
+
+\item
+\label{que:gelstroomdeling4}
+Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling4}. Bereken de stromen $I_1$ t/m $I_4$.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[I, l=\SI{80}{\milli\ampere}] ++(0,2)
+			to[short,-*] ++(2,0) node (A) {}
+			to[R=\SI{120}{\ohm},-*,i>^=$I_1$] ++(0,-2)
+		(A) to[short] ++(1.5,0) node (B) {} 
+			to[R=\SI{68}{\ohm},-*,i>^=$I_2$] ++(0,-2)
+		(B) to[short] ++(1.5,0) node (C) {}
+			to[R=\SI{82}{\ohm},-*,i>^=$I_3$] ++(0,-2)
+		(C) to[short] ++(1.5,0) 
+			to[R=\SI{100}{\ohm},i>^=$I_4$] node (D) {} ++(0,-2)
+			to[short,-.] (0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met stroombron en weerstanden.}
+\label{fig:gelstroomdeling4}
+\end{figure}
+
+%% I_1 = 14,738 mA, I_2 = 26,008 mA, I_3 = 21,5679 mA, I_4 = 17,68568 mA
+%% I_1 = 14,74      I_2 = 26,01      I_3 = 21,57       I_4 = 17,69 mA       = 80,01 mA
+%% I_1 = 14,7       I_2 = 26,0       I_3 = 21,6        I_4 = 17,7           = 80,0
+
+\item
+\label{que:gelspanningsdeling2}
+Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling3}. Bereken de stroom $I$ die de bron levert.
+Bereken de spanning $U$ die over de weerstand van \SI{5}{\ohm} staat.
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V=\SI{18}{\volt}] ++(0,2)
+			to[short,-*,i=$I$] ++(2,0) node (A) {}
+			to[R=\SI{12}{\ohm},-*] ++(0,-2)
+		(A) to[short,-*] ++(1,0) node (B) {}
+            to[short] ++(0,0.5)
+			to[R=\SI{18}{\ohm}] ++(4,0)
+			to[short,-*] ++(0,-.5) node (C) {} 
+        (B) to[short] ++(0,-0.5) 
+			to[R=\SI{4}{\ohm}] ++(2,0)
+			to[R=\SI{5}{\ohm},v=$U$] ++(2,0)
+			to[short] ++(0,0.5)
+			to[short] ++(0.5,0)
+			to[R=\SI{6}{\ohm}] ++(0,-2)
+			to[short,-.] (0,0) 
+;
+\end{tikzpicture}
+\caption{Netwerk met stroombron en weerstanden.}
+\label{fig:gelspanningsdeling3}
+\end{figure}
+
+\item
+\label{que:gelmaxspanning1}
+Bereken de maximale spanning die over een weerstand van \SI{1}{\kilo\ohm}/\SI{ 0.25}{\watt} mag worden geplaatst.
+
+%% $P=$\dfrac{U^2}{R} $\leftarrow$ U = \sqrt{P\cdotR}  U = \sqrt{0.25$\cdot$1000} = \SI{15.8}{\volt}$
+
+\item
+\label{que:gelmaxspanning2}
+Drie weerstanden van \SI{680}{\ohm}, \SI{560}{\ohm} en \SI{820}{\ohm}, alledrie met een maximaal vermogen van \SI{0.25}{\watt}, worden in serie geplaatst. Bereken de maximale spanning die over de drie weerstanden geplaatst mag worden.
+
+%% Imax = sqrt{0.25/820} = 17.5 mA --> Vmax = 36 V
+
+\item
+\label{que:gelinterneweerstand1}
+Een batterij heeft in onbelaste toestand een spanning van \SI{9.5}{\volt}. Als de batterij belast wordt met een weerstand van \SI{680}{\ohm} zakt de spanning naar \SI{7.3}{\volt}. Bereken de interne weerstand van de batterij.
+
+% Ibelast = 7,3/680 = 10,73529411764705882352941176471 mA
+% Ri = (9,5-7,3)/10.735e-3 = 204,93... Ohm \approx 205 ohm
 
 \item
 \label{que:gelkarimp1}
@@ -234,7 +327,7 @@ Hint: deze is ondoenlijk, maar wel leuk. Hierbij komt echt inzicht kijken.
 
 \itemstar
 \label{que:gelkarimp6}
-Een bekende kabelexploitant heeft onlangs de signaalsterkte van het tv-signaal versterkt. Daardoor kan de tv het signaal niet meer goed verwerken. De oplossing ligt in het gebruik van het netwerk in figuur~\ref{fig:gelkarimp1}.
+Een bekende kabelexploitant heeft onlangs de signaalsterkte van het tv-signaal verhoogd. Daardoor kan de tv het signaal niet meer goed verwerken. De oplossing ligt in het gebruik van het netwerk in figuur~\ref{fig:gelkarimp1}.
 Hierbij wordt de weerstand $R_L$ vervangen door een coaxiale kabel. De weerstand van de coaxiale kabel is \SI{75}{\ohm}. Verder verzwakken we het signaal 2 keer (de versterking is dus~\num{0.5}). We kunnen nu~\eqref{equ:gelkarimp4} en~\eqref{equ:gelkarimp5} gebruiken om de waarden van $R_1$ en $R_2$ uitrekenen. Bepaal deze waarden.
 
 \item
@@ -306,7 +399,26 @@ Gegeven zijn de netwerken in figuur~\ref{fig:gelnetwerkvoortheveninanalysis1}. B
 % I_k = 12/10kohm = 1,2 mA
 % Rth = 4/1,2 mA = 3,33.. kohm
 
+\item
+\label{que:gelthevenin5}
+Gegeven is het netwerk in figuur~\ref{fig:gelthevenin3}. Bepaal de stroom $I_X$ door de spanningsbronnen om te werken naar stroombronnen en dan stroomdeling toe te passen.
 
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V, v=\SI{18}{\volt}]   ++(0,2) %node (1) {} node [left] {}
+            to[R=\SI{10}{\ohm},-*] ++(2,0) % node (A) {} node[above] {$U_x$}
+			to[R=\SI{15}{\ohm}] ++(2,0)
+			to[V, v<=\SI{6}{\volt}]   ++(0,-2) %node (1) {} node [left] {}
+            to[short, -.] (0,0)
+        (A) to[R=\SI{12}{\ohm},i>^=$I_x$] ++(0,-2)
+;
+\end{tikzpicture}
+\caption{Netwerk met spanningsbronnen en weerstanden.}
+\label{fig:gelthevenin3}
+\end{figure}
+
+% I_X = 0,73 A (- 11/15 A)
 
 \item
 \label{que:gelthevenin2}
@@ -394,7 +506,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis3}. Bere
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v<=\SI{12}{\volt}]   ++(0,4) %node (1) {} node [left] {}
+\draw (0,0) to[V=\SI{12}{\volt}]   ++(0,4) %node (1) {} node [left] {}
             to[short,-*] ++(2,0) node (1) {}
             to[R=\SI{10}{\ohm},-*] ++(0,-2) node (A) {} node[left] {A}
 			to[R=\SI{20}{\ohm},-*] ++(0,-2) node (C) {}
@@ -495,5 +607,25 @@ Gegeven is het netwerk in figuur~\ref{fig:gelwheatstone1}. Bepaal de waarde van 
 \label{fig:gelwheatstone1}
 \end{figure}
 
+\itemstar
+In figuur~\ref{fig:gelcube1} is een kubus van weerstanden (niet getekend) te zien. De weerstand in iedere ribbe is $R$. De punten A en B zijn lichaamsdiagonaal tegenover elkaar geplaatst. Bepaal de weerstandswaarde tussen de punten A en B.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit,scale=2]
+\draw (0,0,0) -- ++(0,0,-1) -- ++(0,1,0) -- ++(0,0,1) -- cycle;
+\draw (1,0,0) -- ++(0,0,-1) -- ++(0,1,0) -- ++(0,0,1) -- cycle;
+\draw (0,0,0) -- ++(1,0,0);
+\draw (0,0,-1) -- ++(1,0,0);
+\draw (0,1,0) -- ++(1,0,0);
+\draw (0,1,-1) -- ++(1,0,0);
+\draw[fill=black] (0,1,0) circle [radius=1pt] node[left] {A};
+\draw[fill=black] (1,0,-1) circle [radius=1pt] node[right] {B};
+\end{tikzpicture}
+\caption{Kubus met  weerstanden.}
+\label{fig:gelcube1}
+\end{figure}
+
+Hint: Plaats een denkbeeldige spanningsbron van \SI{1}{\volt} tussen de punten A en B en stel de vergelijkingen op voor de onbekende spanningen in het netwerk. Op deze manier kan de stroom die de denkbeeldige bron levert worden berekend en dus ook de weerstand die de bron ondervindt.
 
 \end{enumerate}
