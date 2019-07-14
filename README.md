@@ -18,15 +18,16 @@ Er is een master document:
 
 ### Hoe opgezet ###
 
-Als basis dient de \LaTeX-code. Schema's en figure zijn getekend met Tikz en Circuitikz.
+Als basis dient de \LaTeX-code. Schema's en figuren zijn getekend met Tikz en Circuitikz.
 
 Hoofdstukindeling (voorlopig):
 
 	* chap00: voorwoord
 	* chap01: introductie
 	* chap02: gelijkstroomtheorie
-	* chap03: wisselstroomtheorie met wijzerdiagrammen
-	* chap04: wisselstroomtheorie met complexe rekenwijze
+	* chap03: Stroom, spanning en vermogen
+	* chap04: wisselstroomtheorie met wijzerdiagrammen
+	* chap05: wisselstroomtheorie met complexe rekenwijze
 
 ### Meewerken ###
 
