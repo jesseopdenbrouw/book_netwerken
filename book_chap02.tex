@@ -335,6 +335,18 @@ G = \dfrac{1}{R}
 In de literatuur wordt ook wel de naam mho (omgekeerde van ohm) gebruikt en als symbool wordt ook wel \si{\mho} of \si{\per\ohm} gebruikt.
 
 
+\section{Spoel en condensator}
+De spoel en de condensator hebben geen actieve rol in een gelijkstroomnetwerk. We bekijken de stroom-spanningrelaties:
+%
+\begin{equation}
+\text{spoel: } u(t) = L\dfrac{\mathrm{d}i(t)}{\mathrm{d}t} \qquad\qquad \text{condensator: } i(t) = C\dfrac{\mathrm{d}u(t)}{\mathrm{d}t}
+\end{equation}
+%
+De spanning over de spoel is recht evenredig met de \textsl{stroomverandering} door de spoel. Er is echter geen verandering van de stroom, de stroom is constant. De spanning over de spoel is dus \SI{0}{\volt}. De spoel gedraagt zich als een kortsluiting.
+
+De stroom door een condensator is recht evenredig met de \textsl{spanningsverandering} over de condensator. De spanning verandert echter niet, de spanning is constant. De stroom door de condensator is dus \SI{0}{\ampere}. Hierdoor gedraagt de condensator zich als twee open klemmen (dit wordt ook wel een open verbinding genoemd).
+
+
 \section{Serieschakeling van weerstanden}
 In figuur~\ref{fig:gelserieschakelingweerstanden} is een schakeling te zien waarbij de weerstanden
 in serie geschakeld zijn en gevoed worden door een spanningsbron. De spanningsbron levert een stroom
@@ -775,7 +787,7 @@ Oplossing: De verbruikte hoeveelheid energie per jaar is $W=U\cdot I\cdot t = \n
 
 
 \section{Vermogen geleverd door een bron}
-De eerste wet van de thermodynamica stelt dat er energie niet verloren kan gaan of uit het niets kan ontstaan.
+De eerste wet van de thermodynamica stelt dat energie niet verloren kan gaan of uit het niets kan ontstaan.
 Dat betekent dat in het netwerk in figuur~\ref{fig:gelvermogensdissipatie} het geleverde vermogen en het
 opgenomen vermogen in balans moeten zijn. Dus geldt:
 %
@@ -953,7 +965,7 @@ en opgenomen vermogen af. Bijna al het vermogen wordt in $R_u$ gedissipeerd. De 
 maar zal nooit 1 worden.
 
 \begin{example}[Maximaal geleverd vermogen]
-Gegeven is het onderstaande netwerk waarvoor geldt $U=\SI{9}{\volt}$ en $R_i = \SI{4.5}{\ohm}$. Bereken
+Gegeven is het onderstaande netwerk waarvoor geldt $U=\SI{12}{\volt}$ en $R_i = \SI{4.5}{\ohm}$. Bereken
 de waarde van $R_u$ voor maximale vermogensoverdracht en bereken het overgebrachte vermogen.
 \vspace*{-2ex}
 \begin{figure}[H]
@@ -970,7 +982,7 @@ Oplossing: maximaal vermogensoverdracht bij $R_u=R_i=\SI{4.5}{\ohm}$. Het gediss
 in $R_u$ is:
 %
 \begin{equation}
-P_{max} = \dfrac{U^2}{4R_i} = \dfrac{81}{\num{4}\cdot\num{4.5}} = \SI{18}{\watt}
+P_{max} = \dfrac{U^2}{4R_i} = \dfrac{144}{\num{4}\cdot\num{4.5}} = \SI{8}{\watt}
 \end{equation}\end{example}
 
 
@@ -1650,6 +1662,46 @@ Willen we aan de bovenstaande voorwaarden voldoen dan volgt automatisch dat:
 \begin{equation}
 R_T = R_N
 \end{equation}
+%
+We kunnen de interne weerstand ook nog op een andere, eenvoudige manier bepalen. Deze methode geldt alleen bij een netwerk met onafhankelijke spannings- en stroombronnen.
+
+Voor het vinden van de interne weerstand gebruiken we de nulstelling van de bronnen. Spanningsbronnen vormen dan een kortsluiting en stroombronnen twee open klemmen (dit wordt ook wel een open verbinding genoemd). Daarna bepalen we de weerstand die gezien wordt tussen de uitgangsklemmen. Deze weerstand is gelijk aan de interne weerstand.
+
+\begin{example}[Bepalen interne weerstand]
+In figuur~\ref{fig:gelnetwerkvoorinterneweerstand} is een netwerk getekend. We gaan het th\'eveninvervangingsnetwerk bepalen gezien tussen de punten A en B. Hiertoe passen we
+de nulstelling van de bronnen toe. Spanningsbronnen worden vervangen door kortsluitingen
+en stroombronnen worden uit het netwerk gehaald. Dit is te zien in
+figuur~\ref{fig:gelnetwerkvoorinterneweerstand2}.
+
+We zien dat eenvoudig is uit te rekenen dat de interne weerstand een parallelschakeling is
+van \SI{3}{\ohm} en \SI{6}{\ohm}. De weerstand van \SI{8}{\ohm} heeft geen invloed. Om een
+volledig th\'evangingsnetwerk te bepalen moet ook de open klemspanning tussen A en B
+berekend worden. We kunnen dit uitwerken door \textsl{superpositie} toe te passen.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V=10 V] ++(0,2) to [R=$\SI{6}{\ohm}$, -o] ++(2,0) node[above] {A}
+to [R=$\SI{3}{\ohm}$, -o] ++(0,-2) node[below] {B} to [open] ++(0,2) to [R=$\SI{8}{\ohm}$] ++(2,0)
+to [I_>=, l=$\frac{1}{2}\si{\ampere}$, invert] ++(0,-2) to [short, -.] (0,0);
+\end{tikzpicture}
+\caption{Netwerk voor het bepalen van de interne weerstand.}
+\label{fig:gelnetwerkvoorinterneweerstand}
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [short] ++(0,2) to [R=$\SI{6}{\ohm}$, -o] ++(2,0) node[above] {A}
+            to [R=$\SI{3}{\ohm}$,-o] ++(0,-2) node[below] {B} to [open] ++(0,2)
+			to [R=$\SI{8}{\ohm}$] ++(2,0)
+            to [open] ++(0,-2) to [short, -.] (0,0);
+\end{tikzpicture}
+\caption{Bepalen van de interne weerstand.}
+\label{fig:gelnetwerkvoorinterneweerstand2}
+\end{figure}
+
+\end{example}
+
 
 
 \section{Het superpositiebeginsel}
@@ -1680,7 +1732,7 @@ netwerk met een spanningsbron, stroombron en drie weerstanden te zien.
 
 We berekenen eerst de stromen en spanningen in het netwerk die door de
 spanningsbron gerealiseerd worden. Daarvoor stellen de de stroom van de
-stroombron op 0 A. Dat betekent dat de stroombron wordt vervangen door
+stroombron op \SI{0}{\ampere}. Dat betekent dat de stroombron wordt vervangen door
 een open verbinding; de weerstand van een ideale stroombron is immers
 oneindig groot. Het deelnetwerk is te zien in
 figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplita}. We kunnen
@@ -1723,9 +1775,9 @@ I_{xa} &= \dfrac{U}{R_1+R_3}
 
 In figuur~\ref{fig:gelnetwerkvoorsuperpositiebeginselsplitb} is het deelnetwerk
 te zien voor het berekenen van de stromen en spanningen als gevolg van de stroombron.
-Nu wordt de spanningsbron op 0 V gesteld zodat de spanningsbron wordt vervangen
-door een kortsluiting (een ideale spanningsbron heeft een interne weerstand van 0
-$\Omega$). Voor de spanning over en stroom door $R_3$ kunnen we opstellen:
+Nu wordt de spanningsbron op \SI{0}{\volt} gesteld zodat de spanningsbron wordt vervangen
+door een kortsluiting (een ideale spanningsbron heeft een interne weerstand van \SI{0}{\ohm}.
+Voor de spanning over en stroom door $R_3$ kunnen we opstellen:
 %
 \begin{equation}
 \begin{split}
@@ -1763,7 +1815,6 @@ We kunnen dus \textbf{niet} stellen dat:
 \begin{equation}
 P_{R_3} = U_{xa}\cdot I_{xa} + U_{xb}\cdot I_{xb}
 \end{equation}
-
 
 \begin{example}[Het superpositiebeginsel]
 We geven nu een voorbeeld. We nemen voor de spanning van de spanningsbron
