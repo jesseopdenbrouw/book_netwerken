@@ -399,6 +399,33 @@ Gegeven zijn de netwerken in figuur~\ref{fig:gelnetwerkvoortheveninanalysis1}. B
 % I_k = 12/10kohm = 1,2 mA
 % Rth = 4/1,2 mA = 3,33.. kohm
 
+\item 
+\label{que:gelthevenin6}
+Gegeven zijn de netwerken in figuur~\ref{fig:gelthevenin6}. Bepaal de kortsluitstroom $I_k$ en de interne weerstand (th\'evenin- en norton-weerstand) gezien tussen de klemmen A en B.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V=\SI{10}{\volt}] ++(0,2)
+			to [R=\SI{12}{\kilo\ohm}] ++(2,0) node (1) {}
+			to [R=\SI{18}{\kilo\ohm},*-*] ++(0,-2)
+		(1) to [R=\SI{33}{\kilo\ohm},-o] ++(2,0) node[right] {A}
+			to [open] ++(0,-2) node[right] {B}
+			to [short,o-.] (0,0)
+;
+\draw (6.5,0) to[I,l=\SI{0.8}{\milli\ampere}] ++(0,2)
+			to [R=\SI{5.6}{\kilo\ohm}] ++(2,0) node (1) {}
+			to [R=\SI{8.2}{\kilo\ohm},*-*] ++(0,-2)
+		(1) to [R=\SI{10.0}{\kilo\ohm},-o] ++(2,0) node[right] {A}
+			to [open] ++(0,-2) node[right] {B}
+			to [short,o-.] (6.5,0)
+;
+\end{tikzpicture}
+\caption{Twee netwerken.}
+\label{fig:gelthevenin6}
+\end{figure}
+
+
 \item
 \label{que:gelthevenin5}
 Gegeven is het netwerk in figuur~\ref{fig:gelthevenin3}. Bepaal de stroom $I_X$ door de spanningsbronnen om te werken naar stroombronnen en dan stroomdeling toe te passen.
@@ -576,7 +603,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ e
 			to[R=$R_2$] ++(2,0)
 			to[short,-*] ++(0,2)
 			to[short, -o] ++(1,0) node[right] {$U_2$}
-		(2) to[short, o-*] ++(3,0)
+		(2) to[short, *-o] ++(3,0)
 ;
 \end{tikzpicture}
 \captionof{figure}{Opamp-netwerk.}
