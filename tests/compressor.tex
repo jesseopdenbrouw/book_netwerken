@@ -1,0 +1,126 @@
+\documentclass[a4paper,fleqn]{article}
+\usepackage[showframe]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{nimbusmono}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[stretch=10]{microtype}
+\usepackage[dutch]{babel}
+\usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=sl,up]{caption}
+\usepackage[labelformat=simple,font=footnotesize,format=plain,labelfont=bf,textfont=sl]{subcaption}
+\captionsetup[figure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[table]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[subfigure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[subtable]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
+\usepackage{sansmath}
+\usepackage{mathtools}
+\setlength{\mathindent}{1em}
+\DeclareMathSymbol{,}{\mathord}{letters}{"3B}
+\usepackage{parskip}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% TIKZ AND FRIENDS
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+%\usepackage[european,betterproportions,americaninductors]{circuitikz}
+%\usepackage[]{circuitikz}
+\usepackage{pgfplots}
+\usetikzlibrary{intersections}
+\usepgfplotslibrary{units}
+
+% New dashed-dotted style
+\tikzstyle{loosely dashdotted} = [dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt]
+% Directory prefix for Gnuplot plots
+\tikzset{prefix=gnuplot/}
+% Bipoles have the same line witdh as the wires
+%\ctikzset{bipoles/thickness=1}
+% Reinitialize the generic box for European resistor
+%%%\ctikzset{bipoles/generic/height/.initial=.20}
+%%%\ctikzset{bipoles/generic/width/.initial=.60}
+
+
+% Get the x and y coordinates of a point
+\makeatletter
+\newcommand{\gettikzxy}[3]{%
+  \tikz@scan@one@point\pgfutil@firstofone#1\relax
+  \global\edef#2{\the\pgf@x}%
+  \global\edef#3{\the\pgf@y}%
+}
+\makeatother
+
+% Transform x coordinate to graph coordinate
+\makeatletter
+\newcommand\transformxdimension[1]{
+    \pgfmathparse{((#1/\pgfplots@x@veclength)+\pgfplots@data@scale@trafo@SHIFT@x)/10^\pgfplots@data@scale@trafo@EXPONENT@x}
+}
+% Transform y coordinate to graph coordinate
+\newcommand\transformydimension[1]{
+    \pgfmathparse{((#1/\pgfplots@y@veclength)+\pgfplots@data@scale@trafo@SHIFT@y)/10^\pgfplots@data@scale@trafo@EXPONENT@y}
+}
+\makeatother
+
+%%%\pgfplotsset{xticklabel={$\mathsf{\pgfmathprintnumber{\tick}}$},
+%%%             yticklabel={$\mathsf{\pgfmathprintnumber{\tick}}$},
+%%%             every axis/.append style={font=\sffamily}
+%%%}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\pagestyle{empty}
+
+De schakeling:
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+	\sansmath
+	\begin{axis}[width=8cm,height=5cm,font=\sffamily\footnotesize,
+		xlabel=time,
+		x unit=ms,
+		ylabel=$U$,
+		y unit=V,
+		axis x line*=center,
+		axis y line*=left,
+        xmin=0,% ymin=-1.0,ymax=1.0,
+        ytick distance={0.25},
+        x tick label style={
+        /pgf/number format/.cd,
+            fixed,
+            fixed zerofill,
+            precision=1,
+	        use comma,
+    	    1000 sep={},
+            /tikz/.cd,
+        },
+    	x filter/.code=\pgfmathparse{#1*1000},
+    	%every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+        every axis x label/.style={
+        	at={(ticklabel* cs:1.05)},
+        	anchor=west,
+        },
+    	y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			use comma,
+			1000 sep={},
+			/tikz/.cd,
+		}
+	]
+	% Draw 
+	\addplot [red,thick] table [x index=0, y index = 2] {../simu/compressor.txt};
+	\addplot [blue,thick] table [x index=0, y index = 1] {../simu/compressor.txt};	\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+
+\end{document}

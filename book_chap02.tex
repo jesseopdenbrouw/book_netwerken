@@ -7,11 +7,11 @@
 \newif\ifmaasstroom
 \newif\ifopgaven
 
-\opgaventrue
-%\knooppunttrue
 %\eentrue
 %\gestuurdebronnentrue
+%\knooppunttrue
 %\maasstroomtrue
+%\opgaventrue
 
 
 \ifeen
@@ -325,6 +325,7 @@ naar \SI{5.6}{\kilo\ohm} (kilo-ohm).
 \end{example}
 
 \subsection{Geleiding}
+\label{sec:gelgeleiding}
 In veel berekeningen wordt gerekend met de reciproke (of omgekeerde) waarde van weerstanden. Dit wordt
 de \textsl{geleiding} of \textsl{geleidbaarheid} genoemd. De eenheid van geleiding is siemens (\si{\siemens}).
 Meestal gebruiken we voor geleiding de letter $G$:
@@ -2594,7 +2595,7 @@ In matrixnotatie wordt dit:
 0 & \dfrac{1}{R_3}+\dfrac{1}{R_4} & -\dfrac{1}{R_2} & 1  \\[1em]
 -\dfrac{1}{R_2} & -\dfrac{1}{R_2} & \dfrac{1}{R_5}+\dfrac{1}{R_2}+\dfrac{1}{R_4} & 0 \\[1.5em]
 -1 & 1 & 0 & 0
-\end{bmatrix*} =
+\end{bmatrix*} \times
 \begin{bmatrix*}[c]
 U_1 \\[1em] U_2\\[1em] U_3\\[1em] I_x
 \end{bmatrix*} = 
@@ -2650,6 +2651,71 @@ Met behulp van de matrixrekenkunde vinden we voor de spanningen en de stroom: $U
 \end{example}
 
 \subsection{Gestuurde bronnen}
+Naast onafhankelijke bronnen kan een netwerk ook gestuurde bronnen bevatten. Dezelfde regels als voor onafhankelijke bronnen kunnen gebruikt worden, alleen is de spanning of stroom die de bron opwekt afhankelijk van een andere spanning of stroom in het netwerk. We zullen dit aantonen met behulp van het netwerk in figuur~\ref{fig:gelnetwerkmetccvs}. \textbf{Voor het opstellen van de vergelijkingen is het handig om met geleidingen te werken en niet met weerstanden}. Bij het gebruik van weerstanden krijgen we steeds breuken, bij gebruik van geleidingen niet. Zie ook paragraaf~\ref{sec:gelgeleiding}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to [V=$U$] ++(0,2) node [left] {$U_1$}
+			to [R=$G_1$,-*,i>^=$I_1$] ++(2,0) node (2) {} node [above] {$U_2$}
+			to [R=$G_2$,-*] ++(0,-2)
+			to node[sground]{} ++(0,0)
+		(2)	to [R=$G_3$] ++(2,0) node[right] {$U_3$}
+			to [cV<=$\alpha I_1$] ++(0,-2)
+			to [short] (0,0)
+;
+\end{tikzpicture}
+\caption{Netwerk met een stroomgestuurde spanningsbron.}
+\label{fig:gelnetwerkmetccvs}
+\end{figure}
+
+In het netwerk is een stroomgestuurde spanningsbron opgenomen. Deze bron levert een spanning die rechtevenredig is met de stroom $I_1$. De evenredigheidsfactor $\alpha$ heeft de dimensie $\ohm$. 
+We merken op dat \'e\'en uiteinde van bron $U$ aan de referentie ligt. Dat betekent dat $U_1$ bekend is, namelijk $U_1=U$. Er zijn nog twee vergelijkingen nodig om spanningen $U_2$ en $U_3$ te bepalen.
+
+Voor $U_2$ geldt:
+%
+\begin{equation}
+(U_2-U)G_1 + (U_2-0)G_2 + (U_2-U_3)G_3 = 0
+\end{equation}
+%
+De gestuurde bron ligt ook met \'e\'en uiteinde aan de referentie. Voor $U_3$ geldt:
+%
+\begin{equation}
+U_3 = \alpha I_1
+\end{equation}
+%
+De stroom $I_1$ is uit te drukken in $U$, $U_2$ en $G_1$, dus volgt:
+%
+\begin{equation}
+U_3 = \alpha(U-U_2)G_1
+\end{equation}
+%
+Merk op dat het hier een spanningsvergelijking betreft. We schijven de vergelijkingen even netjes op:
+%
+\begin{equation}
+\begin{matrix*}[r]
+(G_1+G_2+G_3)U_2 & -G_3U_3 &=& G_1U \\
+\alpha G_1U_2 & +U_3 &=& \alpha G_1U
+\end{matrix*}
+\end{equation}
+%
+In matrixnotatie wordt dit:
+%
+\begin{equation}
+\begin{bmatrix*}[c]
+G_1+G_2+G_3 & -G_3 \\
+\alpha G_1  &    1 \\
+\end{bmatrix*}
+\times
+\begin{bmatrix}
+U_2 \\ U_3
+\end{bmatrix}=
+\begin{bmatrix}
+G_1U \\ \alpha G_1U
+\end{bmatrix}
+\end{equation}
+%
+Met behulp van de matrixrekenkunde zijn de spanningen te berekenen.
 
 \begin{example}[Operational amplifier]
 De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \textsl{opamp} (Nederlands), is een bijzonder nuttige component in de elektrotechniek. Het wordt gebruikt in signaalverwerkende elektronica. Het gedrag van een opamp kan zeer goed benaderd worden door drie netwerkelementen: een ingangsweerstand, een uitgangsweerstand en een spanningsgestuurde spanningsbron. Wat een opamp in feite doet is de spanning tussen de twee ingangsklemmen, waartussen de ingangsweerstand is geplaatst, een groot aantal keer versterken. In het uitgangsnetwerk is de uitgangsweerstand opgenomen. Het symbool en het model zijn te vinden in figuur~\ref{fig:gelmodelopamp}.
@@ -2660,10 +2726,10 @@ De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \tex
 \draw (0,-1) node[op amp,yscale=-1] (opamp) {}
 ;
 \draw (3,0) to[short,o-] ++(1,0)
-            to[R=$R_{in}$, v=$U_{in}$] ++(0,-2) node (1) {}
+            to[R=$G_{in}$, v=$U_{in}$] ++(0,-2) node (1) {}
             to[short,-o] ++(-1,0)
             to[open] ++(5.5,2) %node (3) {} node[right] {$U_{2}$}
-            to[R=$R_{out}$,o-] ++(-2,0)
+            to[R=$G_{out}$,o-] ++(-2,0)
             to[cV, v_<=$aU_{in}$] ++(0,-2) node (2) {}
             to[short,-o] ++(2,0)
 %        (1) to[short,*-*] (2)
@@ -2673,7 +2739,7 @@ De \textsl{operational amplifier}, afgekort tot \textsl{op amp} (Engels) of \tex
 \label{fig:gelmodelopamp}
 \end{figure}
 
-We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinverter}. Voor het opstellen van de vergelijkingen is het handig om met geleiding te werken en niet met weerstanden. Bij het gebruik van weerstanden krijgen we steeds breuken, bij gebruik van geleidingen niet. Verder moet opgemerkt worden dat de `$-$'-ingang van de ingangsweerstand met $U_x$ verbonden is en de `+'-ingang met de referentie.
+We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinverter}. Verder moet opgemerkt worden dat de `$-$'-ingang van de ingangsweerstand met $U_x$ verbonden is en de `+'-ingang met de referentie.
 
 \begin{figure}[H]
 \centering
@@ -2682,6 +2748,7 @@ We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinver
             to[R, R=$G_1$, -*]   ++(2,0) node (2) {} node[below] {$U_x$}
         (2) to[short] ++(1,0)
             to[open] ++(0,-2)
+			to node[sground]{} ++(0,0)
             to[R, a=$G_{in}$, v^>=$U_{in}$,*-] ++(0,2) 
         (2) to[short] ++(0,1)
             to[R=$G_2$] ++(5.5,0)
@@ -2870,11 +2937,17 @@ De kracht van de matrixnotatie komt goed naar voren bij het opstellen van de ver
 
 Als een onafhankelijke spanningsbron met één aansluitpunt aan de referentie in het netwerk is geplaatst, dan is van de spanning op het andere aansluitpunt bekend. Er is dan één vergelijking minder nodig.
 
-Als een onafhankelijke spanningsbron tussen twee knooppunten is geplaatst waarvan de spanningen onbekend zijn, dan moet de stroom die de bron levert als onbekende worden meegenomen in de vergelijkingen. De richting van de onbekende stroom wordt van `+' naar `$-$' genomen zodat de coëfficiëntenmatrix symmetrisch blijft t.o.v.\@ van de hoofddiagonaal. Er is nu één extra onbekende en er is een extra (spannings-)vergelijking nodig om tot een oplosbaar stelsel vergelijkingen te komen. In de coëfficiëntenmatrix komen naast de geleidingen nu de dimensieloze waarden $1$, $0$ en $-1$ te staan. In onbekendenvector komt de onbekende bronstroom te staan. De bekendenvector wordt uitgebreid met de spanning die over de onafhankelijk spanningsbron staat.
+Als een onafhankelijke spanningsbron tussen twee knooppunten is geplaatst waarvan de spanningen onbekend zijn, dan moet de stroom die de bron levert als onbekende worden meegenomen in de vergelijkingen. De richting van de onbekende stroom wordt van `+' naar `$-$' genomen zodat de coëfficiëntenmatrix symmetrisch blijft t.o.v.\@ van de hoofddiagonaal. Er is nu één extra onbekende en er is een extra (spannings-)vergelijking nodig om tot een oplosbaar stelsel vergelijkingen te komen. In de coëfficiëntenmatrix komen naast de geleidingen nu de dimensieloze waarden $1$, $0$ en $-1$ te staan. In de onbekendenvector komt de onbekende bronstroom te staan. De bekendenvector wordt uitgebreid met de spanning die over de onafhankelijk spanningsbron staat.
+
+Bij gestuurde bronnen komt er meer kijken. Bij een spanningsgestuurde spanningsbron moet een vergelijk worden opgesteld die de relatie vastlegt tussen de afhankelijke spanning en de sturende spanningen (die onbekend kunnen zijn). Bij een stroomgestuurde spanningsbron moet afhankelijke spanning beschreven worden door de sturende stroom. Als de sturende stroom door een weerstand vloeit, kan de spanningsval over die weerstand gebruikt worden om de afhankelijke spanning te beschrijven. Bij een onbekende stroom door een spanningsbron moet echter de onbekende stroom worden meegenomen in de vergelijkingen.
+
+Bij een spanningsgestuurde stroombron kan in een stroomvergelijking direct de afhankelijke stroom beschreven worden als functie van de sturende spanning. Er is dan geen extra vergelijking nodig voor deze stroom. Bij een stroomgestuurde stroombron kan de afhankelijke stroom beschreven worden als functie van de sturende stroom. Die stroom moet beschreven worden door een spanningsval over een weerstand (tenzij de stroom bekend is).
 
 Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we gebruik maken van de matrixrekenkunde om tot een oplossing te komen. Zie hiervoor bijlage~\ref{cha:linsolve}.
 
+Het consequent doorvoeren van de bovenstaande regels kan leiden tot een groot aantal vergelijkingen en onbekenden. Dat levert veel rekenwerk op. Het is aan te bevelen om te onderzoeken of bepaalde vergelijkingen vereenvoudigd kunnen worden. Misschien is een onbekende stroom wel te schrijven als de spanningsval over een bekende weerstand. Of een spanningsval te schrijven als een bekende stroom door een weerstand. Vaak kan het aantal vergelijkingen dan geminimaliseerd worden en dat zorgt ervoor dat er minder gerekend moet worden.
 
+Bovenstaande regels levert nog een belangrijk voordeel op: bij consequent doorvoeren van de regels is geautomatiseerd een wiskundig model op te stellen van een netwerk. Dat kan met een computerprogramma gerealiseerd worden. Het netwerk kan dan worden doorgerekend. Zo'n programma wordt een \textsl{simulator} genoemd. Een bekende simulator is SPICE. Zie ook paragraaf XXX.
 
 \fi
 \ifmaasstroom
@@ -2889,14 +2962,14 @@ We gaan bij de maasstroommethode uit van \textsl{planaire netwerken}. In een pla
 \centering
 \begin{tikzpicture}[bookcircuit]
 \coordinate (mid) at (1.5,1);
-\draw (0,0) to[V, v<=$U$, -*] ++(0,2) node (1) {} node [above] {1}
+\draw (0,0) to[V, v=$U$, -*] ++(0,2) node (1) {} node [above] {1}
             to[R=$R_1$, -*]   ++(3,0) node (2){} node [above] {2}
             to[R=$R_2$, -*]   ++(0,-2) node (3){} node [below] {3}
             to[R=$R_3$, -*] (0,0) node (4){} node [below] {4}
         (1) to[R,a=$R_4$] (mid) to[short] (3)
         (2) to[R=$R_5$] (mid) to [short] (4)
 ;
-\draw (5,0.5) to[V, v<=$U$, -*] ++(0,2) node (1a) {} node [above] {1}
+\draw (5,0.5) to[V, v=$U$, -*] ++(0,2) node (1a) {} node [above] {1}
             to[R=$R_1$, -*]   ++(2,0) node (2a){} node [above] {2}
             to[R=$R_2$, -*]   ++(0,-2) node (3a){} node [below] {3}
             to[R=$R_3$, -*] (5,0.5) node (4a){} node [left] {4}
@@ -2916,7 +2989,7 @@ Zoals gezegd, gebruiken we de spanningswet van Kirchoff en maasstromen om de net
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v<=$U$,-*]   ++(0,2) node (1) {} node [left] {}
+\draw (0,0) to[V, v=$U$,-*]   ++(0,2) node (1) {} node [left] {}
             to[R, R=$R_1$, -*] ++(2,0) node (2) {} node [above] {}
 			to[R, R=$R_2$, -*] ++(2,0) node (3) {} node [right] {}
 			to[R, R=$R_4$]     ++(0,-2)
@@ -2983,7 +3056,7 @@ of, in matrixnotatie:
 R_1+R_3 & -R_3 & -R_1 \\
 -R_3 & R_2+R_3+R_4 & -R_2 \\
 -R_1 & -R_2 & R_1+R_2+R_5
-\end{bmatrix} = 
+\end{bmatrix} \times 
 \begin{bmatrix}
 I_1 \\ I_2 \\ I_3
 \end{bmatrix} =
@@ -3002,7 +3075,7 @@ We geven nu een voorbeeld van de maasstroommethode. In figuur~\ref{fig:gelnetwer
 \draw (0,0) to[R, R=\SI{330}{\ohm}, -*]   ++(0,2) node (1) {} node [left] {1}
             to[R, R=\SI{120}{\ohm}, -*] ++(3,0) node (2) {} node [above] {2}
 			to[R, R=\SI{220}{\ohm}, -*] ++(3,0) node (3) {} node [right] {3}
-			to[V, v=\SI{9}{\volt}]     ++(0,-2)
+			to[V, v<=\SI{9}{\volt}]     ++(0,-2)
 			to[short]          (0,0)
 	    (1) to[short]          ++(0,2)
             to[R, R=\SI{270}{\ohm}]     ++(6,0)	
@@ -3050,7 +3123,7 @@ We schrijven nu direct het stelsel vergelijkingen in de matrixnotatie:
 330+120+390 & -390 & -120 \\
 -390 & 390+220 & -220 \\
 -120 & -220 & 270+220+120
-\end{bmatrix*} =
+\end{bmatrix*}\times
 \begin{bmatrix*}[c]
 I_1 \\ I_2 \\ I_3
 \end{bmatrix*}=
@@ -3083,6 +3156,135 @@ Nu alle spanningen bekend zijn, kunnen de takstromen berekend worden.
 \end{example}
 
 \fi
+
+\section{Speciale weerstanden}
+De weerstand zoals we die nu besproken hebben, geeft een recht evenredig verband aan tussen de spanning over de weerstand en de stroom door de weerstand. De weerstandswaarde is dus constant. Maar er zijn ook weerstanden waarbij de weerstand niet afhangt van de spanning of stroom. We laten een aantal van deze weerstanden de revue passeren.
+
+\subsection{Negative Temperature Coefficient Resistor}
+Bij een \textsl{Negative Temperature Coefficient Resistor}, afgekort tot NTC, is de weerstandswaarde afhankelijk van de temperatuur van de NTC. De weerstandswaarde neemt af met toenemende temperatuur, vandaar de term ``Negative''. De relatie tussen de weerstandswaarde werd voor het eerst beschreven door Steinhart en Hart in 1968:
+%
+\begin{equation}
+\dfrac{1}{T} = a + b\ln R + c (\ln R)^3
+\end{equation}
+%
+Hierin is $T$ de temperatuur in kelvin en $R$ de weerstandswaarde van de NTC. De co\"effici"enten $a$, $b$ en $c$ worden de Steinhart-Hart co\"effici\"enten genoemd en moeten met behulp van nauwkeurige metingen bepaald worden. Merk op dat het verband tussen temperatuur en weerstand niet lineair is.
+
+Over het algemeen wordt niet de weerstandswaarde maar een afgeleide spanning gebruikt. Dat kan met een eenvoudige spanningsdeling. In figuur~\ref{fig:gelspanningsdelingmetntc} is een netwerk te zien.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V=$U_{in}$] ++(0,4)
+			to[short] ++(2,0)
+			to[thRn=$R_{ntc}$,-*] ++(0,-2) node (1) {}
+			to[R=$R_s$,-*] ++(0,-2)
+			to[open] ++(1,0)
+			to[short,o-] (0,0)
+		(1) to[short,-o] ++(1,0) node [right] {$U_{uit}$}
+;
+\end{tikzpicture}
+\caption{Spanningsdeling met een NTC.}
+\label{fig:gelspanningsdelingmetntc}
+\end{figure}
+
+Voor $U_{uit}$ kunnen we opschrijven:
+%
+\begin{equation}
+U_{uit} = \dfrac{R_s}{R_s+R_{ntc}}U_{in}
+\end{equation}
+%
+Dit kan worden omgewerkt tot:
+%
+\begin{equation}
+R_{ntc} = \dfrac{U_{in}-U_{uit}}{U_{uit}}R_s
+\end{equation}
+%
+De NTC is een weerstand en een weerstand dissipeert vermogen. Hierdoor wordt de weerstand warm. Een NTC heeft dus last van zelfverwarming. Daardoor wijkt de gemeten temperatuur van de NTC af van de omgevingstemperatuur. De zelfverwarming betreft meestal enkele tienden van graden Celsius. Een beproefde methode om zelfverwarming te vermijden is door een schakelaar in het netwerk in figuur~\ref{fig:gelspanningsdelingmetntc} op te nemen. Alleen als een meting moet worden uitgevoerd wordt de schakelaar even gesloten. Na de meting wordt de schakelaar geopend. Hierdoor wordt de zelfverwarming tot een minimum beperkt.
+
+\subsection{Positive Temperature Coefficient Resistor}
+Bij een \textsl{Positive Temperature Coefficient Resistor}, afgekort tot PTC, is de weerstandswaarde afhankelijk van de temperatuur van de PTC. De weerstandswaarde neemt toe met toenemende temperatuur (vandaar de term ``Positive'') maar alleen binnen een bepaald bereik van de weerstandswaarde. De relatie tussen weerstandswaarde en temperatuur is niet met een eenvoudige formule te beschrijven. Vandaar dat de PTC niet gebruikt wordt om de temperatuur nauwkeurig te meten.
+
+\subsection{Light Dependent Resistor}
+Bij een \textsl{Light Dependent Resistor}, afgekort tot LDR, is de weerstand afhankelijk van de hoeveelheid licht die op de LDR valt. Bij weinig licht is de weerstandswaarde zeer hoog, in de orde van \SI{1e8}{\ohm} tot \SI{1e12}{\ohm}. Bij voldoende licht is de weerstandswaarde zeer laag, in de orde \SI{1}{\kilo\ohm}. De relatie tussen lichtintensiteit en weerstandswaarde is niet-lineair. Daarbij is de spreiding van de weerstandswaarde tussen LDR's van hetzelfde type vrij groot en daardaar is de LDR niet te gebruiken als nauwkeurige temperatuursensor.
+
+\subsection{Diode}
+Een \textsl{diode} kan gezien worden als een niet-lineaire weerstannd, alhoewel hij daar meestal niet voor gebruikt wordt. Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbooldiode}.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[short, i=$I_d$] ++(1,0) to[D, v=$U_d$] ++(2,0);
+\draw[-latex] (1,1) node[above,font=\footnotesize] {anode} -- (1.7,0.2);
+\draw[-latex] (3,1) node[above,font=\footnotesize] {kathode} -- (2.3,0.2);
+\end{tikzpicture}
+\caption{Netwerksymbool van een diode.}
+\label{fig:gelsymbooldiode}
+\end{figure}
+
+De kant waar de stroom in gaat wordt de \textsl{anode} genoemd. De kant waar de stroom uit komt wordt \textsl{kathode} genoemd.
+
+De relatie tussen de spanning over de diode en de stroom door de diode wordt gegeven voor de formule van Shockley:
+%
+\begin{equation}
+I_d = I_s \left(\mathrm{e}^{\frac{kT}{nq}U_d}-1\right)
+\end{equation}
+%
+In deze formule is $I_s$ de \textsl{donkerstroom} (Engels: saturation current, een typische waarde is \SI{1e-12}{\ampere} voor siliciumdiodes), $k$ de constante van Boltzmann ($k = $ \SI{1.38e-23}{\joule\per\kelvin}), $T$ de temperatuur in \si{\kelvin}, $q$ de elementaire lading ($q~=~$\SI{1.602e-19}{\coulomb}) en $n$ de emissieco\"effici\"ent ($n$ ligt tussen 1,0 en 2,0). De factor $\frac{kT}{q}$ wordt ook wel de \textsl{thermische spanning} genoemd en heeft bij kamertemperatuur de waarde van ongeveer \SI{26}{\milli\volt}.
+
+Bij een voldoende grote spanning $U_d$ is de $-1$ te verwaarlozen en gaat de formule over in een exponenti\"ele functie. Bij een stroom van enkele milliampere is de spanning over de diode tussen de \SI{0.6}{\volt} en \SI{0.7}{\volt} (bij een siliciumdiode). Dit wordt de \textsl{voorwaardse spanning} genoemd. Bij een negatieve spanning over de diode vloeit er nauwelijks stroom. De diode wordt daarom ook vaak ingezet als component om de stroom slechts \'e\'en kant op te laten vloeien, bijvoorbeeld in gelijkrichtschakelingen.
+
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+%	\sansmath
+	\begin{axis}[width=8cm,height=5cm,font=\footnotesize,
+	xlabel=$t$,
+	x unit=ms,
+	ylabel=$U$,
+	y unit=V,
+	axis x line*=center,
+	axis y line*=left,
+	xmin=0,% ymin=-1.0,ymax=1.0,
+	ytick distance={0.25},
+	x tick label style={
+		/pgf/number format/.cd,
+		fixed,
+		fixed zerofill,
+		precision=1,
+		use comma,
+		1000 sep={},
+		/tikz/.cd,
+	},
+	x filter/.code=\pgfmathparse{#1*1000},
+	%every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+	every axis x label/.style={
+		at={(ticklabel* cs:1.05)},
+		anchor=west,
+	},
+	y tick label style={
+		/pgf/number format/.cd,
+		fixed,
+		fixed zerofill,
+		precision=2,
+		use comma,
+		1000 sep={},
+		/tikz/.cd,
+	}
+	]
+	% Draw 
+	\addplot [red,thick] table [x index=0, y index = 2] {simu/compressor.txt};
+	\addplot [blue,thick] table [x index=0, y index = 1] {simu/compressor.txt};
+	\end{axis}
+\end{tikzpicture}
+\caption{Vervorming van een sinusvormig signaal.}
+\end{figure}
+
+
+
+
+
+
 
 \ifopgaven
 \section{Opgaven}
