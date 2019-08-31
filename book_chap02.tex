@@ -655,7 +655,7 @@ figuur~\ref{fig:gelnisopenkort}.
 \caption{}
 \label{fig:gelniskort}
 \end{subfigure}
-\caption{Niet-ideale spanningsbron: \subref{fig:gelnisopen} onbelast, \subref{fig:gelniskort} kortgesloten.}
+\caption{Niet-ideale spanningsbron: \subref{fig:gelnisopen} open, onbelast, \subref{fig:gelniskort} kortgesloten, belast.}
 \label{fig:gelnisopenkort}
 \end{figure}
 
@@ -705,22 +705,17 @@ figuur~\ref{fig:gelnissopenkort}.
 \caption{}
 \label{fig:gelnisskort}
 \end{subfigure}
-\caption{Niet-ideale stroombron: \subref{fig:gelnissopen} onbelast, \subref{fig:gelnisskort} kortgesloten.}
+\caption{Niet-ideale stroombron: \subref{fig:gelnissopen} open, belast, \subref{fig:gelnisskort} kortgesloten, onbelast.}
 \label{fig:gelnissopenkort}
 \end{figure}
 
-In figuur~\ref{fig:gelnissopen} is de niet-ideale stroombron onbelast. De stroom $I$
-loopt nu door de inwendige weerstand. Hierdoor zal over de bron een bepaalde spanning aanwezig
-zijn. We noemen die spanning de open klemspanning. In figuur~\ref{fig:gelnisskort} is de bron
-kortgesloten. De stroom $I$ loopt nu volledig door de kortsluiting. We noemen de stroom de
-kortsluitstroom. We kunnen de inwendige
-weerstand berekenen door de uitgangsspanning $U_o$ te delen door de kortsluitstroom $I_k$.
+In figuur~\ref{fig:gelnissopen} is de niet-ideale stroombron \textsl{belast}. Dat lijkt vreemd omdat de klemmen niet zijn kortgesloten. Maar de bronstroom $I$ vloeit nu volledig door de inwendige weerstand met als gevolg dat over de niet-ideale stroombron een spanning aanwezig is, de open klemspanning genoemd. In figuur~\ref{fig:gelnisskort} is de bron kortgesloten en is \textsl{onbelast}. De bronstroom $I$ loopt nu volledig door de kortsluiting en de spanning over de niet-ideale stroombron is nu \SI{0}{\volt}. We noemen de stroom de kortsluitstroom. We kunnen de inwendige weerstand berekenen door de uitgangsspanning $U_o$ te delen door de kortsluitstroom $I_k$.
 
 Voor een goede stroombron moet de inwendige weerstand zo groot mogelijk zijn. Praktische
 waarden voor $R_i$ liggen tussen enkele honderden \si{\kilo\ohm} tot vele \si{\mega\ohm}. Aan
-figuur~\ref{fig:gelnissopen} kunnen we nog iets ontdekken. De uitgangsspanning in onbelaste
-toestand zal zeer groot zijn. We kunnen nu inzien dat een stroombron dus nooit onbelast gelaten
-mag worden. Een laboratoriumvoeding zal de uitgangsspanning in onbelaste toestand begrenzen.
+figuur~\ref{fig:gelnissopen} kunnen we nog iets ontdekken. De uitgangsspanning in belaste
+toestand zal zeer groot zijn. We kunnen nu inzien dat een stroombron dus nooit belast gelaten
+mag worden. Een laboratoriumvoeding zal de uitgangsspanning in belaste toestand begrenzen.
 
 \section{Vermogen ontwikkeld in een weerstand}
 Een weerstand waar een spanning over staat en een stroom door loopt dissipeert energie. Dit is weergegeven in
@@ -738,9 +733,9 @@ P = U\cdot I
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R,l_=$R$,n=R] ++(0,-2) to [short,-.] (0,0);
-\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.2) -> ++(2,0.2);
- \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.0) -> ++(2,0.0) node[right] {warmte};
-\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,-0.2) -> ++(2,-0.2); \end{tikzpicture}
+\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},-stealth'] (R) ++(0.2,0.2) -- ++(2,0.2);
+ \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},-stealth'] (R) ++(0.2,0.0) -- ++(2,0.0) node[right] {warmte};
+\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},-stealth'] (R) ++(0.2,-0.2) -- ++(2,-0.2); \end{tikzpicture}
 \caption{De weerstand levert energie en wordt warm.}
 \label{fig:gelvermogensdissipatie}
 \end{figure}
@@ -796,7 +791,10 @@ opgenomen vermogen in balans moeten zijn. Dus geldt:
 P_{geleverd} + P_{opgenomen} = 0
 \end{equation}
 %
-Dat betekent dat het geleverde vermogen voorzien is met een minteken. Dat een bron niet altijd vermogen
+Dat betekent dat het geleverde vermogen voorzien is met een minteken. 
+Als het geleverde vermogen 0 is, dan noemen we de bron \textsl{onbelast}.
+
+Dat een bron niet altijd vermogen
 levert maar ook kan opnemen is zien in het onderstaande voorbeeld.
 
 \begin{example}[Geleverd vermogen]
@@ -2947,7 +2945,7 @@ Als de matrixvorm van het stelsel van vergelijkingen is opgesteld, kunnen we geb
 
 Het consequent doorvoeren van de bovenstaande regels kan leiden tot een groot aantal vergelijkingen en onbekenden. Dat levert veel rekenwerk op. Het is aan te bevelen om te onderzoeken of bepaalde vergelijkingen vereenvoudigd kunnen worden. Misschien is een onbekende stroom wel te schrijven als de spanningsval over een bekende weerstand. Of een spanningsval te schrijven als een bekende stroom door een weerstand. Vaak kan het aantal vergelijkingen dan geminimaliseerd worden en dat zorgt ervoor dat er minder gerekend moet worden.
 
-Bovenstaande regels levert nog een belangrijk voordeel op: bij consequent doorvoeren van de regels is geautomatiseerd een wiskundig model op te stellen van een netwerk. Dat kan met een computerprogramma gerealiseerd worden. Het netwerk kan dan worden doorgerekend. Zo'n programma wordt een \textsl{simulator} genoemd. Een bekende simulator is SPICE. Zie ook paragraaf XXX.
+Bovenstaande regels levert nog een belangrijk voordeel op: bij consequent doorvoeren van de regels is geautomatiseerd een wiskundig model op te stellen van een netwerk. Dat kan met een computerprogramma gerealiseerd worden. Het netwerk kan dan worden doorgerekend. Zo'n programma wordt een \textsl{simulator} genoemd. Een bekende simulator is SPICE. Zie ook paragraaf~\ref{sec:gelsimu}.
 
 \fi
 \ifmaasstroom
@@ -3161,7 +3159,7 @@ Nu alle spanningen bekend zijn, kunnen de takstromen berekend worden.
 De weerstand zoals we die nu besproken hebben, geeft een recht evenredig verband aan tussen de spanning over de weerstand en de stroom door de weerstand. De weerstandswaarde is dus constant. Maar er zijn ook weerstanden waarbij de weerstand niet afhangt van de spanning of stroom. We laten een aantal van deze weerstanden de revue passeren.
 
 \subsection{Negative Temperature Coefficient Resistor}
-Bij een \textsl{Negative Temperature Coefficient Resistor}, afgekort tot NTC, is de weerstandswaarde afhankelijk van de temperatuur van de NTC. De weerstandswaarde neemt af met toenemende temperatuur, vandaar de term ``Negative''. De relatie tussen de weerstandswaarde werd voor het eerst beschreven door Steinhart en Hart in 1968:
+Bij een \textsl{Negative Temperature Coefficient Resistor}, afgekort tot NTC, is de weerstandswaarde afhankelijk van de temperatuur van de NTC. De weerstandswaarde neemt af met toenemende temperatuur, vandaar de term ``Negative''. De relatie tussen de weerstandswaarde en de temperatuur werd voor het eerst beschreven door Steinhart en Hart in 1968:
 %
 \begin{equation}
 \dfrac{1}{T} = a + b\ln R + c (\ln R)^3
@@ -3199,16 +3197,16 @@ Dit kan worden omgewerkt tot:
 R_{ntc} = \dfrac{U_{in}-U_{uit}}{U_{uit}}R_s
 \end{equation}
 %
-De NTC is een weerstand en een weerstand dissipeert vermogen. Hierdoor wordt de weerstand warm. Een NTC heeft dus last van zelfverwarming. Daardoor wijkt de gemeten temperatuur van de NTC af van de omgevingstemperatuur. De zelfverwarming betreft meestal enkele tienden van graden Celsius. Een beproefde methode om zelfverwarming te vermijden is door een schakelaar in het netwerk in figuur~\ref{fig:gelspanningsdelingmetntc} op te nemen. Alleen als een meting moet worden uitgevoerd wordt de schakelaar even gesloten. Na de meting wordt de schakelaar geopend. Hierdoor wordt de zelfverwarming tot een minimum beperkt.
+De NTC is een weerstand en een weerstand dissipeert vermogen. Hierdoor wordt de weerstand warm. Een NTC heeft dus last van zelfverwarming. Daardoor wijkt de gemeten temperatuur van de NTC af van de omgevingstemperatuur. De zelfverwarming betreft meestal enkele tienden van graden Celsius. Een beproefde methode om zelfverwarming te vermijden is door een (elektronische) schakelaar in het netwerk in figuur~\ref{fig:gelspanningsdelingmetntc} op te nemen. Alleen als een meting moet worden uitgevoerd wordt de schakelaar even gesloten. Na de meting wordt de schakelaar geopend. Hierdoor wordt de zelfverwarming tot een minimum beperkt.
 
 \subsection{Positive Temperature Coefficient Resistor}
 Bij een \textsl{Positive Temperature Coefficient Resistor}, afgekort tot PTC, is de weerstandswaarde afhankelijk van de temperatuur van de PTC. De weerstandswaarde neemt toe met toenemende temperatuur (vandaar de term ``Positive'') maar alleen binnen een bepaald bereik van de weerstandswaarde. De relatie tussen weerstandswaarde en temperatuur is niet met een eenvoudige formule te beschrijven. Vandaar dat de PTC niet gebruikt wordt om de temperatuur nauwkeurig te meten.
 
 \subsection{Light Dependent Resistor}
-Bij een \textsl{Light Dependent Resistor}, afgekort tot LDR, is de weerstand afhankelijk van de hoeveelheid licht die op de LDR valt. Bij weinig licht is de weerstandswaarde zeer hoog, in de orde van \SI{1e8}{\ohm} tot \SI{1e12}{\ohm}. Bij voldoende licht is de weerstandswaarde zeer laag, in de orde \SI{1}{\kilo\ohm}. De relatie tussen lichtintensiteit en weerstandswaarde is niet-lineair. Daarbij is de spreiding van de weerstandswaarde tussen LDR's van hetzelfde type vrij groot en daardaar is de LDR niet te gebruiken als nauwkeurige lichtsensor.
+Bij een \textsl{Light Dependent Resistor}, afgekort tot LDR, is de weerstand afhankelijk van de hoeveelheid licht die op de LDR valt. Bij weinig licht is de weerstandswaarde zeer hoog, in de orde van \SI{1e8}{\ohm} tot \SI{1e12}{\ohm}. Bij voldoende licht is de weerstandswaarde zeer laag, in de orde van \SI{1}{\kilo\ohm}. De relatie tussen lichtintensiteit en weerstandswaarde is niet-lineair. Daarbij is de spreiding van de weerstandswaarde tussen LDR's van hetzelfde type vrij groot en daardaar is de LDR niet te gebruiken als nauwkeurige lichtsensor.
 
 \subsection{Diode}
-Een \textsl{diode} kan gezien worden als een niet-lineaire weerstannd, alhoewel hij daar meestal niet voor gebruikt wordt. Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbooldiode}.
+Een \textsl{diode} kan gezien worden als een niet-lineaire weerstand, alhoewel hij daar meestal niet voor gebruikt wordt. Het netwerksymbool is te zien in figuur~\ref{fig:gelsymbooldiode}.
 
 \begin{figure}[!ht]
 \centering
@@ -3285,7 +3283,7 @@ Een \textsl{Light Emitting Diode}, afgekort tot led is een diode die bij voorwaa
 
 \begin{table}[!ht]
 \centering
-\caption{Typische voorwaartse spanning van led bij een stroom van 10 mA.}
+\caption{Typische voorwaartse spanning van leds bij een stroom van 10 mA.}
 \label{tab:gelspanningleds}
 \begin{tabular}{lc}
 \toprule
@@ -3302,6 +3300,55 @@ Ultraviolet & 3,6 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\section{Netwerksimulatie}
+\label{sec:gelsimu}
+Wanneer een netwerk uit veel knooppunten en takken is opgebouwd, kan het handig zijn om de spanningen en stromen te laten berekenen met een netwerksimulator. De meest bekende simulator is SPICE (Simulation Program with Integrated Circuit Emphasis), ontwikkeld begin jaren '70. Zoals de naam al zegt, werd SPICE ontwikkeld om netwerken op een ic (chip) te simuleren. Naast de lineaire netwerkelementen (spanninsbron, stroombron, weerstand, spoel en condensator) kunnen met SPICE ook niet-lineaire elementen zoals diodes en transistoren worden gesimuleerd. Merk op dat een simulator alleen numerieke oplossingen biedt.
+
+SPICE kent diverse simulatiemogelijkheden. Zo kan van een netwerk het \textsl{operating point} worden berekend. Dit zijn de spanningen en stromen in het netwerk als gevolg van gelijkspannings- en gelijkstroombronnen. Hiermee kan bijvoorbeeld het instelpunt van een diode berekend worden. Daarnaast kunnen of tijdsimulaties uitgevoerd worden, waarbij spanningen en stromen in het tijddomein worden berekend. Dit wordt vooral gebruikt bij het bepalen van inschakelverschijnselen. Verder kunnen frequentieanalyses worden uitgevoerd, zodat het frequentiegedrag van een netwerk berekend kan worden. Denk hierbij aan het frequentiegedrag van een audioversterker.
+
+Een netwerk in SPICE wordt beschreven in gewone tekst. Een voorbeeld is te zien in listing~\ref{cod:gelspicenetwerk}. Dit is de beschrijving van het netwerk uit figuur~\ref{fig:gelnetwerkvoornodalanalysis3}.
+
+\begin{lstlisting}[language=,caption=Beschrijving van een SPICE-netwerk.,label=cod:gelspicenetwerk]
+* D:\PROJECTS\Tex\book_netwerken\simu\nodal1.asc
+V1 1 0 12
+R1 1 2 1200
+R2 3 2 1500
+R3 2 0 1000
+R4 3 0 2200
+R5 1 3 1800
+.op
+.end
+\end{lstlisting}
+
+Een regel die begint met een `*' wordt geschouwd als commentaar. Netwerkelementen wordt beschreven met het elementtype en een volgnummer, daarna de twee knooppunten waarop het element is aangesloten en vervolgens de waarde. In regel 2 is te zien dat een spanningsbron \lstinline|V1| is aangesloten op knooppunt \lstinline|1| en knooppunt \lstinline|0| met een waarde van \SI{12}{\volt}. Knooppunt \lstinline|0| is een speciaal knooppunt; alle spanningen worden berekend t.o.v.\@ dit knooppunt. Stromen worden berekend van het eerste knooppunt naar het tweede knooppunt, ook bij spanningsbronnen. In regel 3 is de beschrijving van weerstand \lstinline|R1| te zien, tussen de knooppunten \lstinline|1| en \lstinline|2| met een waarde van \SI{1200}{\ohm}. De andere weerstanden worden op vergelijkbare wijze beschreven. In regel 8 wordt het commando \lstinline|.op| gegeven zodat SPICE het instelpunt van het netwerk berekend. Een SPICE-bestand wordt afgesloten met \lstinline|.end|.
+
+We moeten nu SPICE starten en de bestandsnaam opgeven. Het netwerk wordt ingelezen en de commando's worden uitgevoerd. De uitvoer van SPICE is te zien in listing~\ref{cod:gelspicenetwerkuitvoer}.
+
+\begin{lstlisting}[language=,caption=Uitvoer van een simulatie van een SPICE-netwerk.,label=cod:gelspicenetwerkuitvoer]
+       --- Operating Point ---
+
+V(1):	 12	 			voltage
+V(2):	 5.66038	 	voltage
+V(3):	 6.22642	 	voltage
+I(R5):	 0.00320755	 	device_current
+I(R4):	 0.00283019	 	device_current
+I(R3):	 0.00566038	 	device_current
+I(R2):	 0.000377358	device_current
+I(R1):	 0.00528302	 	device_current
+I(V1):	 -0.00849057	device_current
+\end{lstlisting}
+
+Te zien is dat de spanning op knooppunt 2 ongeveer \SI{5.66}{\volt} is. De stroom door weerstand $R_1$ is ongeveer \SI{5.28}{\milli\ampere}. De stroom die bron $V_1$ levert is negatief. Dat betekent dus dat de stroom dat de stroom in werkelijkheid van `+' naar `$-$' vloeit.
+
+Het invoeren van een netwerk in gewone tekst is best lastig. Gelukkig zijn er diverse (gratis) programma's die een grafische invoermogelijkheid hebben. Bekende programma's zijn PSPICE van Cadence~\cite{pspice}, LTSpice XVII van Analog Devices~\cite{ltspice} en TINA van Texas Instruments~\cite{tina}. In figuur~\ref{fig:gelnetwerkltspice} is het netwerk van listing~\ref{cod:gelspicenetwerk} te zien. Dit netwerk is getekend in LTSpice XVII.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.3]{images/nodal1}
+\caption{Netwerk in LTSpice XVII.}
+\label{fig:gelnetwerkltspice}
+\end{figure}
 
 
 

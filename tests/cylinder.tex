@@ -1,0 +1,93 @@
+\documentclass[tikz,border=3.14mm]{standalone}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{3d,backgrounds}
+% small fix for canvas is xy plane at z % https://tex.stackexchange.com/a/48776/121799
+\makeatletter
+\tikzoption{canvas is xy plane at z}[]{%
+    \def\tikz@plane@origin{\pgfpointxyz{0}{0}{#1}}%
+    \def\tikz@plane@x{\pgfpointxyz{1}{0}{#1}}%
+    \def\tikz@plane@y{\pgfpointxyz{0}{1}{#1}}%
+    \tikz@canvas@is@plane}
+\makeatother
+\begin{document}
+\foreach \X in {5,15,...,355}
+{\tdplotsetmaincoords{70}{\X}
+\begin{tikzpicture}[declare function={h(\x,\y)=2+0.5*(\y+\y*cos(\x));}]
+\path[use as bounding box] (-4,-2) rectangle (18,10);
+\begin{scope}
+ \begin{scope}[tdplot_main_coords]
+  \begin{scope}[canvas is xy plane at z=0]
+   \path[fill=orange!50] (0,0) circle (3);
+   \coordinate (bl) at (0+\tdplotmainphi:3);
+   \coordinate (br) at (180+\tdplotmainphi:3);
+   \draw[dashed] (bl) arc(0+\tdplotmainphi:180+\tdplotmainphi:3);
+   \draw[thick] (br) arc(180+\tdplotmainphi:360+\tdplotmainphi:3);
+   \coordinate (rbl) at (0:3);
+   \coordinate (rbr) at (180:3);
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=8]
+   \draw[thick,fill=orange!30] (0,0) circle (3);
+   \coordinate (tl) at (0+\tdplotmainphi:3);
+   \coordinate (tr) at (180+\tdplotmainphi:3);
+   \coordinate (rtl) at (0:3);
+   \coordinate (rtr) at (180:3);
+  \end{scope}
+  \begin{scope}[on background layer]
+   \fill[orange!20] (bl) rectangle (tr);
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=4]
+   \path[fill=blue,opacity=0.3] (0,0) circle (3);
+  \end{scope}  
+ \end{scope}
+\end{scope} 
+\begin{scope}[xshift=7cm]
+ \begin{scope}[tdplot_main_coords]
+  \begin{scope}[canvas is xy plane at z=0]
+   \path[fill=orange!50] (0,0) circle (3);
+   \coordinate (bl) at (0+\tdplotmainphi:3);
+   \coordinate (br) at (180+\tdplotmainphi:3);
+   \draw[dashed] (bl) arc(0+\tdplotmainphi:180+\tdplotmainphi:3);
+   \draw[thick] (br) arc(180+\tdplotmainphi:360+\tdplotmainphi:3);
+   \coordinate (rbl) at (0:3);
+   \coordinate (rbr) at (180:3);
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=8]
+   \draw[thick,fill=orange!30] (0,0) circle (3);
+   \coordinate (tl) at (0+\tdplotmainphi:3);
+   \coordinate (tr) at (180+\tdplotmainphi:3);
+   \coordinate (rtl) at (0:3);
+   \coordinate (rtr) at (180:3);
+  \end{scope}
+  \begin{scope}[on background layer]
+   \fill[orange!20] (bl) rectangle (tr);
+  \end{scope}
+  \fill[green!60!black,opacity=0.3] plot[variable=\x,domain=-180:180,samples=90] ({3*cos(\x)},{3*sin(\x)},{h(\x,3)});
+ \end{scope}
+\end{scope} 
+\begin{scope}[xshift=14cm]
+ \begin{scope}[tdplot_main_coords]
+  \begin{scope}[canvas is xy plane at z=0]
+   \path[fill=orange!50] (0,0) circle (3);
+   \coordinate (bl) at (0+\tdplotmainphi:3);
+   \coordinate (br) at (180+\tdplotmainphi:3);
+   \draw[dashed] (bl) arc(0+\tdplotmainphi:180+\tdplotmainphi:3);
+   \draw[thick] (br) arc(180+\tdplotmainphi:360+\tdplotmainphi:3);
+   \coordinate (rbl) at (0:3);
+   \coordinate (rbr) at (180:3);
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=8]
+   \draw[thick,fill=orange!30] (0,0) circle (3);
+   \coordinate (tl) at (0+\tdplotmainphi:3);
+   \coordinate (tr) at (180+\tdplotmainphi:3);
+   \coordinate (rtl) at (0:3);
+   \coordinate (rtr) at (180:3);
+  \end{scope}
+  \begin{scope}[on background layer]
+   \fill[orange!20] (bl) rectangle (tr);
+  \end{scope}
+  \fill[red,opacity=0.3] (rtl) -- (rtr) -- (rbr) -- (rbl);
+ \end{scope}
+\end{scope} 
+\end{tikzpicture}
+}
+\end{document}

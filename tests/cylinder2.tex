@@ -1,0 +1,53 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+\begin{document}
+% set the viewing angle
+\def\a{45}
+\tdplotsetmaincoords{65}{\a}
+\begin{tikzpicture}
+	[scale=7,
+	tdplot_main_coords,
+	axis/.style={->,black,very thin},
+	curve/.style={black,thin},rotate=95]
+	% radius and axes
+	\def\radius{.1}
+	\def\axissize{.3}
+    % length
+	\def\th{1}
+
+	% intervals on the z-axis
+	\draw[axis,-,dashed] (0,0,0) -- (0,0,\th);
+	\draw[axis] (0,0,\th) -- (0,0,\th+0.5*\axissize) node[anchor=south]{$I$};
+
+	\tdplotsinandcos{\sintheta}{\costheta}{0}
+	% upper end
+	\tdplotdrawarc[curve,thick]{(0,0,\th)}{\radius*\costheta}{\a-360}{\a}{}{}
+	% single sections
+	\foreach \height in {0.5}{
+    	% draw the front half with a solid line
+		\tdplotdrawarc[curve,solid]{(0,0,\height)}{\radius*\costheta}{\a-180}{\a}{}{}
+        % and the back half with a dotted line
+        \tdplotdrawarc[curve,dotted]{(0,0,\height)}{\radius*\costheta}{\a-360}{\a-180}{}{}
+		\tdplotdrawarc[curve,thick,fill=blue!15,opacity=0.5]{(0,0,\height)}{\radius*\costheta}{\a-360}{\a}{}{}
+    }
+	% lower end
+	\tdplotdrawarc[curve,thick,dashed]{(0,0,0)}{\radius*\costheta}{\a}{\a+180}{}{}
+	\tdplotdrawarc[curve,thick]{(0,0,0)}{\radius*\costheta}{\a}{\a-180}{}{}
+	% right line and labels
+	\tdplotsinandcos{\sintheta}{\costheta}{\a}
+	\draw[thick] (\radius*\costheta,\radius*\sintheta,0) {} -- (\radius*\costheta,\radius*\sintheta,\th);
+	\draw[latex-latex] (1.4*\radius*\costheta,\radius*\sintheta,0) -- node[above] {$L$} (\radius*\costheta,1.4*\radius*\sintheta,\th);
+	% left line
+	\tdplotsinandcos{\sintheta}{\costheta}{\a+180}
+	\draw[thick] (\radius*\costheta,\radius*\sintheta,0) -- (\radius*\costheta,\radius*\sintheta,\th);
+	
+	% label of the diameter
+	\draw[latex-latex] (\radius,0,\th/2) --  (-\radius,0,\th/2) node[anchor=south west,yshift=2mm,xshift=0.5mm] {$d$};
+	
+\end{tikzpicture}
+
+\end{document}
+% Thanks to Jörg Petzold for creating this example

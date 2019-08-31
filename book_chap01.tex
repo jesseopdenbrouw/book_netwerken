@@ -36,7 +36,7 @@ De elektrische stroom is een van de zeven basisgrootheden van het SI-stelsel. Ee
 In twee rechte geleiders loopt een stroom van \SI{1}{\ampere} als de twee geleiders van oneindige lengte en verwaarloosbare diameter, geplaatst in vacuüm op een afstand van \SI{1}{\meter}, een kracht op elkaar uitoefenen van \SI[per-mode=symbol]{2e-7}{\newton\per\meter}.
 
 \subsubsection*{Vanaf 20 mei 2019}
-Vanaf deze datum is de elementaire lading vastgesteld op \SI{1.602176634e-19}{\coulomb}. De stroom is gedefinieerd op basis van de elementaire lading. Dit zorgt ook voor de herdefinitie van de coulomb. In een geleider loopt een stroom van \SI{1}{\ampere} als per seconde een lading $\frac{1}{\num{1.602176634e-19}}\si{\coulomb}$ passeert.
+Vanaf deze datum is de elementaire lading vastgesteld op \SI{1.602176634e-19}{\coulomb}. De stroom is gedefinieerd op basis van de elementaire lading. Dit zorgt ook voor de herdefinitie van de coulomb. In een geleider loopt een stroom van \SI{1}{\ampere} als per seconde $\frac{1}{\num{1.602176634e-19}}$ elektronen passeren.
 
 \subsection{Definitie van spanning}
 Spanning is een afgeleide grootheid. Het is gedefinieerd op basis van \textsl{vermogen} en stroom. Over een geleider staat een spanning (of spanningsverschil) van \SI{1}{\volt} als in de geleider een vermogen wordt gedissipeerd van \SI{1}{\watt} bij een stroom van \SI{1}{\ampere}. Dit is uitgebeeld in figuur~\ref{fig:intdefinitievolt}.
@@ -44,10 +44,10 @@ Spanning is een afgeleide grootheid. Het is gedefinieerd op basis van \textsl{ve
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to [V<=\SI{1}{\volt}] ++(0,2) to [short, i=\SI{1}{\ampere}] ++(2.5,0) to [short,n=R] ++(0,-2) to [short,-.] (0,0);
-\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.2) -> ++(2,0.2);
- \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,0.0) -> ++(2,0.0) node[right] {\SI{1}{\watt}};
-\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},->stealth'] (R) ++(0.2,-0.2) -> ++(2,-0.2); \end{tikzpicture}
+\draw (0,0) to [V=\SI{1}{\volt}] ++(0,2) to [short, i=\SI{1}{\ampere}] ++(2.5,0) to [short,n=R] ++(0,-2) to [short,-.] (0,0);
+\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},-stealth'] (R) ++(0.2,0.2) -> ++(2,0.2);
+ \draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},-stealth'] (R) ++(0.2,0.0) -> ++(2,0.0) node[right] {\SI{1}{\watt}};
+\draw[decorate, decoration={snake, segment length=5pt, amplitude=1pt},-stealth'] (R) ++(0.2,-0.2) -> ++(2,-0.2); \end{tikzpicture}
 \caption{Definitie van de volt.}
 \label{fig:intdefinitievolt}
 \end{figure}
@@ -103,15 +103,15 @@ Aluminium & 2.65e-8 & 0.0043 \\
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V<=$U_1$] ++(0,2)
+\draw (0,0) to[V=$U_1$] ++(0,2)
 			to[short] ++(2,0)
-			to[V=$U_2$] ++(0,-2)
+			to[V<=$U_2$] ++(0,-2)
             to[short,-.] (0,0)
 ;
 \draw[color=red] (current bounding box.south west) -- (current bounding box.north east);
 \draw[color=red] (current bounding box.north west) -- (current bounding box.south east);
-\draw (6,-1) to[V<=$U_1$] ++(0,2)
-			to[V<=$U_2$] ++(0,2)
+\draw (6,-1) to[V=$U_1$] ++(0,2)
+			to[V=$U_2$] ++(0,2)
 ;
 \end{tikzpicture}
 \caption{Twee spanningsbronnen mogen niet parallel geschakeld worden, maar wel in serie.}
@@ -132,7 +132,7 @@ Aluminium & 2.65e-8 & 0.0043 \\
             to[short,-.] (4,1)
 ;
 \end{tikzpicture}
-\caption{Twee spanningsbronnen mogen niet in serie geschakeld worden, maar wel parallel.}
+\caption{Twee stroombronnen mogen niet in serie geschakeld worden, maar wel parallel.}
 \label{fig:intcurrentsources}
 \end{figure}
 
