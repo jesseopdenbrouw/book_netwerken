@@ -1,5 +1,6 @@
 \documentclass{standalone}
 
+\usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
 
@@ -19,8 +20,8 @@
 	\def\th{1}
 
 	% intervals on the z-axis
-	\draw[axis,-,dashed] (0,0,0) -- (0,0,\th);
-	\draw[axis] (0,0,\th) -- (0,0,\th+0.5*\axissize) node[anchor=south]{$I$};
+%	\draw[axis,-,dashed] (0,0,0) -- (0,0,\th);
+	\draw[axis,thick] (0,0,\th-0.5*\axissize) -- (0,0,\th+0.5*\axissize) node[anchor=south]{$I$};
 
 	\tdplotsinandcos{\sintheta}{\costheta}{0}
 	% upper end
@@ -31,7 +32,7 @@
 		\tdplotdrawarc[curve,solid]{(0,0,\height)}{\radius*\costheta}{\a-180}{\a}{}{}
         % and the back half with a dotted line
         \tdplotdrawarc[curve,dotted]{(0,0,\height)}{\radius*\costheta}{\a-360}{\a-180}{}{}
-		\tdplotdrawarc[curve,thick,fill=blue!15,opacity=0.5]{(0,0,\height)}{\radius*\costheta}{\a-360}{\a}{}{}
+		\tdplotdrawarc[curve,thick,fill=brown!50!red,opacity=0.5]{(0,0,\height)}{\radius*\costheta}{\a-360}{\a}{}{}
     }
 	% lower end
 	\tdplotdrawarc[curve,thick,dashed]{(0,0,0)}{\radius*\costheta}{\a}{\a+180}{}{}
@@ -46,7 +47,9 @@
 	
 	% label of the diameter
 	\draw[latex-latex] (\radius,0,\th/2) --  (-\radius,0,\th/2) node[anchor=south west,yshift=2mm,xshift=0.5mm] {$d$};
-	
+	\foreach \ang/\dis in {0/0,1/.06,-1/-0.04,-0.5/-0.1} {
+		\shade[ball color=brown!50!red,opacity=0.90] (-\a+\ang:-1.5-\dis) circle (0.008cm) node[yshift=-1.5mm,font=\tiny] {$q^{\text{-}}$};
+	}	
 \end{tikzpicture}
 
 \end{document}

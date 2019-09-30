@@ -213,7 +213,7 @@
 }
 
 %%
-%% Patched output routine for voltage sources: replaces arrow by '+' and '-'
+%% Create a Dutch version of a voltage source
 %%
 \ctikzset{voltage/american font/.initial={\normalsize}}
 \def\pgf@circ@drawvoltagegenerator{
@@ -222,7 +222,7 @@
     \pgfextra{
         \edef\shiftv{\ctikzvalof{voltage/shift}}
         \edef\bumpa{\ctikzvalof{voltage/bump a}}
-        \pgfmathsetmacro{\bumpaplus}{\bumpa + \shiftv}
+        \pgfmathsetmacro{\bumpaplus}{\bumpa + 0.5*\shiftv} % coefficient added "by feel". Sorry.
     }
     \ifpgf@circuit@bipole@voltage@below
         coordinate (pgfcirc@Vfrom) at ($(\ctikzvalof{bipole/name}.center) ! \bumpaplus ! (\ctikzvalof{bipole/name}.-120)$)
@@ -231,15 +231,18 @@
         coordinate (pgfcirc@Vfrom) at ($ (\ctikzvalof{bipole/name}.center) ! \bumpaplus ! (\ctikzvalof{bipole/name}.120)$)
         coordinate (pgfcirc@Vto) at ($ (\ctikzvalof{bipole/name}.center) ! \bumpaplus ! (\ctikzvalof{bipole/name}.60)$)
     \fi
+    % fix the (unused in this case) Vcont1/2 coords for label placement along the line
+    coordinate (pgfcirc@Vcont1) at (pgfcirc@Vto)
+    coordinate (pgfcirc@Vcont2) at (pgfcirc@Vfrom)
     \ifpgf@circuit@europeanvoltage
         \ifpgf@circuit@bipole@voltage@backward
-%            (pgfcirc@Vto)  -- node[currarrow, sloped,  allow upside down, pos=1] {} (pgfcirc@Vfrom)
-             (pgfcirc@Vfrom)  node[node font=\pgf@circ@avfont] {\pgf@circ@avplus}
-             (pgfcirc@Vto) node[node font=\pgf@circ@avfont] {\pgf@circ@avminus}
+            %(pgfcirc@Vto)  -- node[currarrow, sloped,  allow upside down, pos=1] {} (pgfcirc@Vfrom)
+            (pgfcirc@Vfrom)  node[node font=\pgf@circ@avfont] {\pgf@circ@avplus}
+            (pgfcirc@Vto) node[node font=\pgf@circ@avfont] {\pgf@circ@avminus}
         \else
- %           (pgfcirc@Vfrom)  -- node[currarrow, sloped,  allow upside down, pos=1] {} (pgfcirc@Vto)
-             (pgfcirc@Vfrom)  node[node font=\pgf@circ@avfont] {\pgf@circ@avminus}
-             (pgfcirc@Vto) node[node font=\pgf@circ@avfont] {\pgf@circ@avplus}
+            %(pgfcirc@Vfrom)  -- node[currarrow, sloped,  allow upside down, pos=1] {} (pgfcirc@Vto)
+            (pgfcirc@Vfrom)  node[node font=\pgf@circ@avfont] {\pgf@circ@avminus}
+            (pgfcirc@Vto) node[node font=\pgf@circ@avfont] {\pgf@circ@avplus}
         \fi
         \else% american voltage
         \ifpgf@circuit@bipole@voltageoutsideofsymbol
@@ -267,7 +270,7 @@
 }
 
 %%
-%% Patched output routine for generic bipoles, replaces voltaga arrow by '+' and '-'
+%% Patched output routine for generic bipoles, replaces voltags arrow by '+' and '-'
 %%
 \def\pgf@circ@drawvoltagegeneric{
     \pgfextra{
