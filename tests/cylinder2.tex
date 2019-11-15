@@ -1,13 +1,17 @@
-\documentclass{standalone}
+\documentclass{article}
 
 \usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
+\usepackage{graphicx}
 
 \begin{document}
+
+\begin{figure}[!h]
 % set the viewing angle
 \def\a{45}
 \tdplotsetmaincoords{65}{\a}
+\centering
 \begin{tikzpicture}
 	[scale=7,
 	tdplot_main_coords,
@@ -48,9 +52,22 @@
 	% label of the diameter
 	\draw[latex-latex] (\radius,0,\th/2) --  (-\radius,0,\th/2) node[anchor=south west,yshift=2mm,xshift=0.5mm] {$d$};
 	\foreach \ang/\dis in {0/0,1/.06,-1/-0.04,-0.5/-0.1} {
-		\shade[ball color=brown!50!red,opacity=0.90] (-\a+\ang:-1.5-\dis) circle (0.008cm) node[yshift=-1.5mm,font=\tiny] {$q^{\text{-}}$};
+		\shade[ball color=brown!50!red,opacity=0.90] (-\a+\ang:-1.5-\dis) circle (0.008cm) node[yshift=-1.5mm,font=\tiny] {\textsl{q}\raisebox{.7ex}{-}};
 	}	
 \end{tikzpicture}
+\end{figure}
+
+De weerstand van een metalen draad met lengte $L$ en diameter $d$ is:
+
+\begin{eqnarray}
+R = \frac{\rho L}{A}
+\end{eqnarray}
+
+waarbij $A$ de oppervlakte van de dwarsdoorsnede is met:
+
+\begin{equation}
+A = \dfrac{1}{4}\pi d^2
+\end{equation}
 
 \end{document}
 % Thanks to Jörg Petzold for creating this example
