@@ -489,13 +489,13 @@ R_p = \dfrac{R_1\cdot R_2}{R_1+R_2}
 
 \begin{example}[Berekenen van de parallelweerstand]
 Gegeven is een parallelschakeling van drie weerstanden $R_1 = \SI{3.3}{\kilo\ohm}$,
-$R_1 = \SI{6.8}{\kilo\ohm}$ en $R_1 = \SI{8.2}{\kilo\ohm}$. Bereken de vervangingswaarde
+$R_2 = \SI{6.8}{\kilo\ohm}$ en $R_3 = \SI{8.2}{\kilo\ohm}$. Bereken de vervangingswaarde
 van de parallelweerstand $R_p$.
 
 Oplossing: Voor de parallelweerstand kunnen we schrijven:
 \begin{equation}
 \begin{split}
-\dfrac{1}{R_p} &= \dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_2} \\
+\dfrac{1}{R_p} &= \dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_3} \\
                &= \dfrac{1}{\SI{3.3d3}{\ohm}} + \dfrac{1}{\SI{6.8d3}{\ohm}} + \dfrac{1}{\SI{8.2d3}{\ohm}} \\[1ex]
                &= \SI{0,572e-3}{\siemens}
 \end{split}
@@ -919,10 +919,10 @@ en de inwendige weerstand. Een verhouding van $R_u/R_i=1$ betekent dat $R_u=R_i$
 	% invoke external gnuplot as
 	% calculator:
 	%\addplot [domain=0:2*pi, mark=*, blue,samples=100] gnuplot[id=sin]{sin(x)};
-	\addplot [domain=0:10,samples=101,olive,loosely dashdotted,thick] gnuplot[id=eff] {x/(1+x)};
-	\addplot [domain=0:10,samples=101,red,dashed,thick] gnuplot[id=pri] {1/((1+x)^2)};
-	\addplot [domain=0:10,samples=101,black,dotted,thick] gnuplot[id=pb] {1/(1+x)};
-	\addplot [domain=0:10,samples=101,blue,thick] gnuplot[id=pru] {x/((1+x)^2)};
+	\addplot [domain=0:10,samples=101,linecolor2,loosely dashdotted,thick] gnuplot[id=eff] {x/(1+x)};
+	\addplot [domain=0:10,samples=101,linecolor2,dashed,thick] gnuplot[id=pri] {1/((1+x)^2)};
+	\addplot [domain=0:10,samples=101,linecolor1,dotted,thick] gnuplot[id=pb] {1/(1+x)};
+	\addplot [domain=0:10,samples=101,linecolor1,thick] gnuplot[id=pru] {x/((1+x)^2)};
 	\end{axis}
 
     \begin{axis}[width=10cm,height=7cm,
@@ -1140,12 +1140,13 @@ Daarna stijgt de stroom zeer snel.
 	        use comma,
     	    1000 sep={},
             /tikz/.cd,
-        }
+        },
+		font=\small
 	]
 	% Draw diode curve, diode current is in mA
-	\addplot [domain=0:1.9,samples=201,red,thick,name path=dline] gnuplot[id=diode]{1e-21*(exp(x/(1.4*0.02569257028945))-1)};
+	\addplot [domain=0:1.9,samples=201,linecolor1,thick,name path=dline] gnuplot[id=diode]{1e-21*(exp(x/(1.4*0.02569257028945))-1)};
 	% Draw load line
-	\addplot [domain=0:3.5,samples=201,blue,thick,name path=rline] {(3.3-x)/0.150};
+	\addplot [domain=0:3.5,samples=201,linecolor2,thick,name path=rline] {(3.3-x)/0.150};
 %%%	\addplot [domain=0:1,samples=201,red,thick,name path=dline] gnuplot[id=diode]{0.0000000001*(exp(x/(1.0*0.02569257028945))-1)};
 %%%	\addplot [domain=0:1,samples=201,blue,thick,name path=rline] {(1.0-x)/0.025};
 	% Find the intersection of the diode curve and the load line
@@ -3341,7 +3342,7 @@ I(V1):	 -0.00849057	device_current
 
 Te zien is dat de spanning op knooppunt 2 ongeveer \SI{5.66}{\volt} is. De stroom door weerstand $R_1$ is ongeveer \SI{5.28}{\milli\ampere}. De stroom die bron $V_1$ levert is negatief. Dat betekent dus dat de stroom dat de stroom in werkelijkheid van `+' naar `$-$' vloeit.
 
-Het invoeren van een netwerk in gewone tekst is best lastig. Gelukkig zijn er diverse (gratis) programma's die een grafische invoermogelijkheid hebben. Bekende programma's zijn PSPICE van Cadence~\cite{pspice}, LTSpice XVII van Analog Devices~\cite{ltspice} en TINA van Texas Instruments~\cite{tina}. In figuur~\ref{fig:gelnetwerkltspice} is het netwerk van listing~\ref{cod:gelspicenetwerk} te zien. Dit netwerk is getekend in LTSpice XVII.
+Het invoeren van een netwerk in gewone tekst is best lastig. Gelukkig zijn er diverse (gratis) programma's die een grafische invoermogelijkheid hebben. Bekende programma's zijn Pspice van Cadence~\cite{pspice}, LTSpice XVII van Analog Devices~\cite{ltspice}, TINA van Texas Instruments~\cite{tina} en Qucs~\cite{qucs}. In figuur~\ref{fig:gelnetwerkltspice} is het netwerk van listing~\ref{cod:gelspicenetwerk} te zien. Dit netwerk is getekend in LTSpice XVII.
 
 \begin{figure}[!ht]
 \centering
