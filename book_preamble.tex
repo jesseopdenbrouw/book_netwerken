@@ -264,18 +264,6 @@
 \addtolength{\aftersubsection}{-\baselineskip}
 \titlespacing*{\subsection}{0pt}{.8\baselineskip}{\aftersubsection}
 \titlespacing*{\subsubsection}{0pt}{.6\baselineskip}{0pt}
-%\titlecontents{section}[1.5em]{}{\contentslabel[\secmark\thecontentslabel]{1.5em}}{}{\titlerule*{}\bfseries\contentspage}
-%\titleformat{\section}{\normalfont\Large\bfseries}{\makebox[1.5em][l]{\secmark\thesection}}{0.4em}{}
-%\titlecontents{section}[1.5em]{}{\bfseries\contentslabel[\secmark\thecontentslabel]{1.5em}}{\hspace*{-1.5em}}{\titlerule*{}\bfseries\contentspage}
-%\usepackage{tocloft,etoolbox}
-%\makeatletter
-%\patchcmd{\l@section}{#1}{\settowidth{\mylength}{\secmark}\hspace*{-\mylength}\secmark{#1}}{}{}
-%\renewcommand\cftchappresnum{\chaptername\newline}
-%\setlength{\cftchapnumwidth}{3.5cm}
-%\renewcommand{\cfttoctitlefont}{\fontfamily{phv}\selectfont\Huge\bfseries\scshape}
-%\renewcommand{\cftaftertoctitle}{}
-%\setlength{\cftbeforetoctitleskip}{\baselineskip}
-%\setlength{\cftaftertoctitleskip}{\aftersubsection}
 %% Remove page number on first page of ToC
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
 %% Make space for page number in TOC wider
