@@ -56,7 +56,7 @@ ideale stroombron is oneindig.
 
 \begin{figure}[!ht]
 \centering
-\begin{subfigure}{0.30\textwidth}
+\begin{subfigure}[t]{0.30\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (0,0) to [V=$U$] (0,2);
@@ -64,7 +64,7 @@ ideale stroombron is oneindig.
 \caption{Symbool ideale spanningsbron.}
 %\label{fig:gelidealespanningsbron}
 \end{subfigure}
-\begin{subfigure}{0.30\textwidth}
+\begin{subfigure}[t]{0.30\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (0,0) to [I, l=$I$] (0,2);
@@ -72,7 +72,7 @@ ideale stroombron is oneindig.
 \end{tikzpicture}
 \caption{Symbool ideale stroombron.}
 \end{subfigure}
-\begin{subfigure}{0.30\textwidth}
+\begin{subfigure}[t]{0.30\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (0,0) to [R, l=$R$] (0,2);
@@ -100,7 +100,7 @@ netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroom
 
 \begin{figure}[!ht]
 \centering
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (0,0) to[cV, v=$aU$] ++(0,2);
@@ -108,7 +108,7 @@ netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroom
 \caption{Symbool spanningsgestuurde spanningsbron.}
 %\label{fig:gelidealespanningsbron}
 \end{subfigure}
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (2,0) to[cV, v=$bI$] ++(0,2);
@@ -116,14 +116,14 @@ netwerkelement. Verder zijn er nog de spanningsgestuurde stroombron en de stroom
 \end{tikzpicture}
 \caption{Symbool stroomgestuurde spanningsbron.}
 \end{subfigure}
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (4,0) to[cI, i_>=,l=$cU\,$] ++(0,2);
 \end{tikzpicture}
 \caption{Symbool spanningsgestuurde stroombron.}
 \end{subfigure}
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (6,0) to[cI, l=$dI\ $] ++(0,2);
@@ -261,10 +261,10 @@ Bepaal de spanning~$U$.
 \begin{center}
 \centering
 \begin{tikzpicture}[line width=1pt]
-\draw (0,0) to[V, v=5<\volt>] (0,2)
-            to[V, v<=-2<\volt>] (2,2)
+\draw (0,0) to[V, v=\SI{5}{\volt}] (0,2)
+            to[V, v<=\SI{-2}{\volt}] (2,2)
             to[V, v<=$U$] (2,0)
-			to[V, v=3<\volt>] (0,0);
+			to[V, v=\SI{3}{\volt}] (0,0);
 \end{tikzpicture}
 \captionof{figure}{De spanningswet van Kirchhoff.}
 \label{fig:gelspanningswetKirchhoff2}
@@ -302,7 +302,7 @@ is dan het potentiaal bij de `$-$'.
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to [V=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R=$R$, v=$U_R$] ++(0,-2) to [short,-.] (0,0)
+\draw (0,0) to [V=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R=$R$, v<=$U_R$] ++(0,-2) to [short,-.] (0,0)
 ;
 %%%\draw (-2,0) to[short, i=$I$] (0,0);
 %%%\draw (0,0) to[R=$R$, v_>=$U$] (2,0);
@@ -312,16 +312,15 @@ is dan het potentiaal bij de `$-$'.
 \end{figure}
 
 \begin{example}[De wet van Ohm]
-In figuur~\ref{fig:geldewetvanohm} is de spanning $U=\SI{12}{\volt}$ en de stroom $I=\SI{2.15}{\milli\ampere}$.
+In figuur~\ref{fig:geldewetvanohm} is de spanning $U=\SI{12}{\volt}$ en de stroom $I=\SI{2}{\milli\ampere}$.
 Bereken de waarde van $R$.
 
 Oplossing: We gebruiken de wet van Ohm voor het berekenen van de weerstandswaarde. Let erop dat de stroom in milliampère is gegeven:
 \begin{equation}
-R = \dfrac{12}{\num{2.15d-3}} = \SI{5581}{\ohm} 
+R = \dfrac{12}{\num{2d-3}} = \SI{6000}{\ohm} 
 \end{equation}
 
-De waarde van weerstand $R$ is \SI{5581}{\ohm}. Voor praktische netwerken kunnen we de waarde afronden
-naar \SI{5.6}{\kilo\ohm} (kilo-ohm).
+De waarde van weerstand $R$ is \SI{6000}{\ohm}, oftwel \SI{6}{\kilo\ohm} (kilo-ohm).
 \end{example}
 
 \subsection{Geleiding}
@@ -1411,7 +1410,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelthevenin1}. Bepaal het Thévenin-ve
 \begin{center}
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V, V=$\SI{12}{\volt}$] ++(0,2)
-            to [R, R=$\SI{1.2}{\kilo\ohm}$, -*] ++(2,0) node (1) {} node [above] {$U_x$}
+            to [R, R=$\SI{1.2}{\kilo\ohm}$, -*] ++(2,0) coordinate(1) node [above] {$U_x$}
 			to [R, R=$\SI{2.7}{\kilo\ohm}$, -*] ++(0,-2)
         (1) to [R, R=$\SI{3.3}{\kilo\ohm}$, -o] ++(2,0) node (a) [right] {A}
             to [open] ++(0,-2) node (b) [right] {B}
@@ -1916,7 +1915,7 @@ Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afh
 
 \begin{figure}[!ht]
 \centering
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (0,0) to[cV, v=$aU$] ++(0,2);
@@ -1924,7 +1923,7 @@ Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afh
 \caption{Symbool spanningsgestuurde spanningsbron.}
 \label{fig:gelsymbolengestuuurdebronnenen2vcvs}
 \end{subfigure}
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (2,0) to[cV, v=$bI$] ++(0,2);
@@ -1933,7 +1932,7 @@ Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afh
 \caption{Symbool stroomgestuurde spanningsbron.}
 \label{fig:gelsymbolengestuuurdebronnenen2ccvs}
 \end{subfigure}
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (4,0) to[cI, i_>=,l=$cU\,$] ++(0,2);
@@ -1941,7 +1940,7 @@ Naast onafhankelijke spanningsbron en stroombron kan een netwerk ook \textsl{afh
 \caption{Symbool spanningsgestuurde stroombron.}
 \label{fig:gelsymbolengestuuurdebronnenen2vccs}
 \end{subfigure}
-\begin{subfigure}{0.23\textwidth}
+\begin{subfigure}[t]{0.23\textwidth}
 \centering
 \begin{tikzpicture}[line width=1pt]
 \draw (6,0) to[cI, l=$dI\ $] ++(0,2);
@@ -1963,7 +1962,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelccvs1}. Bepaal de spanning $U_x$ al
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, V=$U$] ++(0,4)
             to[short, i=$I_x$] ++(3,0)
-            to[R, R=$R_1$,-*] ++(0,-2) node (1) {} node[below] {$U_x$}
+            to[R, R=$R_1$,-*] ++(0,-2) coordinate (1) node[below] {$U_x$}
             to[short] ++(-1,0)
 			to[R,R=$R_2$,-*] ++(0,-2)
 %			to[short] ++(1,0) node (2) {}
@@ -2029,9 +2028,9 @@ In dit voorbeeld bespreken we de bipolaire transistor als stroomgestuurde spanni
                       (npn.B) node[left] {b}
 ;
 \draw (npn.C)  ++(3,.15) node (0) {}
-                       to[short, i=$I_b$] ++(1,0) node (1) {} node [right] {b}
-                       to[diode, l=D,] ++(0,-1.5) node (1a) {}
-(1) ++(1.5,0) node (2) {} node[left] {c}
+                       to[short, i=$I_b$] ++(1,0) coordinate (1) node [right] {b}
+                       to[diode, l=D,] ++(0,-1.5) coordinate (1a)
+(1) ++(1.5,0) coordinate (2) node[left] {c}
                        to[cI, l=$\beta I_b$] ++(0,-1.5)
                        to[short] (1a) 
        (1a) ++(0.75,0) node[above] {e}
@@ -2060,14 +2059,14 @@ In figuur~\ref{fig:gelnpntransistor2} is een transistor geschakeld als stroomges
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) node (0) {}
+\draw (0,0) coordinate (0)
                        to[I, l=\SI{100}{\micro\ampere}] ++(0,2)
-                       to[short, i=$I_b$] ++(1.5,0) node (1) {} node [right] {b}
-                       to[diode, l=D, -*] ++(0,-2) node (1a) {}
+                       to[short, i=$I_b$] ++(1.5,0) coordinate (1) node [right] {b}
+                       to[diode, l=D, -*] ++(0,-2) coordinate (1a)
 %                       to[short,-*] ++(1.5,0)
-(1) ++(1.5,0) node (2) {} node[left] {c}
+(1) ++(1.5,0) coordinate (2) node[left] {c}
                        to[cI, l=$100 I_b$, -*] ++(0,-2)
-                   (2) to[R=\SI{500}{\ohm}, i<=$I_c$] ++(2,0)
+                   (2) to[R=\SI{500}{\ohm}, i<=$I_c$] ++(3,0)
                        to[V<=\SI{12}{\volt}] ++(0,-2)
                        to[short] (0)
 (1a) ++(0.75,0) node[above] {e}
@@ -2133,9 +2132,9 @@ De eerder besproken oplossingsmethoden kunnen niet voor alle netwerken gebruikt 
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v=$U$,-*]   ++(0,2) node (1) {} node [left] {}
-            to[R, R=$R_1$, -*] ++(2,0) node (2) {} node [above] {}
-			to[R, R=$R_2$, -*] ++(2,0) node (3) {} node [right] {}
+\draw (0,0) to[V, v=$U$,-*]   ++(0,2) coordinate (1) node [left] {}
+            to[R, R=$R_1$, -*] ++(2,0) coordinate (2) node [above] {}
+			to[R, R=$R_2$, -*] ++(2,0) coordinate (3) node [right] {}
 			to[R, R=$R_4$]     ++(0,-2)
 			to[short]          (0,0)
 	    (1) to[short]          ++(0,1)
@@ -2160,11 +2159,11 @@ Onafhankelijke stroombronnen kunnen zonder problemen in een netwerk ingepast wor
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[I, l=$I_1$, i^<=$I_a$, -*]  ++(0,2) node (1) {} node [left] {1}
-            to[R, R=$R_1$, i>_=$I_b$, -*] ++(2,0) node (2) {} node [above] {2}
+\draw (0,0) to[I, l=$I_1$, i^<=$I_a$, -*]  ++(0,2) coordinate (1) node [left] {1}
+            to[R, R=$R_1$, i>_=$I_b$, -*] ++(2,0) coordinate (2) node [above] {2}
 			to[short, i=$I_d$] ++(-0.7,0)
 			to[short]          ++(0.7,0) 
-			to[I, l=$I_2$, i>^=$I_f$,-*, invert] ++(2,0) node (3) {} node [right] {3}
+			to[I, l=$I_2$, i>^=$I_f$,-*, invert] ++(2,0) coordinate (3) node [right] {3}
 			to[open, i>^=$I_g$]           ++(-1.5,0)
 			to[open]           ++(1.5,0)
 			to[R, R=$R_4$, i>^=$I_h$]     ++(0,-2)
@@ -2294,9 +2293,9 @@ In figuur~\ref{fig:gelnetwerkvoornodalanalysis5} is een netwerk te zien met twee
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[I, l=$\SI{10}{\mA}$,-*]  ++(0,2) node (1) {} node [left] {1}
-            to[R, R=$\SI{820}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {2}
-			to[I, l=$\SI{5}{\mA}$, -*, invert] ++(2,0) node (3) {} node [right] {3}
+\draw (0,0) to[I, l=$\SI{10}{\mA}$,-*]  ++(0,2) coordinate (1) node [left] {1}
+            to[R, R=$\SI{820}{\ohm}$, -*] ++(2,0) coordinate (2) node [above] {2}
+			to[I, l=$\SI{5}{\mA}$, -*, invert] ++(2,0) coordinate (3) node [right] {3}
 			to[open]           ++(-1.5,0)
 			to[open]           ++(1.5,0)
 			to[R, R=$\SI{1200}{\ohm}$]     ++(0,-2)
@@ -2354,9 +2353,9 @@ In figuur~\ref{fig:gelnetwerkvoornodalanalysis2} is een netwerk te zien met een 
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v=$U$,-*]   ++(0,2) node (1) {} node [left] {1}
-            to[R, R=$R_1$, -*, i_<=$I_a$] ++(2,0) node (2) {} node [above] {2}
-			to[R, R=$R_2$, -*, i>_=$I_b$] ++(2,0) node (3) {} node [right] {3}
+\draw (0,0) to[V, v=$U$,-*]   ++(0,2) coordinate (1) node [left] {1}
+            to[R, R=$R_1$, -*, i_<=$I_a$] ++(2,0) coordinate (2) node [above] {2}
+			to[R, R=$R_2$, -*, i>_=$I_b$] ++(2,0) coordinate (3) node [right] {3}
 			to[open]           ++(-1.5,0)
 			to[open, i^<=$I_d$] ++(1.5,0)
 			to[R, R=$R_4$, i>^=$I_e$]     ++(0,-2)
@@ -2470,9 +2469,9 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoornodalanalysis3}. Bereken
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v=$\SI{12}{\volt}$,-*]   ++(0,2) node (1) {} node [left] {$U_1$}
-            to[R, R=$\SI{1200}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {$U_2$}
-			to[R, R=$\SI{1500}{\ohm}$, -*] ++(2,0) node (3) {} node [right] {$U_3$}
+\draw (0,0) to[V, v=$\SI{12}{\volt}$,-*]   ++(0,2) coordinate (1) node [left] {$U_1$}
+            to[R, R=$\SI{1200}{\ohm}$, -*] ++(2,0) coordinate (2) node [above] {$U_2$}
+			to[R, R=$\SI{1500}{\ohm}$, -*] ++(2,0) coordinate (3) node [right] {$U_3$}
 			to[R, R=$\SI{2200}{\ohm}$]     ++(0,-2)
 			to[short]          (0,0)
 	    (1) to[short]          ++(0,1)
@@ -2533,9 +2532,9 @@ In figuur~\ref{fig:gelnetwerkvoornodalanalysis6} is een netwerk te zien met een 
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[R, R=$R_6$, -*] ++(0,2) node (1) {} node [left] {1}
-            to[V, v=$U$, i<=$I_x$, -*]  ++(2,0) node (2) {} node [above] {2}
-			to[R, R=$R_2$, -*] ++(2,0) node (3) {} node [right] {3}
+\draw (0,0) to[R, R=$R_6$, -*] ++(0,2) coordinate (1) node [left] {1}
+            to[V, v=$U$, i<=$I_x$, -*]  ++(2,0) coordinate (2) node [above] {2}
+			to[R, R=$R_2$, -*] ++(2,0) coordinate (3) node [right] {3}
 			to[open]           ++(-1.5,0)
 			to[open]           ++(1.5,0)
 			to[R, R=$R_4$]     ++(0,-2)
@@ -2611,9 +2610,9 @@ In figuur~\ref{fig:gelnetwerkvoornodalanalysis7} is een netwerk te zien met een 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[R, R=$\SI{4}{\ohm}$,-*]   ++(0,2) node (1) {} node [left] {1}
-            to[R, R=$\SI{6}{\ohm}$, -*] ++(2,0) node (2) {} node [above] {2}
-			to[R, R=$\SI{2}{\ohm}$, -*] ++(2,0) node (3) {} node [right] {3}
+\draw (0,0) to[R, R=$\SI{4}{\ohm}$,-*]   ++(0,2) coordinate (1) node [left] {1}
+            to[R, R=$\SI{6}{\ohm}$, -*] ++(2,0) coordinate (2) node [above] {2}
+			to[R, R=$\SI{2}{\ohm}$, -*] ++(2,0) coordinate (3) node [right] {3}
 			to[open]           ++(-1.5,0)
 			to[open] ++(1.5,0)
 			to[R, R=$\SI{3}{\ohm}$]     ++(0,-2)
@@ -2656,7 +2655,7 @@ Naast onafhankelijke bronnen kan een netwerk ook gestuurde bronnen bevatten. Dez
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V=$U$] ++(0,2) node [left] {$U_1$}
-			to [R=$G_1$,-*,i>^=$I_1$] ++(2,0) node (2) {} node [above] {$U_2$}
+			to [R=$G_1$,-*,i>^=$I_1$] ++(2,0) coordinate (2) node [above] {$U_2$}
 			to [R=$G_2$,-*] ++(0,-2)
 			to node[sground]{} ++(0,0)
 		(2)	to [R=$G_3$] ++(2,0) node[right] {$U_3$}
@@ -2744,14 +2743,14 @@ We gaan dit model gebruiken in het netwerk in figuur~\ref{fig:gelmodelopampinver
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, v=$U$]        ++(0,2) node[above] {$U_1$}
-            to[R, R=$G_1$, -*]   ++(2,0) node (2) {} node[below] {$U_x$}
+            to[R, R=$G_1$, -*]   ++(2,0) coordinate (2) node[below] {$U_x$}
         (2) to[short] ++(1,0)
             to[open] ++(0,-2)
 			to node[sground]{} ++(0,0)
             to[R, a=$G_{in}$, v^>=$U_{in}$,*-] ++(0,2) 
         (2) to[short] ++(0,1)
             to[R=$G_2$] ++(5.5,0)
-            to[short, -*] ++(0,-1)  node (3) {} %node[right] {$U_{2}$}
+            to[short, -*] ++(0,-1)  coordinate (3) %node[right] {$U_{2}$}
 			to[short, -o] ++(0.5,0) node[right] {$U_{2}$}
         (3) to[R=$G_{out}$]  ++(-2,0)  node [above] {$U_y$}
             to[cV, v_<=$aU_{in}$, -*] ++(0,-2)
@@ -2898,6 +2897,7 @@ We vullen voor de weerstandswaarden en versterkingsfactor nu enkele praktische w
 
 Als we de waarden invullen in~\eqref{equ:gelopampreal4}, dan vinden we $U_2 = \SI{-1.999968884}{\volt}$. Voor de term in~\eqref{equ:gelopampreal5} vinden we \num{1.555812529e-5}. Voor $U_x$ vinden we \SI{10.037344}{\micro\volt}. Nu heeft het weinig zin om getallen in zoveel decimalen te schrijven maar het geeft wel goed aan hoe nauwkeurig de versterking van $U_1$ naar $U_2$ is. We kunnen dus stellen dat $U_2 = \SI{-2}{\volt}$ en dat $U_x = \SI{0}{\volt}$ is. Uiteraard is dit een theoretisch model en zal de uitgangsspanning iets afwijken van de berekende waarden. Om een realistischer beeld te krijgen van de spanningen en stromen moeten we een netwerksimulator gebruiken.
 
+Opmerking: \textsl{In veel gevallen kunnen we de opamp als ideaal veronderstellen. Dat betekent dat de versterking oneiding is, de ingangsweerstand oneindig is en de uitgangsweerstand 0 is}.
 %\num[round-mode=places,round-precision=3{1.555812529e-5}
 
 %OPERATIONAL TRANSCONDUCTANCE AMPLIFIER
@@ -2961,17 +2961,17 @@ We gaan bij de maasstroommethode uit van \textsl{planaire netwerken}. In een pla
 \centering
 \begin{tikzpicture}[bookcircuit]
 \coordinate (mid) at (1.5,1);
-\draw (0,0) to[V, v=$U$, -*] ++(0,2) node (1) {} node [above] {1}
-            to[R=$R_1$, -*]   ++(3,0) node (2){} node [above] {2}
-            to[R=$R_2$, -*]   ++(0,-2) node (3){} node [below] {3}
-            to[R=$R_3$, -*] (0,0) node (4){} node [below] {4}
+\draw (0,0) to[V, v=$U$, -*] ++(0,2) coordinate (1) node [above] {1}
+            to[R=$R_1$, -*]   ++(3,0) coordinate (2) node [above] {2}
+            to[R=$R_2$, -*]   ++(0,-2) coordinate (3) node [below] {3}
+            to[R=$R_3$, -*] (0,0) coordinate (4) node [below] {4}
         (1) to[R,a=$R_4$] (mid) to[short] (3)
         (2) to[R=$R_5$] (mid) to [short] (4)
 ;
-\draw (5,0.5) to[V, v=$U$, -*] ++(0,2) node (1a) {} node [above] {1}
-            to[R=$R_1$, -*]   ++(2,0) node (2a){} node [above] {2}
-            to[R=$R_2$, -*]   ++(0,-2) node (3a){} node [below] {3}
-            to[R=$R_3$, -*] (5,0.5) node (4a){} node [left] {4}
+\draw (5,0.5) to[V, v=$U$, -*] ++(0,2) coordinate (1a) node [above] {1}
+            to[R=$R_1$, -*]   ++(2,0) coordinate (2a) node [above] {2}
+            to[R=$R_2$, -*]   ++(0,-2) coordinate (3a) node [below] {3}
+            to[R=$R_3$, -*] (5,0.5) coordinate (4a) node [left] {4}
        (1a) to[R=$R_4$] (3a)
        (2a) to[short] ++(1,0)
             to[R=$R_5$] ++(0,-3)
@@ -2988,9 +2988,9 @@ Zoals gezegd, gebruiken we de spanningswet van Kirchoff en maasstromen om de net
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v=$U$,-*]   ++(0,2) node (1) {} node [left] {}
-            to[R, R=$R_1$, -*] ++(2,0) node (2) {} node [above] {}
-			to[R, R=$R_2$, -*] ++(2,0) node (3) {} node [right] {}
+\draw (0,0) to[V, v=$U$,-*]   ++(0,2) coordinate (1) node [left] {}
+            to[R, R=$R_1$, -*] ++(2,0) coordinate (2) node [above] {}
+			to[R, R=$R_2$, -*] ++(2,0) coordinate (3) node [right] {}
 			to[R, R=$R_4$]     ++(0,-2)
 			to[short]          (0,0)
 	    (1) to[short]          ++(0,2)
@@ -3071,9 +3071,9 @@ Met behulp van de matrixrekenkunde kunnen de stromen $I_1$, $I_2$ en $I_3$ berek
 We geven nu een voorbeeld van de maasstroommethode. In figuur~\ref{fig:gelnetwerkvoormeshanalysis2} is een netwerk gegeven met een spanningsbron en vijf weerstanden. Het netwerk heeft drie mazen en dus ook drie maasstromen.
 \begin{center}
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[R, R=\SI{330}{\ohm}, -*]   ++(0,2) node (1) {} node [left] {1}
-            to[R, R=\SI{120}{\ohm}, -*] ++(3,0) node (2) {} node [above] {2}
-			to[R, R=\SI{220}{\ohm}, -*] ++(3,0) node (3) {} node [right] {3}
+\draw (0,0) to[R, R=\SI{330}{\ohm}, -*]   ++(0,2) coordinate (1) node [left] {1}
+            to[R, R=\SI{120}{\ohm}, -*] ++(3,0) coordinate (2) node [above] {2}
+			to[R, R=\SI{220}{\ohm}, -*] ++(3,0) coordinate (3) node [right] {3}
 			to[V, v<=\SI{9}{\volt}]     ++(0,-2)
 			to[short]          (0,0)
 	    (1) to[short]          ++(0,2)
@@ -3160,7 +3160,7 @@ Nu alle spanningen bekend zijn, kunnen de takstromen berekend worden.
 De weerstand zoals we die nu besproken hebben, geeft een recht evenredig verband aan tussen de spanning over de weerstand en de stroom door de weerstand. De weerstandswaarde is dus constant. Maar er zijn ook weerstanden waarbij de weerstand niet afhangt van de spanning of stroom. We laten een aantal van deze weerstanden de revue passeren.
 
 \subsection{Negative Temperature Coefficient Resistor}
-Bij een \textsl{Negative Temperature Coefficient Resistor}, afgekort tot NTC, is de weerstandswaarde afhankelijk van de temperatuur van de NTC. De weerstandswaarde neemt af met toenemende temperatuur, vandaar de term ``Negative''. De relatie tussen de weerstandswaarde en de temperatuur werd voor het eerst beschreven door Steinhart en Hart in 1968:
+Bij een \textsl{Negative Temperature Coefficient Resistor}, afgekort tot NTC, is de weerstandswaarde afhankelijk van de temperatuur van de NTC. De weerstandswaarde neemt af met toenemende temperatuur, vandaar de term ``Negative''. De relatie tussen de weerstandswaarde en de temperatuur werd voor het eerst beschreven door Steinhart en Hart in~1968:
 %
 \begin{equation}
 \dfrac{1}{T} = a + b\ln R + c (\ln R)^3
@@ -3175,7 +3175,7 @@ Over het algemeen wordt niet de weerstandswaarde maar een afgeleide spanning geb
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V=$U_{in}$] ++(0,4)
 			to[short] ++(2,0)
-			to[thRn=$R_{ntc}$,-*] ++(0,-2) node (1) {}
+			to[thRn=$R_{ntc}$,-*] ++(0,-2) coordinate (1)
 			to[R=$R_s$,-*] ++(0,-2)
 			to[open] ++(1,0)
 			to[short,o-] (0,0)
