@@ -78,8 +78,16 @@ Gegeven is de netwerken in figuur~\ref{fig:gelspanningswet1} met spanningsbronne
 Drie weerstanden van \SI{1.2}{\kilo\ohm}, \SI{2.7}{\kilo\ohm} en \SI{3.9}{\kilo\ohm} zijn in serie geschakeld. Bepaal de totale weerstand.
 
 \item
+\label{que:gelserie2}
+Drie weerstanden van \SI{5.6}{\kilo\ohm}, \SI{10.0}{\kilo\ohm} en \SI{12.0}{\kilo\ohm} zijn in serie geschakeld. Bepaal de totale weerstand.
+
+\item
 \label{que:gelparallel1}
 Drie weerstanden van \SI{2.7}{\kilo\ohm}, \SI{5.6}{\kilo\ohm} en \SI{8.2}{\kilo\ohm} zijn parallel geschakeld. Bepaal de totale weerstand.
+
+\item
+\label{que:gelparallel2}
+Drie weerstanden van \SI{5.6}{\kilo\ohm}, \SI{15.0}{\kilo\ohm} en \SI{18.0}{\kilo\ohm} zijn parallel geschakeld. Bepaal de totale weerstand.
 
 \item
 \label{que:gelserieparallel1}
@@ -89,7 +97,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelserieparallel1}. Bepaal de totale w
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) node[left] {A} 
-			to[R=\SI{3.3}{\kilo\ohm}, o-*] ++(2,0) node (1) {}
+			to[R=\SI{3.3}{\kilo\ohm}, o-*] ++(2,0) coordinate (1)
 			to[short] ++(0,0.5)
 			to[R=\SI{4.7}{\kilo\ohm}] ++(2,0)
 			to[short,-*] ++(0,-0.5) node (2) {}
@@ -105,18 +113,17 @@ Gegeven is het netwerk in figuur~\ref{fig:gelserieparallel1}. Bepaal de totale w
 
 \item
 \label{que:gellatticenetwork}
-
 Gegeven is het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. Bepaal de vervangingsweerstand tussen de punten A en B.
 
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) node [left] {A}
-	to[short,o-*]                  ++(1,0) node (1) {}
+	to[short,o-*]                  ++(1,0) coordinate (1)
     to[R, R=\SI{70}{\kilo\ohm},-*] ++ (0,-2)
-(1) to[R, R=\SI{20}{\kilo\ohm},-*] ++(2,0) node (2) {}
+(1) to[R, R=\SI{20}{\kilo\ohm},-*] ++(2,0) coordinate (2)
     to[R, R=\SI{100}{\kilo\ohm},-*] ++(0,-2)
-(2) to[R, R=\SI{80}{\kilo\ohm},-*] ++(2,0) node (3) {}
+(2) to[R, R=\SI{80}{\kilo\ohm},-*] ++(2,0) coordinate (3)
     to[R, R=\SI{30}{\kilo\ohm},-*] ++(0,-2)
 (3) to[R, R=\SI{40}{\kilo\ohm}] ++(2,0)
     to[R, R=\SI{20}{\kilo\ohm}]    ++(0,-2)
@@ -138,6 +145,12 @@ R_{AB} = \SI{30}{\kilo\ohm}
 \end{equation}
 \fi
 
+
+\item
+\label{que:gellatticenetwork2}
+Gegeven is het weerstandsnetwerk in figuur~\ref{fig:gellatticenetwork}. De weerstandswaarden zijn nu de \textsl{helft} van de waarden in de figuur. Bepaal de vervangingsweerstand tussen de punten A en B.
+
+
 \item
 \label{que:gelspanningsdeling1}
 Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling1}. Bepaal de spanningen $U_1$ en $U_2$.
@@ -158,7 +171,6 @@ Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling1}. Bepaal de spanni
 \end{figure}
 
 
-
 \item
 \label{gel:spanningsdeling1}
 Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling2}. De interne weerstand van de spanningsmeter is \SI{10}{\mega\ohm}. Bereken spanning die de spanningsmeter meet.
@@ -167,8 +179,8 @@ Gegeven is het netwerk in figuur~\ref{fig:gelspanningsdeling2}. De interne weers
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, v=\SI{24}{\volt}] ++(0,2)
-			to[R=\SI{1}{\mega\ohm},-*] ++(2,0) node (1) {}
-			to[R=\SI{1}{\mega\ohm},-*] ++(0,-2) node (2) {}
+			to[R=\SI{1}{\mega\ohm},-*] ++(2,0) coordinate (1)
+			to[R=\SI{1}{\mega\ohm},-*] ++(0,-2) coordinate (2)
 			to[short,-.] (0,0)
 		(1) to[short] ++(2,0)
 			to node[draw,circle,fill=white] {V} ++(0,-2)
@@ -189,7 +201,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling3}. Bereken de stromen 
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[I, l=\SI{15}{\milli\ampere}] ++(0,2)
-			to[short,-*] ++(2,0) node (A) {}
+			to[short,-*] ++(2,0) coordinate (A)
 			to[R=\SI{680}{\ohm},-*,i>^=$I_1$] ++(0,-2)
 		(A) to[short] ++(2,0) 
 			to[R=\SI{820}{\ohm},i>^=$I_2$] ++(0,-2)
@@ -210,14 +222,14 @@ Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling4}. Bereken de stromen 
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[I, l=\SI{80}{\milli\ampere}] ++(0,2)
-			to[short,-*] ++(2,0) node (A) {}
+			to[short,-*] ++(2,0) coordinate (A)
 			to[R=\SI{120}{\ohm},-*,i>^=$I_1$] ++(0,-2)
-		(A) to[short] ++(1.5,0) node (B) {} 
+		(A) to[short] ++(1.5,0) coordinate (B) 
 			to[R=\SI{68}{\ohm},-*,i>^=$I_2$] ++(0,-2)
-		(B) to[short] ++(1.5,0) node (C) {}
+		(B) to[short] ++(1.5,0) coordinate (C)
 			to[R=\SI{82}{\ohm},-*,i>^=$I_3$] ++(0,-2)
 		(C) to[short] ++(1.5,0) 
-			to[R=\SI{100}{\ohm},i>^=$I_4$] node (D) {} ++(0,-2)
+			to[R=\SI{100}{\ohm},i>^=$I_4$] coordinate (D) ++(0,-2)
 			to[short,-.] (0,0)
 ;
 \end{tikzpicture}
@@ -237,12 +249,12 @@ Bereken de spanning $U$ die over de weerstand van \SI{5}{\ohm} staat.
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V=\SI{18}{\volt}] ++(0,2)
-			to[short,-*,i=$I$] ++(2,0) node (A) {}
+			to[short,-*,i=$I$] ++(2,0) coordinate (A)
 			to[R=\SI{12}{\ohm},-*] ++(0,-2)
-		(A) to[short,-*] ++(1,0) node (B) {}
+		(A) to[short,-*] ++(1,0) coordinate (B)
             to[short] ++(0,0.5)
 			to[R=\SI{18}{\ohm}] ++(4,0)
-			to[short,-*] ++(0,-.5) node (C) {} 
+			to[short,-*] ++(0,-.5) coordinate (C)
         (B) to[short] ++(0,-0.5) 
 			to[R=\SI{4}{\ohm}] ++(2,0)
 			to[R=\SI{5}{\ohm},v=$U$] ++(2,0)
@@ -283,9 +295,9 @@ Gegeven is het netwerk in figuur~\ref{fig:gelkarimp1}. De waarden voor de weerst
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) node [left] {A}
-    to[R, R=$R_1$,-*] ++(2,0) node (2) {} node[above] {X}
+    to[R, R=$R_1$,-*] ++(2,0) coordinate (2) node[above] {X}
     to[R, R=$R_2$,-*] ++(0,-2)
-(2) to[R, R=$R_1$]    ++(2,0) node (3) {}  node[above] {Y}
+(2) to[R, R=$R_1$]    ++(2,0) coordinate (3) node[above] {Y}
     to[R, R=$R_L$]    ++(0,-2)
 	to[short,-o]        (0,-2) node (4) [left] {B}
 ;
@@ -346,9 +358,9 @@ Gegeven is het netwerk in figuur~\ref{fig:gelstroomdeling1}. Het netwerk bestaat
 %%%        (1) to[short] ++(2,0)
 %%%            to[R, R=$R_X$] ++(0,-2)
 %%%            to[short] (2) 
-\draw (0,0) to[V, v=\SI{48}{\volt}]   ++(0,4) node (1) {} node [left] {}
+\draw (0,0) to[V, v=\SI{48}{\volt}]   ++(0,4) coordinate (1) node [left] {}
             to[short, i=$I_x$] ++(3,0)
-			to[R=$R_X$, -*] ++(0,-2) node (1) {}
+			to[R=$R_X$, -*] ++(0,-2) coordinate (1)
 			to[short] ++(-1,0)
 			to[R=\SI{3.3}{\kilo\ohm},-*] ++(0,-2)
         (1) to[short] ++(1,0)
@@ -374,15 +386,15 @@ Gegeven zijn de netwerken in figuur~\ref{fig:gelnetwerkvoortheveninanalysis1}. B
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,1) to[V, v=\SI{12}{\volt}] ++(0,2) %node (1) {} node [left] {}
-            to[R=\SI{10}{\kilo\ohm}, -*] ++(2,0) node (1) {}
+            to[R=\SI{10}{\kilo\ohm}, -*] ++(2,0) coordinate (1)
 			to[short,-o] ++(1,0) node[right] {A}
         (1) to[R=\SI{5}{\kilo\ohm},-*] ++(0,-2)
 			to[open,-o] ++(1,0) node[right] {B}
 			to[short,-.] ++(-3,0)
 ;
-\draw (6,0) to[V,v=\SI{12}{\volt}] ++(0,2) node(1) {}
+\draw (6,0) to[V,v=\SI{12}{\volt}] ++(0,2) coordinate (1)
 			to[V,v=\SI{6}{\volt}] ++(0,2)
-			to[R=\SI{12}{\kilo\ohm},-*] ++(2,0) node (2) {}
+			to[R=\SI{12}{\kilo\ohm},-*] ++(2,0) coordinate (2)
 			to[short,-o] ++(1,0) node[right] {A}
 		(2) to[R=\SI{18}{\kilo\ohm},-*] ++(0,-4)
 			to[open,-o] ++(1,0) node[right] {B}
@@ -407,14 +419,14 @@ Gegeven zijn de netwerken in figuur~\ref{fig:gelthevenin6}. Bepaal de kortsluits
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V=\SI{10}{\volt}] ++(0,2)
-			to [R=\SI{12}{\kilo\ohm}] ++(2,0) node (1) {}
+			to [R=\SI{12}{\kilo\ohm}] ++(2,0) coordinate (1)
 			to [R=\SI{18}{\kilo\ohm},*-*] ++(0,-2)
 		(1) to [R=\SI{33}{\kilo\ohm},-o] ++(2,0) node[right] {A}
 			to [open] ++(0,-2) node[right] {B}
 			to [short,o-.] (0,0)
 ;
 \draw (6.5,0) to[I,l=\SI{0.8}{\milli\ampere}] ++(0,2)
-			to [R=\SI{5.6}{\kilo\ohm}] ++(2,0) node (1) {}
+			to [R=\SI{5.6}{\kilo\ohm}] ++(2,0) coordinate (1)
 			to [R=\SI{8.2}{\kilo\ohm},*-*] ++(0,-2)
 		(1) to [R=\SI{10.0}{\kilo\ohm},-o] ++(2,0) node[right] {A}
 			to [open] ++(0,-2) node[right] {B}
@@ -454,9 +466,9 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis2}. Bepa
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V, v=\SI{12}{\volt},-*]   ++(0,2) node (1) {} node [left] {}
-            to[R, R=\SI{1.2}{\kilo\ohm}, -*] ++(2,0) node (2) {} node [above] {A}
-			to[R, R=\SI{3.9}{\kilo\ohm}, -*] ++(2,0) node (3) {} node [right] {}
+\draw (0,0) to[V, v=\SI{12}{\volt},-*]   ++(0,2) coordinate (1) node [left] {}
+            to[R, R=\SI{1.2}{\kilo\ohm}, -*] ++(2,0) coordinate (2) node [above] {A}
+			to[R, R=\SI{3.9}{\kilo\ohm}, -*] ++(2,0) coordinate (3) node [right] {}
 			to[R, R=\SI{2.7}{\kilo\ohm}]     ++(0,-2)
 			to[short]          (0,0)
 	    (1) to[short]          ++(0,1)
@@ -485,9 +497,9 @@ Gegeven is het netwerk in figuur~\ref{fig:gelthevenin4}. Bepaal het thévenin-ve
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[R=\SI{30}{\ohm},-*] ++(0,2) node (1) {}
-            to[V, v<=\SI{10}{\volt},-*] ++(2,0) node (2) {}
-            to[V, v<=\SI{10}{\volt},-*] ++(2,0) node (3) {} node[right] {A}
+\draw (0,0) to[R=\SI{30}{\ohm},-*] ++(0,2) coordinate (1)
+            to[V, v<=\SI{10}{\volt},-*] ++(2,0) coordinate (2)
+            to[V, v<=\SI{10}{\volt},-*] ++(2,0) coordinate (3) node[right] {A}
 			to[R=\SI{30}{\ohm}] ++(0,-2) node[right] {B}
 			to[short] (0,0)
 		(1) to[short] ++(0,1.5)
@@ -512,7 +524,7 @@ Gegeven is het netwerk in figuur~\ref{fig:gelsuperpos1}. Bepaal de spanning $U_x
 			to[R=\SI{4}{\ohm}] ++(3,0) node[above] {$U_x$}
 			to[short] ++(2,0)
 			to[R=\SI{8}{\ohm}] ++(0,-2)
-			to[short] ++(-2,0) node (1) {}
+			to[short] ++(-2,0) coordinate (1)
 			to[short,*-.] (0,0)
 		(1) to[I,l=$\dfrac{1}{4}$\si{\ampere},*-*] ++(0,2)
 ;
@@ -535,10 +547,10 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnetwerkvoortheveninanalysis3}. Bere
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V=\SI{12}{\volt}]   ++(0,4) %node (1) {} node [left] {}
             to[short,-*] ++(2,0) node (1) {}
-            to[R=\SI{10}{\ohm},-*] ++(0,-2) node (A) {} node[left] {A}
-			to[R=\SI{20}{\ohm},-*] ++(0,-2) node (C) {}
+            to[R=\SI{10}{\ohm},-*] ++(0,-2) coordinate (A) node[left] {A}
+			to[R=\SI{20}{\ohm},-*] ++(0,-2) coordinate (C)
         (1) to[short] ++(2,0)
-            to[R=\SI{40}{\ohm},-*] ++(0,-2) node (B) {} node[right] {B}
+            to[R=\SI{40}{\ohm},-*] ++(0,-2) coordinate (B) node[right] {B}
             to[R=\SI{20}{\ohm}] ++(0,-2)
             to[short, -.] (0,0)
         (A) to[R=$R_X$] (B)
@@ -564,7 +576,7 @@ Bepaal de waarde van $R_x$.
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V, v=\SI{8}{\volt}]   ++(0,2) %node (1) {} node [left] {}
-            to[R=\SI{2}{\ohm},-*] ++(2,0) node (A) {} node[above] {$U_x$}
+            to[R=\SI{2}{\ohm},-*] ++(2,0) coordinate (A) node[above] {$U_x$}
 			to[R=\SI{4}{\ohm}] ++(2,0)
 			to[V, v<=\SI{6}{\volt}]   ++(0,-2) %node (1) {} node [left] {}
             to[short, -.] (0,0)
@@ -590,13 +602,13 @@ Gegeven is het netwerk in figuur~\ref{fig:gelnodal3}. Bepaal de spanning $U_2$ e
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to[V=$U_1$] ++(0,4)
             to[short] ++(2,0)
-            to[R=$R_{in}$, v=$U_{in}$,-*] ++(0,-2) node (1) {} node[left] {$U_x$}
+            to[R=$R_{in}$, v=$U_{in}$,-*] ++(0,-2) coordinate (1) node[left] {$U_x$}
             to[R=$R_1$,-*] ++(0,-2)
 			node[sground] {}
             to[short,-.] ++(-2,0)
             to[open] ++(6.5,4) %node (3) {} node[right] {$U_{2}$}
             to[R=$R_{out}$,] ++(-2,0)
-            to[cV, v_<=$aU_{in}$] ++(0,-2) node (2) {}
+            to[cV, v_<=$aU_{in}$] ++(0,-2) coordinate (2)
 			to[short] ++(0,-2) node (2) {}
 			to[short] ++(-2.5,0)
 		(1) to[short] ++(2.5,0)
@@ -617,9 +629,9 @@ Gegeven is het netwerk in figuur~\ref{fig:gelwheatstone1}. Bepaal de waarde van 
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[V=\SI{12}{\volt},-*]   ++(0,2) node (1) {} node [left] {}
-            to[R=\SI{1.2}{\kilo\ohm}, -*] ++(2,0) node (2) {} node [above] {A}
-			to[R=\SI{1.5}{\kilo\ohm}, -*] ++(2,0) node (3) {} node [right] {B}
+\draw (0,0) to[V=\SI{12}{\volt},-*]   ++(0,2) coordinate (1) node [left] {}
+            to[R=\SI{1.2}{\kilo\ohm}, -*] ++(2,0) coordinate (2) node [above] {A}
+			to[R=\SI{1.5}{\kilo\ohm}, -*] ++(2,0) coordinate (3) node [right] {B}
 			to[R=\SI{2.2}{\kilo\ohm}]     ++(0,-2)
 			to[short]          (0,0)
 	    (1) to[short]          ++(0,1)
@@ -632,6 +644,37 @@ Gegeven is het netwerk in figuur~\ref{fig:gelwheatstone1}. Bepaal de waarde van 
 \end{tikzpicture}
 \caption{Netwerk met spanningsbron en weerstanden.}
 \label{fig:gelwheatstone1}
+\end{figure}
+
+\item
+Gegeven is de opamp-schakeling in figuur~\ref{fig:gelopamp1}. De opamp wordt ideaal verondersteld. Bereken de spanningsversterking van $U_{in}$ naar $U_{out}$.
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+
+\draw (0, 0) node[op amp] (opamp) {}
+      (opamp.-) to[short,-*] ++(-1, 0) coordinate (A)
+%      (opamp.+) -| ++(-1,-1) coordinate B) %node[sground] (B) {}
+      (opamp.+) to [short] ++(-1,0)
+      to [short,-*] ++(0,-1) coordinate (B)
+      (opamp.out) to [short,-*] ++(.5, 0) coordinate (X)
+      to[short, -*] ++(1,0) coordinate (C) node[right,xshift=10pt] {$U_{out}$}
+%      to [short] ++(0,0) coordinate (C)
+      (C |- B) coordinate (XXX) %node[sground]{}  %node[ocirc]{}
+      (A) to[R, l=\SI{10}{\kilo\ohm}] ++(-3, 0) coordinate (D) %-- ++(-1, 0) coordinate (D)
+      to [V<=$U_{in}$] (D |- B) coordinate (null) node[sground]{}
+      (A) |- ++(0,1) coordinate (L1)
+%      to [R=\SI{33}{\kilo\ohm}] ++(2,0) -| (opamp.out)
+      to [R=\SI{33}{\kilo\ohm}] ++(3,0) -| (X)
+%      to [R=\SI{33}{\kilo\ohm}] ++(2,0) -| (X)
+%      to[short,-o] ++(1,0)
+%     to [short] {0,0}
+(null) to [short,-o] (XXX)
+%       () [R] (XXX)
+;
+\end{tikzpicture}
+\caption{Opamp met weerstanden.}
+\label{fig:gelopamp1}
 \end{figure}
 
 \itemstar
@@ -654,5 +697,7 @@ In figuur~\ref{fig:gelcube1} is een kubus van weerstanden (niet getekend) te zie
 \end{figure}
 
 Hint: Plaats een denkbeeldige spanningsbron van \SI{1}{\volt} tussen de punten A en B en stel de vergelijkingen op voor de onbekende spanningen in het netwerk. Op deze manier kan de stroom die de denkbeeldige bron levert worden berekend en dus ook de weerstand die de bron ondervindt.
+
+
 
 \end{enumerate}
