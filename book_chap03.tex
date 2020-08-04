@@ -1,0 +1,250 @@
+\chapter{Spanning, stroom en vermogen}
+In dit hoofdstuk zullen we wat nader kijken naar spanning, stroom en vermogen. We introduceren belangrijke begrippen die nodig zijn in het oplossen van elektrotechnische vraagstukken. Bekende eigenschappen zijn \textsl{effectieve spanning en stroom} en \textsl{gemiddeld vermogen}.
+
+\section{Gelijkspanning en gelijkstroom}
+Een gelijkspanning of gelijkstroom is een spanning of stroom die niet van \textsl{polariteit} veranderd. Van polariteit veranderen betekent dat een spanning of stroom negatief wordt als de spanning of stroom positief is en positief is als de spanning of stroom negatief is. De spanning of stroom gaat dan door de 0 heen. In figuur~\ref{fig:spaconstgelijkspanning} is een \textsl{constante} gelijkspanning te zien. De spanning wisselt niet van polariteit en is constant over de tijd. De spanning veranderd niet over de tijd. In figuur~\ref{fig:spawisgelijkspanning} is een gelijkstroom te zien. De stroom wisselt niet van polariteit maar wel in de tijd. We noemen dit een wisselende gelijkstroom.
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\begin{axis}[
+    width=0.8\textwidth, height=0.4\textwidth,
+    axis lines=middle,
+    xlabel={},
+    xticklabels={},
+    ylabel={},
+    yticklabels={$U$},
+    ytick=0.5,
+    xlabel style={
+        at={(ticklabel cs:1.05)},
+        anchor=west,
+    },
+    xlabel={t},
+    xmajorticks=false
+    ]
+\addplot[domain=0:1,chapnumcolor] {0.5};
+\end{axis}
+\end{tikzpicture}
+\caption{Een constante gelijkspanning.}
+\label{fig:spaconstgelijkspanning}
+\end{subfigure}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\begin{axis}[
+    width=0.8\textwidth, height=0.4\textwidth,
+    axis lines=middle,
+    xticklabels={},
+    ylabel={},
+    yticklabels={$i(t)$},
+    ytick=3.3,
+%    ymajorticks=false,
+    xlabel style={
+        at={(ticklabel cs:1.05)},
+        anchor=west,
+    },
+    xlabel={t},
+    xmajorticks=false,
+    ymin=0
+    ]
+\addplot[domain=20*pi:25*pi,chapnumcolor,samples=101] {2+exp(sin(\x r))*cos(\x r))};
+\end{axis}
+\end{tikzpicture}
+\caption{Een wisselende gelijkstroom.}
+\label{fig:spawisgelijkspanning}
+\end{subfigure}
+\caption{Voorbeelden van gelijkspanning en -stroom.}
+\end{figure}
+
+
+\section{Wisselspanning en wisselstroom}
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[bookcircuit]
+\begin{axis}[
+    width=0.8\textwidth, height=0.4\textwidth,
+    axis lines=middle,
+    xticklabels={},
+    ylabel={},
+    yticklabels={$u(t)$},
+    ytick=1,
+    xlabel style={
+        at={(ticklabel cs:1.05)},
+        anchor=west,
+    },
+    xlabel={t},
+    xmajorticks=false,
+    ]
+\addplot[domain=0:2*pi,chapnumcolor,samples=101] {sin(deg(2*x))};
+\end{axis}
+\end{tikzpicture}
+\caption{Een sinusvormige wisselspanning.}
+\label{fig:spawisselspanning}
+\end{subfigure}
+\begin{subfigure}[b]{0.48\textwidth}
+\begin{tikzpicture}[bookcircuit]
+\begin{axis}[
+    width=0.8\textwidth, height=0.4\textwidth,
+    axis lines=middle,
+    xticklabels={},
+    ylabel={},
+    yticklabels={$t(t)$},
+    ytick=1,
+    xlabel style={
+        at={(ticklabel cs:1.05)},
+        anchor=west,
+    },
+    xlabel={t},
+    xmajorticks=false
+    ]
+\addplot [domain=0:2*pi, samples=101,chapnumcolor,samples=201] plot (\x, {exp(mod(\x,2)-1)-1.5});
+%\addplot [domain=0:2*pi, samples=101,red] plot (\x, {mod(\x,2)-1});
+\end{axis}
+\end{tikzpicture}
+\caption{Een exponentiële wisselstroom.}
+\label{fig:spawisselspanning2}
+\end{subfigure}
+\caption{Voorbeelden van wisselspanning en -stroom.}
+\end{figure}
+
+
+\section{Momentele waarde}
+De momentele waarde van een signaal is de waarde van een signaal op een bepaald tijdstip. Stel dat we een spanning hebben met de functie:
+%
+\begin{equation}
+u(t) = 12\sin(100t)
+\end{equation}
+%
+dan is de momentele spanning op tijdstip $t=\SI{2}{ms}$:
+%
+\begin{equation}
+u(\SI{2}{ms}) = 12\sin(100\cdot\num{2e-3}) =12\sin(\num{0.2})=\SI{2.384}{V}
+\end{equation}
+
+Stel dat we een stroom hebben met de functie:
+%
+\begin{equation}
+i(t) = 2\sin(100t)
+\end{equation}
+%
+dan is de momentele stroom op tijdstip $t=\SI{2}{ms}$:
+%
+\begin{equation}
+i(\SI{2}{ms}) = 2\sin(100\cdot\num{2e-3}) =2\sin(\num{0.2})=\SI{0.397}{A}
+\end{equation}
+%
+Het momentele vermogen van een spanning en een gerelateerde stroom is:
+%
+\begin{equation}
+p(t) = u(t)\cdot i(t)
+\end{equation}
+%
+Vullen we hier de eerder genoemde spanning en stroom in dan krijgen we:
+%
+\begin{equation}
+p(t) = 12\sin(100t)\cdot2\sin(100t) = 24\sin^2(100t)
+\end{equation}
+\section{Gemiddelde spanning en stroom}
+
+
+\begin{equation}
+U_{gem} = \dfrac{1}{T}\int_0^Tu(t)\,\mathrm{d}t
+\end{equation}
+
+\section{Effectieve spanning en stroom}
+In de elektrotechniek neemt het begrip \textsl{effectieve waarde} een zeer belangrijke plaats in.
+Anders dan het begrip gemiddelde waarde, dat voor vele fysische grootheden betekenis heeft, geldt de effectieve waarde alleen voor elektrische spanningen en stromen. De definitie van de effectieve waarde van een spanning is:
+
+\begin{displayquote}
+De effectieve waarde van een spanning is de waarde van een denkbeeldige constante gelijkspanning, die in dezelfde tijd dezelfde warmte-ontwikkeling geeft in dezelfde weerstand.
+\end{displayquote}
+
+De definitie van de effectieve stroom is:
+
+\begin{displayquote}
+De effectieve waarde van een stroom is de waarde van een denkbeeldige constante gelijkstroom, die in dezelfde tijd dezelfde warmte-ontwikkeling geeft in dezelfde weerstand.
+\end{displayquote}
+
+Voor het bepalen van de effectieve spanning van een bron maken we gebruik van de netwerken in figuur~\ref{fig:spanetwereffectief}. Links is het netwerk te zien met de denkbeeldige gelijkspanning als bron. Rechts is het netwerk te zien met de spanningsbron waarvan we de effectieve waarde willen berekenen.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[V=$U_{eff}$] ++(0,2)
+            to[short,i=$I_{eff}$] ++(2,0)
+            to[R=$R$] ++(0,-2)
+            to[short,-.] (0,0);
+\draw (5,0) to[V=$u(t)$] ++(0,2)
+            to[short,i=$i(t)$] ++(2,0)
+            to[R=$R$] ++(0,-2)
+            to[short,-.] (5,0);
+\end{tikzpicture}
+\caption{Netwerken voor het bepalen van de effectieve spanning.}
+\label{fig:spanetwereffectief}
+\end{figure}
+
+Als we de tijd waarover we meten gelijkstellen aan de periodetijd van het wisselspanningssignaal, dan kunnen gebruik maken van de ontwikkelde vermogens in beide schakelingen. We kunnen dus stellen dat:
+%
+\begin{equation}
+P_{gelijk} \overset{\mathrm{def}}{=} P_{wissel}
+\end{equation}
+%
+Nu is het vermogen ontwikkeld door de denkbeeldige gelijkspanning:
+%
+\begin{equation}
+P_{gelijk} = \dfrac{U^2_{eff}}{R}
+\end{equation}
+Het ontwikkelde vermogen ontwikkeld door de wisselspanning is:
+\begin{equation}
+P_{wissel} = \dfrac{1}{T}\int_0^T\dfrac{u^2(t)}{R}\,\mathrm{d}t
+\end{equation}
+%
+De ontwikkelde vermogens zijn gelijk, dus geldt:
+%
+\begin{equation}
+\dfrac{U^2_{eff}}{R} = \dfrac{1}{T}\int_0^T\dfrac{u^2(t)}{R}\,\mathrm{d}t
+\end{equation}
+%
+We schrappen aan beide kanten de weerstand $R$ en trekken de wortel uit het rechter lid:
+%
+\begin{equation}
+U_{eff} = \sqrt{\dfrac{1}{T}\int_0^Tu^2(t)\,\mathrm{d}t}
+\end{equation}
+%
+Het rechterlid berekent dus het gemiddelde van het kwadraat van de spanning over periodetijd $T$. Dit wordt de \textsl{Root Mean Square} genoemd, afgekort tot \textsl{RMS}.
+
+Voor een zuivere sinusvormige spanning met een frequentie $f$ geldt dan:
+%
+\begin{equation}
+\begin{split}
+U_{eff} &= \sqrt{\dfrac{1}{T}\int_0^T\hat{u}\sin^2(\omega t)\,\mathrm{d}t} \\
+        &= \hat{u}\sqrt{\dfrac{1}{T}\int_0^T\left(\dfrac{1}{2}-\dfrac{1}{2}\cos(2\omega t)\right)\,\mathrm{d}t} \\
+        &= \hat{u}\sqrt{\dfrac{1}{T}\left[\dfrac{1}{2}t\right]^T_0 - \underbrace{\dfrac{1}{T}\left[\dfrac{1}{4\omega}\sin(2\omega t)\right]^T_0}_0}
+\end{split}
+\end{equation}
+%
+De term rechts onder het wortelteken levert 0 op zodat we die term kunnen schrappen. We krijgen dan:
+%
+\begin{equation}
+\begin{split}
+U_{eff} &= \hat{u}\sqrt{\dfrac{1}{T}\left[\dfrac{1}{2}t\right]^T_0}
+      = \hat{u}\sqrt{\dfrac{1}{T}\dfrac{1}{2}T - 0}
+      = \hat{u}\sqrt{\dfrac{1}{2}}
+      = \hat{u}\dfrac{1}{2}\sqrt{2}
+\end{split}\end{equation}
+%
+Merk op dat de effectieve spanning onafhankelijk is van de frequentie. Voor het Nederlandse elektriciteitsnetwerk geldt dat de spanning zuivere sinusvormig is met $\hat{u}=\SI{325}{V}$. Dus geldt dat:
+%
+\begin{equation}
+U_{eff} = 325\cdot\dfrac{1}{2}\sqrt{2} \approx \SI{230}{V}
+\end{equation}
+%
+Voor een zuivere zaagtand- en driehoeksspanning geldt:
+%
+\begin{equation}
+U_{eff} =  \hat{u}\dfrac{1}{3}\sqrt{3} \approx 0,57735\, \hat{u}
+\end{equation}
