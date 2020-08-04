@@ -8,132 +8,13 @@
 \chapter{Rekenen met complexe getallen}
 \label{cha:complex}
 In de elektrotechniek wordt gebruik gemaakt van complexe getallen. Dit is een uitbreiding op de verzameling reële getallen. Het gebruik van complexe getallen zorgt ervoor dat ingewikkelde berekeningen met \textsl{sinusvormige signalen} eenvoudig kunnen worden uitgewerkt. De oorsprong van het gebruik van de complexe getallen komt voor uit het oplossen van differentiaalvergelijkingen.
-\iffalse
-Stel, we hebben het volgende schema met een spoel, een condensator en een schakelaar. Dit wordt een LC-kring genoemd en is te zien in figuur~\ref{fig:comlckring}.
-
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}[bookcircuit]
-\draw (0,0) to[L,l=$L$] ++(0,2) to[short,i=$i(t)$] ++(1,0) to [switch] ++(1.5,0) to [C,l_=$C$,v^=$U_0$] ++(0,-2) to [short,-.] (0,0);
-\end{tikzpicture}
-\caption{Een simpele LC-kring.}
-\label{fig:comlckring}
-\end{figure}
-
-Op tijdstip $t=\SI{0}{\second}$ is de beginspanning van de condensator en spoel $u(0_+)=U_0\ \si{\volt}$. Op hetzelfde tijdstip is beginstroom $i(0_+)=\SI{0}{\ampere}$. Dit zijn de beginvoorwaarden voor het netwerk.
-
-Volgens de spanningswet van Kirchoff geldt:
-\begin{equation}
-u(t) = u_L(t) = u_C(t)
-\end{equation}
-%
-Volgens de stroomwet van Kirchoff geldt:
-%
-\begin{equation}
-i(t) = i_L(t) = i_C(t)
-\end{equation}
-%
-Verder gelden de spanning-stroomrelaties van spoel en condensator:
-%
-\begin{equation}
-u_L(t) = -L\dfrac{\mathrm{d}i(t)}{\mathrm{d}t} \qquad \text{en} \qquad i(t) = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t}
-\end{equation}
-
-We willen graag een uitdrukking voor de spanning $u(t)$. Daarvoor moeten we de spanning-stroomrelatie van de spel anders opschrijven:
-%
-\begin{equation}
-u_L(t) = -L\dfrac{\mathrm{d}i(t)}{\mathrm{d}t} \quad\longrightarrow\quad i(t) = -\dfrac{1}{L}\int u(t) \mathrm{d}t
-\end{equation}
-%
-Zoals eerder vermeld, is de stroom door de spoel en de condensator identiek:
-%
-\begin{equation}
-i(t) = i_L(t) = i_C(t)
-\end{equation}
-%
-We kunnen dus de volgende vergelijking voor de spanning opstellen:
-%
-\begin{equation}
--\dfrac{1}{L}\int u(t) \mathrm{d}t = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t}
-\end{equation}
-%
-Beide kanten eenmaal differentiëren en delen door $C$:
-%
-\begin{equation}
--\dfrac{1}{LC}u(t) =\dfrac{\mathrm{d}^2u_C(t)}{\mathrm{d}t^2}
-\end{equation}
-%
-Nu brengen we de term aan de rechterkant van het isgelijkteken naar de linkerkant en schrappen het minteken:
-%
-\begin{equation}
-\dfrac{\mathrm{d}^2u_C(t)}{\mathrm{d}t^2} + \dfrac{1}{LC}u(t) = 0
-\end{equation}
-%
-De algemene oplossing voor deze lineaire differentiaalvergelijking met constante coëfficiënten is:
-%
-\begin{equation}
-u(t) = C_1\epowre{\lambda_1t} + C_2\epowre{\lambda_2t}
-\end{equation}
-%
-Voor het vinden van $\lambda_1$ en $\lambda_2$ moeten we de wortels bepalen van de karakteristieke vergelijking:
-%
-\begin{equation}
-\lambda^2 = -\dfrac{1}{LC}
-\end{equation}
-%
-Helaas heeft deze vergelijking geen reële oplossingen. We kunnen $\lambda_{1,2}$ niet bepalen.
-
-%
-%\begin{equation}
-%i(t) = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t} \quad\longrightarrow\quad u_C(t) = \dfrac{1}{C}\int i(t)\mathrm{d}t
-%\end{equation}
-%%
-%Zoals eerder vermeld, zijn de spanning over de spoel en de condensator identiek:
-%%
-%\begin{equation}
-%u(t) = u_L(t) = u_C(t)
-%\end{equation}
-%
-%%
-
-
-
-% Stel, we hebben een lineaire differentiaalvergelijking met constante coëfficiënten:
-%%
-%\begin{equation}
-%\label{equ:comdiffequ}
-%\dfrac{\mathrm{d}^2\,f(x)}{\mathrm{d}\,x^2} = -f(x)% \qquad\text{met }f(0)=1\text{, }f'(0) = 0
-%\end{equation}
-%%
-%Voor welke functie $f(x)$ geldt dat de tweede afgeleide de functie $f(x)$ is maar nu negatief? Er zijn twee functies die hier aan voldoen:
-%%
-%\begin{equation}
-%f(x) = 0 \qquad\vee\qquad f(x) = \sin{(x+C)}
-%\end{equation}
-%%
-%De oplossing $f(x)=0$ is triviaal en negeren we. In de tweede oplossing stellen we de constante $C$ op 0. Als oplossing krijgen we dus:
-%%
-%\begin{equation}
-%f(x) = \sin x
-%\end{equation}
-%%
-%Bij het oplossen van lineaire differentiaalvergelijkingen met constante coëfficiënten maken we gebruik van de \textsl{karakteristieke vergelijking}:
-%%
-%\begin{equation}
-%\lambda^2 = -1
-%\end{equation}
-%%
-%Deze vergelijking heeft geen reële oplossingen. Er is geen getal dat gekwadrateerd $-1$ oplevert. Toch
-%stelt de vergelijking in~\eqref{equ:comdiffequ} een fysisch probleem voor. Er moeten dus oplossingen zijn.
-%%
-%
-\fi
 
 \section{Imaginaire getallen}
 
 Bij het vinden van de wortels van de vergelijking:
 %
 \begin{equation}
+\label{equ:Aa2minusb2}
 a^2 - b^2 = 0
 \end{equation}
 %
@@ -156,7 +37,15 @@ We hebben echter een probleem bij de vergelijking:
 a^2 + b^2 = 0
 \end{equation}
 %
-die, zoals bekend is, geen reële oplossingen heeft. We introduceren nu een constante $\imunit$ zodanig dat geldt dat:
+die, zoals bekend is, geen reële oplossingen heeft.
+We kunnen de vergelijking echter ook schrijven als:
+%
+\begin{equation}
+a^2 - (-1)b^2 = 0
+\end{equation}
+%
+We willen deze vergelijking nu oplossen zoals we dat deden in~~\ref{equ:Aa2minusb2}. We hebben echter een constante nodig waarvan het kwadraat $-1$ is. Helaas is er geen reëel getal bekend waarvan het kwadraat $-1$ is.
+We kunnen deze vergelijking toch oplossen door gebruik te maken van een speciale constante. We introduceren nu een constante $\imunit$ zodanig dat geldt dat:
 %
 \begin{equation}\fboxsep=7pt
 \boxed{\imunit^2 = -1}
@@ -435,9 +324,9 @@ Een complex getal kan worden afgebeeld als punt op het \textsl{complexe vlak}. I
 
 \section{Poolcoördinaten}
 
-Als we nu in het complexe vlak een \textsl{wijzer} tekenen vanuit de oorsprong (het complexe getal $0+\imunit0$) naar het complexe punt $\underline{z}$, dan kunnen we het punt $\underline{z}$ ook uitdrukken in \textsl{poolcoördinaten}. Hierbij worden een lengte vanuit de oorsprong tot aan het punt $\underline{z}$ en een hoek t.o.v.\@ de x-as opgegeven. In figuur~\ref{fig:compuntinhetcomplexevlak} zijn de wijzer en het punt $\underline{z}$ getekend.
+Als we nu in het complexe vlak een \textsl{wijzer} tekenen vanuit de oorsprong (het complexe getal $0+\imunit0$) naar het complexe punt $\underline{z}$, dan kunnen we het punt $\underline{z}$ ook uitdrukken in \textsl{poolcoördinaten}. Hierbij worden een lengte vanuit de oorsprong tot aan het punt $\underline{z}$ en een hoek die de wijzer heeft t.o.v.\@ de x-as opgegeven. In figuur~\ref{fig:compuntinhetcomplexevlak} zijn de wijzer en het punt $\underline{z}$ getekend.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=3.6] % scale is radius in cm
 \def\uangle{33.7}
@@ -504,7 +393,7 @@ Ten aanzien van de poolcoördinaten kunnen we nog het volgende melden:
 
 
 \section{De stelling van Euler}
-Euler heeft de relatie gelegd tussen de complexe e-macht en de goniometrische functies sinus en cosinus:
+Euler (1707-1783) heeft de relatie gelegd tussen de complexe e-macht en de goniometrische functies sinus en cosinus:
 %
 \begin{equation}
 \boxed{\epowim{\varphi} = \cis{\varphi}}
@@ -568,3 +457,141 @@ We kunnen een complex getal nu op drie manieren uitdrukken: met poolcoördinaten
 \begin{equation}
 r\angle\varphi = r\epowim{\varphi} = r\cos\varphi + \imunit\, r\sin\varphi
 \end{equation}
+
+\section{Oplossen van elektrotechnische vraagstukken}
+\iftrue
+Stel, we hebben het volgende schema met een spoel, een condensator en een schakelaar. Dit wordt een LC-kring genoemd en is te zien in figuur~\ref{fig:comlckring}.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[bookcircuit]
+\draw (0,0) to[L,l=$L$] ++(0,2) to[short,i=$i(t)$] ++(1,0) to [switch] ++(1.5,0) to [C,l_=$C$,v^=$U_0$] ++(0,-2) to [short,-.] (0,0);
+\end{tikzpicture}
+\caption{Een simpele LC-kring.}
+\label{fig:comlckring}
+\end{figure}
+
+Op tijdstip $t=\SI{0}{\second}$ is de beginspanning van de condensator en spoel $u(0_+)=U_0\ \si{\volt}$. Op hetzelfde tijdstip is beginstroom $i(0_+)=\SI{0}{\ampere}$. Dit zijn de beginvoorwaarden voor het netwerk.
+
+Volgens de spanningswet van Kirchoff geldt:
+\begin{equation}
+u(t) = u_L(t) = u_C(t)
+\end{equation}
+%
+Volgens de stroomwet van Kirchoff geldt:
+%
+\begin{equation}
+i(t) = i_L(t) = i_C(t)
+\end{equation}
+%
+Verder gelden de spanning-stroomrelaties van spoel en condensator:
+%
+\begin{equation}
+u_L(t) = -L\dfrac{\mathrm{d}i(t)}{\mathrm{d}t} \qquad \text{en} \qquad i(t) = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t}
+\end{equation}
+
+We willen graag een uitdrukking voor de spanning $u(t)$. Daarvoor moeten we de spanning-stroomrelatie van de spoel anders opschrijven:
+%
+\begin{equation}
+u_L(t) = -L\dfrac{\mathrm{d}i(t)}{\mathrm{d}t} \quad\longrightarrow\quad i(t) = -\dfrac{1}{L}\int u(t) \mathrm{d}t
+\end{equation}
+%
+Zoals eerder vermeld, is de stroom door de spoel en de condensator identiek:
+%
+\begin{equation}
+i(t) = i_L(t) = i_C(t)
+\end{equation}
+%
+We kunnen dus de volgende vergelijking voor de spanning opstellen:
+%
+\begin{equation}
+-\dfrac{1}{L}\int u(t) \mathrm{d}t = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t}
+\end{equation}
+%
+Beide kanten eenmaal differentiëren en delen door $C$:
+%
+\begin{equation}
+-\dfrac{1}{LC}u(t) =\dfrac{\mathrm{d}^2u_C(t)}{\mathrm{d}t^2}
+\end{equation}
+%
+Nu brengen we de term aan de rechterkant van het isgelijkteken naar de linkerkant en schrappen het minteken:
+%
+\begin{equation}
+\dfrac{\mathrm{d}^2u_C(t)}{\mathrm{d}t^2} + \dfrac{1}{LC}u(t) = 0
+\end{equation}
+%
+We hebben nu een lineaire differentiaalvergelijking met constante coëfficiënten. We kunnen die oplossen door de wortels van de \textsl{karakteristieke vergelijking} te bepalen. De karakteristieke vergelijking is:
+%
+\begin{equation}
+\lambda^2 + \dfrac{1}{LC}=0
+\end{equation}
+Voor het vinden van $\lambda_1$ en $\lambda_2$ moeten we de wortels bepalen van de karakteristieke vergelijking:
+%
+\begin{equation}
+\lambda^2 = -\dfrac{1}{LC}
+\end{equation}
+%
+We introduceren nu een hulpvariabele $\omega$ (omega) om de breuk te vermijden. We zijn schrijven dan:
+%
+\begin{equation}
+\lambda^2 = -\omega^2 \qquad \text{met }\omega^2=\dfrac{1}{LC}
+\end{equation}
+%
+Helaas heeft deze vergelijking geen reële oplossingen, maar heeft wel imaginaire oplossingen:
+%
+\begin{equation}
+\lambda_1 = \imunit\omega \quad\wedge\quad \lambda_2 = -\imunit\omega
+\end{equation}
+%
+Nu is de algemene oplossing voor deze lineaire differentiaalvergelijking met constante coëfficiënten:
+%
+\begin{equation}
+u(t) = C_1\epowre{\lambda_1t} + C_2\epowre{\lambda_2t}
+\end{equation}
+%
+
+%
+%\begin{equation}
+%i(t) = C\dfrac{\mathrm{d}u_C(t)}{\mathrm{d}t} \quad\longrightarrow\quad u_C(t) = \dfrac{1}{C}\int i(t)\mathrm{d}t
+%\end{equation}
+%%
+%Zoals eerder vermeld, zijn de spanning over de spoel en de condensator identiek:
+%%
+%\begin{equation}
+%u(t) = u_L(t) = u_C(t)
+%\end{equation}
+%
+%%
+
+
+
+% Stel, we hebben een lineaire differentiaalvergelijking met constante coëfficiënten:
+%%
+%\begin{equation}
+%\label{equ:comdiffequ}
+%\dfrac{\mathrm{d}^2\,f(x)}{\mathrm{d}\,x^2} = -f(x)% \qquad\text{met }f(0)=1\text{, }f'(0) = 0
+%\end{equation}
+%%
+%Voor welke functie $f(x)$ geldt dat de tweede afgeleide de functie $f(x)$ is maar nu negatief? Er zijn twee functies die hier aan voldoen:
+%%
+%\begin{equation}
+%f(x) = 0 \qquad\vee\qquad f(x) = \sin{(x+C)}
+%\end{equation}
+%%
+%De oplossing $f(x)=0$ is triviaal en negeren we. In de tweede oplossing stellen we de constante $C$ op 0. Als oplossing krijgen we dus:
+%%
+%\begin{equation}
+%f(x) = \sin x
+%\end{equation}
+%%
+%Bij het oplossen van lineaire differentiaalvergelijkingen met constante coëfficiënten maken we gebruik van de \textsl{karakteristieke vergelijking}:
+%%
+%\begin{equation}
+%\lambda^2 = -1
+%\end{equation}
+%%
+%Deze vergelijking heeft geen reële oplossingen. Er is geen getal dat gekwadrateerd $-1$ oplevert. Toch
+%stelt de vergelijking in~\eqref{equ:comdiffequ} een fysisch probleem voor. Er moeten dus oplossingen zijn.
+%%
+%
+\fi
