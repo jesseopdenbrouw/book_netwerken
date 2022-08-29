@@ -302,7 +302,7 @@ is dan het potentiaal bij de `$-$'. Over de weerstand treedt \textsl{spanningsva
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
-\draw (0,0) to [V=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R=$R$, v<=$U_R$] ++(0,-2) to [short,-.] (0,0)
+\draw (0,0) to [V=$U$] ++(0,2) to [short, i=$I$] ++(2.5,0) to [R=$R$, v=$U_R$] ++(0,-2) to [short,-.] (0,0)
 ;
 %%%\draw (-2,0) to[short, i=$I$] (0,0);
 %%%\draw (0,0) to[R=$R$, v_>=$U$] (2,0);
@@ -1884,7 +1884,8 @@ Hieruit berekenen we de spanning $U_x$ en de stroom $I_x$:
 \begin{equation}
 \begin{split}
 U_{x} &= U_{ax} + U_{bx} = 3\frac{1}{3} + 1 = 4\frac{1}{3}\si{\volt} \\
-I_{x} &= I_{ax} + I_{bx} = 1\frac{1}{9} + \frac{1}{3} = \num{1}\SI[quotient-mode = fraction,fraction-function = \dfrac]{4 / 9}{\ampere} \\
+%I_{x} &= I_{ax} + I_{bx} = 1\frac{1}{9} + \frac{1}{3} = \num{1}\SI[quotient-mode = fraction,fraction-function = \dfrac]{4/9}{\ampere} \\
+I_{x} &= I_{ax} + I_{bx} = 1\frac{1}{9} + \frac{1}{3} = 1\frac{4}{9}\si{\ampere} \\
 \end{split}
 \end{equation}
 %
@@ -2088,7 +2089,7 @@ I_c = 100I_b = \num{100}\cdot\num{100e-6} = \SI{10}{\milli\ampere}
 De collectorstroom vloeit ook door de weerstand van \SI{500}{\ohm}. De spanningsval over deze weerstand is:
 %
 \begin{equation}
-U_{500\Omega} = \SI{10e-3}\cdot{500} = \SI{5}{\volt}
+U_{500\Omega} = \num{10e-3}\cdot{500} = \SI{5}{\volt}
 \end{equation}
 %
 De spanning op de collector (t.o.v.\@ de referentie) is dan \SI{7}{\volt}. We kunnen de relatie van de ingangsstroom naar de collectorspanning als volgt beschrijven:
@@ -2651,7 +2652,7 @@ Met behulp van de matrixrekenkunde vinden we voor de spanningen en de stroom: $U
 \subsection{Gestuurde bronnen}
 Naast onafhankelijke bronnen kan een netwerk ook gestuurde bronnen bevatten. Dezelfde regels als voor onafhankelijke bronnen kunnen gebruikt worden, alleen is de spanning of stroom die de bron opwekt afhankelijk van een andere spanning of stroom in het netwerk. We zullen dit aantonen met behulp van het netwerk in figuur~\ref{fig:gelnetwerkmetccvs}. \textbf{Voor het opstellen van de vergelijkingen is het handig om met geleidingen te werken en niet met weerstanden}. Bij het gebruik van weerstanden krijgen we steeds breuken, bij gebruik van geleidingen niet. Zie ook paragraaf~\ref{sec:gelgeleiding}.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[bookcircuit]
 \draw (0,0) to [V=$U$] ++(0,2) node [left] {$U_1$}
@@ -2667,7 +2668,7 @@ Naast onafhankelijke bronnen kan een netwerk ook gestuurde bronnen bevatten. Dez
 \label{fig:gelnetwerkmetccvs}
 \end{figure}
 
-In het netwerk is een stroomgestuurde spanningsbron opgenomen. Deze bron levert een spanning die rechtevenredig is met de stroom $I_1$. De evenredigheidsfactor $\alpha$ heeft de dimensie $\ohm$. 
+In het netwerk is een stroomgestuurde spanningsbron opgenomen. Deze bron levert een spanning die rechtevenredig is met de stroom $I_1$. De evenredigheidsfactor $\alpha$ heeft de dimensie \si{\ohm}. 
 We merken op dat \'e\'en uiteinde van bron $U$ aan de referentie ligt. Dat betekent dat $U_1$ bekend is, namelijk $U_1=U$. Er zijn nog twee vergelijkingen nodig om spanningen $U_2$ en $U_3$ te bepalen.
 
 Voor $U_2$ geldt:
