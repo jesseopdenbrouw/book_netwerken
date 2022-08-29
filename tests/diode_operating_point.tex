@@ -1,24 +1,38 @@
+%%
+%%
+%% LaTeX/TikZ sample code to plot and calculate the diode
+%% operating point with known circuit parameters
+%%
+%% (c)2021, J. op den Brouw <J.E.J.opdenBrouw@hhs.nl>
+%%
+%%
 \documentclass[a4paper,fleqn]{article}
 \usepackage[showframe]{geometry}
 \usepackage[latin1]{inputenc}
 \usepackage{nimbusmono}
-\usepackage{charter}
 \usepackage[bitstream-charter]{mathdesign}
 \usepackage[stretch=10]{microtype}
-\usepackage[dutch]{babel}
+\usepackage[english]{babel}
 \usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=sl,up]{caption}
-\usepackage[labelformat=simple,font=footnotesize,format=plain,labelfont=bf,textfont=sl]{subcaption}
 \captionsetup[figure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
 \captionsetup[table]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
 \captionsetup[subfigure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
 \captionsetup[subtable]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
-\renewcommand\thesubfigure{(\alph{subfigure})}
-\renewcommand\thesubtable{(\alph{subtable})}
 \usepackage{sansmath}
 \usepackage{mathtools}
 \setlength{\mathindent}{1em}
-\DeclareMathSymbol{,}{\mathord}{letters}{"3B}
 \usepackage{parskip}
+\usepackage{siunitx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Circuit dimensions for standard silicon diode
+%
+\newcommand{\n}{1.0}                  % Ideality factor
+\newcommand{\Is}{0.0000000001}        % Reverse saturation current in mA
+\newcommand{\Vs}{1.0}                 % The voltage source
+\newcommand{\Rs}{0.025}               % The series resistor in kOhm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,192 +41,102 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{tikz}
-\usepackage[european,betterproportions,americaninductors]{circuitikz}
-%\usepackage[]{circuitikz}
+\usepackage[betterproportions]{circuitikz}
 \usepackage{pgfplots}
 \usetikzlibrary{intersections}
 \usepgfplotslibrary{units}
 
 % New dashed-dotted style
-\tikzstyle{loosely dashdotted} = [dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt]
+%\tikzstyle{loosely dashdotted} = [dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt]
 % Directory prefix for Gnuplot plots
 \tikzset{prefix=gnuplot/}
 % Bipoles have the same line witdh as the wires
 \ctikzset{bipoles/thickness=1}
-% Reinitialize the generic box for European resistor
-%%%\ctikzset{bipoles/generic/height/.initial=.20}
-%%%\ctikzset{bipoles/generic/width/.initial=.60}
-
-
-% Get the x and y coordinates of a point
-\makeatletter
-\newcommand{\gettikzxy}[3]{%
-  \tikz@scan@one@point\pgfutil@firstofone#1\relax
-  \global\edef#2{\the\pgf@x}%
-  \global\edef#3{\the\pgf@y}%
-}
-\makeatother
 
 % Transform x coordinate to graph coordinate
 \makeatletter
-\newcommand\transformxdimension[1]{
-    \pgfmathparse{((#1/\pgfplots@x@veclength)+\pgfplots@data@scale@trafo@SHIFT@x)/10^\pgfplots@data@scale@trafo@EXPONENT@x}
+\newcommand\transformxdimension[1]{%
+    \pgfmathparse{((#1/\pgfplots@x@veclength)+\pgfplots@data@scale@trafo@SHIFT@x)/10^\pgfplots@data@scale@trafo@EXPONENT@x}%
 }
 % Transform y coordinate to graph coordinate
-\newcommand\transformydimension[1]{
-    \pgfmathparse{((#1/\pgfplots@y@veclength)+\pgfplots@data@scale@trafo@SHIFT@y)/10^\pgfplots@data@scale@trafo@EXPONENT@y}
+\newcommand\transformydimension[1]{%
+    \pgfmathparse{((#1/\pgfplots@y@veclength)+\pgfplots@data@scale@trafo@SHIFT@y)/10^\pgfplots@data@scale@trafo@EXPONENT@y}%
 }
 \makeatother
-
-%%%\pgfplotsset{xticklabel={$\mathsf{\pgfmathprintnumber{\tick}}$},
-%%%             yticklabel={$\mathsf{\pgfmathprintnumber{\tick}}$},
-%%%             every axis/.append style={font=\sffamily}
-%%%}
-
-%% Create a Dutch version of a voltage source
-\makeatletter
-%% Output routine for voltage sources
-\def\pgf@circ@drawvoltagegenerator{
-	\ifpgf@circuit@bipole@voltage@below
-		coordinate (pgfcirc@Vfrom) at ($(\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.-120)$)
-		coordinate (pgfcirc@Vto) at ($(\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.-60)$)
-	\else
-		coordinate (pgfcirc@Vfrom) at ($ (\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.120)$)
-		coordinate (pgfcirc@Vto) at ($ (\ctikzvalof{bipole/name}.center) ! \ctikzvalof{voltage/bump a} ! (\ctikzvalof{bipole/name}.60)$)
-	\fi
-	\ifpgf@circuit@europeanvoltage
-		\ifpgf@circuit@bipole@voltage@backward
-				(pgfcirc@Vfrom)  node {$-$}  (pgfcirc@Vto) node {$+$}
-		\else
-				(pgfcirc@Vfrom)  node {$+$}  (pgfcirc@Vto) node {$-$}
-		\fi
-	\else% american voltage
-		\ifpgf@circuit@bipole@voltageoutsideofsymbol
-		% if it is a battery, must put + and -
-			\ifpgf@circuit@bipole@voltage@backward
-				(pgfcirc@Vfrom)  node {$-$}  (pgfcirc@Vto) node {$+$}
-			\else
-				(pgfcirc@Vfrom)  node {$+$}  (pgfcirc@Vto) node {$-$}
-			\fi
-		\fi
-	\fi
-}
-
-%% Create a Dutch version of the current source
-\makeatletter
-\pgfcircdeclarebipole{}{\ctikzvalof{bipoles/isource/height}}{isource}{\ctikzvalof{bipoles/isource/height}}{\ctikzvalof{bipoles/isource/width}}{
-    \pgfpointorigin
-    \pgfsetlinewidth{\pgfkeysvalueof{/tikz/circuitikz/bipoles/thickness}\pgfstartlinewidth}
-    \pgfpathellipse{\pgfpointorigin}{\pgfpoint{0}{\pgf@circ@res@up}}{\pgfpoint{\pgf@circ@res@left}{0}}
-    \pgfpathmoveto{\pgfpoint{\pgf@circ@res@step}{\pgf@circ@res@up}}
-    \pgfpathlineto{\pgfpoint{\pgf@circ@res@step}{\pgf@circ@res@down}}
-  \pgfusepath{draw}
-  \pgfscope
-    \pgfsetarrowsend{latex'}
-    \pgfpathmoveto{\pgfpoint{0.8\pgf@circ@res@left}{1.3\pgf@circ@res@up}}
-    \pgfpathlineto{\pgfpoint{0.8\pgf@circ@res@right}{1.3\pgf@circ@res@up}}
-    \pgfusepath{draw}   %draw arrow
-  \endpgfscope
-}
-\makeatother
-
-\usepackage{sansmath}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
+% kT/q for 25 C
+%\pgfmathparse{0.861733033*0.2985/10.0}\pgfmathresult
+
 \pagestyle{empty}
 
-\section{Belastingskarakteristiek diode en weerstand}
+\section*{Operating point of a diode}
 
-De schakeling:
+The circuit is shown in Figure~\ref{fig:1}:
+
 \begin{figure}[!ht]
 \centering
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[V_>=$U_B$] (0,-2);
-\draw (0,0) to[R=$R$, -*] (2,0);
+\draw (0,0) to[V_<=$V_S$] (0,-2);
+\draw (0,0) to[R=$R_S$, -*] (2,0);
 \draw (2,0) to[short, i=$I_D$] (4,0);
 \draw (4,0) to[empty diode, l=$D$] (4,-2);
 \draw (4,-2) to[short, -*] (2,-2);
 \draw (2,-2) to[short] (0,-2);
-\draw[<->,shorten <=5pt,shorten >=5pt,thin] (2,0) -- (2,-1) node[anchor=east] {$U_D$} -- (2,-2);
+\draw[latex-latex,shorten <=5pt,shorten >=5pt,thin] (2,0) -- (2,-1) node[anchor=east] {$V_D$} -- (2,-2);
 \end{circuitikz}
-\caption{Serieschakeling van een weerstand en een diode.}
+\caption{Series circuit of a voltage source, a resistor and a diode.}
+\label{fig:1}
 \end{figure}
 
+The voltage of the source is \SI{\Vs}{\volt}. The resistance of the resistor is \SI{\Rs}{\kilo\ohm}.
 
-De spanning-stroom-vergelijking van een diode is:
+The voltage-current relation of a diode is:
 %
 \begin{equation}
-I_D = I_S\cdot\left(\text{e}^{\left(\frac{U_D}{n\cdot U_T}\right)}-1\right)
+I_D = I_S\cdot\left(\text{e}^{\left(\frac{V_D}{n\cdot V_T}\right)}-1\right)
 \end{equation}
 %
-Met:
+With:
 \begin{itemize}\itemsep-4pt
-\item[] $I_D$: de diodestroom;
-\item[] $I_S$: de donkerstroom van de diode, $10^{-12}$ A;
-\item[] $U_D$: de diodespanning in doorlaat;
-\item[] $n$ : de emissieco\"efficient, $1$;
-\item[] $U_T$: thermische spanning, $25,69257$ mV bij 25 $^{\circ}$C;
+\item[] $I_D$: The diode current;
+\item[] $I_S$: The reverse bias saturation current, typically \SI{1e-12}{\ampere};
+\item[] $V_D$: The voltage in forward direction;
+\item[] $n$ : The ideality factor, typically 1 (between 1 and 2);
+\item[] $V_T$: The thermal voltage, \SI{25.69257}{\milli\volt} at \SI{25}{\degreeCelsius};
 \end{itemize}
 
-%%%%\begin{figure}[!ht]
-%%%%\centering
-%%%%\begin{tikzpicture}[domain=0:0.69,xscale=6,yscale=0.066666667]
-%%%%    %\draw[very thin,color=gray] (-0.1,-1.1) grid (1.1,3.9);
-%%%%    \draw[->] (-0.05,0) -- (1.05,0) node[right] {\footnotesize $U_D$ [V]};
-%%%%    \draw[->] (0,-5) -- (0,45) node[above] {\footnotesize $I_D$ [mA]};
-%%%%    \foreach \i/\ii in {0.1/{0,1},0.2/{0,2},0.3/{0,3},0.4/{0,4},0.5/{0,5},0.6/{0,6},0.7/{0,7},0.8/{0,8},0.9/{0,9},1.0/{1,0}} {
-%%%%	    \draw     (\i,0) node[below] {\footnotesize\ii};
-%%%%    	\draw[-]  (\i,1) -- (\i,-1);
-%%%%    }
-%%%%    \foreach \i in {10,20,30,40} {
-%%%%	    \draw     (0,\i) node[left] {\footnotesize\i};
-%%%%    	\draw[-]  (-0.01,\i) -- (0.01,\i);
-%%%%    }
-%%%%    
-%%%%    % Draw the V-I curve of the diode. The dark current in in milliamps.
-%%%%    \draw[color=red] plot[id=diodevi,samples=100,prefix=gnuplot/]
-%%%%                     function{0.0000000001*(exp(x/0.02569257028945)-1)} ;
-%%%%       % node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
-%%%%    \draw[color=blue, -] (0,40) -- (1.0,0);
-%%%%    \draw[dotted, -] (0.6587471914,0) -- (0.6587471914,13.65011234);
-%%%%    \draw[dotted, -] (0,13.65011234)     -- (0.6587471914,13.65011234);
-%%%%\end{tikzpicture}
-%%%%\caption{Belastingskarakteristiek van een serieschakeling van een diode en een weerstand.}
-%%%%\end{figure}
+The curves of the load lines are shown in Figure~\ref{fig:2}. The blue line is the load line of the voltage source and the resistor, the red line is the load line of the diode. Where they intersect, is the operating point of the diode.
 
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
-	\sansmath
-	\begin{axis}[width=8cm,height=5cm,
+	\begin{axis}[
+        width=8cm,height=5cm,
 		xlabel=$U_D$,
 		x unit=V,
 		ylabel=$I_D$,
 		y unit=mA,
-		xtick={0.1,0.2,...,1.05},
+		xtick={\Vs/10,\Vs/5,...,\Vs*1.05},
 		axis x line*=bottom,
 		axis y line*=left,
-        xmin=0, xmax=1.05,
-        ymin=0, ymax=42,
-        restrict y to domain=0:40,
-        % enlargelimits={abs=10pt},
+        xmin=0, xmax=\Vs*1.05,
+        ymin=0, ymax=\Vs/\Rs*1.05,
+        restrict y to domain=0:1000,
         x tick label style={
         /pgf/number format/.cd,
             fixed,
             fixed zerofill,
             precision=1,
-	        use comma,
     	    1000 sep={},
             /tikz/.cd,
         }
 	]
 	% Draw diode curve, diode current is in mA
-	\addplot [domain=0:1,samples=201,red,thick,name path=dline] {0.0000000001*(exp(x/(1.0*0.02569257028945))-1)};
+	\addplot [domain=0:\Vs,samples=201,red,thick,name path=dline] {\Is*(exp(x/(\n*0.02569257028945))-1)};
 	% Draw load line
-	\addplot [domain=0:1,samples=201,blue,thick,name path=rline] {(1.0-x)/0.025};
+	\addplot [domain=0:\Vs,samples=201,blue,thick,name path=rline] {(\Vs-x)/\Rs};
 	% Find the intersection of the diode curve and the load line
 	\path [name intersections={of=rline and dline , by=op}];
 	% Draw horizontal an vertical li lines
@@ -220,36 +144,22 @@ Met:
 	\draw [dashed] ({{0,0}} -| op) -- (op);
 	
 	% Calculate the intersection coordinates and print them
-	\path(op) node [above right,xshift=5pt] {\footnotesize($\!\!\!$\pgfgetlastxy{\macrox}{\macroy}
+	\path[reset cm] (op) node [above right,xshift=5pt] {\footnotesize(\pgfgetlastxy{\macrox}{\macroy}%
         \transformxdimension{\macrox}%
-        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\udiode{\dummy}%
-        \pgfmathprintnumber[use comma]{\pgfmathresult},%
+        %\pgfmathprintnumberto{\pgfmathresult}{\dummy}\global\edef\udiode{\dummy}%
+        \pgfmathsetmacro{\dummy}{\pgfmathresult}\global\edef\udiode{\dummy}%
+        \pgfmathprintnumber{\pgfmathresult},%
         \transformydimension{\macroy}%
-        \pgfmathprintnumberto[use comma]{\pgfmathresult}{\dummy}\global\edef\idiode{\dummy}%
-        \pgfmathprintnumber[use comma]{\pgfmathresult})};
-
-%%%    \path (op) node [below left] {
-%%%                    \pgfplotspointgetcoordinates{(intersection-1)}
-%%%                    $(
-%%%                        \pgfmathprintnumber[fixed]{\pgfkeysvalueof{/data point/x}},
-%%%                        \pgfmathprintnumber[fixed]{\pgfkeysvalueof{/data point/y}}
-%%%                    )$
-%%%                };
-	
-	
-	
+        %\pgfmathprintnumberto{\pgfmathresult}{\dummy}\global\edef\idiode{\dummy}%
+        \pgfmathsetmacro{\dummy}{\pgfmathresult}\global\edef\idiode{\dummy}%
+        \pgfmathprintnumber{\pgfmathresult})};
 	\end{axis}
-
 \end{tikzpicture}
-\caption{Belastingskarakteristiek van een serieschakeling van een diode en uitwendige weerstand en de bron.}
+\caption{Load line of the series circuit of a diode, a resistor and a voltage source.}
+\label{fig:2}
 \end{figure}
 
 %Via Maple is gevonden: $U_D = 0,6587471914$ V en $I_D = 13,65011234$ mA.
-
-Voor het instelpunt geldt dat de spanning over de diode \udiode\ V is. De stroom door de
-diode (en dus ook de weerstand en de bron) is \idiode\ mA.
-
-
-
+For the operating point, the diode forward voltage is \SI[round-mode=places,round-precision=2]{\udiode}{\volt} and the diode current is \SI[round-mode=places,round-precision=2]{\idiode}{\milli\ampere}.
 
 \end{document}

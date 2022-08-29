@@ -2,6 +2,7 @@
 
 \usepackage{tikz}
 \usetikzlibrary{intersections}
+\usepackage{siunitx}
 
 
 \usepackage{txfonts}
@@ -15,14 +16,14 @@
 \draw[-latex] node[left] {$0$} (0,0) -- (0,10) node[above] {$I_C$};
 
 % Draw curve for Ib = 60 uA, set coordinates for other curves
-\draw (0,0) to [out=0, in=260] coordinate [pos=0.4] (F) (1,1.5) coordinate (A) -- ++(0.2,1.2) coordinate (B) -- ++(0.2,1.2) coordinate(C) -- ++(0.2,1.2) coordinate (D) -- ++(0.2,1.2) to [out=80, in=187.5] ++(2,1.2) -- ++(3.5,0.35) node[right] {$I_B=60\ \muup$A};
+\draw (0,0) to [out=0, in=260] coordinate [pos=0.4] (F) (1,1.5) coordinate (A) -- ++(0.2,1.2) coordinate (B) -- ++(0.2,1.2) coordinate(C) -- ++(0.2,1.2) coordinate (D) -- ++(0.2,1.2) to [out=80, in=187.5] ++(2,1.2) -- ++(3.5,0.35) node[right] {$I_B=\SI{60}{\micro\ampere}$};
 
 % Draw the other curves
-\draw (A) to [out=80, in=187.5] ++(2,1.2) -- ++(5.5,0.55) node[right] {$I_B=20\ \muup$A};
-\draw[name path=l] (B) to [out=80, in=187.5] ++(2,1.2) -- ++(5,0.5) node[right] {$I_B=30\ \muup$A};
-\draw (C) to [out=80, in=187.5] ++(2,1.2) -- ++(4.5,0.45) node[right] {$I_B=40\ \muup$A};
-\draw (D) to [out=80, in=187.5] ++(2,1.2) -- ++(4,0.4) node[right] {$I_B=50\ \muup$A};
-\draw (F) to [out=60, in=190] ++(2,1.2) -- ++(6,0.6) node[right] {$I_B=10\ \muup$A};;
+\draw (A) to [out=80, in=187.5] ++(2,1.2) -- ++(5.5,0.55) node[right] {$I_B=\SI{20}{\micro\ampere}$};
+\draw[name path=l] (B) to [out=80, in=187.5] ++(2,1.2) -- ++(5,0.5) node[right] {$I_B=\SI{30}{\micro\ampere}$};
+\draw (C) to [out=80, in=187.5] ++(2,1.2) -- ++(4.5,0.45) node[right] {$I_B=\SI{40}{\micro\ampere}$};
+\draw (D) to [out=80, in=187.5] ++(2,1.2) -- ++(4,0.4) node[right] {$I_B=\SI{50}{\micro\ampere}$};
+\draw (F) to [out=60, in=190] ++(2,1.2) -- ++(6,0.6) node[right] {$I_B=\SI{10}{\micro\ampere}$};;
 
 % Draw load line
 \draw[name path=k] (0,9) node[left] {$I_{C,max}$} -- (9,0) node[below] {$U_{CE,max}$};

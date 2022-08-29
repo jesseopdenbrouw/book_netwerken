@@ -3,13 +3,14 @@
 \usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
-\usepackage{graphicx}
+\usepackage[charter]{mathdesign}
+\usepackage{parskip}
 
 \begin{document}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 % set the viewing angle
-\def\a{45}
+\def\a{45} % DO NOT CHANGE
 \tdplotsetmaincoords{65}{\a}
 \centering
 \begin{tikzpicture}
@@ -21,12 +22,14 @@
 	\def\radius{.1}
 	\def\axissize{.3}
     % length
-	\def\th{1}
+	\def\th{1} % DO NOT CHANGE
 
 	% intervals on the z-axis
-%	\draw[axis,-,dashed] (0,0,0) -- (0,0,\th);
+%	\draw[axis,-,dashed,red] (0,0,0) -- (0,0,\th);
 	\draw[axis,thick] (0,0,\th-0.5*\axissize) -- (0,0,\th+0.5*\axissize) node[anchor=south]{$I$};
-
+	\draw[axis,thick] (0,0,-.8+\th+0.25*\axissize) -- (0,0,-.8+\th-0.25*\axissize) node[anchor=north,yshift=-0.5mm]{$I_e$};
+     
+     
 	\tdplotsinandcos{\sintheta}{\costheta}{0}
 	% upper end
 	\tdplotdrawarc[curve,thick]{(0,0,\th)}{\radius*\costheta}{\a-360}{\a}{}{}
@@ -50,24 +53,31 @@
 	\draw[thick] (\radius*\costheta,\radius*\sintheta,0) -- (\radius*\costheta,\radius*\sintheta,\th);
 	
 	% label of the diameter
-	\draw[latex-latex] (\radius,0,\th/2) --  (-\radius,0,\th/2) node[anchor=south west,yshift=2mm,xshift=0.5mm] {$d$};
-	\foreach \ang/\dis in {0/0,1/.06,-1/-0.04,-0.5/-0.1} {
+	\draw[latex-latex] (\radius,0,\th/2) -- (-\radius,0,\th/2) node[anchor=south west,yshift=1mm,xshift=0.6mm] {$d$};
+    % Draw the electrons
+	\foreach \ang/\dis in {0/0,1/.06,-1/-0.04,-0.5/-0.1,-0.6/-0.7,-3/-.8,1/-.8} {
 		\shade[ball color=brown!50!red,opacity=0.90] (-\a+\ang:-1.5-\dis) circle (0.008cm) node[yshift=-1.5mm,font=\tiny] {\textsl{q}\raisebox{.7ex}{-}};
 	}	
 \end{tikzpicture}
+\caption{A section of a metal wire.}
 \end{figure}
 
-De weerstand van een metalen draad met lengte $L$ en diameter $d$ is:
+When applying a \emph{voltage} across a metal wire, a \emph{current} (designated as $I$) will flow. A voltage can be seen as electric pressure between two points. A current can be seen as movement of electric particles in the wire, in this case electrons. Note that the electrons, having a negative charge, move in the opposite direction of the measured current (as shown by $I_e$).
 
-\begin{eqnarray}
+The resistance of a metal wire with length $L$ and diameter $d$ is:
+
+\begin{equation}
 R = \frac{\rho L}{A}
-\end{eqnarray}
+\end{equation}
 
-waarbij $A$ de oppervlakte van de dwarsdoorsnede is met:
+where $A$ is the area of the cross section with
 
 \begin{equation}
 A = \dfrac{1}{4}\pi d^2
 \end{equation}
 
+and $\rho$ is the specific specific resistance of the metal in $\Omega$ m (ohm meter).
+
 \end{document}
+
 % Thanks to Jörg Petzold for creating this example
